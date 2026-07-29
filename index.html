@@ -69,21 +69,36 @@
     <section class="hero section">
       <div class="container hero-grid">
         <div class="hero-copy reveal">
-          <p class="eyebrow">Custom printing for individuals, friends, events and brands</p>
+          <p class="eyebrow">Custom T-shirts from one piece</p>
           <h1>Your idea.<br>Your design.<br><span>Your tee.</span></h1>
           <p class="hero-lead">
-            Create a personalised unisex T-shirt from just <strong>one piece</strong>, or ask for a wider range for your bulk requirement.
+            Choose an <strong>180 GSM regular-fit cotton tee</strong> or a
+            <strong>240 GSM oversized tee</strong>, then send your idea on WhatsApp.
           </p>
 
           <div class="hero-actions">
-            <a href="#order" class="button button-primary">Start customising</a>
-            <a href="#process" class="button button-secondary">See the process</a>
+            <a
+              href="#order"
+              class="button button-primary"
+              data-order-intent="Personal / Small Quantity"
+              data-order-product="180 GSM Unisex Regular Fit"
+            >
+              Start my 1-piece custom tee
+            </a>
+            <a
+              href="#order"
+              class="button button-secondary"
+              data-order-intent="Bulk / Business / Event"
+              data-order-product="Bulk / Wider Range"
+            >
+              Get a bulk quote
+            </a>
           </div>
 
           <ul class="trust-list" aria-label="Product highlights">
-            <li>180 GSM cotton</li>
-            <li>240 GSM oversized</li>
-            <li>Front and back printing</li>
+            <li>Personal orders from 1 piece</li>
+            <li>WhatsApp ordering only</li>
+            <li>No online payment</li>
           </ul>
         </div>
 
@@ -108,10 +123,14 @@
       <div class="container split-cards">
         <article class="choice-card reveal">
           <p class="card-number">01</p>
-          <h2>Customise for yourself</h2>
-          <p>Choose a base tee, send your design or reference, and get a personalised piece made for you.</p>
-          <a href="#order" class="text-link" data-order-product="180 GSM Unisex Regular Fit">
-            Start from one piece <span aria-hidden="true">→</span>
+          <h2>Personal — from 1 piece</h2>
+          <p>Choose a regular or oversized tee, then send your design, photo, wording or reference on WhatsApp.</p>
+          <a
+            href="#tees"
+            class="text-link"
+            data-order-intent="Personal / Small Quantity"
+          >
+            Choose your tee <span aria-hidden="true">→</span>
           </a>
         </article>
 
@@ -119,8 +138,13 @@
           <p class="card-number">02</p>
           <h2>Order for a group or business</h2>
           <p>Access a wider selection of GSM, fits, colours, printing, embroidery and branding options for bulk orders.</p>
-          <a href="#order" class="text-link" data-order-product="Bulk / Wider Range">
-            Request a bulk quote <span aria-hidden="true">→</span>
+          <a
+            href="#order"
+            class="text-link"
+            data-order-intent="Bulk / Business / Event"
+            data-order-product="Bulk / Wider Range"
+          >
+            Get a bulk quote on WhatsApp <span aria-hidden="true">→</span>
           </a>
         </article>
       </div>
@@ -154,9 +178,10 @@
               <button
                 class="button button-dark"
                 type="button"
+                data-order-intent="Personal / Small Quantity"
                 data-order-product="180 GSM Unisex Regular Fit"
               >
-                Customise this tee
+                Choose 180 GSM regular
               </button>
             </div>
           </article>
@@ -188,9 +213,10 @@
               <button
                 class="button button-dark"
                 type="button"
+                data-order-intent="Personal / Small Quantity"
                 data-order-product="240 GSM Unisex Oversized"
               >
-                Customise this tee
+                Choose 240 GSM oversized
               </button>
             </div>
           </article>
@@ -313,6 +339,14 @@
         </div>
 
         <p class="gallery-note">Designs shown are examples of printing capability. Customers should share artwork they own or have permission to use.</p>
+        <a
+          class="instagram-link gallery-instagram"
+          href="https://www.instagram.com/saturncheetahstore"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          See current work on Instagram <span aria-hidden="true">↗</span>
+        </a>
       </div>
     </section>
 
@@ -324,120 +358,15 @@
         </div>
         <div>
           <p>Tell us your quantity and purpose to discuss additional GSM, fits, fabrics, colours, printing methods, embroidery, labels and packaging.</p>
-          <a href="#order" class="button button-primary" data-order-product="Bulk / Wider Range">Get a bulk quote</a>
-        </div>
-      </div>
-    </section>
-
-    <section class="section order-section" id="order">
-      <div class="container order-grid">
-        <div class="order-copy reveal">
-          <p class="eyebrow">Order without a payment gateway</p>
-          <h2>Build your enquiry and send it on WhatsApp</h2>
-          <p>Complete the details below. WhatsApp will open with your choices already written. Attach your design or reference image there.</p>
-
-          <div class="contact-card">
-            <span>WhatsApp</span>
-            <a href="https://wa.me/917780478506" target="_blank" rel="noopener noreferrer">+91 77804 78506</a>
-          </div>
-
-          <a class="instagram-link" href="https://www.instagram.com/saturncheetahstore" target="_blank" rel="noopener noreferrer">
-            See more work on Instagram <span aria-hidden="true">↗</span>
+          <a
+            href="#order"
+            class="button button-primary"
+            data-order-intent="Bulk / Business / Event"
+            data-order-product="Bulk / Wider Range"
+          >
+            Get a bulk quote on WhatsApp
           </a>
         </div>
-
-        <form class="order-form reveal" id="whatsapp-order-form">
-          <div class="field-row">
-            <div class="field">
-              <label for="customer-name">Customer name</label>
-              <input type="text" id="customer-name" name="customerName" autocomplete="name" placeholder="Your name">
-            </div>
-
-            <div class="field">
-              <label for="order-type">Order type</label>
-              <select id="order-type" name="orderType">
-                <option>Personal / Small Quantity</option>
-                <option>Bulk / Business / Event</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="field">
-            <label for="product">Product</label>
-            <select id="product" name="product" required>
-              <option value="180 GSM Unisex Regular Fit">180 GSM Unisex Regular Fit</option>
-              <option value="240 GSM Unisex Oversized">240 GSM Unisex Oversized</option>
-              <option value="Bulk / Wider Range">Bulk / Wider Range</option>
-              <option value="Other customised product">Other customised product</option>
-            </select>
-          </div>
-
-          <div class="field-row field-row-three">
-            <div class="field">
-              <label for="quantity">Quantity</label>
-              <input type="number" id="quantity" name="quantity" min="1" value="1" inputmode="numeric" required>
-            </div>
-
-            <div class="field">
-              <label for="sizes">Size(s)</label>
-              <input type="text" id="sizes" name="sizes" placeholder="e.g. M or S–XL mix">
-            </div>
-
-            <div class="field">
-              <label for="colour">Colour</label>
-              <input type="text" id="colour" name="colour" placeholder="e.g. Black">
-            </div>
-          </div>
-
-          <div class="field-row">
-            <div class="field">
-              <label for="placement">Print placement</label>
-              <select id="placement" name="placement">
-                <option>Front</option>
-                <option>Back</option>
-                <option>Front and back</option>
-                <option>Sleeve</option>
-                <option>Multiple placements</option>
-                <option>Not sure yet</option>
-              </select>
-            </div>
-
-            <div class="field">
-              <label for="design-status">Design status</label>
-              <select id="design-status" name="designStatus">
-                <option>I have a ready design</option>
-                <option>I have a reference or idea</option>
-                <option>I need design assistance</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="field-row">
-            <div class="field">
-              <label for="required-date">Required date</label>
-              <input type="date" id="required-date" name="requiredDate">
-            </div>
-
-            <div class="field">
-              <label for="city">Delivery city</label>
-              <input type="text" id="city" name="city" autocomplete="address-level2" placeholder="Your city">
-            </div>
-          </div>
-
-          <div class="field">
-            <label for="notes">Notes</label>
-            <textarea id="notes" name="notes" rows="4" placeholder="Describe the design, wording, print size, event or any special requirement."></textarea>
-          </div>
-
-          <button type="submit" class="button button-whatsapp">
-            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-              <path d="M20.5 3.5A11.8 11.8 0 0 0 12.1 0C5.6 0 .3 5.3.3 11.8c0 2.1.6 4.2 1.6 6L.2 24l6.4-1.7a11.8 11.8 0 0 0 5.6 1.4h.1c6.5 0 11.8-5.3 11.8-11.8 0-3.2-1.3-6.1-3.6-8.4Zm-8.3 18.2h-.1a9.8 9.8 0 0 1-5-1.4l-.4-.2-3.8 1 1-3.7-.2-.4a9.8 9.8 0 1 1 8.5 4.7Zm5.4-7.3c-.3-.1-1.8-.9-2-.9-.3-.1-.5-.1-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-1.7-.9-2.8-1.5-4-3.4-.3-.5.3-.5.9-1.6.1-.2 0-.4 0-.6 0-.1-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.2-1.2 2.9 0 1.7 1.2 3.3 1.4 3.5.2.2 2.4 3.7 5.9 5.2.8.4 1.5.6 2 .7.8.3 1.6.2 2.2.1.7-.1 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4-.1-.1-.3-.2-.6-.3Z"/>
-            </svg>
-            Send enquiry on WhatsApp
-          </button>
-
-          <p class="form-note" id="order-form-note">No payment is taken on this website. Final price and timeline are confirmed directly with Saturn Cheetah.</p>
-        </form>
       </div>
     </section>
 
@@ -468,6 +397,121 @@
         </div>
       </div>
     </section>
+
+    <section class="section order-section" id="order">
+      <div class="container order-grid">
+        <div class="order-copy reveal">
+          <p class="eyebrow">A quick WhatsApp enquiry</p>
+          <h2>Tell us the essentials. Add the rest if you want.</h2>
+          <p>Choose your path and tee. WhatsApp will open with your answers ready, and you can attach your design or reference there.</p>
+
+          <div class="contact-card">
+            <span>WhatsApp</span>
+            <a href="https://wa.me/917780478506" target="_blank" rel="noopener noreferrer">+91 77804 78506</a>
+          </div>
+
+          <a class="instagram-link" href="https://www.instagram.com/saturncheetahstore" target="_blank" rel="noopener noreferrer">
+            See more work on Instagram <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+
+        <form class="order-form reveal" id="whatsapp-order-form">
+          <div class="field">
+            <label for="order-intent">I am ordering for</label>
+            <select id="order-intent" name="orderIntent" required>
+              <option value="Personal / Small Quantity">Myself / a small quantity</option>
+              <option value="Bulk / Business / Event">A business, team or event</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="product">Product</label>
+            <select id="product" name="product" required>
+              <option value="180 GSM Unisex Regular Fit">180 GSM Unisex Regular Fit</option>
+              <option value="240 GSM Unisex Oversized">240 GSM Unisex Oversized</option>
+              <option value="Bulk / Wider Range">Bulk / Wider Range</option>
+              <option value="Other customised product">Other customised product</option>
+            </select>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="quantity">Quantity</label>
+              <input type="number" id="quantity" name="quantity" min="1" value="1" inputmode="numeric" required>
+            </div>
+
+            <div class="field">
+              <label for="design-status">Design status</label>
+              <select id="design-status" name="designStatus" required>
+                <option value="I have a ready design">I have a ready design</option>
+                <option value="I have a reference or idea">I have a reference or idea</option>
+                <option value="I need design assistance">I need design assistance</option>
+              </select>
+            </div>
+          </div>
+
+          <details class="order-details">
+            <summary>Add size, colour, date and other details</summary>
+            <div class="order-details-content">
+              <div class="field-row">
+                <div class="field">
+                  <label for="customer-name">Customer name</label>
+                  <input type="text" id="customer-name" name="customerName" autocomplete="name" placeholder="Your name">
+                </div>
+                <div class="field">
+                  <label for="sizes">Size(s)</label>
+                  <input type="text" id="sizes" name="sizes" placeholder="e.g. M or S–XL mix">
+                </div>
+              </div>
+
+              <div class="field-row">
+                <div class="field">
+                  <label for="colour">Colour</label>
+                  <input type="text" id="colour" name="colour" placeholder="e.g. Black">
+                </div>
+                <div class="field">
+                  <label for="placement">Print placement</label>
+                  <select id="placement" name="placement">
+                    <option>Front</option>
+                    <option>Back</option>
+                    <option>Front and back</option>
+                    <option>Sleeve</option>
+                    <option>Multiple placements</option>
+                    <option>Not sure yet</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="field-row">
+                <div class="field">
+                  <label for="required-date">Required date</label>
+                  <input type="date" id="required-date" name="requiredDate">
+                </div>
+                <div class="field">
+                  <label for="city">Delivery city</label>
+                  <input type="text" id="city" name="city" autocomplete="address-level2" placeholder="Your city">
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="notes">Notes</label>
+                <textarea id="notes" name="notes" rows="4" placeholder="Describe the design, wording, print size, event or any special requirement."></textarea>
+              </div>
+            </div>
+          </details>
+
+          <button type="submit" class="button button-whatsapp">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M20.5 3.5A11.8 11.8 0 0 0 12.1 0C5.6 0 .3 5.3.3 11.8c0 2.1.6 4.2 1.6 6L.2 24l6.4-1.7a11.8 11.8 0 0 0 5.6 1.4h.1c6.5 0 11.8-5.3 11.8-11.8 0-3.2-1.3-6.1-3.6-8.4Zm-8.3 18.2h-.1a9.8 9.8 0 0 1-5-1.4l-.4-.2-3.8 1 1-3.7-.2-.4a9.8 9.8 0 1 1 8.5 4.7Zm5.4-7.3c-.3-.1-1.8-.9-2-.9-.3-.1-.5-.1-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-1.7-.9-2.8-1.5-4-3.4-.3-.5.3-.5.9-1.6.1-.2 0-.4 0-.6 0-.1-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.2-1.2 2.9 0 1.7 1.2 3.3 1.4 3.5.2.2 2.4 3.7 5.9 5.2.8.4 1.5.6 2 .7.8.3 1.6.2 2.2.1.7-.1 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4-.1-.1-.3-.2-.6-.3Z"/>
+            </svg>
+            Continue on WhatsApp
+          </button>
+
+          <p class="form-note" id="order-form-note">No payment is taken on this website. Final price and timeline are confirmed directly with Saturn Cheetah.</p>
+        </form>
+      </div>
+    </section>
+
   </main>
 
   <footer class="site-footer">
@@ -502,6 +546,7 @@
     <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
       <path d="M20.5 3.5A11.8 11.8 0 0 0 12.1 0C5.6 0 .3 5.3.3 11.8c0 2.1.6 4.2 1.6 6L.2 24l6.4-1.7a11.8 11.8 0 0 0 5.6 1.4h.1c6.5 0 11.8-5.3 11.8-11.8 0-3.2-1.3-6.1-3.6-8.4Zm-8.3 18.2h-.1a9.8 9.8 0 0 1-5-1.4l-.4-.2-3.8 1 1-3.7-.2-.4a9.8 9.8 0 1 1 8.5 4.7Zm5.4-7.3c-.3-.1-1.8-.9-2-.9-.3-.1-.5-.1-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-1.7-.9-2.8-1.5-4-3.4-.3-.5.3-.5.9-1.6.1-.2 0-.4 0-.6 0-.1-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.2-1.2 2.9 0 1.7 1.2 3.3 1.4 3.5.2.2 2.4 3.7 5.9 5.2.8.4 1.5.6 2 .7.8.3 1.6.2 2.2.1.7-.1 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4-.1-.1-.3-.2-.6-.3Z"/>
     </svg>
+    <span>WhatsApp your idea</span>
   </a>
 </body>
 </html>
