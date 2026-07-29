@@ -192,8 +192,13 @@ h3 {
 }
 
 .primary-nav a {
+  display: inline-flex;
+  min-width: 44px;
+  min-height: 44px;
   font-size: 0.94rem;
   font-weight: 700;
+  align-items: center;
+  justify-content: center;
   text-decoration: none;
 }
 
@@ -206,7 +211,9 @@ h3 {
 
 .nav-toggle {
   display: none;
-  padding: 8px;
+  width: 48px;
+  height: 48px;
+  padding: 8px 11px;
   border: 0;
   color: var(--color-ink);
   background: transparent;
@@ -312,6 +319,7 @@ h3 {
 
 .text-link {
   display: inline-flex;
+  min-height: 44px;
   align-items: center;
   gap: 8px;
   margin-top: 10px;
@@ -793,6 +801,9 @@ h3 {
 }
 
 .contact-card a {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
   font-size: 1.32rem;
   font-weight: 900;
   text-decoration: none;
@@ -800,6 +811,8 @@ h3 {
 
 .instagram-link {
   display: inline-flex;
+  min-height: 44px;
+  align-items: center;
   gap: 8px;
   margin-top: 20px;
   font-weight: 850;
@@ -903,6 +916,9 @@ textarea:focus {
 }
 
 .faq-grid summary {
+  display: flex;
+  min-height: 44px;
+  align-items: center;
   cursor: pointer;
   font-weight: 900;
 }
@@ -955,6 +971,9 @@ textarea:focus {
 }
 
 .footer-links a {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
   color: var(--color-sand);
   font-weight: 750;
   text-decoration: none;
