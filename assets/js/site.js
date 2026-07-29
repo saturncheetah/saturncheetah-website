@@ -9,6 +9,7 @@ const header = document.querySelector(".site-header");
 const navToggle = document.querySelector(".nav-toggle");
 const primaryNav = document.querySelector(".primary-nav");
 const orderSection = document.querySelector("#order");
+const orderIntentSelect = document.querySelector("#order-intent");
 const productSelect = document.querySelector("#product");
 const orderForm = document.querySelector("#whatsapp-order-form");
 
@@ -16,12 +17,18 @@ function updateHeaderState() {
   header?.classList.toggle("is-scrolled", window.scrollY > 12);
 }
 
-function setNavigationOpen(isOpen) {
+function setNavigationOpen(isOpen, returnFocus = false) {
   if (!navToggle || !primaryNav) return;
 
   primaryNav.classList.toggle("is-open", isOpen);
   navToggle.setAttribute("aria-expanded", String(isOpen));
   navToggle.setAttribute("aria-label", isOpen ? "Close navigation" : "Open navigation");
+
+  if (isOpen) {
+    primaryNav.querySelector("a")?.focus();
+  } else if (returnFocus) {
+    navToggle.focus();
+  }
 }
 
 function setupNavigation() {
@@ -30,7 +37,7 @@ function setupNavigation() {
 
   navToggle?.addEventListener("click", () => {
     const isOpen = navToggle.getAttribute("aria-expanded") !== "true";
-    setNavigationOpen(isOpen);
+    setNavigationOpen(isOpen, !isOpen);
   });
 
   primaryNav?.addEventListener("click", event => {
@@ -38,7 +45,23 @@ function setupNavigation() {
   });
 
   document.addEventListener("keydown", event => {
-    if (event.key === "Escape") setNavigationOpen(false);
+    if (event.key === "Escape" && primaryNav?.classList.contains("is-open")) {
+      setNavigationOpen(false, true);
+    }
+
+    if (event.key !== "Tab" || !primaryNav?.classList.contains("is-open")) return;
+
+    const focusableItems = [navToggle, ...primaryNav.querySelectorAll("a")];
+    const firstItem = focusableItems[0];
+    const lastItem = focusableItems.at(-1);
+
+    if (event.shiftKey && document.activeElement === firstItem) {
+      event.preventDefault();
+      lastItem.focus();
+    } else if (!event.shiftKey && document.activeElement === lastItem) {
+      event.preventDefault();
+      firstItem.focus();
+    }
   });
 
   document.addEventListener("click", event => {
@@ -74,10 +97,13 @@ function setupRevealMotion() {
 
 function setupOrderShortcuts() {
   document.addEventListener("click", event => {
-    const trigger = event.target.closest("[data-order-product]");
+    const trigger = event.target.closest("[data-order-product], [data-order-intent]");
     if (!trigger) return;
 
+    const selectedIntent = trigger.dataset.orderIntent;
     const selectedProduct = trigger.dataset.orderProduct;
+
+    if (selectedIntent && orderIntentSelect) orderIntentSelect.value = selectedIntent;
     if (selectedProduct && productSelect) productSelect.value = selectedProduct;
 
     if (trigger.tagName === "BUTTON") {
@@ -86,6 +112,23 @@ function setupOrderShortcuts() {
         block: "start"
       });
     }
+  });
+
+  orderIntentSelect?.addEventListener("change", () => {
+    if (!productSelect) return;
+
+    if (orderIntentSelect.value === "Bulk / Business / Event") {
+      productSelect.value = "Bulk / Wider Range";
+    } else if (productSelect.value === "Bulk / Wider Range") {
+      productSelect.value = "180 GSM Unisex Regular Fit";
+    }
+  });
+
+  productSelect?.addEventListener("change", () => {
+    if (!orderIntentSelect) return;
+    orderIntentSelect.value = productSelect.value === "Bulk / Wider Range"
+      ? "Bulk / Business / Event"
+      : "Personal / Small Quantity";
   });
 }
 
@@ -104,30 +147,49 @@ function setupOrderForm() {
     event.preventDefault();
 
     const formData = new FormData(orderForm);
-    const value = name => {
-      const fieldValue = String(formData.get(name) ?? "").trim();
-      return fieldValue || "Not specified";
-    };
+    const value = name => String(formData.get(name) ?? "").trim();
+    const optionalLines = [
+      ["Customer name", value("customerName")],
+      ["Size(s)", value("sizes")],
+      ["Colour", value("colour")],
+      ["Print placement", value("placement")],
+      ["Required date", value("requiredDate")],
+      ["Delivery city", value("city")],
+      ["Notes", value("notes")]
+    ].filter(([, fieldValue]) => fieldValue)
+      .map(([label, fieldValue]) => `${label}: ${fieldValue}`);
 
-    const message = [
-      "Hello Saturn Cheetah Store,",
-      "",
-      "I would like to enquire about a customised order.",
-      "",
-      `Customer name: ${value("customerName")}`,
-      `Order type: ${value("orderType")}`,
-      `Product: ${value("product")}`,
-      `Quantity: ${value("quantity")}`,
-      `Size(s): ${value("sizes")}`,
-      `Colour: ${value("colour")}`,
-      `Print placement: ${value("placement")}`,
-      `Design status: ${value("designStatus")}`,
-      `Required date: ${value("requiredDate")}`,
-      `Delivery city: ${value("city")}`,
-      `Notes: ${value("notes")}`,
-      "",
-      "Please confirm the final price, feasibility and timeline. I will attach my design/reference in WhatsApp."
-    ].join("\n");
+    const orderIntent = value("orderIntent");
+    const isBulkOrder = orderIntent === "Bulk / Business / Event";
+    const messageLines = isBulkOrder
+      ? [
+          "Hello Saturn Cheetah Store,",
+          "",
+          "I would like a bulk quote.",
+          "",
+          `Order type: ${orderIntent}`,
+          `Product or range: ${value("product")}`,
+          `Quantity: ${value("quantity")}`,
+          `Design status: ${value("designStatus")}`,
+          ...optionalLines,
+          "",
+          "Please confirm suitable options, feasibility, final price and timeline. I will attach my design/reference in WhatsApp."
+        ]
+      : [
+          "Hello Saturn Cheetah Store,",
+          "",
+          "I would like to customise a T-shirt.",
+          "",
+          `Order type: ${orderIntent}`,
+          `Product: ${value("product")}`,
+          `Quantity: ${value("quantity")}`,
+          `Design status: ${value("designStatus")}`,
+          ...optionalLines,
+          "",
+          "Please confirm feasibility, final price and timeline. I will attach my design/reference in WhatsApp."
+        ];
+
+    const message = messageLines.join("\n");
 
     const whatsappUrl = `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(message)}`;
     window.location.assign(whatsappUrl);
