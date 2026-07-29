@@ -131,6 +131,63 @@ full-page keyboard traversal remain required before release.
 Result: **pass** for the current implementation. Network performance still
 requires real-device/deployed testing.
 
+## Targeted mobile media fitting
+
+The informational product, printing, process, and customer back-print media
+were retested at exact viewport widths of 320, 360, 390, 430, 768, and
+1440px. Mobile-specific fitting applies through 460px; the existing desktop
+presentation remains unchanged.
+
+| Selector | Mobile fit and position | Mobile container behavior | Full source visible | Empty space and presentation |
+| --- | --- | --- | --- | --- |
+| `.product-image > img` | `contain`; centered | Parent height `clamp(320px, 105vw, 420px)` with 14px inset | Yes | Possible; deliberate cream/radial product stage |
+| `.product-image-pair > img` | `contain`; centered | Same controlled parent; equal flexible columns | Yes | Possible; deliberate and balanced between paired images |
+| `.gallery-item img` | `contain`; centered | Image height `clamp(320px, 110vw, 460px)` with 12px inset | Yes | Possible; deliberate cream gallery-card field |
+| `.customer-back-grid img` | `contain`; centered | Image height `clamp(360px, 120vw, 500px)` with 8px inset | Yes | Possible; deliberate dark print-viewing field |
+| `.video-card video` | `contain`; centered | Responsive 9:16 frame; auto height; no mobile maximum height | Yes | Possible only if source framing differs; deliberate black video field |
+
+Measured mobile media boxes:
+
+| Width | Product single | Product pair, each | Gallery image | Customer back-print | Video |
+| ---: | ---: | ---: | ---: | ---: | ---: |
+| 320px | 258×308 | 129×308 | 286×352 | 248×384 | 248×441 |
+| 360px | 298×350 | 149×350 | 326×396 | 288×432 | 288×512 |
+| 390px | 328×382 | 164×381 | 356×429 | 318×468 | 318×565 |
+| 430px | 368×392 | 184×392 | 396×460 | 358×500 | 358×636 |
+
+At every tested width, each affected media box remained within the viewport.
+No horizontal overflow occurred. `balance-print.webp` and the portrait
+gallery sources use the same `contain` rule, so the full printed artwork
+remains visible without stretching. The product sources, customer back-print
+sources, and full 9:16 video frame also remain visible.
+
+At 768px and 1440px, the pre-existing desktop `cover` presentation remains in
+effect. The existing poster-first, non-autoplay behavior remains intact:
+`preload="none"` is unchanged and the video was paused on load.
+
+The current sources do not require replacement to satisfy this fitting patch.
+For a later visual-quality phase, owner-approved product photography with
+matched framing and gallery images with more consistent source composition
+would reduce deliberate contain-space without reintroducing crop.
+
+Result: **pass** for mobile fitting and overflow. Physical-device review
+remains required before release.
+
+## Reduced-motion and accessibility regression
+
+With `prefers-reduced-motion: reduce` emulated at 390px:
+
+- the media query matched;
+- document scroll behavior computed to `auto`;
+- reveal transitions computed to effectively zero duration;
+- the live-printing video remained paused;
+- no autoplay behavior was introduced.
+
+Existing alternative text, video controls, poster-first loading, border
+radii, and card hierarchy remain unchanged.
+
+Result: **pass** for the automated regression check.
+
 ## WhatsApp personal-order example
 
 ```text
@@ -192,4 +249,3 @@ Result: **pass**.
 No merge or deployment was performed. Phase 1 should remain on
 `phase1/mobile-conversion` until owner review and an exact deployment dry run
 receive explicit approval.
-

@@ -24,6 +24,31 @@ renamed, replaced, cropped, or deleted. No dependency was installed.
 | `334c723` | Corrected validation findings: responsive hero height and closed optional fields leaking default values into messages. |
 | `5aa3673` | Enforced the Phase 1 minimum 44×44px target rule for visible links, controls, navigation, FAQ summaries, and contact actions. |
 
+## Targeted mobile media-fitting patch
+
+- `.product-image` now provides a controlled responsive stage with modest
+  padding and a deliberate cream/radial background at widths through 460px.
+- `.product-image > img` and `.product-image-pair > img` use centered
+  `object-fit: contain` and remain constrained to the product stage.
+- `.product-image-pair` retains two equal flexible columns without hard-coded
+  widths.
+- `.gallery-item img`, including `balance-print.webp` and all portrait
+  gallery images, uses centered contain fitting inside a consistent
+  responsive cream card field.
+- `.customer-back-grid img` uses centered contain fitting inside a consistent
+  dark field so the full back-print area remains visible.
+- `.video-card video` retains its full 9:16 frame using centered contain
+  fitting with no mobile maximum-height cap and a black container background.
+- `.brand img`, `.footer-brand img`, and `.hero-media img` were not changed.
+- No semantic HTML class was necessary, so `index.html` was not modified.
+- No media source, poster, loading attribute, playback behavior, or file was
+  changed.
+
+Validation covered 320, 360, 390, 430, 768, and 1440px. All affected mobile
+media boxes remained within the viewport, no horizontal overflow was found,
+local references resolved, JavaScript syntax passed, and reduced-motion
+behavior regressed cleanly.
+
 ## Customer journey changes
 
 1. The hero now states that customization starts from one piece.
@@ -62,4 +87,3 @@ renamed, replaced, cropped, or deleted. No dependency was installed.
 - No framework, animation library, 3D library, build tool, or package was
   added.
 - No branch was merged and nothing was deployed.
-
