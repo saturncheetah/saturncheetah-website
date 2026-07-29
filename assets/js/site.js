@@ -148,16 +148,19 @@ function setupOrderForm() {
 
     const formData = new FormData(orderForm);
     const value = name => String(formData.get(name) ?? "").trim();
-    const optionalLines = [
-      ["Customer name", value("customerName")],
-      ["Size(s)", value("sizes")],
-      ["Colour", value("colour")],
-      ["Print placement", value("placement")],
-      ["Required date", value("requiredDate")],
-      ["Delivery city", value("city")],
-      ["Notes", value("notes")]
-    ].filter(([, fieldValue]) => fieldValue)
-      .map(([label, fieldValue]) => `${label}: ${fieldValue}`);
+    const includeOptionalDetails = document.querySelector(".order-details")?.open;
+    const optionalLines = includeOptionalDetails
+      ? [
+          ["Customer name", value("customerName")],
+          ["Size(s)", value("sizes")],
+          ["Colour", value("colour")],
+          ["Print placement", value("placement")],
+          ["Required date", value("requiredDate")],
+          ["Delivery city", value("city")],
+          ["Notes", value("notes")]
+        ].filter(([, fieldValue]) => fieldValue)
+          .map(([label, fieldValue]) => `${label}: ${fieldValue}`)
+      : [];
 
     const orderIntent = value("orderIntent");
     const isBulkOrder = orderIntent === "Bulk / Business / Event";
