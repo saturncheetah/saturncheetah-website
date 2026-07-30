@@ -194,7 +194,8 @@
       <div class="container">
         <div class="section-heading">
           <p class="eyebrow">Choose your direction</p>
-          <h2 id="direction-title">Start with ours or bring your own.</h2>
+          <h2 id="direction-title">Explore Our Designs</h2>
+          <p>Choose a design you like, or send us something completely your own.</p>
         </div>
 
         <div class="tab-module" data-tabs="direction">
@@ -229,31 +230,26 @@
             aria-labelledby="direction-explore-tab"
             data-tab-panel="direction-explore"
           >
-            <div class="panel-intro">
-              <p>Swipe five starting points. Open any image for a closer look, then adapt the direction with your own idea.</p>
-              <span>Use artwork you own or have permission to print.</span>
-            </div>
-
             <div class="design-gallery" tabindex="0" aria-label="Saturn Cheetah design gallery">
               <button class="design-card" type="button" data-gallery-index="0">
-                <img src="assets/images/gallery/cappuccino-print.webp" alt="White T-shirt with a colourful cappuccino graphic" width="416" height="900" loading="lazy" decoding="async">
-                <span>Colour graphic</span>
+                <img src="assets/images/designs/echo-silhouette.webp" alt="Black T-shirt on a hanger with Echo Silhouette artwork" width="960" height="960" loading="lazy" decoding="async">
+                <span>Echo Silhouette</span>
               </button>
               <button class="design-card" type="button" data-gallery-index="1">
-                <img src="assets/images/gallery/six-seven-print.webp" alt="Yellow T-shirt with a playful blue graphic" width="416" height="900" loading="lazy" decoding="async">
-                <span>Playful print</span>
+                <img src="assets/images/designs/find-your-balance.webp" alt="White T-shirt on a hanger with Find Your Balance artwork" width="960" height="960" loading="lazy" decoding="async">
+                <span>Find Your Balance</span>
               </button>
               <button class="design-card" type="button" data-gallery-index="2">
-                <img src="assets/images/gallery/udin-din-print.webp" alt="Maroon T-shirt with humorous custom artwork" width="416" height="900" loading="lazy" decoding="async">
-                <span>Personal humour</span>
+                <img src="assets/images/designs/resurrection.webp" alt="Black T-shirt on a hanger with Resurrection artwork" width="960" height="960" loading="lazy" decoding="async">
+                <span>Resurrection</span>
               </button>
               <button class="design-card" type="button" data-gallery-index="3">
-                <img src="assets/images/gallery/blue-graphic-print.webp" alt="Blue T-shirt with a colourful illustrated graphic" width="416" height="900" loading="lazy" decoding="async">
-                <span>Illustrated colour</span>
+                <img src="assets/images/designs/knowledge-is-power.webp" alt="White T-shirt on a hanger with Knowledge Is Power artwork" width="960" height="960" loading="lazy" decoding="async">
+                <span>Knowledge Is Power</span>
               </button>
               <button class="design-card" type="button" data-gallery-index="4">
-                <img src="assets/images/gallery/balance-print.webp" alt="T-shirt mockup with a balance and meditation illustration" width="1000" height="1000" loading="lazy" decoding="async">
-                <span>Inspiration mockup</span>
+                <img src="assets/images/designs/prism-beauty.webp" alt="Black T-shirt on a hanger with Prism Beauty artwork" width="960" height="960" loading="lazy" decoding="async">
+                <span>Prism Beauty</span>
               </button>
             </div>
           </div>
@@ -342,66 +338,87 @@
     <section class="section process-section" id="process" aria-labelledby="process-title">
       <div class="container">
         <div class="section-heading section-heading-light">
-          <p class="eyebrow">Choose → Print → Result</p>
-          <h2 id="process-title">One connected custom-printing story.</h2>
-          <p>Explore the steps without treating unrelated examples as the exact output of the live-printing clip.</p>
+          <p class="eyebrow">Custom-piece story</p>
+          <h2 id="process-title">From an idea to something you can wear</h2>
+          <p>Choose a design, see how we print, and explore the finished result.</p>
         </div>
 
-        <div class="tab-module process-module" data-tabs="process">
-          <div class="tab-list process-tabs" role="tablist" aria-label="Custom printing stages">
-            <button id="process-choose-tab" type="button" role="tab" aria-selected="true" aria-controls="process-choose-panel" data-tab-target="process-choose">
-              <span>01</span> Choose
+        <div class="tab-module story-module" data-tabs="story">
+          <p class="story-truth">See our real printing process, followed by a finished custom-design example.</p>
+
+          <div class="tab-list story-tabs" role="tablist" aria-label="Custom-piece stages">
+            <button id="story-design-tab" type="button" role="tab" aria-selected="true" aria-controls="story-design-panel" data-tab-target="story-design">
+              <span>01</span>
+              <strong>Design</strong>
             </button>
-            <button id="process-print-tab" type="button" role="tab" aria-selected="false" aria-controls="process-print-panel" tabindex="-1" data-tab-target="process-print">
-              <span>02</span> Print
+            <button id="story-print-tab" type="button" role="tab" aria-selected="false" aria-controls="story-print-panel" tabindex="-1" data-tab-target="story-print">
+              <span>02</span>
+              <strong>Live Printing</strong>
             </button>
-            <button id="process-result-tab" type="button" role="tab" aria-selected="false" aria-controls="process-result-panel" tabindex="-1" data-tab-target="process-result">
-              <span>03</span> Result
+            <button id="story-finished-tab" type="button" role="tab" aria-selected="false" aria-controls="story-finished-panel" tabindex="-1" data-tab-target="story-finished">
+              <span>03</span>
+              <strong>Finished Tee</strong>
+            </button>
+            <button id="story-worn-tab" type="button" role="tab" aria-selected="false" aria-controls="story-worn-panel" tabindex="-1" data-tab-target="story-worn">
+              <span>04</span>
+              <strong>Worn</strong>
             </button>
           </div>
 
-          <div class="process-stage">
-            <article class="process-panel" id="process-choose-panel" role="tabpanel" aria-labelledby="process-choose-tab" data-tab-panel="process-choose">
-              <div class="process-media">
-                <img src="assets/images/boutique/featured-tshirt-design.webp" alt="Illustrative custom T-shirt design in a boutique display" width="900" height="1125" loading="lazy" decoding="async">
-                <span>Illustrative design inspiration</span>
+          <div class="story-stage" data-story-swipe>
+            <article class="story-panel" id="story-design-panel" role="tabpanel" aria-labelledby="story-design-tab" data-tab-panel="story-design">
+              <div class="story-media">
+                <img src="assets/images/story/custom-story-design.webp" alt="Original flamingo artwork reading Just Be Your Own Unique Beautiful Self" width="900" height="1066" loading="lazy" decoding="async">
+                <span>Original artwork</span>
               </div>
-              <div class="process-copy">
-                <p class="eyebrow">Choose</p>
-                <h3>Share a design, reference or idea.</h3>
-                <p>Use a Saturn Cheetah direction as inspiration or bring artwork you have permission to print.</p>
+              <div class="story-copy">
+                <p class="eyebrow">01 Design</p>
+                <h3>The original idea</h3>
+                <p>“Just Be Your Own Unique Beautiful Self” flamingo artwork, ready to become a custom piece.</p>
               </div>
             </article>
 
-            <article class="process-panel" id="process-print-panel" role="tabpanel" aria-labelledby="process-print-tab" data-tab-panel="process-print" hidden>
-              <div class="process-media video-frame">
-                <video controls muted playsinline preload="none" poster="assets/images/process/live-printing-poster.jpg" aria-label="Live T-shirt printing in action">
-                  <source src="assets/video/live-printing-demo.mp4" type="video/mp4">
+            <article class="story-panel" id="story-print-panel" role="tabpanel" aria-labelledby="story-print-tab" data-tab-panel="story-print" hidden>
+              <div class="story-media story-video">
+                <video controls muted playsinline preload="none" poster="assets/images/story/custom-story-printing-poster.webp" aria-label="Vertical video showing a real T-shirt printing process">
+                  <source src="assets/video/custom-story-live-printing.mp4" type="video/mp4">
                   Your browser does not support video playback.
                 </video>
-                <span>Real printing footage</span>
+                <span>Real printing-process video</span>
               </div>
-              <div class="process-copy">
-                <p class="eyebrow">Print</p>
+              <div class="story-copy">
+                <p class="eyebrow">02 Live Printing</p>
                 <h3>Live printing in action</h3>
-                <p>Tap play when you are ready. The footage is real and does not autoplay.</p>
+                <p>This demonstrates our real printing process. It is not confirmed as the exact printing of the finished tee shown next.</p>
               </div>
             </article>
 
-            <article class="process-panel" id="process-result-panel" role="tabpanel" aria-labelledby="process-result-tab" data-tab-panel="process-result" hidden>
-              <div class="process-media result-frame">
-                <img src="assets/images/gallery/cappuccino-print.webp" alt="Finished white T-shirt with a colourful cappuccino graphic" width="416" height="900" loading="lazy" decoding="async">
-                <span>Separate finished-work example</span>
+            <article class="story-panel" id="story-finished-panel" role="tabpanel" aria-labelledby="story-finished-tab" data-tab-panel="story-finished" hidden>
+              <div class="story-media">
+                <img src="assets/images/story/custom-story-finished-tee.webp" alt="Completed black T-shirt with pink flamingo artwork in a boutique display" width="900" height="1200" loading="lazy" decoding="async">
+                <span>Finished custom-design example</span>
               </div>
-              <div class="process-copy">
-                <p class="eyebrow">Result</p>
-                <h3>Examples created during our custom-printing sessions.</h3>
-                <p>This example is shown separately and is not presented as the exact result from the video.</p>
+              <div class="story-copy">
+                <p class="eyebrow">03 Finished Tee</p>
+                <h3>A finished tee example</h3>
+                <p>Shown as a separate custom-design example, not as the confirmed result of the printing video.</p>
+              </div>
+            </article>
+
+            <article class="story-panel" id="story-worn-panel" role="tabpanel" aria-labelledby="story-worn-tab" data-tab-panel="story-worn" hidden>
+              <div class="story-media">
+                <img src="assets/images/story/custom-story-worn.webp" alt="Face-free back view of two customers wearing black flamingo-print T-shirts" width="554" height="1200" loading="lazy" decoding="async">
+                <span>Face-free customer photograph</span>
+              </div>
+              <div class="story-copy">
+                <p class="eyebrow">04 Worn</p>
+                <h3>Made to be worn</h3>
+                <p>A face-free back-view example of custom flamingo tees in use.</p>
               </div>
             </article>
           </div>
 
-          <div class="process-action" data-whatsapp-zone>
+          <div class="story-action" data-whatsapp-zone>
             <a
               class="button button-primary"
               href="https://wa.me/917780478506"
@@ -409,7 +426,7 @@
               rel="noopener noreferrer"
               data-whatsapp-action="print"
             >
-              Print my idea <span aria-hidden="true">↗</span>
+              Print My Idea <span aria-hidden="true">↗</span>
             </a>
           </div>
         </div>

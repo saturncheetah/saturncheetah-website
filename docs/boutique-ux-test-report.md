@@ -248,16 +248,94 @@ physical-device inspection remains a release check.
 Result: **pass for source integrity, responsive rules, fitting constraints,
 local delivery and syntax**.
 
+## Refreshed gallery and custom-story validation
+
+Asset and content checks:
+
+- five 960×960 gallery WebPs decode successfully;
+- visible order is black / white / black / white / black;
+- card titles are Echo Silhouette, Find Your Balance, Resurrection,
+  Knowledge Is Power and Prism Beauty;
+- the excluded “Her Pookie” artwork is absent from HTML and production
+  assets;
+- all four story WebPs decode at their declared dimensions;
+- the story video is H.264/AAC, 478×850 and 8.85 seconds;
+- the MP4 `moov` atom precedes `mdat`, supporting poster-first progressive
+  playback;
+- the generated poster visibly comes from the supplied vertical video; and
+- the worn photograph was visually checked as a face-free back view.
+
+Responsive source-rule results:
+
+| Viewport | Design presentation | Story presentation | Overflow assessment |
+| ---: | --- | --- | --- |
+| 320 px | 86.5% scroll-snap cards | Four equal compact tabs; one panel; media ≤282 px high | Bounded |
+| 360 px | 86.5% scroll-snap cards | Four equal compact tabs; one panel; media ≤317 px high | Bounded |
+| 390 px | 86.5% scroll-snap cards | Four equal compact tabs; one panel; media ≤340 px high | Bounded |
+| 430 px | 86.5% scroll-snap cards | Four equal compact tabs; one panel; media ≤340 px high | Bounded |
+| 768 px | Five-card grid | One stacked active panel; media 380 px high | Bounded |
+| 1024 px | Five-card grid | One two-column active panel; media 410 px high | Bounded |
+| 1440 px | Five-card grid | One two-column active panel; media 410 px high | Bounded |
+
+Gallery and story images use `object-fit: contain`, centered positioning and
+explicit dimensions. Design hover zoom was removed. The story labels occupy a
+separate media row instead of covering artwork, clothing or customer media.
+Hidden panels are not vertically stacked in the JavaScript experience, and
+story-specific no-JavaScript CSS prevents four media panels from stacking.
+
+Accessibility and interaction checks:
+
+- all story tab IDs, panels and `aria-controls` targets resolve;
+- existing Arrow, Home and End keyboard tab behavior applies to all four
+  story states;
+- pointer swipe ignores video and interactive controls;
+- native video controls remain available for tap-to-play;
+- video uses `preload="none"` and has no `autoplay`;
+- switching tabs pauses video in a hidden panel;
+- the CTA is inside a `data-whatsapp-zone`, so the compact floating pill is
+  suppressed when the CTA is visible; and
+- `node --check assets/js/site.js` passes.
+
+Local delivery:
+
+- page, CSS and JavaScript: HTTP 200;
+- five gallery WebPs: HTTP 200;
+- four story WebPs: HTTP 200;
+- custom-story MP4: HTTP 200;
+- missing local references: 0;
+- duplicate IDs: 0;
+- invalid labels, fragments or `aria-controls`: 0;
+- rendered images without explicit dimensions: 0.
+
+Locked selector comparison against `7c28f3b`:
+
+- selector HTML SHA-256:
+  `bb4d1cc88b9fd7247bef8dfdea3a3a8e426736743db41023c78ae90c8b925680`;
+- selector base CSS SHA-256:
+  `708037aaf4493490e809dd29fac40ff6b9e0610a91ed9f7e2f4b89ba9c1892c1`;
+- all six selector product-asset SHA-256 checks: passed;
+- changed selector JavaScript or WhatsApp-state lines: 0.
+
+The browser runtime remained unavailable. Viewport results are verified from
+the responsive layout constraints, decoded media and source relationships;
+final physical-device and browser-rendered inspection remains a release
+check.
+
+Result: **pass for scoped source, asset, truthfulness, accessibility,
+delivery and locked-selector checks**.
+
 ## Unresolved owner and release decisions
 
 1. Confirm documented publication permission for all five gallery artworks,
    especially any third-party design elements.
-2. Confirm the live-printing video has passed final frame-by-frame privacy and
+2. Obtain and document customer consent to publish
+   `custom-story-worn.webp` before production launch.
+3. Confirm the live-printing video has passed final frame-by-frame privacy and
    consent review.
-3. Confirm final acceptance of the stylised branding embedded in the approved
+4. Confirm final acceptance of the stylised branding embedded in the approved
    generated boutique hero/category images; the official live logo remains
    authoritative.
-4. Complete browser and physical-device validation at the eight required
+5. Complete browser and physical-device validation at the eight required
    widths before merging or deploying.
 
 Reviews remain intentionally omitted until genuine permissioned material is

@@ -265,6 +265,45 @@ function setupTabs() {
   });
 }
 
+function setupStorySwipe() {
+  const stage = document.querySelector("[data-story-swipe]");
+  const module = stage?.closest("[data-tabs]");
+  let startX = null;
+  let startY = null;
+
+  if (!stage || !module) return;
+
+  function resetSwipe() {
+    startX = null;
+    startY = null;
+  }
+
+  stage.addEventListener("pointerdown", event => {
+    if (!event.isPrimary || event.target.closest("video, button, a, input, select, textarea, summary")) return;
+    startX = event.clientX;
+    startY = event.clientY;
+  });
+
+  stage.addEventListener("pointerup", event => {
+    if (startX === null || startY === null) return;
+
+    const horizontalTravel = event.clientX - startX;
+    const verticalTravel = event.clientY - startY;
+    resetSwipe();
+
+    if (Math.abs(horizontalTravel) < 48 || Math.abs(horizontalTravel) <= Math.abs(verticalTravel)) return;
+
+    const tabs = [...module.querySelectorAll("[role='tab']")];
+    const activeIndex = tabs.findIndex(tab => tab.getAttribute("aria-selected") === "true");
+    const nextIndex = horizontalTravel < 0 ? activeIndex + 1 : activeIndex - 1;
+
+    if (nextIndex < 0 || nextIndex >= tabs.length) return;
+    activateTab(module, tabs[nextIndex].dataset.tabTarget);
+  });
+
+  stage.addEventListener("pointercancel", resetSwipe);
+}
+
 function updateTeeProduct(productKey, announce = true) {
   const product = productData[productKey];
   const teeImage = document.querySelector("#tee-image");
@@ -597,6 +636,7 @@ setupNavigation();
 setupActiveNavigation();
 setupHeroEntrance();
 setupTabs();
+setupStorySwipe();
 setupTeeSelector();
 setupWhatsAppFlow();
 setupFloatingPill();

@@ -222,6 +222,64 @@ unused upper area rather than over the shoes.
 
 No product copy, WhatsApp behavior or non-selector section changed.
 
+## Design-gallery and custom-story update
+
+The **Explore Our Designs** panel now uses five approved, face-free
+T-shirt-on-hanger visuals in the required presentation order:
+
+1. `assets/images/designs/echo-silhouette.webp` — black, 960×960,
+   28,836 bytes;
+2. `assets/images/designs/find-your-balance.webp` — white, 960×960,
+   26,218 bytes;
+3. `assets/images/designs/resurrection.webp` — black, 960×960,
+   29,532 bytes;
+4. `assets/images/designs/knowledge-is-power.webp` — white, 960×960,
+   30,102 bytes;
+5. `assets/images/designs/prism-beauty.webp` — black, 960×960,
+   23,826 bytes.
+
+The incoming filenames were checked against visible artwork before
+conversion. Two incoming names were swapped, and
+`design-prism-beauty.jpg` visibly contained the excluded “Her Pookie”
+artwork. Production files were therefore mapped by approved visible content,
+not the incorrect staging name. “Her Pookie” is absent from rendered and
+production assets.
+
+The gallery retains the existing **Create Your Own** form/pathway and
+full-screen preview. Its cards now use centered containment in a compact
+five-card desktop row and native mobile scroll snap, without hover zoom.
+
+The former three-state printing example is now a four-state connected
+custom-piece story:
+
+- `assets/images/story/custom-story-design.webp` — 900×1066,
+  61,888 bytes;
+- `assets/images/story/custom-story-printing-poster.webp` — 478×850,
+  16,368 bytes;
+- `assets/video/custom-story-live-printing.mp4` — 478×850, 8.85 seconds,
+  1,134,543 bytes;
+- `assets/images/story/custom-story-finished-tee.webp` — 900×1200,
+  120,484 bytes;
+- `assets/images/story/custom-story-worn.webp` — 554×1200,
+  71,108 bytes.
+
+Only one story panel is active at a time. Four accessible tabs support
+click/tap and keyboard navigation, while a scoped horizontal pointer gesture
+supports swiping without intercepting video controls. The vertical video is
+poster-first, muted, `preload="none"` and has no autoplay attribute.
+
+The module explicitly states that the video demonstrates the real printing
+process but is not confirmed as the exact printing of the displayed finished
+tee. The final CTA continues to use the existing WhatsApp generation logic
+and number.
+
+The face-free worn photograph still requires documented customer publication
+permission before production launch.
+
+The approved 180/240 selector remains unchanged from commit `7c28f3b`:
+its HTML section and CSS block hashes match, its six product assets retain
+their recorded SHA-256 values, and no selector or WhatsApp-state line changed.
+
 ## Release boundary
 
 No Netlify deployment, DNS change, Netlify configuration change, merge or
