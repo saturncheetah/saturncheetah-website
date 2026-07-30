@@ -276,151 +276,6 @@
       </div>
     </section>
 
-    <section class="section direction-section" id="direction" aria-labelledby="direction-title">
-      <div class="container">
-        <div class="section-heading">
-          <p class="eyebrow">Choose your direction</p>
-          <h2 id="direction-title">Explore Our Designs</h2>
-          <p>Choose a design you like, or send us something completely your own.</p>
-        </div>
-
-        <div class="tab-module" data-tabs="direction">
-          <div class="tab-list" role="tablist" aria-label="Choose a design direction">
-            <button
-              id="direction-explore-tab"
-              type="button"
-              role="tab"
-              aria-selected="true"
-              aria-controls="direction-explore-panel"
-              data-tab-target="direction-explore"
-            >
-              Explore Our Designs
-            </button>
-            <button
-              id="direction-create-tab"
-              type="button"
-              role="tab"
-              aria-selected="false"
-              aria-controls="direction-create-panel"
-              tabindex="-1"
-              data-tab-target="direction-create"
-            >
-              Create Your Own
-            </button>
-          </div>
-
-          <div
-            class="tab-panel"
-            id="direction-explore-panel"
-            role="tabpanel"
-            aria-labelledby="direction-explore-tab"
-            data-tab-panel="direction-explore"
-          >
-            <div class="design-gallery" tabindex="0" aria-label="Saturn Cheetah design gallery" data-whatsapp-zone>
-              <button class="design-card" type="button" data-gallery-index="0">
-                <img src="assets/images/designs/echo-silhouette.webp" alt="Black T-shirt on a hanger with Echo Silhouette artwork" width="960" height="960" loading="lazy" decoding="async">
-                <span>Echo Silhouette</span>
-              </button>
-              <button class="design-card" type="button" data-gallery-index="1">
-                <img src="assets/images/designs/find-your-balance.webp" alt="White T-shirt on a hanger with Find Your Balance artwork" width="960" height="960" loading="lazy" decoding="async">
-                <span>Find Your Balance</span>
-              </button>
-              <button class="design-card" type="button" data-gallery-index="2">
-                <img src="assets/images/designs/resurrection.webp" alt="Black T-shirt on a hanger with Resurrection artwork" width="960" height="960" loading="lazy" decoding="async">
-                <span>Resurrection</span>
-              </button>
-              <button class="design-card" type="button" data-gallery-index="3">
-                <img src="assets/images/designs/knowledge-is-power.webp" alt="White T-shirt on a hanger with Knowledge Is Power artwork" width="960" height="960" loading="lazy" decoding="async">
-                <span>Knowledge Is Power</span>
-              </button>
-              <button class="design-card" type="button" data-gallery-index="4">
-                <img src="assets/images/designs/prism-beauty.webp" alt="Black T-shirt on a hanger with Prism Beauty artwork" width="960" height="960" loading="lazy" decoding="async">
-                <span>Prism Beauty</span>
-              </button>
-            </div>
-          </div>
-
-          <div
-            class="tab-panel"
-            id="direction-create-panel"
-            role="tabpanel"
-            aria-labelledby="direction-create-tab"
-            data-tab-panel="direction-create"
-            hidden
-          >
-            <form class="customise-form" id="customise" data-whatsapp-zone>
-              <div class="form-grid">
-                <div class="field">
-                  <label for="custom-product">Product</label>
-                  <select id="custom-product" name="product" required>
-                    <option value="180 GSM Unisex Regular Fit">180 GSM Regular Fit</option>
-                    <option value="240 GSM Unisex Oversized">240 GSM Oversized</option>
-                    <option value="Bulk / Other Custom Product">Bulk / another custom product</option>
-                  </select>
-                </div>
-                <div class="field">
-                  <label for="custom-quantity">Quantity</label>
-                  <input id="custom-quantity" name="quantity" type="number" min="1" value="1" inputmode="numeric" required>
-                </div>
-                <div class="field">
-                  <label for="custom-design-status">Do you have a design?</label>
-                  <select id="custom-design-status" name="designStatus" required>
-                    <option value="I have a ready design">Yes, it is ready</option>
-                    <option value="I have a reference or idea">I have a reference or idea</option>
-                    <option value="I need design assistance">Not yet</option>
-                  </select>
-                </div>
-              </div>
-
-              <details class="optional-details">
-                <summary>Add optional details</summary>
-                <div class="optional-grid">
-                  <div class="field">
-                    <label for="customer-name">Name</label>
-                    <input id="customer-name" name="customerName" type="text" autocomplete="name">
-                  </div>
-                  <div class="field">
-                    <label for="custom-colour">Preferred colour</label>
-                    <input id="custom-colour" name="colour" type="text" placeholder="For example, black">
-                  </div>
-                  <div class="field">
-                    <label for="custom-placement">Print placement</label>
-                    <select id="custom-placement" name="placement">
-                      <option value="">Not sure yet</option>
-                      <option>Front</option>
-                      <option>Back</option>
-                      <option>Front and back</option>
-                      <option>Sleeve</option>
-                      <option>Multiple placements</option>
-                    </select>
-                  </div>
-                  <div class="field">
-                    <label for="custom-date">Required date</label>
-                    <input id="custom-date" name="requiredDate" type="date">
-                  </div>
-                  <div class="field">
-                    <label for="custom-city">City</label>
-                    <input id="custom-city" name="city" type="text" autocomplete="address-level2">
-                  </div>
-                  <div class="field field-wide">
-                    <label for="custom-notes">Notes</label>
-                    <textarea id="custom-notes" name="notes" rows="3" placeholder="Describe your wording, reference or placement."></textarea>
-                  </div>
-                </div>
-              </details>
-
-              <div class="form-submit">
-                <button class="button button-whatsapp" type="submit">
-                  Continue on WhatsApp <span aria-hidden="true">↗</span>
-                </button>
-                <p>Your message opens in WhatsApp. Attach your design or reference there.</p>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <section class="section process-section" id="process" aria-labelledby="process-title">
       <div class="container">
         <div class="section-heading section-heading-light">
@@ -512,6 +367,186 @@
             >
               Print My Idea <span aria-hidden="true">↗</span>
             </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section direction-section" id="direction" aria-labelledby="direction-title">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Made to inspire</p>
+          <h2 id="direction-title">Explore Our Designs</h2>
+          <p>Start with one of our ideas, or make it completely your own.</p>
+        </div>
+
+        <div class="tab-module" data-tabs="direction">
+          <div class="tab-list" role="tablist" aria-label="Choose a design direction">
+            <button
+              id="direction-explore-tab"
+              type="button"
+              role="tab"
+              aria-selected="true"
+              aria-controls="direction-explore-panel"
+              data-tab-target="direction-explore"
+            >
+              Explore Our Designs
+            </button>
+            <button
+              id="direction-create-tab"
+              type="button"
+              role="tab"
+              aria-selected="false"
+              aria-controls="direction-create-panel"
+              tabindex="-1"
+              data-tab-target="direction-create"
+            >
+              Create Your Own
+            </button>
+          </div>
+
+          <div
+            class="tab-panel"
+            id="direction-explore-panel"
+            role="tabpanel"
+            aria-labelledby="direction-explore-tab"
+            data-tab-panel="direction-explore"
+          >
+            <div class="design-gallery-meta">
+              <p id="design-gallery-position" role="status" aria-live="polite" aria-atomic="true" aria-label="Design 1 of 5">01 / 05</p>
+            </div>
+
+            <div
+              class="design-gallery"
+              tabindex="0"
+              aria-label="Saturn Cheetah design gallery"
+              aria-describedby="design-gallery-position"
+              data-whatsapp-zone
+            >
+              <article class="design-card" data-gallery-index="0" data-tee-tone="black">
+                <button class="design-preview" type="button" data-gallery-open aria-label="Open Echo Silhouette design preview">
+                  <img src="assets/images/designs/echo-silhouette.webp" alt="Black T-shirt on a hanger with Echo Silhouette artwork" width="960" height="960" loading="lazy" decoding="async">
+                </button>
+                <div class="design-card-body">
+                  <h3>Echo Silhouette</h3>
+                  <a href="https://wa.me/917780478506" target="_blank" rel="noopener noreferrer" data-design-title="Echo Silhouette">Use This Design</a>
+                </div>
+              </article>
+              <article class="design-card" data-gallery-index="1" data-tee-tone="white">
+                <button class="design-preview" type="button" data-gallery-open aria-label="Open Find Your Balance design preview">
+                  <img src="assets/images/designs/find-your-balance.webp" alt="White T-shirt on a hanger with Find Your Balance artwork" width="960" height="960" loading="lazy" decoding="async">
+                </button>
+                <div class="design-card-body">
+                  <h3>Find Your Balance</h3>
+                  <a href="https://wa.me/917780478506" target="_blank" rel="noopener noreferrer" data-design-title="Find Your Balance">Use This Design</a>
+                </div>
+              </article>
+              <article class="design-card" data-gallery-index="2" data-tee-tone="black">
+                <button class="design-preview" type="button" data-gallery-open aria-label="Open Resurrection design preview">
+                  <img src="assets/images/designs/resurrection.webp" alt="Black T-shirt on a hanger with Resurrection artwork" width="960" height="960" loading="lazy" decoding="async">
+                </button>
+                <div class="design-card-body">
+                  <h3>Resurrection</h3>
+                  <a href="https://wa.me/917780478506" target="_blank" rel="noopener noreferrer" data-design-title="Resurrection">Use This Design</a>
+                </div>
+              </article>
+              <article class="design-card" data-gallery-index="3" data-tee-tone="white">
+                <button class="design-preview" type="button" data-gallery-open aria-label="Open Knowledge Is Power design preview">
+                  <img src="assets/images/designs/knowledge-is-power.webp" alt="White T-shirt on a hanger with Knowledge Is Power artwork" width="960" height="960" loading="lazy" decoding="async">
+                </button>
+                <div class="design-card-body">
+                  <h3>Knowledge Is Power</h3>
+                  <a href="https://wa.me/917780478506" target="_blank" rel="noopener noreferrer" data-design-title="Knowledge Is Power">Use This Design</a>
+                </div>
+              </article>
+              <article class="design-card" data-gallery-index="4" data-tee-tone="black">
+                <button class="design-preview" type="button" data-gallery-open aria-label="Open Prism Beauty design preview">
+                  <img src="assets/images/designs/prism-beauty.webp" alt="Black T-shirt on a hanger with Prism Beauty artwork" width="960" height="960" loading="lazy" decoding="async">
+                </button>
+                <div class="design-card-body">
+                  <h3>Prism Beauty</h3>
+                  <a href="https://wa.me/917780478506" target="_blank" rel="noopener noreferrer" data-design-title="Prism Beauty">Use This Design</a>
+                </div>
+              </article>
+            </div>
+          </div>
+
+          <div
+            class="tab-panel"
+            id="direction-create-panel"
+            role="tabpanel"
+            aria-labelledby="direction-create-tab"
+            data-tab-panel="direction-create"
+            hidden
+          >
+            <form class="customise-form" id="customise" data-whatsapp-zone>
+              <div class="form-grid">
+                <div class="field">
+                  <label for="custom-product">Product</label>
+                  <select id="custom-product" name="product" required>
+                    <option value="180 GSM Unisex Regular Fit">180 GSM Regular Fit</option>
+                    <option value="240 GSM Unisex Oversized">240 GSM Oversized</option>
+                    <option value="Bulk / Other Custom Product">Bulk / another custom product</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="custom-quantity">Quantity</label>
+                  <input id="custom-quantity" name="quantity" type="number" min="1" value="1" inputmode="numeric" required>
+                </div>
+                <div class="field">
+                  <label for="custom-design-status">Do you have a design?</label>
+                  <select id="custom-design-status" name="designStatus" required>
+                    <option value="I have a ready design">Yes, it is ready</option>
+                    <option value="I have a reference or idea">I have a reference or idea</option>
+                    <option value="I need design assistance">Not yet</option>
+                  </select>
+                </div>
+              </div>
+
+              <details class="optional-details">
+                <summary>Add optional details</summary>
+                <div class="optional-grid">
+                  <div class="field">
+                    <label for="customer-name">Name</label>
+                    <input id="customer-name" name="customerName" type="text" autocomplete="name">
+                  </div>
+                  <div class="field">
+                    <label for="custom-colour">Preferred colour</label>
+                    <input id="custom-colour" name="colour" type="text" placeholder="For example, black">
+                  </div>
+                  <div class="field">
+                    <label for="custom-placement">Print placement</label>
+                    <select id="custom-placement" name="placement">
+                      <option value="">Not sure yet</option>
+                      <option>Front</option>
+                      <option>Back</option>
+                      <option>Front and back</option>
+                      <option>Sleeve</option>
+                      <option>Multiple placements</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label for="custom-date">Required date</label>
+                    <input id="custom-date" name="requiredDate" type="date">
+                  </div>
+                  <div class="field">
+                    <label for="custom-city">City</label>
+                    <input id="custom-city" name="city" type="text" autocomplete="address-level2">
+                  </div>
+                  <div class="field field-wide">
+                    <label for="custom-notes">Notes</label>
+                    <textarea id="custom-notes" name="notes" rows="3" placeholder="Describe your wording, reference or placement."></textarea>
+                  </div>
+                </div>
+              </details>
+
+              <div class="form-submit">
+                <button class="button button-whatsapp" type="submit">
+                  Continue on WhatsApp <span aria-hidden="true">↗</span>
+                </button>
+                <p>Your message opens in WhatsApp. Attach your design or reference there.</p>
+              </div>
+            </form>
           </div>
         </div>
       </div>

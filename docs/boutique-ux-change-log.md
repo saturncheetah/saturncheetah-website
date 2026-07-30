@@ -429,6 +429,50 @@ and interaction are unchanged; only its surrounding brown visual surfaces
 were neutralised. Story media, tabs and WhatsApp behavior, bulk/review content,
 HTML, JavaScript and Netlify configuration were not modified.
 
+## Story order, editorial design gallery and portrait-product fitting
+
+The complete connected custom-piece story now appears immediately after the
+Bulk T-shirts & Embroidery section and before Explore Our Designs. Its HTML
+unit moved without changing its IDs, media, labels, copy, tabs, swipe
+interaction, CTA or WhatsApp behavior.
+
+Explore Our Designs now uses a cream editorial presentation:
+
+- section surface: `#f3e0c8`;
+- primary text: `#17120f`;
+- secondary text: `#574b43`;
+- black-tee image wells: pale beige `#f8ead8`;
+- white-tee image wells: charcoal `#151515`;
+- card/form surface: `#fff8ef`; and
+- the existing orange remains the active and interaction accent.
+
+The five approved designs retain their original images and
+black/white/black/white/black order. Each card now separates its accessible
+full-screen preview button from a **Use This Design** WhatsApp link. The link
+includes the selected design title in its generated message. A live
+`01 / 05` indicator follows the nearest scroll-snap card, while keyboard users
+can move the focused gallery with Left and Right Arrow. Mobile cards use
+`min(86vw, 340px)` and native scrolling; the 1440 px layout uses five balanced
+cards with a restrained alternating 14 px editorial offset.
+
+The previous phone product frame was short relative to the 900×1125 portrait
+Caps, Coasters and Mugs sources. It also combined a 4:3 wrapper clipping
+boundary with a percentage-sized replaced element. The new mobile-only shared
+wrapper is square, uses 14 px padding and `overflow: visible`, and explicitly
+sets the image to centered `object-fit: contain` with zero minimum dimensions
+and no transform. The primary products and all four source corners therefore
+fit within the image well.
+
+Tote Bags and Bottles retain their order, images, copy, links and containment.
+The shared square wrapper is required to keep all five cards aligned; their
+actual contained landscape-image dimensions remain effectively the same as
+the previous 4:3 presentation. Desktop secondary-product grid and media rules
+are unchanged.
+
+The hero, 180/240 selector, bulk content, story content and behavior, reviews,
+FAQ, footer and Netlify configuration remain unchanged. No dependency or media
+asset was added or modified.
+
 ## Release boundary
 
 No Netlify deployment, DNS change, Netlify configuration change, merge or

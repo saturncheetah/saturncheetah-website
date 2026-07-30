@@ -37,7 +37,7 @@ Result: **pass**.
 
 - IDs checked: 71
 - duplicate IDs: 0
-- local stylesheet/script/image/poster/video references checked: 20
+- local stylesheet/script/image/poster/video references checked: 21
 - missing local references: 0
 - invalid local fragment targets: 0
 - invalid label targets: 0
@@ -57,7 +57,7 @@ Result: **pass**.
 
 - `node --check assets/js/site.js`: passed.
 - `git diff --check`: passed.
-- CSS braces: 355 opening, 355 closing.
+- CSS braces: 369 opening, 369 closing.
 - Dependencies, modules and external animation libraries: none.
 - WhatsApp phone constant: `917780478506`.
 - Local required-date minimum uses the visitor’s local date.
@@ -734,6 +734,144 @@ checks.
 
 Result: **pass for neutral public surfaces, equal mobile category cards,
 complete contained imagery, WCAG AA contrast and locked-module integrity**.
+
+## Story order, design gallery and portrait-product validation
+
+Document-order checks:
+
+1. hero;
+2. 180/240 selector;
+3. Bulk T-shirts & Embroidery;
+4. connected custom-piece story;
+5. Explore Our Designs / Create Your Own;
+6. More Ways to Customise;
+7. customer reviews;
+8. FAQ;
+9. final WhatsApp CTA; and
+10. footer.
+
+The process and direction sections each occur once. The moved process-section
+HTML matches its pre-move unit byte-for-byte, including all IDs, assets, copy,
+tabs, hidden states, swipe hook and WhatsApp action.
+
+Gallery checks:
+
+- approved design order: Echo Silhouette, Find Your Balance, Resurrection,
+  Knowledge Is Power, Prism Beauty;
+- excluded Her Pookie references: 0;
+- design images: unchanged 960×960 WebPs;
+- black/white/black/white/black tone order: preserved;
+- media treatment: square centered `object-fit: contain`, with no product
+  transform or zoom;
+- black-tee wells: `#f8ead8`;
+- white-tee wells: `#151515`;
+- section: `#f3e0c8`, with no brown or wood-grain layer;
+- primary and secondary text: `#17120f` and `#574b43`;
+- gallery cards and custom form: `#fff8ef`;
+- active accent: existing `#ff8738`;
+- controls per card: one labelled preview button and one **Use This Design**
+  link;
+- position state: `01 / 05` initially, updated to the nearest card during
+  native scrolling;
+- keyboard state: visible global focus plus Left/Right Arrow movement when
+  the gallery itself is focused; and
+- reduced motion: programmatic movement switches to immediate scrolling,
+  transition duration collapses to the existing near-instant fallback and
+  interaction lift is removed.
+
+Calculated gallery constraints:
+
+| Viewport | Card width | Next-card preview / behavior |
+| ---: | ---: | --- |
+| 320 px | 275.2 px | approximately 15 px; native snap |
+| 360 px | 309.6 px | approximately 20 px; native snap |
+| 390 px | 335.4 px | approximately 25 px; native snap |
+| 430 px | capped at 340 px | approximately 60 px; native snap |
+| 768 px | 190 px minimum | horizontal row rather than squeezed columns |
+| 1024 px | up to 240 px | horizontal row rather than squeezed columns |
+| 1440 px | approximately 209 px | five-card grid with alternating 14 px offset |
+
+Calculated contrast:
+
+- `#17120f` on `#f3e0c8`: 14.43:1;
+- `#574b43` on `#f3e0c8`: 6.54:1;
+- `#17120f` on `#fff8ef`: 17.64:1;
+- `#9a3d15` eyebrow text on `#f3e0c8`: 5.34:1; and
+- `#080706` selected-tab text on `#ff8738`: 8.41:1.
+
+The generated Echo Silhouette message is:
+
+```text
+Hello Saturn Cheetah Store,
+
+I’m interested in the Echo Silhouette design.
+Please help me customise it on a T-shirt.
+```
+
+It uses the unchanged `917780478506` WhatsApp destination. Each of the other
+four links receives its own approved design title through the same builder.
+
+Mobile secondary-product diagnostic:
+
+| Viewport | Card width | Media wrapper | Caps/Coasters/Mugs rendered image |
+| ---: | ---: | ---: | ---: |
+| 320 px | 249.12 px | 247.12×247.12 px | 175.30×219.12 px |
+| 360 px | 283.72 px | 281.72×281.72 px | 202.98×253.72 px |
+| 390 px | 309.67 px | 307.67×307.67 px | 223.74×279.67 px |
+| 430 px | 344.27 px | 342.27×342.27 px | 251.42×314.27 px |
+
+For Caps, Coasters and Mugs:
+
+- source dimensions: 900×1125 each;
+- wrapper display: grid with centered placement;
+- wrapper overflow: visible;
+- wrapper padding: 14 px;
+- image width/height and maximum width/height: 100%;
+- image minimum width/height: 0;
+- object fit: contain;
+- object position: center;
+- transform: none;
+- background image: none;
+- card wrapper overflow: hidden only at the padded outer card radius, outside
+  the contained image bounds;
+- all four source corners: retained within the calculated image bounds; and
+- source crop assessment: the boutique scenes naturally end at their source
+  edges, but the cap, coasters, mug, packaging/logo areas and principal
+  displays are complete. No immediate replacement is required.
+
+The mobile square wrapper is shared so all five cards remain equal. At 360 px,
+Tote Bags and Bottles calculate to approximately 253.72×190.29 px inside the
+new well, compared with approximately 255.05×191.29 px previously; their
+actual contained image size is therefore effectively unchanged. Desktop
+secondary-product card order, five-column layout and 4:5 media treatment
+remain unchanged.
+
+Regression checks:
+
+- IDs: 72 checked, 0 duplicates;
+- local references: 21 checked, 0 missing;
+- story and direction sections: one each;
+- JavaScript syntax: passed;
+- CSS braces: 369 opening and 369 closing;
+- HTML/CSS whitespace validation: passed;
+- selector HTML and selector CSS blocks match `7c28f3b`;
+- selector product assets changed from `7c28f3b`: 0;
+- hero block matches pre-task commit `6a15612`;
+- bulk section content: unchanged;
+- story content/behavior source: unchanged apart from document position;
+- reviews, FAQ and footer markup: unchanged;
+- Netlify configuration: unchanged; and
+- dependencies and production media changes: 0.
+
+The connected browser runtime remains unavailable. Responsive results are
+validated from the source dimensions, explicit box constraints, native
+scroll-snap rules, containment calculations and local delivery. Final
+physical-phone confirmation of all source corners and browser-rendered
+overflow remains a release check.
+
+Result: **pass for section order, approved gallery content and controls,
+portrait-source containment, accessibility structure and locked-module
+integrity**.
 
 ## Unresolved owner and release decisions
 

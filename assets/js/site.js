@@ -453,6 +453,15 @@ function buildBulkMessage(product) {
   ].join("\n");
 }
 
+function buildDesignMessage(designTitle) {
+  return [
+    "Hello Saturn Cheetah Store,",
+    "",
+    `I’m interested in the ${designTitle} design.`,
+    "Please help me customise it on a T-shirt."
+  ].join("\n");
+}
+
 function buildBulkTeeMessage(form) {
   const formData = new FormData(form);
   const value = name => String(formData.get(name) || "").trim();
@@ -488,6 +497,10 @@ function updateWhatsAppLinks() {
 
   document.querySelectorAll("[data-bulk-product]").forEach(link => {
     link.href = whatsappUrl(buildBulkMessage(link.dataset.bulkProduct));
+  });
+
+  document.querySelectorAll("[data-design-title]").forEach(link => {
+    link.href = whatsappUrl(buildDesignMessage(link.dataset.designTitle));
   });
 }
 
@@ -589,6 +602,63 @@ function setupReviewCarousel() {
   updateState();
 }
 
+function setupDesignGallery() {
+  const scroller = document.querySelector(".design-gallery");
+  const cards = [...document.querySelectorAll(".design-card")];
+  const position = document.querySelector("#design-gallery-position");
+  let scrollFrame;
+
+  if (!scroller || cards.length === 0 || !position) return;
+
+  const cardOffset = card => {
+    const scrollInset = Number.parseFloat(getComputedStyle(scroller).scrollPaddingLeft) || 0;
+    return card.getBoundingClientRect().left
+      - scroller.getBoundingClientRect().left
+      + scroller.scrollLeft
+      - scrollInset;
+  };
+
+  const activeIndex = () => {
+    const current = scroller.scrollLeft;
+    return cards.reduce((nearest, card, index) => (
+      Math.abs(cardOffset(card) - current) < Math.abs(cardOffset(cards[nearest]) - current)
+        ? index
+        : nearest
+    ), 0);
+  };
+
+  const updateState = () => {
+    const index = activeIndex();
+    const total = String(cards.length).padStart(2, "0");
+
+    position.textContent = `${String(index + 1).padStart(2, "0")} / ${total}`;
+    position.setAttribute("aria-label", `Design ${index + 1} of ${cards.length}`);
+    cards.forEach((card, cardIndex) => card.classList.toggle("is-active", cardIndex === index));
+  };
+
+  const showCard = index => {
+    const target = cards[Math.max(0, Math.min(index, cards.length - 1))];
+    scroller.scrollTo({
+      left: cardOffset(target),
+      behavior: reducedMotion.matches ? "auto" : "smooth"
+    });
+  };
+
+  scroller.addEventListener("keydown", event => {
+    if (event.target !== scroller || (event.key !== "ArrowLeft" && event.key !== "ArrowRight")) return;
+    event.preventDefault();
+    showCard(activeIndex() + (event.key === "ArrowRight" ? 1 : -1));
+  });
+
+  scroller.addEventListener("scroll", () => {
+    window.cancelAnimationFrame(scrollFrame);
+    scrollFrame = window.requestAnimationFrame(updateState);
+  }, { passive: true });
+
+  window.addEventListener("resize", updateState);
+  updateState();
+}
+
 function setupFloatingPill() {
   if (!floatingWhatsapp || !hero || !("IntersectionObserver" in window)) return;
 
@@ -639,7 +709,7 @@ function setupGalleryModal() {
   function renderModal(index) {
     activeIndex = (index + galleryItems.length) % galleryItems.length;
     const sourceImage = galleryItems[activeIndex].querySelector("img");
-    const caption = galleryItems[activeIndex].querySelector("span")?.textContent || "Design preview";
+    const caption = galleryItems[activeIndex].querySelector("h3")?.textContent || "Design preview";
 
     modalImage.src = sourceImage.src;
     modalImage.alt = sourceImage.alt;
@@ -676,7 +746,8 @@ function setupGalleryModal() {
   }
 
   galleryItems.forEach((item, index) => {
-    item.addEventListener("click", () => openModal(index, item));
+    const preview = item.querySelector("[data-gallery-open]");
+    preview?.addEventListener("click", () => openModal(index, preview));
   });
 
   modal.querySelector(".modal-close")?.addEventListener("click", closeModal);
@@ -750,6 +821,7 @@ setupTeeSelector();
 setupWhatsAppFlow();
 setupBulkTeeFlow();
 setupReviewCarousel();
+setupDesignGallery();
 setupFloatingPill();
 setupGalleryModal();
 setupSectionReveals();
