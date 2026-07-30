@@ -3,40 +3,33 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Saturn Cheetah creates custom unisex T-shirts from one piece to bulk orders. Choose 180 GSM regular or 240 GSM oversized tees and order directly on WhatsApp.">
-  <meta name="theme-color" content="#0d1a26">
-  <meta name="color-scheme" content="light">
+  <meta name="description" content="Customise Saturn Cheetah unisex T-shirts from one piece. Choose 180 GSM regular or 240 GSM oversized, explore designs or share your own, and continue on WhatsApp.">
+  <meta name="theme-color" content="#080706">
+  <meta name="color-scheme" content="dark">
 
   <meta property="og:title" content="Saturn Cheetah | Custom T-Shirts">
-  <meta property="og:description" content="Your idea. Your design. Your tee. Custom printing from one piece to bulk orders.">
+  <meta property="og:description" content="Your idea. Your design. Your tee. Custom unisex T-shirts from one piece, plus bulk merchandise.">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="assets/images/hero/oversized-front-back.webp">
-  <meta property="og:image:width" content="1350">
-  <meta property="og:image:height" content="1350">
+  <meta property="og:image" content="assets/images/boutique/hero-desktop.webp">
+  <meta property="og:image:width" content="1600">
+  <meta property="og:image:height" content="900">
   <meta name="twitter:card" content="summary_large_image">
 
   <title>Saturn Cheetah | Custom T-Shirts</title>
 
   <link rel="icon" href="assets/images/brand/favicon-64.png" type="image/png" sizes="64x64">
-  <link rel="preload" href="assets/images/hero/oversized-front-back.webp" as="image" type="image/webp" fetchpriority="high">
   <link rel="stylesheet" href="assets/css/site.css">
   <script src="assets/js/site.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to content</a>
 
-  <div class="announcement" role="status">
-    <span>Single-piece customisation accepted</span>
-    <span aria-hidden="true">•</span>
-    <span>Bulk orders welcome</span>
-  </div>
-
   <header class="site-header" id="top">
-    <div class="container nav-wrap">
+    <div class="container nav-shell">
       <a class="brand" href="#top" aria-label="Saturn Cheetah home">
         <img
           src="assets/images/brand/saturn-cheetah-logo.webp"
-          alt="Saturn Cheetah logo"
+          alt=""
           width="512"
           height="471"
         >
@@ -55,498 +48,535 @@
         <span aria-hidden="true"></span>
       </button>
 
-      <nav id="primary-navigation" class="primary-nav" aria-label="Primary navigation">
-        <a href="#tees">T-shirts</a>
-        <a href="#process">How it works</a>
-        <a href="#work">Our work</a>
-        <a href="#bulk">Bulk</a>
-        <a href="#order" class="nav-cta">Order on WhatsApp</a>
+      <nav class="primary-nav" id="primary-navigation" aria-label="Primary navigation">
+        <a href="#tees" data-nav-section="tees">T-shirts</a>
+        <a href="#direction" data-nav-section="direction">Designs</a>
+        <a href="#process" data-nav-section="process">Print</a>
+        <a href="#more-custom" data-nav-section="more-custom">More</a>
+        <a class="nav-cta" href="#customise" data-open-tab="direction-create">Start your tee</a>
       </nav>
     </div>
   </header>
 
   <main id="main-content">
-    <section class="hero section">
-      <div class="container hero-grid">
-        <div class="hero-copy reveal">
-          <p class="eyebrow">Custom T-shirts from one piece</p>
-          <h1>Your idea.<br>Your design.<br><span>Your tee.</span></h1>
-          <p class="hero-lead">
-            Choose an <strong>180 GSM regular-fit cotton tee</strong> or a
-            <strong>240 GSM oversized tee</strong>, then send your idea on WhatsApp.
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="container hero-content">
+        <div class="hero-copy">
+          <p class="hero-brand-line hero-intro hero-intro-1">Stay Wild. Stay Original.</p>
+          <h1 class="hero-intro hero-intro-2" id="hero-title">Your idea. Your design. <span>Your tee.</span></h1>
+          <p class="hero-lead hero-intro hero-intro-3">
+            Custom unisex T-shirts from one piece, with bulk merchandise for teams,
+            events and brands.
           </p>
 
-          <div class="hero-actions">
-            <a
-              href="#order"
-              class="button button-primary"
-              data-order-intent="Personal / Small Quantity"
-              data-order-product="180 GSM Unisex Regular Fit"
-            >
-              Start my 1-piece custom tee
-            </a>
-            <a
-              href="#order"
-              class="button button-secondary"
-              data-order-intent="Bulk / Business / Event"
-              data-order-product="Bulk / Wider Range"
-            >
-              Get a bulk quote
-            </a>
-          </div>
-
-          <ul class="trust-list" aria-label="Product highlights">
-            <li>Personal orders from 1 piece</li>
-            <li>WhatsApp ordering only</li>
-            <li>No online payment</li>
+          <ul class="hero-proof-chips hero-intro hero-intro-4" aria-label="Product choices and ordering">
+            <li>180 GSM Regular</li>
+            <li>240 GSM Oversized</li>
+            <li>From 1 Piece</li>
+            <li>Bulk Available</li>
           </ul>
-        </div>
 
-        <div class="hero-media reveal">
-          <img
-            src="assets/images/hero/oversized-front-back.webp"
-            alt="Front and back view of custom black oversized T-shirts"
-            width="1350"
-            height="1350"
-            fetchpriority="high"
-            decoding="async"
-          >
-          <div class="hero-badge" aria-label="Orders accepted from one piece">
-            <strong>1+</strong>
-            <span>piece orders</span>
+          <div class="hero-actions hero-intro hero-intro-5">
+            <a class="button button-primary" href="#tees">Customise a Tee</a>
+            <a class="button button-secondary" href="#direction" data-open-tab="direction-explore">Explore Our Designs</a>
           </div>
+          <p class="hero-note hero-intro hero-intro-5">Plan it here, then continue on WhatsApp.</p>
         </div>
       </div>
+
+      <picture class="hero-picture">
+        <source
+          media="(max-width: 767px)"
+          srcset="assets/images/boutique/hero-mobile.webp"
+          width="960"
+          height="1200"
+        >
+        <img
+          src="assets/images/boutique/hero-desktop.webp"
+          alt="Boutique display with a custom T-shirt, cap, mug and coasters"
+          width="1600"
+          height="900"
+          fetchpriority="high"
+          decoding="async"
+        >
+      </picture>
     </section>
 
-    <section class="section intro-strip" aria-label="Ways to order">
-      <div class="container split-cards">
-        <article class="choice-card reveal">
-          <p class="card-number">01</p>
-          <h2>Personal — from 1 piece</h2>
-          <p>Choose a regular or oversized tee, then send your design, photo, wording or reference on WhatsApp.</p>
-          <a
-            href="#tees"
-            class="text-link"
-            data-order-intent="Personal / Small Quantity"
-          >
-            Choose your tee <span aria-hidden="true">→</span>
-          </a>
-        </article>
-
-        <article class="choice-card choice-dark reveal" id="bulk">
-          <p class="card-number">02</p>
-          <h2>Order for a group or business</h2>
-          <p>Access a wider selection of GSM, fits, colours, printing, embroidery and branding options for bulk orders.</p>
-          <a
-            href="#order"
-            class="text-link"
-            data-order-intent="Bulk / Business / Event"
-            data-order-product="Bulk / Wider Range"
-          >
-            Get a bulk quote on WhatsApp <span aria-hidden="true">→</span>
-          </a>
-        </article>
-      </div>
-    </section>
-
-    <section class="section" id="tees">
+    <section class="section tee-section" id="tees" aria-labelledby="tees-title">
       <div class="container">
-        <div class="section-heading reveal">
-          <p class="eyebrow">Choose your base</p>
-          <h2>Two easy options for personal orders</h2>
-          <p>All T-shirts are unisex. Final colours, sizes, design feasibility and delivery time are confirmed on WhatsApp.</p>
+        <div class="section-heading">
+          <p class="eyebrow">Choose your tee</p>
+          <h2 id="tees-title">Regular or oversized?</h2>
+          <p>Pick the silhouette that feels right. Your choice carries into the customisation pathway and WhatsApp message.</p>
         </div>
 
-        <div class="product-grid">
-          <article class="product-card reveal">
-            <div class="product-image">
+        <div class="tee-selector">
+          <fieldset class="tee-segments" aria-describedby="tee-selector-note">
+            <legend class="sr-only">Choose a T-shirt type</legend>
+            <label>
+              <input
+                type="radio"
+                name="tee-option"
+                value="180"
+                data-product-value="180 GSM Unisex Regular Fit"
+                checked
+              >
+              <span>
+                <strong>180 GSM</strong>
+                Regular
+              </span>
+            </label>
+            <label>
+              <input
+                type="radio"
+                name="tee-option"
+                value="240"
+                data-product-value="240 GSM Unisex Oversized"
+              >
+              <span>
+                <strong>240 GSM</strong>
+                Oversized
+              </span>
+            </label>
+          </fieldset>
+
+          <div class="tee-stage">
+            <figure class="tee-visual">
               <img
+                id="tee-image"
                 src="assets/images/products/regular-180-black-white.webp"
-                alt="Black and white regular-fit crew-neck T-shirts"
+                alt="Black and white regular crew-neck T-shirts"
                 width="686"
                 height="1200"
-                loading="lazy"
                 decoding="async"
               >
-              <span class="product-tag">Everyday comfort</span>
-            </div>
-            <div class="product-content">
-              <p class="product-spec">180 GSM • Cotton • Unisex</p>
-              <h3>Regular Fit T-shirt</h3>
-              <p>Comfortable for everyday wear, gifting, events and custom prints from one piece.</p>
-              <button
-                class="button button-dark"
-                type="button"
-                data-order-intent="Personal / Small Quantity"
-                data-order-product="180 GSM Unisex Regular Fit"
-              >
-                Choose 180 GSM regular
-              </button>
-            </div>
-          </article>
+              <figcaption>Current product view</figcaption>
+            </figure>
 
-          <article class="product-card reveal">
-            <div class="product-image product-image-pair">
-              <img
-                src="assets/images/products/oversized-240-white.webp"
-                alt="Blank white oversized T-shirt"
-                width="562"
-                height="1000"
-                loading="lazy"
-                decoding="async"
-              >
-              <img
-                src="assets/images/products/oversized-240-black.webp"
-                alt="Blank black oversized T-shirt"
-                width="562"
-                height="1000"
-                loading="lazy"
-                decoding="async"
-              >
-              <span class="product-tag">Premium streetwear</span>
-            </div>
-            <div class="product-content">
-              <p class="product-spec">240 GSM • Heavyweight • Unisex</p>
-              <h3>Oversized T-shirt</h3>
-              <p>A heavier, relaxed silhouette designed for bold front, back and multi-placement prints.</p>
+            <div class="tee-details">
+              <p class="product-spec" id="tee-spec">180 GSM · Unisex · Cotton</p>
+              <h3 id="tee-name">Regular Fit T-shirt</h3>
+              <p class="tee-summary" id="tee-summary">A familiar everyday silhouette with an easy, regular fit.</p>
+              <dl>
+                <div>
+                  <dt>Fit</dt>
+                  <dd id="tee-fit">Regular and easy to wear</dd>
+                </div>
+                <div>
+                  <dt>Works well for</dt>
+                  <dd id="tee-use">Everyday wear, gifting and event tees</dd>
+                </div>
+              </dl>
               <button
-                class="button button-dark"
+                class="button button-primary"
                 type="button"
-                data-order-intent="Personal / Small Quantity"
-                data-order-product="240 GSM Unisex Oversized"
+                data-open-tab="direction-create"
+                data-scroll-target="direction"
               >
-                Choose 240 GSM oversized
+                Customise this tee
               </button>
+              <a class="tertiary-link" href="#more-custom">Planning a team or event? See bulk options <span aria-hidden="true">→</span></a>
+              <p class="sr-only" id="tee-selector-note">The selected T-shirt updates the product image, fit summary and WhatsApp enquiry.</p>
+              <p class="sr-only" id="tee-status" aria-live="polite"></p>
             </div>
-          </article>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="section process-section" id="process">
+    <section class="section direction-section" id="direction" aria-labelledby="direction-title">
       <div class="container">
-        <div class="section-heading section-heading-light reveal">
-          <p class="eyebrow">From idea to tee</p>
-          <h2>Choose → Share → Print → Wear</h2>
-          <p>You do not need a finished artwork file. Send your idea, text, photo or reference and discuss the best way to print it.</p>
+        <div class="section-heading">
+          <p class="eyebrow">Choose your direction</p>
+          <h2 id="direction-title">Start with ours or bring your own.</h2>
         </div>
 
-        <div class="steps-grid">
-          <article class="step reveal">
-            <span>1</span>
-            <h3>Choose a tee</h3>
-            <p>Select regular or oversized, then tell us your size, colour and quantity.</p>
-          </article>
-          <article class="step reveal">
-            <span>2</span>
-            <h3>Share your idea</h3>
-            <p>Send your own design, wording, photograph or visual reference on WhatsApp.</p>
-          </article>
-          <article class="step reveal">
-            <span>3</span>
-            <h3>Confirm details</h3>
-            <p>We confirm feasibility, print placement, final quote and expected completion.</p>
-          </article>
-          <article class="step reveal">
-            <span>4</span>
-            <h3>Get it printed</h3>
-            <p>Your custom design is applied and the finished T-shirt is prepared for you.</p>
-          </article>
-        </div>
-
-        <div class="printing-story reveal">
-          <div class="video-card">
-            <video
-              controls
-              muted
-              loop
-              playsinline
-              preload="none"
-              poster="assets/images/process/live-printing-poster.jpg"
-              aria-label="Live T-shirt printing process"
+        <div class="tab-module" data-tabs="direction">
+          <div class="tab-list" role="tablist" aria-label="Choose a design direction">
+            <button
+              id="direction-explore-tab"
+              type="button"
+              role="tab"
+              aria-selected="true"
+              aria-controls="direction-explore-panel"
+              data-tab-target="direction-explore"
             >
-              <source src="assets/video/live-printing-demo.mp4" type="video/mp4">
-              Your browser does not support video playback.
-            </video>
-            <div class="video-caption">
-              <span class="live-dot" aria-hidden="true"></span>
-              Real printing process
-            </div>
+              Explore Our Designs
+            </button>
+            <button
+              id="direction-create-tab"
+              type="button"
+              role="tab"
+              aria-selected="false"
+              aria-controls="direction-create-panel"
+              tabindex="-1"
+              data-tab-target="direction-create"
+            >
+              Create Your Own
+            </button>
           </div>
 
-          <div class="printing-copy">
-            <p class="eyebrow">Printed live</p>
-            <h3>See your design take shape</h3>
-            <p>The website shows real process footage and finished back-print examples, with customer faces kept out of view.</p>
-
-            <div class="customer-back-grid">
-              <img
-                src="assets/images/process/flamingo-back-view.webp"
-                alt="Two customers from the back wearing custom flamingo print T-shirts"
-                width="462"
-                height="1000"
-                loading="lazy"
-                decoding="async"
-              >
-              <img
-                src="assets/images/process/pink-graphics-back-view.webp"
-                alt="Two customers from the back wearing matching pink graphic T-shirts"
-                width="462"
-                height="1000"
-                loading="lazy"
-                decoding="async"
-              >
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="work">
-      <div class="container">
-        <div class="section-heading reveal">
-          <p class="eyebrow">Design inspiration</p>
-          <h2>A few ways your tee can look</h2>
-          <p>These examples show different print styles and placements. You can also send something completely your own.</p>
-        </div>
-
-        <div class="gallery-grid">
-          <figure class="gallery-item reveal">
-            <img src="assets/images/gallery/cappuccino-print.webp" alt="White T-shirt with a colourful cappuccino graphic" width="416" height="900" loading="lazy" decoding="async">
-            <figcaption>Bold full-colour graphic</figcaption>
-          </figure>
-          <figure class="gallery-item reveal">
-            <img src="assets/images/gallery/six-seven-print.webp" alt="Yellow T-shirt with a blue robot graphic" width="416" height="900" loading="lazy" decoding="async">
-            <figcaption>Kids and playful prints</figcaption>
-          </figure>
-          <figure class="gallery-item reveal">
-            <img src="assets/images/gallery/udin-din-print.webp" alt="Maroon T-shirt with humorous custom artwork" width="416" height="900" loading="lazy" decoding="async">
-            <figcaption>Humour and personal ideas</figcaption>
-          </figure>
-          <figure class="gallery-item reveal">
-            <img src="assets/images/gallery/blue-graphic-print.webp" alt="Blue T-shirt with a colourful illustrated graphic" width="416" height="900" loading="lazy" decoding="async">
-            <figcaption>Colour tee customisation</figcaption>
-          </figure>
-          <figure class="gallery-item reveal">
-            <img src="assets/images/gallery/balance-print.webp" alt="White T-shirt with an illustrated balance and meditation design" width="1000" height="1000" loading="lazy" decoding="async">
-            <figcaption>Original statement designs</figcaption>
-          </figure>
-          <figure class="gallery-item reveal">
-            <img src="assets/images/gallery/devotional-back-print.webp" alt="Black T-shirt with a devotional circular back print" width="416" height="900" loading="lazy" decoding="async">
-            <figcaption>Large back-print artwork</figcaption>
-          </figure>
-        </div>
-
-        <p class="gallery-note">Designs shown are examples of printing capability. Customers should share artwork they own or have permission to use.</p>
-        <a
-          class="instagram-link gallery-instagram"
-          href="https://www.instagram.com/saturncheetahstore"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          See current work on Instagram <span aria-hidden="true">↗</span>
-        </a>
-      </div>
-    </section>
-
-    <section class="section bulk-banner">
-      <div class="container bulk-grid reveal">
-        <div>
-          <p class="eyebrow">Need more than a few?</p>
-          <h2>A wider range is available for bulk orders.</h2>
-        </div>
-        <div>
-          <p>Tell us your quantity and purpose to discuss additional GSM, fits, fabrics, colours, printing methods, embroidery, labels and packaging.</p>
-          <a
-            href="#order"
-            class="button button-primary"
-            data-order-intent="Bulk / Business / Event"
-            data-order-product="Bulk / Wider Range"
+          <div
+            class="tab-panel"
+            id="direction-explore-panel"
+            role="tabpanel"
+            aria-labelledby="direction-explore-tab"
+            data-tab-panel="direction-explore"
           >
-            Get a bulk quote on WhatsApp
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <section class="section faq-section">
-      <div class="container">
-        <div class="section-heading reveal">
-          <p class="eyebrow">Quick answers</p>
-          <h2>Before you message us</h2>
-        </div>
-
-        <div class="faq-grid">
-          <details class="reveal">
-            <summary>Can I order only one T-shirt?</summary>
-            <p>Yes. Personal customisation is available from one piece on selected T-shirt options.</p>
-          </details>
-          <details class="reveal">
-            <summary>Can I send my own design?</summary>
-            <p>Yes. After opening WhatsApp, attach the design, photograph or reference you want to discuss.</p>
-          </details>
-          <details class="reveal">
-            <summary>Do you handle bulk orders?</summary>
-            <p>Yes. Bulk enquiries can access a wider range of products, GSM, fits, colours and branding options.</p>
-          </details>
-          <details class="reveal">
-            <summary>How do I pay?</summary>
-            <p>There is no website payment gateway. Payment method and terms are confirmed directly after your order details are approved.</p>
-          </details>
-        </div>
-      </div>
-    </section>
-
-    <section class="section order-section" id="order">
-      <div class="container order-grid">
-        <div class="order-copy reveal">
-          <p class="eyebrow">A quick WhatsApp enquiry</p>
-          <h2>Tell us the essentials. Add the rest if you want.</h2>
-          <p>Choose your path and tee. WhatsApp will open with your answers ready, and you can attach your design or reference there.</p>
-
-          <div class="contact-card">
-            <span>WhatsApp</span>
-            <a href="https://wa.me/917780478506" target="_blank" rel="noopener noreferrer">+91 77804 78506</a>
-          </div>
-
-          <a class="instagram-link" href="https://www.instagram.com/saturncheetahstore" target="_blank" rel="noopener noreferrer">
-            See more work on Instagram <span aria-hidden="true">↗</span>
-          </a>
-        </div>
-
-        <form class="order-form reveal" id="whatsapp-order-form">
-          <div class="field">
-            <label for="order-intent">I am ordering for</label>
-            <select id="order-intent" name="orderIntent" required>
-              <option value="Personal / Small Quantity">Myself / a small quantity</option>
-              <option value="Bulk / Business / Event">A business, team or event</option>
-            </select>
-          </div>
-
-          <div class="field">
-            <label for="product">Product</label>
-            <select id="product" name="product" required>
-              <option value="180 GSM Unisex Regular Fit">180 GSM Unisex Regular Fit</option>
-              <option value="240 GSM Unisex Oversized">240 GSM Unisex Oversized</option>
-              <option value="Bulk / Wider Range">Bulk / Wider Range</option>
-              <option value="Other customised product">Other customised product</option>
-            </select>
-          </div>
-
-          <div class="field-row">
-            <div class="field">
-              <label for="quantity">Quantity</label>
-              <input type="number" id="quantity" name="quantity" min="1" value="1" inputmode="numeric" required>
+            <div class="panel-intro">
+              <p>Swipe five starting points. Open any image for a closer look, then adapt the direction with your own idea.</p>
+              <span>Use artwork you own or have permission to print.</span>
             </div>
 
-            <div class="field">
-              <label for="design-status">Design status</label>
-              <select id="design-status" name="designStatus" required>
-                <option value="I have a ready design">I have a ready design</option>
-                <option value="I have a reference or idea">I have a reference or idea</option>
-                <option value="I need design assistance">I need design assistance</option>
-              </select>
+            <div class="design-gallery" tabindex="0" aria-label="Saturn Cheetah design gallery">
+              <button class="design-card" type="button" data-gallery-index="0">
+                <img src="assets/images/gallery/cappuccino-print.webp" alt="White T-shirt with a colourful cappuccino graphic" width="416" height="900" loading="lazy" decoding="async">
+                <span>Colour graphic</span>
+              </button>
+              <button class="design-card" type="button" data-gallery-index="1">
+                <img src="assets/images/gallery/six-seven-print.webp" alt="Yellow T-shirt with a playful blue graphic" width="416" height="900" loading="lazy" decoding="async">
+                <span>Playful print</span>
+              </button>
+              <button class="design-card" type="button" data-gallery-index="2">
+                <img src="assets/images/gallery/udin-din-print.webp" alt="Maroon T-shirt with humorous custom artwork" width="416" height="900" loading="lazy" decoding="async">
+                <span>Personal humour</span>
+              </button>
+              <button class="design-card" type="button" data-gallery-index="3">
+                <img src="assets/images/gallery/blue-graphic-print.webp" alt="Blue T-shirt with a colourful illustrated graphic" width="416" height="900" loading="lazy" decoding="async">
+                <span>Illustrated colour</span>
+              </button>
+              <button class="design-card" type="button" data-gallery-index="4">
+                <img src="assets/images/gallery/balance-print.webp" alt="T-shirt mockup with a balance and meditation illustration" width="1000" height="1000" loading="lazy" decoding="async">
+                <span>Inspiration mockup</span>
+              </button>
             </div>
           </div>
 
-          <details class="order-details">
-            <summary>Add size, colour, date and other details</summary>
-            <div class="order-details-content">
-              <div class="field-row">
+          <div
+            class="tab-panel"
+            id="direction-create-panel"
+            role="tabpanel"
+            aria-labelledby="direction-create-tab"
+            data-tab-panel="direction-create"
+            hidden
+          >
+            <form class="customise-form" id="customise" data-whatsapp-zone>
+              <div class="form-grid">
                 <div class="field">
-                  <label for="customer-name">Customer name</label>
-                  <input type="text" id="customer-name" name="customerName" autocomplete="name" placeholder="Your name">
+                  <label for="custom-product">Product</label>
+                  <select id="custom-product" name="product" required>
+                    <option value="180 GSM Unisex Regular Fit">180 GSM Regular Fit</option>
+                    <option value="240 GSM Unisex Oversized">240 GSM Oversized</option>
+                    <option value="Bulk / Other Custom Product">Bulk / another custom product</option>
+                  </select>
                 </div>
                 <div class="field">
-                  <label for="sizes">Size(s)</label>
-                  <input type="text" id="sizes" name="sizes" placeholder="e.g. M or S–XL mix">
-                </div>
-              </div>
-
-              <div class="field-row">
-                <div class="field">
-                  <label for="colour">Colour</label>
-                  <input type="text" id="colour" name="colour" placeholder="e.g. Black">
+                  <label for="custom-quantity">Quantity</label>
+                  <input id="custom-quantity" name="quantity" type="number" min="1" value="1" inputmode="numeric" required>
                 </div>
                 <div class="field">
-                  <label for="placement">Print placement</label>
-                  <select id="placement" name="placement">
-                    <option>Front</option>
-                    <option>Back</option>
-                    <option>Front and back</option>
-                    <option>Sleeve</option>
-                    <option>Multiple placements</option>
-                    <option>Not sure yet</option>
+                  <label for="custom-design-status">Do you have a design?</label>
+                  <select id="custom-design-status" name="designStatus" required>
+                    <option value="I have a ready design">Yes, it is ready</option>
+                    <option value="I have a reference or idea">I have a reference or idea</option>
+                    <option value="I need design assistance">Not yet</option>
                   </select>
                 </div>
               </div>
 
-              <div class="field-row">
-                <div class="field">
-                  <label for="required-date">Required date</label>
-                  <input type="date" id="required-date" name="requiredDate">
+              <details class="optional-details">
+                <summary>Add optional details</summary>
+                <div class="optional-grid">
+                  <div class="field">
+                    <label for="customer-name">Name</label>
+                    <input id="customer-name" name="customerName" type="text" autocomplete="name">
+                  </div>
+                  <div class="field">
+                    <label for="custom-colour">Preferred colour</label>
+                    <input id="custom-colour" name="colour" type="text" placeholder="For example, black">
+                  </div>
+                  <div class="field">
+                    <label for="custom-placement">Print placement</label>
+                    <select id="custom-placement" name="placement">
+                      <option value="">Not sure yet</option>
+                      <option>Front</option>
+                      <option>Back</option>
+                      <option>Front and back</option>
+                      <option>Sleeve</option>
+                      <option>Multiple placements</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label for="custom-date">Required date</label>
+                    <input id="custom-date" name="requiredDate" type="date">
+                  </div>
+                  <div class="field">
+                    <label for="custom-city">City</label>
+                    <input id="custom-city" name="city" type="text" autocomplete="address-level2">
+                  </div>
+                  <div class="field field-wide">
+                    <label for="custom-notes">Notes</label>
+                    <textarea id="custom-notes" name="notes" rows="3" placeholder="Describe your wording, reference or placement."></textarea>
+                  </div>
                 </div>
-                <div class="field">
-                  <label for="city">Delivery city</label>
-                  <input type="text" id="city" name="city" autocomplete="address-level2" placeholder="Your city">
-                </div>
+              </details>
+
+              <div class="form-submit">
+                <button class="button button-whatsapp" type="submit">
+                  Continue on WhatsApp <span aria-hidden="true">↗</span>
+                </button>
+                <p>Your message opens in WhatsApp. Attach your design or reference there.</p>
               </div>
-
-              <div class="field">
-                <label for="notes">Notes</label>
-                <textarea id="notes" name="notes" rows="4" placeholder="Describe the design, wording, print size, event or any special requirement."></textarea>
-              </div>
-            </div>
-          </details>
-
-          <button type="submit" class="button button-whatsapp">
-            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-              <path d="M20.5 3.5A11.8 11.8 0 0 0 12.1 0C5.6 0 .3 5.3.3 11.8c0 2.1.6 4.2 1.6 6L.2 24l6.4-1.7a11.8 11.8 0 0 0 5.6 1.4h.1c6.5 0 11.8-5.3 11.8-11.8 0-3.2-1.3-6.1-3.6-8.4Zm-8.3 18.2h-.1a9.8 9.8 0 0 1-5-1.4l-.4-.2-3.8 1 1-3.7-.2-.4a9.8 9.8 0 1 1 8.5 4.7Zm5.4-7.3c-.3-.1-1.8-.9-2-.9-.3-.1-.5-.1-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-1.7-.9-2.8-1.5-4-3.4-.3-.5.3-.5.9-1.6.1-.2 0-.4 0-.6 0-.1-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.2-1.2 2.9 0 1.7 1.2 3.3 1.4 3.5.2.2 2.4 3.7 5.9 5.2.8.4 1.5.6 2 .7.8.3 1.6.2 2.2.1.7-.1 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4-.1-.1-.3-.2-.6-.3Z"/>
-            </svg>
-            Continue on WhatsApp
-          </button>
-
-          <p class="form-note" id="order-form-note">No payment is taken on this website. Final price and timeline are confirmed directly with Saturn Cheetah.</p>
-        </form>
+            </form>
+          </div>
+        </div>
       </div>
     </section>
 
-  </main>
+    <section class="section process-section" id="process" aria-labelledby="process-title">
+      <div class="container">
+        <div class="section-heading section-heading-light">
+          <p class="eyebrow">Choose → Print → Result</p>
+          <h2 id="process-title">One connected custom-printing story.</h2>
+          <p>Explore the steps without treating unrelated examples as the exact output of the live-printing clip.</p>
+        </div>
 
-  <footer class="site-footer">
-    <div class="container footer-grid">
-      <div class="footer-brand">
-        <img src="assets/images/brand/saturn-cheetah-logo.webp" alt="" width="512" height="471" loading="lazy" decoding="async">
-        <div>
-          <strong>Saturn Cheetah</strong>
-          <p>Custom products from one piece to bulk.</p>
+        <div class="tab-module process-module" data-tabs="process">
+          <div class="tab-list process-tabs" role="tablist" aria-label="Custom printing stages">
+            <button id="process-choose-tab" type="button" role="tab" aria-selected="true" aria-controls="process-choose-panel" data-tab-target="process-choose">
+              <span>01</span> Choose
+            </button>
+            <button id="process-print-tab" type="button" role="tab" aria-selected="false" aria-controls="process-print-panel" tabindex="-1" data-tab-target="process-print">
+              <span>02</span> Print
+            </button>
+            <button id="process-result-tab" type="button" role="tab" aria-selected="false" aria-controls="process-result-panel" tabindex="-1" data-tab-target="process-result">
+              <span>03</span> Result
+            </button>
+          </div>
+
+          <div class="process-stage">
+            <article class="process-panel" id="process-choose-panel" role="tabpanel" aria-labelledby="process-choose-tab" data-tab-panel="process-choose">
+              <div class="process-media">
+                <img src="assets/images/boutique/featured-tshirt-design.webp" alt="Illustrative custom T-shirt design in a boutique display" width="900" height="1125" loading="lazy" decoding="async">
+                <span>Illustrative design inspiration</span>
+              </div>
+              <div class="process-copy">
+                <p class="eyebrow">Choose</p>
+                <h3>Share a design, reference or idea.</h3>
+                <p>Use a Saturn Cheetah direction as inspiration or bring artwork you have permission to print.</p>
+              </div>
+            </article>
+
+            <article class="process-panel" id="process-print-panel" role="tabpanel" aria-labelledby="process-print-tab" data-tab-panel="process-print" hidden>
+              <div class="process-media video-frame">
+                <video controls muted playsinline preload="none" poster="assets/images/process/live-printing-poster.jpg" aria-label="Live T-shirt printing in action">
+                  <source src="assets/video/live-printing-demo.mp4" type="video/mp4">
+                  Your browser does not support video playback.
+                </video>
+                <span>Real printing footage</span>
+              </div>
+              <div class="process-copy">
+                <p class="eyebrow">Print</p>
+                <h3>Live printing in action</h3>
+                <p>Tap play when you are ready. The footage is real and does not autoplay.</p>
+              </div>
+            </article>
+
+            <article class="process-panel" id="process-result-panel" role="tabpanel" aria-labelledby="process-result-tab" data-tab-panel="process-result" hidden>
+              <div class="process-media result-frame">
+                <img src="assets/images/gallery/cappuccino-print.webp" alt="Finished white T-shirt with a colourful cappuccino graphic" width="416" height="900" loading="lazy" decoding="async">
+                <span>Separate finished-work example</span>
+              </div>
+              <div class="process-copy">
+                <p class="eyebrow">Result</p>
+                <h3>Examples created during our custom-printing sessions.</h3>
+                <p>This example is shown separately and is not presented as the exact result from the video.</p>
+              </div>
+            </article>
+          </div>
+
+          <div class="process-action" data-whatsapp-zone>
+            <a
+              class="button button-primary"
+              href="https://wa.me/917780478506"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-whatsapp-action="print"
+            >
+              Print my idea <span aria-hidden="true">↗</span>
+            </a>
+          </div>
         </div>
       </div>
+    </section>
 
+    <section class="section secondary-section" id="more-custom" aria-labelledby="secondary-title" data-whatsapp-zone>
+      <div class="container">
+        <div class="section-heading compact-heading">
+          <p class="eyebrow">Bulk &amp; branding</p>
+          <h2 id="secondary-title">More ways to customise</h2>
+          <p>Caps, coasters, mugs, tote bags and bottles for teams, events and brands.</p>
+        </div>
+
+        <div class="secondary-scroller" tabindex="0" aria-label="More custom product categories">
+          <article class="secondary-card">
+            <div class="secondary-image">
+              <img src="assets/images/boutique/category-caps.webp" alt="Custom cap presented in the Saturn Cheetah boutique style" width="900" height="1125" loading="lazy" decoding="async">
+            </div>
+            <div class="secondary-copy">
+              <span>Bulk &amp; branding</span>
+              <h3>Caps</h3>
+              <a href="https://wa.me/917780478506" target="_blank" rel="noopener noreferrer" data-bulk-product="Caps">Ask on WhatsApp</a>
+            </div>
+          </article>
+          <article class="secondary-card">
+            <div class="secondary-image">
+              <img src="assets/images/boutique/category-coasters.webp" alt="Custom coasters presented in the Saturn Cheetah boutique style" width="900" height="1125" loading="lazy" decoding="async">
+            </div>
+            <div class="secondary-copy">
+              <span>Bulk &amp; branding</span>
+              <h3>Coasters</h3>
+              <a href="https://wa.me/917780478506" target="_blank" rel="noopener noreferrer" data-bulk-product="Coasters">Ask on WhatsApp</a>
+            </div>
+          </article>
+          <article class="secondary-card">
+            <div class="secondary-image">
+              <img src="assets/images/boutique/category-mugs.webp" alt="Custom mugs presented in the Saturn Cheetah boutique style" width="900" height="1125" loading="lazy" decoding="async">
+            </div>
+            <div class="secondary-copy">
+              <span>Bulk &amp; branding</span>
+              <h3>Mugs</h3>
+              <a href="https://wa.me/917780478506" target="_blank" rel="noopener noreferrer" data-bulk-product="Mugs">Ask on WhatsApp</a>
+            </div>
+          </article>
+          <article class="secondary-card">
+            <div class="secondary-image secondary-image-wide">
+              <img src="assets/images/boutique/category-tote-bags.webp" alt="Custom tote bag presented in the Saturn Cheetah boutique style" width="1448" height="1086" loading="lazy" decoding="async">
+            </div>
+            <div class="secondary-copy">
+              <span>Bulk &amp; branding</span>
+              <h3>Tote Bags</h3>
+              <a href="https://wa.me/917780478506" target="_blank" rel="noopener noreferrer" data-bulk-product="Tote Bags">Ask on WhatsApp</a>
+            </div>
+          </article>
+          <article class="secondary-card">
+            <div class="secondary-image secondary-image-wide">
+              <img src="assets/images/boutique/category-bottles.webp" alt="Custom bottles presented in the Saturn Cheetah boutique style" width="1448" height="1086" loading="lazy" decoding="async">
+            </div>
+            <div class="secondary-copy">
+              <span>Bulk &amp; branding</span>
+              <h3>Bottles</h3>
+              <a href="https://wa.me/917780478506" target="_blank" rel="noopener noreferrer" data-bulk-product="Bottles">Ask on WhatsApp</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section faq-section" id="faq" aria-labelledby="faq-title">
+      <div class="container faq-layout">
+        <div class="section-heading compact-heading">
+          <p class="eyebrow">Quick answers</p>
+          <h2 id="faq-title">Before you message us</h2>
+        </div>
+
+        <div class="faq-list">
+          <details>
+            <summary>Can I order one T-shirt?</summary>
+            <p>Yes. Personal customisation starts from one piece for the 180 GSM regular and 240 GSM oversized options.</p>
+          </details>
+          <details>
+            <summary>What is the difference between the two tees?</summary>
+            <p>The 180 GSM tee has a familiar regular fit. The 240 GSM tee has a heavier, relaxed oversized silhouette.</p>
+          </details>
+          <details>
+            <summary>Can I send my own design?</summary>
+            <p>Yes. Open WhatsApp from the customisation pathway, then attach your ready design, reference or idea.</p>
+          </details>
+          <details>
+            <summary>How do ordering and payment work?</summary>
+            <p>Enquiries continue on WhatsApp. Feasibility, final price, timeline and payment are confirmed directly; this website has no payment gateway.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section final-cta" id="contact" aria-labelledby="final-cta-title" data-whatsapp-zone>
+      <div class="container final-cta-inner">
+        <div>
+          <p class="eyebrow">Ready when you are</p>
+          <h2 id="final-cta-title">Make the next tee unmistakably yours.</h2>
+          <p id="final-selection">Currently showing: 180 GSM Regular Fit.</p>
+        </div>
+        <a
+          class="button button-whatsapp"
+          id="final-whatsapp-link"
+          href="https://wa.me/917780478506"
+          target="_blank"
+          rel="noopener noreferrer"
+          data-whatsapp-action="final"
+        >
+          Continue on WhatsApp <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" data-whatsapp-zone>
+    <div class="container footer-main">
+      <a class="footer-brand" href="#top" aria-label="Saturn Cheetah home">
+        <img src="assets/images/brand/saturn-cheetah-logo.webp" alt="" width="512" height="471" loading="lazy" decoding="async">
+        <span>
+          <strong>Saturn Cheetah</strong>
+          <small>Custom T-shirts and bulk merchandise</small>
+        </span>
+      </a>
       <nav class="footer-links" aria-label="Footer navigation">
+        <a href="#tees">T-shirts</a>
+        <a href="#direction">Designs</a>
         <a href="https://wa.me/917780478506" target="_blank" rel="noopener noreferrer">WhatsApp</a>
         <a href="https://www.instagram.com/saturncheetahstore" target="_blank" rel="noopener noreferrer">Instagram</a>
-        <a href="#top">Back to top</a>
       </nav>
     </div>
-
     <div class="container footer-bottom">
-      <p>© <span id="current-year">2026</span> Saturn Cheetah. All rights reserved.</p>
+      <p>© <span id="current-year">2026</span> Saturn Cheetah. WhatsApp ordering only; no website payment.</p>
     </div>
   </footer>
 
   <a
     class="floating-whatsapp"
-    href="https://wa.me/917780478506?text=Hello%20Saturn%20Cheetah%2C%20I%20would%20like%20to%20discuss%20a%20custom%20T-shirt."
+    id="floating-whatsapp"
+    href="https://wa.me/917780478506"
     target="_blank"
     rel="noopener noreferrer"
-    aria-label="Chat with Saturn Cheetah on WhatsApp"
+    aria-label="Continue your Saturn Cheetah enquiry on WhatsApp"
+    aria-hidden="true"
+    tabindex="-1"
+    data-whatsapp-action="pill"
   >
-    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-      <path d="M20.5 3.5A11.8 11.8 0 0 0 12.1 0C5.6 0 .3 5.3.3 11.8c0 2.1.6 4.2 1.6 6L.2 24l6.4-1.7a11.8 11.8 0 0 0 5.6 1.4h.1c6.5 0 11.8-5.3 11.8-11.8 0-3.2-1.3-6.1-3.6-8.4Zm-8.3 18.2h-.1a9.8 9.8 0 0 1-5-1.4l-.4-.2-3.8 1 1-3.7-.2-.4a9.8 9.8 0 1 1 8.5 4.7Zm5.4-7.3c-.3-.1-1.8-.9-2-.9-.3-.1-.5-.1-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-1.7-.9-2.8-1.5-4-3.4-.3-.5.3-.5.9-1.6.1-.2 0-.4 0-.6 0-.1-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.2-1.2 2.9 0 1.7 1.2 3.3 1.4 3.5.2.2 2.4 3.7 5.9 5.2.8.4 1.5.6 2 .7.8.3 1.6.2 2.2.1.7-.1 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4-.1-.1-.3-.2-.6-.3Z"/>
-    </svg>
-    <span>WhatsApp your idea</span>
+    <span class="whatsapp-dot" aria-hidden="true"></span>
+    <span>WhatsApp</span>
   </a>
+
+  <dialog class="design-modal" id="design-modal" aria-labelledby="design-modal-title">
+    <div class="modal-shell">
+      <div class="modal-header">
+        <div>
+          <p class="eyebrow">Explore Our Designs</p>
+          <h2 id="design-modal-title">Design preview</h2>
+        </div>
+        <button class="modal-close" type="button" aria-label="Close design preview">×</button>
+      </div>
+      <figure>
+        <img id="modal-image" alt="" width="1000" height="1000">
+        <figcaption id="modal-caption"></figcaption>
+      </figure>
+      <div class="modal-controls">
+        <button type="button" data-gallery-previous aria-label="Previous design">← Previous</button>
+        <span id="modal-count" aria-live="polite"></span>
+        <button type="button" data-gallery-next aria-label="Next design">Next →</button>
+      </div>
+    </div>
+  </dialog>
 </body>
 </html>
