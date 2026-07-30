@@ -21,8 +21,9 @@ The first screen now communicates:
 - bulk merchandise is available; and
 - the enquiry continues on WhatsApp.
 
-No price, review, delivery promise, urgency, stock level, customer activity or
-payment gateway was added.
+No price, delivery promise, urgency, stock level, customer-activity claim or
+payment gateway was added. Five supplied Google Review excerpts now appear
+exactly in their approved first-name and last-initial format.
 
 ## Production files changed
 
@@ -53,17 +54,20 @@ Mobile:
 1. Compact boutique header
 2. Copy-first hero with the portrait art-directed source
 3. 180 GSM / 240 GSM segmented selector
-4. Choose Your Direction
-5. Choose → Print → Result
-6. More Ways to Customise
-7. Short FAQ
-8. Final WhatsApp CTA
-9. Compact footer
+4. Compact Bulk T-shirts & Embroidery card
+5. Choose Your Direction
+6. Choose → Print → Result
+7. More Ways to Customise
+8. Loved by Our Customers
+9. Short FAQ
+10. Final WhatsApp CTA
+11. Compact footer
 
 Desktop uses the same semantic order. It changes only the presentation:
 the hero uses the 16:9 source, product and process states use editorial
-two-column layouts, the five designs form one compact row, and the five
-secondary products form one compact row.
+two-column layouts, the bulk summary is horizontal, the five designs form one
+compact row, the five secondary products form one compact row, and three
+reviews are visible where space allows.
 
 ## Old rendered content removed
 
@@ -333,6 +337,38 @@ pseudo-element participates in this module. Desktop category rules remain
 byte-identical to their pre-fix state. HTML, JavaScript, images, copy, links,
 product order, WhatsApp behavior and the locked 180/240 selector are
 unchanged.
+
+## Bulk T-shirts and customer reviews
+
+A compact **Bulk T-shirts & Embroidery** card now follows the personal
+180/240 selector. Its default state shows the approved summary, six option
+chips and a clear statement that embroidery is available for bulk orders
+only. An accessible button controls the hidden enquiry form through
+`aria-expanded` and `aria-controls`.
+
+The expanded form collects organisation or purpose, product type, quantity,
+preferred colours, size breakup, printing/embroidery choice, branding
+position, required date and delivery city. Submission generates a dedicated
+WhatsApp message to the unchanged `917780478506` destination. The form is an
+existing WhatsApp visibility zone, preventing the delayed mobile pill from
+covering its CTA.
+
+The new **Loved by Our Customers** section follows the secondary-products
+module. It contains exactly five supplied Google Review excerpts in the
+approved order, with:
+
+- first name and last initial only;
+- text initials instead of photographs;
+- five visual stars plus screen-reader text;
+- no dates, owner replies or verified-purchase label;
+- native mobile scroll snap with an accessible position indicator;
+- three visible cards at 1024 px and wider, two at 768 px, and accessible
+  previous/next controls on desktop; and
+- the approved Google reviews link opened safely in a new tab.
+
+No review autoplay or carousel dependency was added. The hero, navigation,
+selector, gallery, custom-piece story, secondary-product cards, FAQ, footer,
+Netlify configuration and existing WhatsApp messages remain unchanged.
 
 ## Release boundary
 

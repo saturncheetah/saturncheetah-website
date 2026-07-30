@@ -35,17 +35,17 @@ Result: **pass**.
 
 ## HTML and local references
 
-- IDs checked: 53
+- IDs checked: 71
 - duplicate IDs: 0
-- local stylesheet/script/image/poster/video references checked: 21
+- local stylesheet/script/image/poster/video references checked: 20
 - missing local references: 0
 - invalid local fragment targets: 0
 - invalid label targets: 0
 - invalid `aria-controls` targets: 0
-- rendered `<img>` elements: 17
+- rendered `<img>` elements: 18
 - rendered images without explicit dimensions: 0
 - old unsafe customer/process image references in rendered output: 0
-- review/testimonial sections in rendered output: 0
+- supplied review sections in rendered output: 1
 
 The installed legacy HTML parser reports only its expected lack of HTML5
 element recognition; it reports no additional encoded-ampersand or structural
@@ -57,7 +57,7 @@ Result: **pass**.
 
 - `node --check assets/js/site.js`: passed.
 - `git diff --check`: passed.
-- CSS braces: 277 opening, 277 closing.
+- CSS braces: 338 opening, 338 closing.
 - Dependencies, modules and external animation libraries: none.
 - WhatsApp phone constant: `917780478506`.
 - Local required-date minimum uses the visitor’s local date.
@@ -461,6 +461,111 @@ links remain present; CSS braces balance; `git diff --check` and
 Result: **pass for natural-ratio mobile media, complete source bounds,
 unchanged desktop category styling and locked-selector integrity**.
 
+## Bulk T-shirts and embroidery validation
+
+Default and expanded behavior:
+
+- `bulk-options-panel` is hidden by default;
+- the semantic toggle has `aria-expanded="false"` and resolves
+  `aria-controls="bulk-options-panel"`;
+- the expanded form contains nine labelled, required fields;
+- button, fields and CTA meet the existing minimum 44 px control sizing;
+- the default desktop presentation is a compact horizontal summary;
+- mobile uses one column with no fixed height or horizontal overflow; and
+- the card participates in the existing WhatsApp-zone observer, so the
+  floating pill cannot cover the form CTA.
+
+Every public embroidery reference is in the **Bulk T-shirts & Embroidery**
+context. The chip says **Bulk Embroidery**, the summary and helper text state
+bulk availability, both relevant form choices say “bulk orders only”, and the
+generated message repeats that limitation.
+
+Sample generated message:
+
+```text
+Hello Saturn Cheetah Store,
+
+I’d like a quote for a bulk T-shirt order.
+
+Organisation / purpose: Northside Running Club uniforms
+Product type: Polo / Collar Neck T-shirts
+Quantity: 120
+Preferred colours: Black and orange
+Size breakup: S: 20, M: 40, L: 40, XL: 20
+Printing / bulk embroidery: Printing and bulk embroidery (bulk orders only)
+Branding position: Left chest and back
+Required date: 2026-09-15
+Delivery city: Ahmedabad
+
+I understand embroidery is available for bulk orders only.
+Please help me confirm suitable fabric, GSM, colours, final price and timeline.
+```
+
+The WhatsApp URL is generated through the existing phone constant
+`917780478506`. Existing personal and secondary-product message builders are
+unchanged.
+
+## Customer-review validation
+
+Content checks:
+
+- review cards: exactly 5;
+- order: Gyan G., Vikas R., Karan H., Sharang M., Kinjal M.;
+- rating text: five stars and “5 out of 5 stars” on every card;
+- source label: “Google Review” on every card;
+- profile photographs: 0;
+- owner replies: 0;
+- review dates: 0;
+- verified-purchase labels: 0;
+- Google link:
+  `https://share.google/ArvbmBL3G2J7yAaLp`;
+- safe new-tab attributes: `target="_blank"` and
+  `rel="noopener noreferrer"`.
+
+Responsive constraint results:
+
+| Viewport | Card width | Visible behavior |
+| ---: | ---: | --- |
+| 320 px | 268.8 px | One main card plus next-card edge; native swipe |
+| 360 px | 302.4 px | One main card plus 13.6 px next-card preview |
+| 390 px | 327.6 px | One main card plus 18.4 px next-card preview |
+| 430 px | 360 px | One main card plus 26 px next-card preview |
+| 768 px | approximately 353 px | Two cards; controls available |
+| 1024 px | approximately 311 px | Three cards; controls available |
+| 1440 px | approximately 383 px | Three cards; controls available |
+
+The mobile scroller uses native horizontal scrolling, 84vw cards, scroll
+snap, a hidden scrollbar and no vertical overflow or autoplay. The live
+position text starts at “1 of 5” and updates after swipe or navigation.
+Desktop previous/next buttons have accessible names and
+`aria-controls="reviews-scroller"`; the focused scroller also supports Left
+and Right Arrow navigation. Reduced-motion mode changes programmatic review
+movement from smooth to immediate.
+
+## Scoped regression checks
+
+- duplicate IDs: 0;
+- missing labels, fragment targets or `aria-controls`: 0;
+- missing local references: 0;
+- page, CSS and JavaScript: HTTP 200 locally;
+- `git diff --check`: passed;
+- `node --check assets/js/site.js`: passed;
+- selector HTML, base CSS and product-data hashes match `7c28f3b`;
+- selector product assets changed: 0;
+- Explore Our Designs HTML hash matches `bc223f9`;
+- connected-story HTML hash matches `bc223f9`;
+- secondary-products HTML hash matches `bc223f9`;
+- mobile secondary-product fitting hash matches `bc223f9`;
+- image, video and Netlify configuration changes: 0.
+
+The connected browser runtime remained unavailable. The requested widths were
+validated from the responsive CSS constraints and local delivery; final
+browser-rendered keyboard traversal and physical-device inspection remain
+release checks.
+
+Result: **pass for approved bulk/review content, accessibility structure,
+responsive constraints, local delivery and locked-section integrity**.
+
 ## Unresolved owner and release decisions
 
 1. Confirm documented publication permission for all five gallery artworks,
@@ -478,8 +583,8 @@ Customer publication permission for the face-free
 customer-consent requirement is resolved; no identifying consent evidence is
 stored in the repository.
 
-Reviews remain intentionally omitted until genuine permissioned material is
-provided.
+The five owner-supplied review excerpts are now included exactly as approved.
+No additional review or reviewer data was added.
 
 ## Release boundary
 

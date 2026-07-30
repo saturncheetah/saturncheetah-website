@@ -190,6 +190,92 @@
       </div>
     </section>
 
+    <section class="section bulk-tee-section" id="bulk-tees" aria-labelledby="bulk-tees-title">
+      <div class="container">
+        <div class="bulk-tee-card" data-whatsapp-zone>
+          <div class="bulk-tee-overview">
+            <div>
+              <p class="eyebrow">For teams, events and brands</p>
+              <h2 id="bulk-tees-title">Bulk T-shirts &amp; Embroidery</h2>
+              <p>Need uniforms, teamwear or branded merchandise? Choose from wider T-shirt styles, fabrics, colours, printing and bulk embroidery options.</p>
+              <ul class="bulk-option-chips" aria-label="Bulk T-shirt options">
+                <li>Polo / Collar Neck</li>
+                <li>Jersey Style</li>
+                <li>Regular Fit</li>
+                <li>Oversized</li>
+                <li>Printing</li>
+                <li>Bulk Embroidery</li>
+              </ul>
+              <p class="bulk-range-note">Wider fabric, GSM and colour options are available. Embroidery is available for bulk orders only.</p>
+            </div>
+            <button
+              class="button button-secondary bulk-options-toggle"
+              type="button"
+              aria-expanded="false"
+              aria-controls="bulk-options-panel"
+            >
+              View bulk options
+            </button>
+          </div>
+
+          <form class="bulk-options-panel" id="bulk-options-panel" hidden>
+            <div class="bulk-form-grid">
+              <div class="field">
+                <label for="bulk-purpose">Organisation or purpose</label>
+                <input id="bulk-purpose" name="purpose" type="text" placeholder="Team, company, event or brand" required>
+              </div>
+              <div class="field">
+                <label for="bulk-product-type">Product type</label>
+                <select id="bulk-product-type" name="productType" required>
+                  <option value="Polo / Collar Neck T-shirts">Polo / Collar Neck</option>
+                  <option value="Jersey Style T-shirts">Jersey Style</option>
+                  <option value="Regular Fit T-shirts">Regular Fit</option>
+                  <option value="Oversized T-shirts">Oversized</option>
+                  <option value="Other bulk T-shirt style">Another bulk T-shirt style</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="bulk-quantity">Quantity</label>
+                <input id="bulk-quantity" name="quantity" type="number" min="1" inputmode="numeric" required>
+              </div>
+              <div class="field">
+                <label for="bulk-colours">Preferred colours</label>
+                <input id="bulk-colours" name="colours" type="text" placeholder="For example, black and beige" required>
+              </div>
+              <div class="field">
+                <label for="bulk-sizes">Size breakup</label>
+                <input id="bulk-sizes" name="sizes" type="text" placeholder="For example, S: 10, M: 20" required>
+              </div>
+              <div class="field">
+                <label for="bulk-decoration">Printing, bulk embroidery or both</label>
+                <select id="bulk-decoration" name="decoration" required>
+                  <option value="Printing">Printing</option>
+                  <option value="Bulk embroidery (bulk orders only)">Bulk embroidery (bulk orders only)</option>
+                  <option value="Printing and bulk embroidery (bulk orders only)">Printing + bulk embroidery (bulk orders only)</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="bulk-position">Branding position</label>
+                <input id="bulk-position" name="position" type="text" placeholder="Front, back, sleeve or chest" required>
+              </div>
+              <div class="field">
+                <label for="bulk-date">Required date</label>
+                <input id="bulk-date" name="requiredDate" type="date" required>
+              </div>
+              <div class="field">
+                <label for="bulk-city">Delivery city</label>
+                <input id="bulk-city" name="city" type="text" autocomplete="address-level2" required>
+              </div>
+            </div>
+            <div class="bulk-form-submit">
+              <p>Embroidery enquiries are accepted for bulk orders only.</p>
+              <button class="button button-whatsapp" type="submit">Get a Bulk Quote <span aria-hidden="true">↗</span></button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
     <section class="section direction-section" id="direction" aria-labelledby="direction-title">
       <div class="container">
         <div class="section-heading">
@@ -490,6 +576,91 @@
               <a href="https://wa.me/917780478506" target="_blank" rel="noopener noreferrer" data-bulk-product="Bottles">Ask on WhatsApp</a>
             </div>
           </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reviews-section" id="reviews" aria-labelledby="reviews-title">
+      <div class="container">
+        <div class="section-heading section-heading-light compact-heading">
+          <h2 id="reviews-title">Loved by Our Customers</h2>
+          <p>Real feedback from customers who trusted us with their ideas.</p>
+        </div>
+
+        <div class="reviews-shell">
+          <div class="reviews-toolbar">
+            <p class="review-position" id="review-position" aria-live="polite" aria-atomic="true">1 of 5</p>
+            <div class="review-nav-buttons" aria-label="Review navigation">
+              <button type="button" data-review-previous aria-label="Show previous review" aria-controls="reviews-scroller">←</button>
+              <button type="button" data-review-next aria-label="Show next review" aria-controls="reviews-scroller">→</button>
+            </div>
+          </div>
+
+          <div class="reviews-scroller" id="reviews-scroller" tabindex="0" aria-label="Customer reviews">
+            <article class="review-card">
+              <header>
+                <span class="review-avatar" aria-hidden="true">GG</span>
+                <div>
+                  <h3>Gyan G.</h3>
+                  <p class="review-rating"><span aria-hidden="true">★★★★★</span><span class="sr-only">5 out of 5 stars</span></p>
+                </div>
+              </header>
+              <blockquote>“Have ordered over 200 T-shirts in bulk. Excellent quality, timely production and delivery. Economical and efficient. Highly recommend.”</blockquote>
+              <p class="review-source">Google Review</p>
+            </article>
+
+            <article class="review-card">
+              <header>
+                <span class="review-avatar" aria-hidden="true">VR</span>
+                <div>
+                  <h3>Vikas R.</h3>
+                  <p class="review-rating"><span aria-hidden="true">★★★★★</span><span class="sr-only">5 out of 5 stars</span></p>
+                </div>
+              </header>
+              <blockquote>“A great place to bring your visionary thoughts to life. Loved how my custom T-shirt turned out!”</blockquote>
+              <p class="review-source">Google Review</p>
+            </article>
+
+            <article class="review-card">
+              <header>
+                <span class="review-avatar" aria-hidden="true">KH</span>
+                <div>
+                  <h3>Karan H.</h3>
+                  <p class="review-rating"><span aria-hidden="true">★★★★★</span><span class="sr-only">5 out of 5 stars</span></p>
+                </div>
+              </header>
+              <blockquote>“Great quality customised T-shirts. The print is sharp, the fabric feels premium, and the fit is perfect.”</blockquote>
+              <p class="review-source">Google Review</p>
+            </article>
+
+            <article class="review-card">
+              <header>
+                <span class="review-avatar" aria-hidden="true">SM</span>
+                <div>
+                  <h3>Sharang M.</h3>
+                  <p class="review-rating"><span aria-hidden="true">★★★★★</span><span class="sr-only">5 out of 5 stars</span></p>
+                </div>
+              </header>
+              <blockquote>“The delivery was quick and the packaging was really nice. You can tell they care about the customer experience.”</blockquote>
+              <p class="review-source">Google Review</p>
+            </article>
+
+            <article class="review-card">
+              <header>
+                <span class="review-avatar" aria-hidden="true">KM</span>
+                <div>
+                  <h3>Kinjal M.</h3>
+                  <p class="review-rating"><span aria-hidden="true">★★★★★</span><span class="sr-only">5 out of 5 stars</span></p>
+                </div>
+              </header>
+              <blockquote>“The fabric and design are so good. Loved it. It has become my go-to brand!”</blockquote>
+              <p class="review-source">Google Review</p>
+            </article>
+          </div>
+
+          <a class="reviews-google-link" href="https://share.google/ArvbmBL3G2J7yAaLp" target="_blank" rel="noopener noreferrer">
+            Read more reviews on Google <span aria-hidden="true">↗</span>
+          </a>
         </div>
       </div>
     </section>

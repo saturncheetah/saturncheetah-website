@@ -453,6 +453,30 @@ function buildBulkMessage(product) {
   ].join("\n");
 }
 
+function buildBulkTeeMessage(form) {
+  const formData = new FormData(form);
+  const value = name => String(formData.get(name) || "").trim();
+
+  return [
+    "Hello Saturn Cheetah Store,",
+    "",
+    "I’d like a quote for a bulk T-shirt order.",
+    "",
+    `Organisation / purpose: ${value("purpose")}`,
+    `Product type: ${value("productType")}`,
+    `Quantity: ${value("quantity")}`,
+    `Preferred colours: ${value("colours")}`,
+    `Size breakup: ${value("sizes")}`,
+    `Printing / bulk embroidery: ${value("decoration")}`,
+    `Branding position: ${value("position")}`,
+    `Required date: ${value("requiredDate")}`,
+    `Delivery city: ${value("city")}`,
+    "",
+    "I understand embroidery is available for bulk orders only.",
+    "Please help me confirm suitable fabric, GSM, colours, final price and timeline."
+  ].join("\n");
+}
+
 function updateWhatsAppLinks() {
   document.querySelectorAll("[data-whatsapp-action='print']").forEach(link => {
     link.href = whatsappUrl(buildProductMessage("print"));
@@ -478,6 +502,91 @@ function setupWhatsAppFlow() {
   });
 
   updateWhatsAppLinks();
+}
+
+function setupBulkTeeFlow() {
+  const toggle = document.querySelector(".bulk-options-toggle");
+  const panel = document.querySelector("#bulk-options-panel");
+  const requiredDate = document.querySelector("#bulk-date");
+
+  if (!toggle || !panel) return;
+  if (requiredDate) requiredDate.min = getLocalDateString();
+
+  toggle.addEventListener("click", () => {
+    const willExpand = toggle.getAttribute("aria-expanded") !== "true";
+    toggle.setAttribute("aria-expanded", String(willExpand));
+    toggle.textContent = willExpand ? "Hide bulk options" : "View bulk options";
+    panel.hidden = !willExpand;
+  });
+
+  panel.addEventListener("submit", event => {
+    event.preventDefault();
+    if (!panel.reportValidity()) return;
+    window.location.assign(whatsappUrl(buildBulkTeeMessage(panel)));
+  });
+}
+
+function setupReviewCarousel() {
+  const scroller = document.querySelector(".reviews-scroller");
+  const cards = [...document.querySelectorAll(".review-card")];
+  const previous = document.querySelector("[data-review-previous]");
+  const next = document.querySelector("[data-review-next]");
+  const position = document.querySelector("#review-position");
+  let scrollFrame;
+
+  if (!scroller || cards.length === 0 || !position) return;
+
+  const cardOffset = card => {
+    const scrollInset = Number.parseFloat(getComputedStyle(scroller).scrollPaddingLeft) || 0;
+    return card.getBoundingClientRect().left
+      - scroller.getBoundingClientRect().left
+      + scroller.scrollLeft
+      - scrollInset;
+  };
+
+  const activeIndex = () => {
+    const current = scroller.scrollLeft;
+    return cards.reduce((nearest, card, index) => (
+      Math.abs(cardOffset(card) - current) < Math.abs(cardOffset(cards[nearest]) - current)
+        ? index
+        : nearest
+    ), 0);
+  };
+
+  const updateState = () => {
+    const index = activeIndex();
+    const atStart = scroller.scrollLeft <= 2;
+    const atEnd = scroller.scrollLeft >= scroller.scrollWidth - scroller.clientWidth - 2;
+
+    position.textContent = `${index + 1} of ${cards.length}`;
+    if (previous) previous.disabled = atStart;
+    if (next) next.disabled = atEnd;
+  };
+
+  const showCard = index => {
+    const target = cards[Math.max(0, Math.min(index, cards.length - 1))];
+    scroller.scrollTo({
+      left: cardOffset(target),
+      behavior: reducedMotion.matches ? "auto" : "smooth"
+    });
+  };
+
+  previous?.addEventListener("click", () => showCard(activeIndex() - 1));
+  next?.addEventListener("click", () => showCard(activeIndex() + 1));
+
+  scroller.addEventListener("keydown", event => {
+    if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+    event.preventDefault();
+    showCard(activeIndex() + (event.key === "ArrowRight" ? 1 : -1));
+  });
+
+  scroller.addEventListener("scroll", () => {
+    window.cancelAnimationFrame(scrollFrame);
+    scrollFrame = window.requestAnimationFrame(updateState);
+  }, { passive: true });
+
+  window.addEventListener("resize", updateState);
+  updateState();
 }
 
 function setupFloatingPill() {
@@ -639,6 +748,8 @@ setupTabs();
 setupStorySwipe();
 setupTeeSelector();
 setupWhatsAppFlow();
+setupBulkTeeFlow();
+setupReviewCarousel();
 setupFloatingPill();
 setupGalleryModal();
 setupSectionReveals();
