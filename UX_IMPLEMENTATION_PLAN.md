@@ -80,6 +80,9 @@ phase should restructure and restyle them rather than regress them.
 
 ## 3. Approved visual direction
 
+The approved direction is **Concept C: balanced premium + energetic
+conversion experience**.
+
 The supplied imagery establishes the visual world:
 
 - near-black boutique interiors;
@@ -274,19 +277,30 @@ Do not use GSM alone as the decision language. Explain weight, silhouette and
 likely use in plain language. Do not add unverified colours, sizes, fabric
 composition, stock or prices.
 
-### Step 2 — Select the design path
+### Step 2 — Choose Your Direction
 
-- **Choose an existing design**
-  - Show a short scroll-snap row of approved existing examples.
+- **Explore Our Designs**
+  - Open the approved five-image swipe gallery inside this compact module.
+  - Use `cappuccino-print.webp`, `six-seven-print.webp`,
+    `udin-din-print.webp`, `blue-graphic-print.webp` and
+    `balance-print.webp`.
+  - Label `balance-print.webp` as inspiration/mockup unless its provenance as
+    a finished customer order is confirmed.
+  - Allow an accessible full-screen preview with an explicit close control,
+    focus containment, Escape support, focus restoration and correct image
+    position/count.
   - “Send a design like this” may set a design-reference label in the
     WhatsApp message.
   - It must not imply copyright ownership or guaranteed reproduction.
 
-- **Customise your own**
+- **Create Your Own**
   - Accept a ready design, reference or idea.
   - Explain that the visitor attaches the file after WhatsApp opens.
   - Confirm feasibility, print placement, final price and timeline directly.
   - Do not create a fake live mockup or upload flow.
+
+These are two states of one compact module, not two full-height sections.
+There is no separate featured-design section on mobile.
 
 ### Step 3 — Continue to WhatsApp
 
@@ -301,46 +315,40 @@ The CTA carries explicit state:
 No hidden default should be interpreted as a user choice. A hero CTA should
 open or scroll to the selector rather than silently choosing 180 GSM.
 
-## 7. Category-card plan
+Matched, owner-approved visuals that clearly distinguish the 180 GSM regular
+fit from the 240 GSM oversized fit are required before final publication.
+Current product images are not sufficient as the final paired presentation.
+
+## 7. Secondary bulk-product card plan
 
 ### Hierarchy
 
-1. **T-shirts — primary**
-   - Large lead card using `category-tshirts.webp`.
-   - Opens the 180/240 journey.
-   - Supports personal and bulk intent.
+The module opens with the exact line **“Custom goods for teams, events and
+brands.”** It receives approximately 20–25% of homepage emphasis; the
+T-shirt-led journey above receives approximately 75–80%.
 
-2. **Caps — mainly bulk**
+1. **Caps — mainly bulk**
    - Use `category-caps.webp`.
    - CTA: discuss a bulk requirement on WhatsApp.
 
-3. **Coasters — mainly bulk**
+2. **Coasters — mainly bulk**
    - Use `category-coasters.webp`.
    - CTA: discuss quantity and branding on WhatsApp.
 
-4. **Tote bags — mainly bulk**
-   - No approved tote-bag asset is supplied.
-   - Use a restrained text-led placeholder only if the owner explicitly
-     approves it, or defer the card until an approved image exists.
+3. **Mugs — mainly bulk**
+   - Use `category-mugs.webp`.
+   - CTA: discuss quantity, purpose and branding on WhatsApp.
 
-5. **Jugs — mainly bulk**
-   - No approved jug asset is supplied.
-   - Do not relabel `category-mugs.webp` as a jug.
-   - Defer the image-led card or use a text-led bulk pathway after business
-     confirmation.
-
-### Supplied mug asset
-
-`category-mugs.webp` is approved artwork for mugs, while the requested
-business hierarchy names jugs. Keep it out of the first public integration
-unless the owner confirms that mugs are also an intended category. It may not
-be used as visual evidence for jugs.
+Tote bags and jugs are future categories. Do not render their cards,
+placeholders or labels until approved assets and owner approval exist. Never
+use the mug image as evidence for jugs.
 
 ### Interaction
 
-- Desktop: one large T-shirt card plus smaller bulk-category cards in an
-  asymmetric boutique grid.
-- Mobile: a clearly labelled native horizontal row or two-column grid.
+- Desktop: three smaller secondary cards in an asymmetric boutique row/grid;
+  they must remain visibly subordinate to the T-shirt journey.
+- Mobile: a clearly labelled native horizontal row with approximately 1.1
+  cards visible.
 - Card image ratio: 4:5.
 - Hover zoom: no more than `1.04`.
 - Directional movement: no more than a few pixels.
@@ -348,12 +356,13 @@ be used as visual evidence for jugs.
 - Every bulk CTA should set the exact product category and bulk intent.
 - Do not create dead-end category routes; the current site has no inner routes.
 
-## 8. Connected design → printing → finished-result module
+## 8. Connected Choose → Print → Result module
 
 ### Purpose
 
 Replace the current disconnected four-step grid, portrait video and customer
-photos with one evidence-based narrative.
+photos with one evidence-based narrative while explicitly distinguishing real
+printing footage from separate finished examples.
 
 ### Mobile layout
 
@@ -365,7 +374,7 @@ One compact card contains:
 2. **Printing**
    - Existing portrait video, poster first, explicit play.
 3. **Finished result**
-   - Face-free image of the exact item produced in that video.
+   - Initially show a face-free, separately labelled finished example.
 
 Only one media state is visible at a time. A progress indicator and previous/
 next controls must remain keyboard and screen-reader accessible.
@@ -374,10 +383,12 @@ next controls must remain keyboard and screen-reader accessible.
 
 Use a connected three-part composition:
 
-`Design/reference → portrait printing video → exact finished garment`
+`Choose/share a design → real printing footage → separate finished example`
 
 The video remains bounded and does not dictate the full section height. Short
-HTML captions state what is proven by each asset.
+HTML captions state what is proven by each asset. The finished example must
+not be visually joined to the video in a way that implies it is the exact
+item being printed.
 
 ### Current evidence gap
 
@@ -386,7 +397,7 @@ No exact finished-result image is documented for
 must not be presented as results of that clip unless the owner verifies the
 relationship.
 
-Before implementation, obtain:
+For a later exact-continuity version, obtain:
 
 - permissioned source design;
 - face-free printing video of that design;
@@ -395,12 +406,18 @@ Before implementation, obtain:
 - artwork-use confirmation;
 - frame-by-frame video privacy review.
 
-If an exact set is not available, the honest fallback is:
+For the initial release, publication consent, artwork-use confirmation and the
+frame-by-frame privacy review remain mandatory; the matched design/result trio
+does not.
 
-- “Real printing footage”; and
-- “Separate finished examples.”
+The approved initial release therefore uses the honest labels **“Real
+printing footage”** and **“Separate finished example — not the item shown in
+the video.”** Do not animate or word these assets as one continuous order.
+An exact matched result may replace the second label only after its
+relationship is documented and approved.
 
-Do not animate or word the fallback as one continuous order.
+The module CTA is **“Discuss Your Tee on WhatsApp”** and carries the selected
+180/240 and design-direction state where available.
 
 ### Supporting kit asset
 
@@ -417,9 +434,9 @@ specific printing process.
 | `brand/favicon-64.png` | Keep | Existing browser icon. |
 | `brand/saturn-cheetah-logo.webp` | Keep | Official site mark; never regenerate or recolour. |
 | `hero/oversized-front-back.webp` | Replace in hero; retain as archived source/OG fallback until approved | New art-directed desktop/mobile kit heroes establish the boutique world. |
-| `products/regular-180-black-white.webp` | Retain temporarily, then replace when matched approved product photography exists | Does not clearly show fit on a person or match the boutique scene. |
-| `products/oversized-240-white.webp` | Retain temporarily, then replace | Raw stockroom setting and inconsistent merchandising. |
-| `products/oversized-240-black.webp` | Retain temporarily, then replace | Raw stockroom setting and partially visible person. |
+| `products/regular-180-black-white.webp` | Replace before final publication | Does not clearly show fit on a person or form an approved matched pair with 240 GSM. |
+| `products/oversized-240-white.webp` | Replace before final publication | Raw stockroom setting and inconsistent merchandising; not a matched counterpart to the regular-fit visual. |
+| `products/oversized-240-black.webp` | Remove from the rendered journey when replacement is approved | Raw stockroom setting and partially visible person. |
 | `process/live-printing-poster.jpg` | Keep conditionally | Safe poster-first process proof after privacy review. |
 | `video/live-printing-demo.mp4` | Keep conditionally | Tap-to-play real process proof; requires complete privacy and relationship review. |
 | `process/flamingo-back-view.webp` | Remove from default flow; reconsider only after consent and face-free crop approval | Customer-identifying context; not verified as the video result. |
@@ -429,7 +446,7 @@ specific printing process.
 | `gallery/udin-din-print.webp` | Keep in compact gallery | Real-work/capability example subject to artwork permission. |
 | `gallery/blue-graphic-print.webp` | Keep in compact gallery | Real-work/capability example subject to artwork permission. |
 | `gallery/balance-print.webp` | Keep only as labelled inspiration/mockup unless provenance is confirmed | Visually polished but not verified as a finished customer order. |
-| `gallery/devotional-back-print.webp` | Keep only after publication/artwork approval | Capability example with possible third-party artwork. |
+| `gallery/devotional-back-print.webp` | Exclude from the approved five-image gallery; retain source only | Possible third-party artwork; not part of the approved initial set. |
 
 “Remove” means remove the reference from future rendered HTML. Do not delete,
 rename or destructively edit the source file without a separate approval.
@@ -443,12 +460,23 @@ rename or destructively edit the source file without a separate approval.
 | `webp/category-tshirts.webp` | `assets/images/boutique/category-tshirts.webp` |
 | `webp/category-caps.webp` | `assets/images/boutique/category-caps.webp` |
 | `webp/category-coasters.webp` | `assets/images/boutique/category-coasters.webp` |
-| `webp/category-mugs.webp` | Hold pending approval of mugs as a real category |
+| `webp/category-mugs.webp` | `assets/images/boutique/category-mugs.webp` |
 | `webp/custom-printing-wide.webp` | `assets/images/boutique/custom-printing-wide.webp` |
 
 Source PNGs remain outside the production asset tree. LQIPs should be used only
 if a clean blur-up implementation does not add duplicate loading or complexity;
 native image loading with a matching dark background is the default.
+
+The approved swipe gallery contains exactly five images:
+`cappuccino-print.webp`, `six-seven-print.webp`, `udin-din-print.webp`,
+`blue-graphic-print.webp` and `balance-print.webp`. Publication remains
+conditional on artwork rights; `balance-print.webp` also requires honest
+mockup/inspiration labelling unless provenance is confirmed.
+
+Before final publication, the owner must supply or approve a visually matched,
+face-free 180 GSM regular-fit and 240 GSM oversized pair. Tote-bag and jug
+assets are not required for the initial release because those cards are
+explicitly deferred.
 
 ## 10. Motion storyboard
 
@@ -484,9 +512,11 @@ Build the first version with existing CSS and vanilla JavaScript only.
    - Product panel uses a short opacity/translate transition.
    - Height changes must not cause unexpected page jumps.
 
-4. **Design path**
-   - Existing/custom panels crossfade.
+4. **Choose Your Direction**
+   - Explore/Create panels crossfade.
    - Gallery remains user-controlled; no autoplay.
+   - Full-screen preview opens without zoom theatrics; focus moves into the
+     modal and returns to the triggering image on close.
 
 5. **Printing story**
    - Progress line reveals once.
@@ -519,6 +549,10 @@ No animation library is justified for the first boutique implementation.
 Motion or another lightweight library may be considered only after a measured
 interaction cannot be maintained cleanly with CSS, Web Animations API and
 `IntersectionObserver`.
+
+The approved initial release is dependency-free. Optional animation libraries
+and 3D product experiences are outside its implementation scope and require a
+separate performance case, owner approval and reduced-motion design.
 
 ## 11. Responsive image strategy
 
@@ -566,9 +600,10 @@ interaction cannot be maintained cleanly with CSS, Web Animations API and
 
 ### Primary T-shirt flow
 
-1. Hero CTA scrolls to “Choose your tee.”
+1. **“Customise a Tee”** scrolls to the 180/240 selector.
 2. Visitor explicitly selects 180 GSM regular or 240 GSM oversized.
-3. Visitor selects existing design or custom design.
+3. Visitor selects **Explore Our Designs** or **Create Your Own** in
+   **Choose Your Direction**.
 4. Visitor confirms quantity and design status.
 5. Optional size, colour, placement, date, city and notes remain collapsed.
 6. “Continue on WhatsApp” opens the existing number with the explicit state.
@@ -578,20 +613,25 @@ interaction cannot be maintained cleanly with CSS, Web Animations API and
 ### Bulk category flow
 
 1. Category card sets `Bulk / Business / Event`.
-2. Product category is set to caps, tote bags, coasters or jugs.
+2. Product category is set to Caps, Coasters or Mugs.
 3. Ask only quantity, purpose and design status before WhatsApp.
 4. Do not imply an SKU, fabric, colour, print method, price or availability.
 
 ### CTA rules
 
 - One primary action per module.
+- **“Explore Our Designs”** opens the five-image state of **Choose Your
+  Direction**; it does not open a separate mobile section.
 - Preserve contextual labels:
   - “Choose 180 GSM regular”
   - “Choose 240 GSM oversized”
   - “Customise my tee”
-  - “Use an existing design”
+  - “Explore this design”
   - “Discuss a bulk order”
 - Gallery actions may prefill an internal design-reference label only.
+- On mobile, use a delayed compact WhatsApp pill after the hero. Hide it near
+  video controls, the enquiry UI, final CTA and footer. Never use a full-width
+  fixed WhatsApp bar.
 - No fake urgency, scarcity, stock activity, countdown, review count or
   delivery promise.
 - Do not store personal form data in analytics or browser storage.
@@ -635,8 +675,9 @@ interaction cannot be maintained cleanly with CSS, Web Animations API and
 
 - `index.html`
   - Compact section order, responsive hero picture, product selector,
-    existing/custom pathways, connected proof module, category cards,
-    compact gallery, conditional reviews slot, FAQ order and contextual CTAs.
+    integrated **Choose Your Direction** module and five-image modal gallery,
+    connected proof module, three secondary category cards, FAQ order and
+    contextual CTAs. No initial reviews section.
 
 - `assets/css/site.css`
   - Boutique tokens, dark shell, responsive hero, compact mobile rhythm,
@@ -645,8 +686,8 @@ interaction cannot be maintained cleanly with CSS, Web Animations API and
 
 - `assets/js/site.js`
   - Explicit selector/design state, contextual WhatsApp messages, compact
-    sticky CTA visibility, process-module state and preserved navigation
-    accessibility.
+    delayed CTA visibility, process-module state, accessible gallery-modal
+    behaviour and preserved navigation accessibility.
 
 ### Add by copying approved WebP files unchanged
 
@@ -655,14 +696,17 @@ interaction cannot be maintained cleanly with CSS, Web Animations API and
 - `assets/images/boutique/category-tshirts.webp`
 - `assets/images/boutique/category-caps.webp`
 - `assets/images/boutique/category-coasters.webp`
+- `assets/images/boutique/category-mugs.webp`
 - `assets/images/boutique/custom-printing-wide.webp`
 
 ### Add only after approved assets are supplied
 
-- `assets/images/boutique/category-tote-bags.webp`
-- `assets/images/boutique/category-jugs.webp`
+- Matched, face-free 180 GSM regular-fit product visual.
+- Matched, face-free 240 GSM oversized product visual.
 - Exact design/reference asset for the printing story.
 - Exact face-free finished-result asset for the printing video.
+- Future `assets/images/boutique/category-tote-bags.webp`.
+- Future `assets/images/boutique/category-jugs.webp`.
 
 ### Add for implementation records
 
@@ -682,34 +726,56 @@ interaction cannot be maintained cleanly with CSS, Web Animations API and
 Each future milestone requires a Git checkpoint before and after it, per
 `AGENTS.md`. No milestone starts until its preceding review is approved.
 
-### Phase 0 — Owner and asset confirmation
+### Phase 0 — Record approvals and close asset gates
 
-- Approve this plan and final section order.
-- Confirm the category wording: mugs versus jugs.
-- Supply approved tote-bag and jug imagery or approve text-led/deferred cards.
-- Confirm publication rights for existing gallery artwork.
-- Decide whether genuine reviews are available.
-- Supply or verify an exact printing/result sequence.
-- Confirm final hero and CTA wording.
+- Record Concept C, the integrated section order and the exact hero copy as
+  approved.
+- Confirm publication rights for the five approved gallery images.
+- Obtain or approve matched, face-free 180 GSM and 240 GSM visuals.
+- Approve which face-free finished examples may be shown under the required
+  separate-example label.
+- Verify every frame of the printing video for privacy and publication rights.
+- Treat tote bags, jugs and reviews as deferred, non-blocking scope.
 
-Exit criterion: no unresolved content conflict would force invented or
-mislabelled website content.
+Approval gate: owner approves the five-image publication list, matched
+180/240 pair and initial separately labelled finished examples.
+
+Exit criterion: no initial-release asset would force invented, misleading or
+privacy-unsafe content.
 
 ### Phase 1 — Asset import and visual foundation
 
-- Copy only approved WebPs into `assets/images/boutique/`.
+- Copy only approved WebPs, including `category-mugs.webp`, into
+  `assets/images/boutique/`.
 - Add dark boutique UI tokens and motion tokens.
 - Refine header/footer without changing conversion behaviour.
 
-Exit criterion: assets resolve, no source image is altered, contrast passes and
-the existing page remains functional.
+Approval gate: owner approves the imported asset manifest and visual tokens.
+
+Testing: missing-reference check, image-dimension check, contrast checks and
+baseline interaction smoke test.
+
+Rollback point: the pre-Phase 1 Git checkpoint.
+
+Exit criterion: assets resolve, no source image is altered, contrast passes
+and the existing page remains functional.
 
 ### Phase 2 — Responsive shell and hero
 
 - Replace the announcement/header/hero composition.
 - Integrate the art-directed `<picture>`.
 - Implement copy-first mobile and desktop negative-space layout.
+- Use the exact approved brand line, headline, supporting copy, proof chips
+  and two CTA labels.
 - Add the one-time hero entrance with reduced-motion alternative.
+
+Approval gate: owner approves desktop and mobile hero crops and exact live
+copy in a private preview.
+
+Testing: responsive checks at all listed widths, hero-source loading, image
+safe areas, copy/CTA contrast, CLS and reduced motion.
+
+Rollback point: the post-Phase 1 checkpoint.
 
 Exit criterion: headline, one-piece proof and CTA are visible and readable at
 320, 375, 390, 768, 1024, 1440 and 1920 px with no stretching or CLS.
@@ -717,44 +783,114 @@ Exit criterion: headline, one-piece proof and CTA are visible and readable at
 ### Phase 3 — T-shirt decision journey
 
 - Replace two tall product cards with the compact 180/240 selector.
-- Add existing-design/custom-design state.
+- Use the approved matched visuals to distinguish regular and oversized fit.
+- Add the integrated **Choose Your Direction** module.
+- Put the approved five-image swipe gallery and accessible full-screen modal
+  inside **Explore Our Designs**.
+- Put the short customisation pathway inside **Create Your Own**.
 - Preserve explicit user selection in the WhatsApp flow.
 
+Approval gate: owner approves product differentiation, five gallery labels and
+the customisation copy.
+
+Testing: selector keyboard/state tests, touch swipe, modal focus trap/Escape/
+restoration, 200% zoom, artwork labels and WhatsApp state checks.
+
+Rollback point: the post-Phase 2 checkpoint.
+
 Exit criterion: a personal visitor reaches a correct prefilled WhatsApp
-message without a hidden product default and within three intentional choices.
+message without a hidden product default and within three intentional choices;
+mobile has no separate full-height featured-design section.
 
 ### Phase 4 — Printing proof and categories
 
-- Implement the connected process module using only verified relationships.
-- Add the T-shirt-led category grid.
-- Add approved bulk pathways without fake product routes.
+- Implement **Choose → Print → Result** with **Real printing footage** and
+  separately labelled finished examples.
+- Add the compact secondary module introduced by **“Custom goods for teams,
+  events and brands.”**
+- Show only Caps, Coasters and Mugs.
+- Keep tote-bag and jug cards absent.
 
-Exit criterion: process labels are honest, category intent is correct and no
-unapproved tote/jug/mug visual is published.
+Approval gate: owner approves the process labels, finished examples and the
+three secondary cards.
 
-### Phase 5 — Gallery, trust, FAQ and final conversion
+Testing: video poster/playback, privacy review, process-state keyboard
+operation, bulk WhatsApp messages, lazy loading and visual-emphasis review.
 
-- Compress the gallery to five or six approved examples.
-- Add reviews only if genuine and permissioned.
-- Reorder FAQ before the final CTA.
-- Replace the oversized persistent mobile control with the approved compact
-  behaviour.
+Rollback point: the post-Phase 3 checkpoint.
 
-Exit criterion: the mobile page feels intentionally compact, has no repeated
-  conversion sections and exposes no customer faces.
+Exit criterion: process labels are honest, only approved categories are shown,
+and the page gives T-shirts approximately 75–80% and secondary goods
+approximately 20–25% of emphasis.
+
+### Phase 5 — FAQ, final conversion and compact footer
+
+- Add the short FAQ before the final CTA.
+- Add the final contextual WhatsApp CTA and compact footer.
+- Replace the oversized fixed mobile bar with the delayed compact pill.
+- Omit reviews completely.
+
+Approval gate: owner approves FAQ scope, final CTA copy and pill timing.
+
+Testing: fixed-control overlap at all mobile widths, hide/show conditions,
+keyboard focus, FAQ semantics, final CTA message and no-review/no-placeholder
+check.
+
+Rollback point: the post-Phase 4 checkpoint.
+
+Exit criterion: the mobile page follows the approved nine-section order,
+feels intentionally compact, has no repeated conversion sections, no
+full-width fixed bar and no review placeholder.
 
 ### Phase 6 — Validation and private preview
 
 - Run all automated and manual checks below.
 - Compare intended and actual asset mapping.
-- Record results and remaining owner decisions.
+- Record validation results.
 - Present local/private desktop and mobile previews.
 - Do not deploy.
+
+Approval gate: owner signs off the private preview; deployment remains a
+separate future authorization.
+
+Testing: complete Section 17, including responsive, accessibility, conversion,
+performance, privacy and content checks.
+
+Rollback point: the post-Phase 5 checkpoint or the last individually approved
+phase checkpoint.
 
 Exit criterion: all critical checks pass and the owner approves the private
 preview.
 
 ## 17. Validation criteria and commands
+
+### Approved release acceptance criteria
+
+- Mobile follows exactly: compact header; boutique hero; 180/240 selector;
+  **Choose Your Direction**; **Choose → Print → Result**; secondary bulk
+  products; short FAQ; final WhatsApp CTA; compact footer.
+- Desktop uses the same content sequence with editorial two-column
+  compositions where appropriate.
+- The hero uses the exact approved live copy, four proof chips and two CTA
+  labels.
+- T-shirts receive approximately 75–80% of homepage emphasis; secondary goods
+  receive approximately 20–25%.
+- **Choose Your Direction** contains both design paths and exactly five
+  approved gallery images; mobile has no separate featured-design section.
+- The gallery has accessible touch/keyboard navigation and a full-screen modal
+  with focus containment, Escape close and focus restoration.
+- Matched, approved, face-free visuals distinguish 180 GSM regular from
+  240 GSM oversized.
+- The process video is labelled **“Real printing footage”** and unrelated
+  results are labelled **“Separate finished example — not the item shown in
+  the video.”**
+- Only Caps, Coasters and Mugs appear as secondary cards; tote bags, jugs and
+  reviews do not appear.
+- Mobile uses a delayed compact WhatsApp pill and no full-width fixed bar.
+- Initial animation uses only CSS and vanilla JavaScript and fully respects
+  reduced motion.
+- No customer face, unapproved artwork, invented claim or misleading
+  video-to-result relationship is published.
 
 ### Static checks
 
@@ -809,6 +945,7 @@ At every width verify:
 - Menu open/close, focus trap, Escape and focus restoration.
 - Product selector name, role, state and keyboard behaviour.
 - Existing/custom design state.
+- **Choose Your Direction** state and five-image modal focus behaviour.
 - Process controls and video keyboard operation.
 - Gallery keyboard and pointer scrolling.
 - FAQ disclosure semantics.
@@ -825,12 +962,13 @@ Generate and inspect at least:
 - one-piece 180 GSM regular/custom design;
 - one-piece 240 GSM oversized/existing design;
 - bulk caps;
-- bulk tote bags;
 - bulk coasters;
-- bulk jugs.
+- bulk mugs.
 
 Every message must contain the selected intent without invented product facts.
 Back/return behaviour must not silently change the selection.
+Confirm that no tote-bag or jug card/message shortcut exists in the initial
+release.
 
 ### Performance checks
 
@@ -844,37 +982,48 @@ Back/return behaviour must not silently change the selection.
 
 ## 18. Risks and approval gates
 
-1. **Mugs versus jugs:** the kit supplies a mug image; the requested category
-   is jugs. Owner confirmation or a new jug asset is required.
-2. **Missing tote-bag asset:** an image-led tote card cannot be approved yet.
-3. **Printing continuity:** the current video has no verified exact result
-   image.
-4. **Product differentiation:** neither the kit T-shirt image nor current
-   product photos provide matched regular/oversized merchandising.
-5. **Generated scene text/artwork:** useful for atmosphere, not verified
+1. **Matched product visuals:** the current files do not provide the required
+   approved, face-free matched 180/240 pair; final publication is gated on it.
+2. **Printing continuity:** the current video has no verified exact result
+   image, so the approved separate-example label is mandatory.
+3. **Generated scene text/artwork:** useful for atmosphere, not verified
    business copy or documentary print proof.
-6. **Artwork rights:** gallery and devotional/customer designs need
-   publication confirmation.
-7. **Privacy:** customer/background faces and every video frame require review.
-8. **Reviews:** omit the section unless genuine text and permission are
-   supplied.
-9. **Single-page architecture:** category cards must lead to a real selector or
+4. **Artwork rights:** all five approved gallery images require publication
+   confirmation; `balance-print.webp` requires mockup/inspiration labelling
+   unless provenance is confirmed.
+5. **Privacy:** customer/background faces and every video frame require review.
+6. **Deferred categories:** tote bags and jugs must remain absent until
+   approved assets and a later owner decision exist.
+7. **Reviews:** the initial release omits them; adding them later requires
+   genuine text and explicit publication permission.
+8. **Single-page architecture:** category cards must lead to a real selector or
    WhatsApp path, not fake or empty routes.
-10. **Performance:** all seven kit WebPs must not be eagerly loaded together.
+9. **Performance:** boutique assets must not be eagerly loaded together.
+10. **Visual hierarchy:** equal-height or equal-weight card treatment could
+    undermine the approved 75–80% T-shirt emphasis.
 
 ## 19. Definition of done for the later implementation
 
 - The site reads as a dark, warm Saturn Cheetah boutique on desktop and mobile.
 - T-shirts are unmistakably primary.
 - Regular 180 GSM and oversized 240 GSM are distinguishable in one compact
-  interaction.
-- Existing-design and customer-customisation paths are both clear.
-- Caps, tote bags, coasters and jugs are positioned as bulk without invented
-  availability.
+  interaction using approved matched visuals.
+- **Choose Your Direction** clearly integrates **Explore Our Designs** and
+  **Create Your Own** without a separate mobile featured-design section.
+- The approved five-image gallery supports swipe and an accessible full-screen
+  modal.
+- Caps, Coasters and Mugs are positioned as secondary bulk goods without
+  invented availability; tote bags and jugs are absent.
 - Responsive hero art direction uses the correct supplied source.
-- Design, printing and result proof are connected honestly.
+- The exact approved hero copy, proof chips and CTA labels are live HTML.
+- Design, printing and result proof are connected honestly, with unrelated
+  results explicitly labelled as separate examples.
 - Mobile length is substantially reduced and no longer feels like a catalogue.
-- Motion is purposeful, compositor-friendly and reduced-motion compliant.
+- Mobile follows the approved nine-section order and uses a delayed compact
+  WhatsApp pill rather than a full-width fixed bar.
+- Motion is dependency-free, purposeful, compositor-friendly and
+  reduced-motion compliant.
+- Reviews remain omitted.
 - No customer face, unapproved artwork or fabricated review/claim is exposed.
 - WhatsApp messages carry correct explicit state.
 - No broken link, missing asset, overflow, stretching, CLS regression, console
