@@ -272,6 +272,8 @@ function updateTeeProduct(productKey, announce = true) {
   teeVisual?.classList.add("is-changing");
 
   const applyProduct = () => {
+    if (selectedProductKey !== productKey) return;
+
     teeImage.src = product.image;
     teeImage.alt = product.alt;
     teeImage.width = Number(product.width);
