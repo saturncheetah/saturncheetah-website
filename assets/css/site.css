@@ -576,7 +576,7 @@ h3 {
 
 .tee-stage {
   display: grid;
-  grid-template-columns: minmax(280px, 0.82fr) minmax(0, 1.18fr);
+  grid-template-columns: minmax(420px, 1fr) minmax(0, 1fr);
   min-height: 520px;
   border-top: 1px solid var(--line-light);
 }
@@ -596,20 +596,21 @@ h3 {
 }
 
 .tee-visual img {
-  width: 100%;
-  height: 440px;
+  width: min(100%, 560px);
+  max-width: 100%;
+  height: auto;
   object-fit: contain;
-  transition: opacity 180ms ease, transform 280ms var(--ease-premium);
+  object-position: center;
+  transition: opacity 180ms ease;
 }
 
 .tee-visual.is-changing img {
   opacity: 0;
-  transform: scale(0.985);
 }
 
 .tee-visual figcaption {
   position: absolute;
-  bottom: 16px;
+  top: 16px;
   left: 16px;
   padding: 7px 10px;
   border-radius: 999px;
@@ -1433,7 +1434,7 @@ textarea:focus {
   }
 
   .tee-visual img {
-    height: 380px;
+    width: min(100%, 460px);
   }
 
   .process-stage,
@@ -1558,7 +1559,7 @@ textarea:focus {
   }
 
   .tee-visual img {
-    height: min(72vw, 300px);
+    width: min(100%, 360px);
   }
 
   .tee-details {

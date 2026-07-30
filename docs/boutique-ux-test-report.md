@@ -198,19 +198,66 @@ All messages resolve to `https://wa.me/917780478506`.
 Result: **pass for source-generated destination and message differentiation**.
 Browser handoff to WhatsApp remains a private-preview check.
 
+## Product-selector image validation
+
+Source identity:
+
+- imported black source SHA-256 matches the supplied 994×1583 JPEG;
+- imported beige source SHA-256 matches the supplied 993×1583 JPEG;
+- no source or derivative was upscaled;
+- both WebP families preserve their original portrait ratios.
+
+Responsive candidates and expected CSS display sizes:
+
+| Viewport | Expected display width | 180 GSM display | 240 GSM display | DPR 1 candidate | DPR 2 candidate |
+| ---: | ---: | ---: | ---: | --- | --- |
+| 320 px | 256 px | 256×408 | 256×408 | 640w | 640w |
+| 360 px | 296 px | 296×471 | 296×472 | 640w | 640w |
+| 390 px | 326 px | 326×519 | 326×520 | 640w | 994w/993w |
+| 430 px | 360 px | 360×573 | 360×574 | 640w | 994w/993w |
+| 768 px | 460 px | 460×733 | 460×733 | 640w | 994w/993w |
+| 1024 px | 386 px | 386×614 | 386×615 | 640w | 994w/993w |
+| 1440 px | 542 px | 542×863 | 542×864 | 640w | 994w/993w |
+| 1920 px | 542 px | 542×863 | 542×864 | 640w | 994w/993w |
+
+The wide-desktop selector caps the media at 542 px in the current two-column
+container, within the requested 520–560 px range. Narrower layouts reduce the
+width to preserve balance.
+
+Fitting checks:
+
+- `width: min(100%, …)` with `max-width: 100%`;
+- natural `height: auto`;
+- centered `object-fit: contain` and `object-position: center`;
+- no scale transition, zoom or fixed image height;
+- front and back tees, trousers and shoes remain present in both decoded
+  640 px files;
+- the image remains in normal flow before the product title and CTA;
+- intentional selector containment introduces no horizontal overflow; and
+- intrinsic dimensions reserve the portrait ratio before decoding.
+
+All four WebPs, the page, CSS and JavaScript returned HTTP 200 from the local
+server. The four responsive paths resolve in both HTML/JavaScript state data,
+and `node --check assets/js/site.js` passes.
+
+The browser runtime was unavailable during this update. Source-selection and
+layout results above are therefore verified from responsive markup, intrinsic
+dimensions and computed layout constraints; final rendered browser and
+physical-device inspection remains a release check.
+
+Result: **pass for source integrity, responsive rules, fitting constraints,
+local delivery and syntax**.
+
 ## Unresolved owner and release decisions
 
-1. Supply and approve one matched, face-free 180 GSM / 240 GSM product-image
-   pair. The current selector images are honest provisional existing assets,
-   not a matched pair.
-2. Confirm documented publication permission for all five gallery artworks,
+1. Confirm documented publication permission for all five gallery artworks,
    especially any third-party design elements.
-3. Confirm the live-printing video has passed final frame-by-frame privacy and
+2. Confirm the live-printing video has passed final frame-by-frame privacy and
    consent review.
-4. Confirm final acceptance of the stylised branding embedded in the approved
+3. Confirm final acceptance of the stylised branding embedded in the approved
    generated boutique hero/category images; the official live logo remains
    authoritative.
-5. Complete browser and physical-device validation at the eight required
+4. Complete browser and physical-device validation at the eight required
    widths before merging or deploying.
 
 Reviews remain intentionally omitted until genuine permissioned material is

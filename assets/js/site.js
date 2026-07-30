@@ -25,10 +25,12 @@ const productData = {
     summary: "A familiar everyday silhouette with an easy, regular fit.",
     fit: "Regular and easy to wear",
     use: "Everyday wear, gifting and event tees",
-    image: "assets/images/products/regular-180-black-white.webp",
-    alt: "Black and white regular crew-neck T-shirts",
-    width: "686",
-    height: "1200"
+    image: "assets/images/products/tshirt-180-regular-black-640.webp",
+    srcset: "assets/images/products/tshirt-180-regular-black-640.webp 640w, assets/images/products/tshirt-180-regular-black-994.webp 994w",
+    sizes: "(max-width: 767px) calc(100vw - 64px), (max-width: 900px) 460px, (max-width: 1200px) 42vw, 560px",
+    alt: "Black 180 GSM unisex regular-fit T-shirt shown from front and back",
+    width: "994",
+    height: "1583"
   },
   "240": {
     value: "240 GSM Unisex Oversized",
@@ -38,10 +40,12 @@ const productData = {
     summary: "A heavier, relaxed silhouette with an oversized streetwear fit.",
     fit: "Relaxed and oversized",
     use: "Bold front, back and streetwear-style prints",
-    image: "assets/images/products/oversized-240-white.webp",
-    alt: "White oversized crew-neck T-shirt on a hanger",
-    width: "562",
-    height: "1000"
+    image: "assets/images/products/tshirt-240-oversized-beige-640.webp",
+    srcset: "assets/images/products/tshirt-240-oversized-beige-640.webp 640w, assets/images/products/tshirt-240-oversized-beige-994.webp 993w",
+    sizes: "(max-width: 767px) calc(100vw - 64px), (max-width: 900px) 460px, (max-width: 1200px) 42vw, 560px",
+    alt: "Beige 240 GSM unisex oversized T-shirt shown from front and back",
+    width: "993",
+    height: "1583"
   }
 };
 
@@ -275,6 +279,8 @@ function updateTeeProduct(productKey, announce = true) {
     if (selectedProductKey !== productKey) return;
 
     teeImage.src = product.image;
+    teeImage.srcset = product.srcset;
+    teeImage.sizes = product.sizes;
     teeImage.alt = product.alt;
     teeImage.width = Number(product.width);
     teeImage.height = Number(product.height);
@@ -293,6 +299,8 @@ function updateTeeProduct(productKey, announce = true) {
   };
 
   const preloadedImage = new Image();
+  preloadedImage.srcset = product.srcset;
+  preloadedImage.sizes = product.sizes;
   preloadedImage.src = product.image;
 
   if (preloadedImage.complete) {

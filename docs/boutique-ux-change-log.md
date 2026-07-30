@@ -187,6 +187,41 @@ the private preview.
 | `dd8e1e1` | Tightened mobile hero, product and section heights. |
 | `81088ab` | Prevented stale image loads from overriding rapid tee-selector changes. |
 
+## Product-selector visual update
+
+The approved black and beige portrait images now replace only the two
+T-shirt-selector visuals:
+
+- black → 180 GSM unisex regular fit;
+- beige → 240 GSM unisex oversized.
+
+Imported sources:
+
+- `assets/images/products/tshirt-180-regular-black-source.jpg`
+  (`994×1583`, 60,127 bytes);
+- `assets/images/products/tshirt-240-oversized-beige-source.jpg`
+  (`993×1583`, 71,554 bytes).
+
+Responsive WebP derivatives:
+
+- `tshirt-180-regular-black-640.webp` (`640×1019`, 15,914 bytes);
+- `tshirt-180-regular-black-994.webp` (`994×1583`, 32,912 bytes);
+- `tshirt-240-oversized-beige-640.webp` (`640×1020`, 19,458 bytes);
+- `tshirt-240-oversized-beige-994.webp` (`993×1583`, 39,790 bytes).
+
+The beige source is 993 px wide, so its largest derivative remains 993 px
+wide despite the approved `-994.webp` maximum-size filename. It was not
+upscaled.
+
+The selector now supplies `srcset`, `sizes`, intrinsic dimensions and the
+approved alternative text in both initial HTML and JavaScript-driven states.
+Its media rule uses natural height, centered containment and a maximum
+560 px display width. The former fixed image heights and selector transition
+scale were removed, and the visual label was moved into the source image’s
+unused upper area rather than over the shoes.
+
+No product copy, WhatsApp behavior or non-selector section changed.
+
 ## Release boundary
 
 No Netlify deployment, DNS change, Netlify configuration change, merge or
