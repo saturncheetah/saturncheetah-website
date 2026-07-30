@@ -185,6 +185,7 @@ the private preview.
 | `f188861` | Replaced the old homepage markup with the full compact journey. |
 | `fc8bcb6` | Added the responsive boutique visual system and interactions. |
 | `dd8e1e1` | Tightened mobile hero, product and section heights. |
+| `81088ab` | Prevented stale image loads from overriding rapid tee-selector changes. |
 
 ## Release boundary
 
