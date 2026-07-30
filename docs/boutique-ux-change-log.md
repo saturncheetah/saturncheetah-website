@@ -273,8 +273,10 @@ process but is not confirmed as the exact printing of the displayed finished
 tee. The final CTA continues to use the existing WhatsApp generation logic
 and number.
 
-The face-free worn photograph still requires documented customer publication
-permission before production launch.
+The owner has confirmed customer publication permission for the face-free
+`custom-story-worn.webp` photograph. The customer-consent requirement for
+this asset is resolved; no identifying consent evidence is stored in the
+repository.
 
 The approved 180/240 selector remains unchanged from commit `7c28f3b`:
 its HTML section and CSS block hashes match, its six product assets retain

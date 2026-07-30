@@ -328,15 +328,18 @@ delivery and locked-selector checks**.
 
 1. Confirm documented publication permission for all five gallery artworks,
    especially any third-party design elements.
-2. Obtain and document customer consent to publish
-   `custom-story-worn.webp` before production launch.
-3. Confirm the live-printing video has passed final frame-by-frame privacy and
+2. Confirm the live-printing video has passed final frame-by-frame privacy and
    consent review.
-4. Confirm final acceptance of the stylised branding embedded in the approved
+3. Confirm final acceptance of the stylised branding embedded in the approved
    generated boutique hero/category images; the official live logo remains
    authoritative.
-5. Complete browser and physical-device validation at the eight required
+4. Complete browser and physical-device validation at the eight required
    widths before merging or deploying.
+
+Customer publication permission for the face-free
+`custom-story-worn.webp` photograph has been confirmed by the owner. This
+customer-consent requirement is resolved; no identifying consent evidence is
+stored in the repository.
 
 Reviews remain intentionally omitted until genuine permissioned material is
 provided.
