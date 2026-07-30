@@ -388,6 +388,47 @@ changed. The five gallery images, source order, card labels, 4:5 containment,
 card sizing, mobile scroll snap, modal, form behavior and WhatsApp visibility
 zone are unchanged. HTML and JavaScript were not modified.
 
+## Neutral surfaces and aligned secondary-product cards
+
+The previous dark-wood direction treatment and remaining legacy brown public
+surfaces are superseded by a shared neutral boutique palette:
+
+- main surface: `#0b0b0c`;
+- raised surface: `#151515`;
+- secondary surface: `#191817`;
+- alternating cream surface: `#f3e0c8`;
+- primary light text: `#fff8ef`;
+- secondary light text: `#cfc3b5`; and
+- dark text on cream: `#17120f`.
+
+The connected custom-piece story now uses near-black, charcoal and a restrained
+orange highlight. The direction, bulk, reviews, FAQ, footer, form and modal
+surfaces use the same neutral system. The large-section wood grain, walnut
+transition, pink review wash and pink final-CTA wash were removed. Warmth now
+comes from the existing orange, bronze borders and photographed product
+surfaces rather than brown page backgrounds.
+
+The unequal mobile category-card heights were caused by the prior
+natural-height treatment: Caps, Coasters and Mugs use 900×1125 portrait
+sources, while Tote Bags and Bottles use 1448×1086 landscape sources. Letting
+each wrapper follow its source height made the last two media panels and cards
+shorter.
+
+At mobile widths, all five cards now share one 86.5% flex basis, a 4:3 media
+well, 10 px internal padding and a 132 px minimum body height. The card is a
+stretching flex column and the WhatsApp link is aligned at the bottom of the
+body. Every image occupies the available image well with centered
+`object-fit: contain`, `object-position: center`, no transform and no
+transition. The fixed frame therefore standardises the card without
+reintroducing crop or zoom.
+
+The existing desktop grid, product order and desktop 4:5 media presentation
+remain unchanged. The 180/240 selector section and its product assets still
+match commit `7c28f3b`. Explore Our Designs content, image sizing, containment
+and interaction are unchanged; only its surrounding brown visual surfaces
+were neutralised. Story media, tabs and WhatsApp behavior, bulk/review content,
+HTML, JavaScript and Netlify configuration were not modified.
+
 ## Release boundary
 
 No Netlify deployment, DNS change, Netlify configuration change, merge or

@@ -57,7 +57,7 @@ Result: **pass**.
 
 - `node --check assets/js/site.js`: passed.
 - `git diff --check`: passed.
-- CSS braces: 354 opening, 354 closing.
+- CSS braces: 355 opening, 355 closing.
 - Dependencies, modules and external animation libraries: none.
 - WhatsApp phone constant: `917780478506`.
 - Local required-date minimum uses the visitor’s local date.
@@ -643,6 +643,97 @@ remains a release check.
 
 Result: **pass for scoped dark-wood styling, contrast, unchanged layout and
 locked-module integrity**.
+
+## Neutral-surface and equal-card validation
+
+Root-cause verification:
+
+- Caps, Coasters and Mugs are 900×1125 portrait WebPs;
+- Tote Bags and Bottles are 1448×1086 landscape WebPs;
+- the superseded mobile rule removed the wrapper ratio and used intrinsic
+  image height, so the landscape wrappers rendered shorter; and
+- there is no background-image, pseudo-element or `<picture>` source in the
+  affected card chain.
+
+The corrected mobile chain is:
+
+- `.secondary-scroller`: stretching horizontal scroll-snap row;
+- `.secondary-card`: identical 86.5% flex basis and stretching flex column;
+- `.secondary-image`: full-width 4:3 grid, centered content, 10 px padding,
+  neutral `#151515` image well and hidden overflow;
+- `.secondary-card .secondary-image img`: 100% width and height, 100% maximum
+  width and height, centered `object-fit: contain`, and no transform,
+  transition, scale or zoom; and
+- `.secondary-copy`: 132 px minimum height with the WhatsApp link pushed to
+  the common lower alignment.
+
+Calculated mobile box constraints:
+
+| Viewport | Card width | Media frame | Minimum total card height |
+| ---: | ---: | ---: | ---: |
+| 320 px | 249.12 px | 247.12×185.34 px | 319.34 px |
+| 360 px | 283.72 px | 281.72×211.29 px | 345.29 px |
+| 390 px | 309.67 px | 307.67×230.75 px | 364.75 px |
+| 430 px | 344.27 px | 342.27×256.70 px | 390.70 px |
+
+After 10 px internal padding, the portrait sources calculate to
+153.03×191.29 px, 168.60×210.75 px and 189.36×236.70 px at 360, 390 and
+430 px respectively. The 4:3 landscape sources calculate to 255.05×191.29
+px, 281×210.75 px and 315.60×236.70 px. Each dimension is bounded by the
+available image well, so all four source edges remain visible without
+distortion or clipping.
+
+At 768, 1024 and 1440 px, the pre-existing five-column desktop rules still
+apply: the CSS changes no desktop card width, grid order or 4:5 media sizing.
+The base image rule now explicitly guarantees centered containment and
+removes hover zoom.
+
+Surface audit:
+
+- the connected story outer section: `#0b0b0c` plus a 9%-opacity orange
+  highlight;
+- story shell/media captions: `#151515` and `#191817`;
+- direction outer section: solid `#0b0b0c`, with no wood-grain or walnut
+  gradient;
+- raised cards and panels: `#151515`;
+- secondary raised surface: `#191817`;
+- secondary-products alternate section: `#f3e0c8`; and
+- reviews, bulk, FAQ and footer: neutral near-black/charcoal surfaces with
+  orange accents only.
+
+Calculated contrast:
+
+- `#fff8ef` on `#0b0b0c`: 18.67:1;
+- `#fff8ef` on `#151515`: 17.33:1;
+- `#cfc3b5` on `#0b0b0c`: 11.36:1;
+- `#cfc3b5` on `#151515`: 10.54:1;
+- `#cfc3b5` on `#191817`: 10.24:1; and
+- `#17120f` on `#f3e0c8`: 14.43:1.
+
+Regression checks:
+
+- local references: 21 checked, 0 missing;
+- IDs: 71 checked, 0 duplicates;
+- local page and stylesheet: HTTP 200;
+- CSS braces: 355 opening and 355 closing;
+- `node --check assets/js/site.js`: passed;
+- `git diff --check`: passed;
+- working-tree HTML and JavaScript changes: 0;
+- selector HTML and selector CSS blocks match `7c28f3b`;
+- selector product-asset changes from `7c28f3b`: 0;
+- Explore Our Designs markup, assets, sizing and interaction rules: unchanged;
+- story markup, media, tabs and WhatsApp behavior: unchanged;
+- bulk/review copy and interaction code: unchanged; and
+- Netlify configuration changes: 0.
+
+The connected browser runtime reported no available browser. The requested
+widths were validated from the explicit responsive constraints, source
+dimensions, containment math and local HTTP delivery. Final browser-rendered
+overflow inspection and physical-device visual acceptance remain release
+checks.
+
+Result: **pass for neutral public surfaces, equal mobile category cards,
+complete contained imagery, WCAG AA contrast and locked-module integrity**.
 
 ## Unresolved owner and release decisions
 
