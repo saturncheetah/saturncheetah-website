@@ -1,7 +1,9 @@
 # Boutique UX V2 Test Report
 
-Date: 2026-07-30  
-Branch: `implementation/full-boutique-redesign-v2`  
+Date: 2026-07-30
+
+Branch: `implementation/full-boutique-redesign-v2`
+
 Mode: local source and HTTP validation; no deployment
 
 ## Summary
