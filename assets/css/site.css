@@ -379,8 +379,6 @@ h3 {
 }
 
 .hero-content {
-  position: relative;
-  z-index: 2;
   display: flex;
   min-height: inherit;
   align-items: center;
@@ -390,6 +388,11 @@ h3 {
 
 .hero-copy {
   width: min(52%, 620px);
+}
+
+.hero-copy > :not(.hero-picture) {
+  position: relative;
+  z-index: 2;
 }
 
 .hero-brand-line {
@@ -1921,13 +1924,28 @@ html:not(.js-enabled) .story-panel[hidden] {
   }
 
   .hero-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 100%;
+    max-width: 360px;
     margin-top: 20px;
+  }
+
+  .hero-actions .button {
+    width: 100%;
+  }
+
+  .hero-note {
+    display: none;
   }
 
   .hero-picture {
     position: relative;
     display: block;
-    height: clamp(340px, 95vw, 410px);
+    width: min(100%, 360px);
+    height: auto;
+    margin-top: 20px;
+    margin-inline: auto;
     overflow: hidden;
     border-top: 1px solid var(--line-dark);
   }
@@ -1941,7 +1959,16 @@ html:not(.js-enabled) .story-panel[hidden] {
   }
 
   .hero-picture img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
     object-position: center;
+  }
+
+  .js-enabled .hero-picture img,
+  .js-enabled .hero.is-ready .hero-picture img {
+    transform: none;
+    transition: none;
   }
 
   .section-heading h2 {
