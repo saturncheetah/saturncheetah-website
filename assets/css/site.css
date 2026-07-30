@@ -1458,7 +1458,7 @@ textarea:focus {
 
 @media (max-width: 767px) {
   :root {
-    --section-space: 52px;
+    --section-space: 46px;
     --gutter: 16px;
   }
 
@@ -1515,7 +1515,7 @@ textarea:focus {
   .hero-picture {
     position: relative;
     display: block;
-    height: clamp(358px, 112vw, 460px);
+    height: clamp(340px, 95vw, 410px);
     overflow: hidden;
     border-top: 1px solid var(--line-dark);
   }
@@ -1558,7 +1558,7 @@ textarea:focus {
   }
 
   .tee-visual img {
-    height: min(90vw, 380px);
+    height: min(72vw, 300px);
   }
 
   .tee-details {
@@ -1713,10 +1713,6 @@ textarea:focus {
 @media (max-width: 430px) {
   .hero-actions .button {
     width: 100%;
-  }
-
-  .tee-details dl {
-    grid-template-columns: 1fr;
   }
 
   .tee-details .button {
