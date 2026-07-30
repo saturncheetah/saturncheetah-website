@@ -330,10 +330,10 @@ Responsive constraint results:
 
 | Viewport | Gallery card/frame | Gallery mode | Mobile category media |
 | ---: | --- | --- | --- |
-| 320 px | 268.8×336 px | Horizontal scroll snap | Padded 4:3 containment |
-| 360 px | 302.4×378 px | Horizontal scroll snap | Padded 4:3 containment |
-| 390 px | 327.6×409.5 px | Horizontal scroll snap | Padded 4:3 containment |
-| 430 px | 340×425 px | Horizontal scroll snap | Padded 4:3 containment |
+| 320 px | 268.8×336 px | Horizontal scroll snap | Superseded 4:3 pass |
+| 360 px | 302.4×378 px | Horizontal scroll snap | Superseded 4:3 pass |
+| 390 px | 327.6×409.5 px | Horizontal scroll snap | Superseded 4:3 pass |
+| 430 px | 340×425 px | Horizontal scroll snap | Superseded 4:3 pass |
 | 768 px | 190×237.5 px | Horizontal row | Desktop rules unchanged |
 | 1024 px | 240×300 px | Horizontal row | Desktop rules unchanged |
 | 1440 px | approximately 210.4×263 px | Five-card row | Desktop rules unchanged |
@@ -344,12 +344,9 @@ any intentional breathing room instead of placing it above the product, and
 the title remains in normal flow directly below the image. The gallery hides
 its scrollbar and has no nested vertical scrolling.
 
-At 320, 360, 390 and 430 px, category images use `width: 100%`,
-`max-width: 100%`, a 4:3 frame, internal padding, centered
-`object-fit: contain` and centered positioning. The three portrait 900×1125
-assets and two landscape 1448×1086 assets decode at the dimensions declared
-in HTML. Their cards remain in the existing intentional horizontal scroller;
-copy and links stay in normal flow below the media.
+The category column records the first constrained 4:3 pass. Physical-phone
+review later showed that pass still cropped; the diagnostic and replacement
+validation below supersede those category results.
 
 The gallery itself now participates in the existing WhatsApp-zone observer.
 The floating pill is therefore suppressed while gallery content is visible,
@@ -391,6 +388,78 @@ a release check.
 
 Result: **pass for scoped responsive rules, complete-image containment,
 public Worn copy, local delivery, syntax and locked-selector integrity**.
+
+## Secondary-product mobile crop diagnostic
+
+The secondary module contains five direct `<img>` elements. It contains no
+`<picture>`, `<source>`, product `background-image`, secondary-card
+pseudo-element, `background-size: cover` or `object-fit: cover` rule.
+
+The following pre-fix measurements are calculated CSS-pixel dimensions at
+390 px from the declared flex and box model. The connected browser runtime
+was unavailable; “source bounds visible” reflects the reported physical-phone
+result.
+
+| Card | Source | Pre-fix image box | Pre-fix media wrapper | `object-fit` | Wrapper overflow | Complete source bounds | Crop-producing rule chain |
+| --- | ---: | ---: | ---: | --- | --- | --- | --- |
+| Caps | 900×1125 | 287.7×210.8 | 307.7×230.8 | `contain` | `hidden` | No—physical report | 4:3 wrapper + `height:100%` + possible `scale(1.025)` |
+| Coasters | 900×1125 | 287.7×210.8 | 307.7×230.8 | `contain` | `hidden` | No—physical report | 4:3 wrapper + `height:100%` + possible `scale(1.025)` |
+| Mugs | 900×1125 | 287.7×210.8 | 307.7×230.8 | `contain` | `hidden` | No—physical report | 4:3 wrapper + `height:100%` + possible `scale(1.025)` |
+| Tote Bags | 1448×1086 | 287.7×210.8 | 307.7×230.8 | `contain` | `hidden` | No—physical report | 4:3 wrapper + `height:100%` + possible `scale(1.025)` |
+| Bottles | 1448×1086 | 287.7×210.8 | 307.7×230.8 | `contain` | `hidden` | No—physical report | 4:3 wrapper + `height:100%` + possible `scale(1.025)` |
+
+The relevant rules were the base `.secondary-image { overflow: hidden; }`,
+the former mobile `.secondary-image { aspect-ratio: 4 / 3; }`, the former
+mobile `.secondary-image img { height: 100%; max-height: 100%; }`, and
+`.secondary-card:hover img { transform: scale(1.025); }`. The prior mobile
+pass changed `object-fit` but retained this constrained sizing and clipping
+chain.
+
+## Secondary-product natural-height validation
+
+Post-fix dimensions preserve each source ratio. The media wrapper includes
+10 px padding on every edge:
+
+| Viewport | Card width | Caps / Coasters / Mugs image | Portrait wrapper | Tote Bags / Bottles image | Landscape wrapper |
+| ---: | ---: | ---: | ---: | ---: | ---: |
+| 320 px | 249.1 | 227.1×283.9 | 247.1×303.9 | 227.1×170.3 | 247.1×190.3 |
+| 360 px | 283.7 | 261.7×327.2 | 281.7×347.2 | 261.7×196.3 | 281.7×216.3 |
+| 390 px | 309.7 | 287.7×359.6 | 307.7×379.6 | 287.7×215.8 | 307.7×235.8 |
+| 430 px | 344.3 | 322.3×402.8 | 342.3×422.8 | 322.3×241.7 | 342.3×261.7 |
+
+Final mobile chain for all five cards:
+
+- image: `display: block`, `width: 100%`, `max-width: 100%`,
+  `height: auto`, `max-height: none`, `aspect-ratio: auto`,
+  `object-fit: contain`, `object-position: center`, `transform: none`;
+- wrapper: natural `height: auto`, no minimum or maximum height, no aspect
+  ratio, 10 px padding and warm-neutral background;
+- card: auto height with title and WhatsApp link in normal flow;
+- scroller: existing horizontal scroll snap, cross-axis start alignment and
+  no nested vertical scrollbar.
+
+All five decoded source images were visually compared at full dimensions.
+Natural-ratio rendering maps the complete source rectangle—including all four
+corners—inside the padded wrapper. No cover, scale, zoom, fixed media height
+or crop-producing transform applies on mobile.
+
+The base desktop `.secondary-section` through `.secondary-copy` block matches
+its pre-fix state byte-for-byte. HTML, JavaScript, source images, product
+names, ordering, copy, links and WhatsApp logic are unchanged.
+
+Locked-selector comparison against `7c28f3b` remains unchanged:
+
+- selector HTML range: match;
+- selector base CSS: match;
+- selector product data and update function: match;
+- selector product assets changed: 0.
+
+Static checks: local references missing: 0; five secondary images and five
+links remain present; CSS braces balance; `git diff --check` and
+`node --check assets/js/site.js` pass.
+
+Result: **pass for natural-ratio mobile media, complete source bounds,
+unchanged desktop category styling and locked-selector integrity**.
 
 ## Unresolved owner and release decisions
 

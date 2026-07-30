@@ -304,14 +304,35 @@ supporting line, “See how the finished custom tees look in real life.” Publi
 references to face hiding, privacy, consent and internal asset status were
 removed. Consent status remains documented internally.
 
-Mobile-only category media rules now use a padded 4:3 warm-neutral frame with
-full-width, centered `object-fit: contain` imagery. Caps, coasters, mugs, tote
-bags and bottles therefore remain fully visible without changing their source
-assets, names, order, copy or WhatsApp messages. Base desktop category-card
-layout and image treatment are unchanged.
+The first mobile category pass used a padded 4:3 warm-neutral frame with
+centered `object-fit: contain` imagery. Physical-phone review showed that this
+constrained clipping chain did not reliably preserve the complete sources; it
+is superseded by the natural-height fix below.
 
 No JavaScript, image, video, Netlify configuration or 180/240 selector file,
 state, copy, asset or responsive rule changed.
+
+## Mobile secondary-product natural-height fix
+
+The physical-phone crop was traced beyond `object-fit` to the combined mobile
+media chain: a fixed 4:3 wrapper, wrapper `overflow: hidden`, image
+`height: 100%`, and the separate `scale(1.025)` hover treatment. The mobile
+override now:
+
+- removes the wrapper aspect ratio and fixed-height relationship;
+- lets each image use `width: 100%` and intrinsic `height: auto`;
+- explicitly removes image transforms and transitions;
+- retains 10 px of intentional warm-neutral wrapper padding;
+- lets portrait and landscape wrappers expand to their natural image height;
+  and
+- keeps the existing horizontal scroll-snap row without a nested vertical
+  scrollbar.
+
+No `<picture>`, `<source>`, product background image or secondary-card
+pseudo-element participates in this module. Desktop category rules remain
+byte-identical to their pre-fix state. HTML, JavaScript, images, copy, links,
+product order, WhatsApp behavior and the locked 180/240 selector are
+unchanged.
 
 ## Release boundary
 
