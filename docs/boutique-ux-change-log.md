@@ -370,6 +370,24 @@ No review autoplay or carousel dependency was added. The hero, navigation,
 selector, gallery, custom-piece story, secondary-product cards, FAQ, footer,
 Netlify configuration and existing WhatsApp messages remain unchanged.
 
+## Dark-wood design-direction surface
+
+The **Explore Our Designs / Create Your Own** module now uses a scoped
+CSS-only dark-wood treatment instead of stacked flat brown surfaces. The
+outer section combines a near-black base, one broad walnut transition, two
+asymmetric warm highlights and a 2.2%-opacity bronze grain. No image asset or
+external dependency was added.
+
+The tab shell, panels, gallery cards, image wells, customisation form,
+optional panel and form fields use clean charcoal surfaces. Grain remains on
+the outer section only, away from important text and controls. Bronze borders
+provide separation while the approved orange remains the active-tab colour.
+
+Only direction-module color, background, border and shadow properties
+changed. The five gallery images, source order, card labels, 4:5 containment,
+card sizing, mobile scroll snap, modal, form behavior and WhatsApp visibility
+zone are unchanged. HTML and JavaScript were not modified.
+
 ## Release boundary
 
 No Netlify deployment, DNS change, Netlify configuration change, merge or

@@ -57,7 +57,7 @@ Result: **pass**.
 
 - `node --check assets/js/site.js`: passed.
 - `git diff --check`: passed.
-- CSS braces: 338 opening, 338 closing.
+- CSS braces: 354 opening, 354 closing.
 - Dependencies, modules and external animation libraries: none.
 - WhatsApp phone constant: `917780478506`.
 - Local required-date minimum uses the visitor’s local date.
@@ -565,6 +565,84 @@ release checks.
 
 Result: **pass for approved bulk/review content, accessibility structure,
 responsive constraints, local delivery and locked-section integrity**.
+
+## Dark-wood design-direction validation
+
+Changed visual chain:
+
+- outer section: `.direction-section`;
+- shell/navigation: `.direction-section .tab-module`,
+  `.direction-section .tab-list` and its tab states;
+- active panel: `.direction-section .tab-panel`;
+- gallery cards: scoped `.design-card`, image and label surfaces;
+- custom pathway: scoped `.customise-form`, fields, optional details and
+  helper copy.
+
+Final palette:
+
+| Role | Value |
+| --- | --- |
+| Main near-black | `#0d0c0b` |
+| Dark walnut transition | `#17110d` |
+| Card surface | `#151515` |
+| Raised/field surface | `#191817` |
+| Dark inset surface | `#11100f` |
+| Bronze border | `rgb(205 139 72 / 28%)` |
+| Primary text | `#fff8ef` |
+| Secondary text | `#cfc3b5` |
+| Placeholder text | `#9e9285` |
+| Grain | `rgb(205 139 72 / 2.2%)` |
+| Active tab | existing `var(--orange)` |
+
+Contrast calculations:
+
+- primary text on card: 17.33:1;
+- secondary text on main panel: 11.29:1;
+- secondary text on card: 10.54:1;
+- placeholder text on field: 5.83:1.
+
+Responsive constraint results:
+
+| Viewport | Gallery presentation | Surface result |
+| ---: | --- | --- |
+| 320 px | 268.8×336 px card; native snap | Near-black/walnut grain, no flat brown block |
+| 360 px | 302.4×378 px card; native snap | Near-black/walnut grain, no flat brown block |
+| 390 px | 327.6×409.5 px card; native snap | Near-black/walnut grain, no flat brown block |
+| 430 px | 340×425 px card; native snap | Near-black/walnut grain, no flat brown block |
+| 768 px | 190×237.5 px cards; horizontal row | Broad asymmetric gradient; no wallpaper tile |
+| 1024 px | 240×300 px cards; horizontal row | Broad asymmetric gradient; no wallpaper tile |
+| 1440 px | approximately 210.4×263 px; five-card row | Broad asymmetric gradient; no wallpaper tile |
+
+The grain is a single low-opacity CSS layer over two large asymmetric radial
+highlights and a full-section walnut transition. It has no separate tile
+asset, text overlay or high-contrast motif. Card and form surfaces are solid
+charcoal, keeping black and white T-shirt imagery distinct from the outer
+texture.
+
+Regression checks:
+
+- gallery HTML, images, titles and order: unchanged;
+- image dimensions, `object-fit: contain`, centred positioning and card
+  sizing: unchanged;
+- mobile scroll snap and intentional horizontal scroller: unchanged;
+- gallery `data-whatsapp-zone`: unchanged, so the floating pill remains
+  suppressed over gallery content;
+- Create Your Own markup, behavior and WhatsApp logic: unchanged;
+- selector HTML/base CSS/product-data hashes match `7c28f3b`;
+- all non-direction HTML, JavaScript, assets, video and Netlify
+  configuration: unchanged;
+- local page, CSS, JavaScript and representative black/white designs:
+  HTTP 200;
+- CSS braces: 354 opening and 354 closing;
+- `git diff --check` and `node --check assets/js/site.js`: passed.
+
+The connected browser runtime remained unavailable. Responsive results are
+verified from the unchanged layout rules, scoped cascade, contrast
+calculations and local delivery; final physical-device/browser visual review
+remains a release check.
+
+Result: **pass for scoped dark-wood styling, contrast, unchanged layout and
+locked-module integrity**.
 
 ## Unresolved owner and release decisions
 

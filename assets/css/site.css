@@ -690,8 +690,10 @@ h3 {
 
 .direction-section {
   background:
-    radial-gradient(circle at 82% 18%, rgb(255 79 184 / 8%), transparent 30%),
-    var(--ink);
+    radial-gradient(ellipse at 16% 10%, rgb(205 139 72 / 8%), transparent 34%),
+    radial-gradient(ellipse at 84% 88%, rgb(112 65 32 / 7%), transparent 38%),
+    repeating-linear-gradient(98deg, rgb(205 139 72 / 2.2%) 0 1px, transparent 1px 8px),
+    linear-gradient(112deg, #0d0c0b 0%, #17110d 48%, #0d0c0b 100%);
 }
 
 .tab-module {
@@ -794,6 +796,90 @@ h3 {
   padding: 12px;
   font-size: 0.78rem;
   font-weight: 800;
+}
+
+.direction-section .section-heading h2 {
+  color: #fff8ef;
+}
+
+.direction-section .section-heading > p:last-child,
+.direction-section .panel-intro p,
+.direction-section .form-submit p {
+  color: #cfc3b5;
+}
+
+.direction-section .tab-module {
+  border-color: rgb(205 139 72 / 28%);
+  background: #151515;
+  box-shadow: 0 28px 76px rgb(0 0 0 / 36%);
+}
+
+.direction-section .tab-list {
+  border-color: rgb(205 139 72 / 22%);
+  background: linear-gradient(180deg, #191817, #11100f);
+}
+
+.direction-section .tab-list button {
+  color: #cfc3b5;
+}
+
+.direction-section .tab-list button[aria-selected="true"] {
+  color: var(--ink);
+  background: var(--orange);
+}
+
+.direction-section .tab-panel {
+  background:
+    radial-gradient(circle at 88% 12%, rgb(205 139 72 / 4%), transparent 28%),
+    #0d0c0b;
+}
+
+.direction-section .design-card {
+  border-color: rgb(205 139 72 / 28%);
+  color: #fff8ef;
+  background: #151515;
+}
+
+.direction-section .design-card img {
+  background: #191817;
+}
+
+.direction-section .design-card span {
+  border-top: 1px solid rgb(205 139 72 / 18%);
+  background: #151515;
+}
+
+.direction-section .customise-form {
+  border-color: rgb(205 139 72 / 28%);
+  background: #151515;
+}
+
+.direction-section .field label,
+.direction-section .optional-details summary {
+  color: #fff8ef;
+}
+
+.direction-section input,
+.direction-section select,
+.direction-section textarea {
+  border-color: rgb(205 139 72 / 28%);
+  color: #fff8ef;
+  background: #191817;
+}
+
+.direction-section input::placeholder,
+.direction-section textarea::placeholder {
+  color: #9e9285;
+}
+
+.direction-section .optional-details {
+  border-color: rgb(205 139 72 / 28%);
+  background: #11100f;
+}
+
+.direction-section .optional-grid {
+  border-color: rgb(205 139 72 / 22%);
+  background: #151515;
 }
 
 .customise-form {
