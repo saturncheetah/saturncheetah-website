@@ -282,6 +282,37 @@ The approved 180/240 selector remains unchanged from commit `7c28f3b`:
 its HTML section and CSS block hashes match, its six product assets retain
 their recorded SHA-256 values, and no selector or WhatsApp-state line changed.
 
+## Responsive gallery and product-fitting polish
+
+The five approved gallery images, titles and order remain unchanged. Their
+presentation is now compact and consistently centred:
+
+- mobile cards use `min(84vw, 340px)`, a 4:5 image frame, 12–16 px gaps,
+  native horizontal scroll snap and a hidden scrollbar;
+- tablet and narrower desktop widths retain practical 190–240 px cards in a
+  horizontal row rather than compressing five narrow columns;
+- viewports from 1200 px use one balanced five-card row; and
+- card media uses centered `object-fit: contain`, with no bottom alignment,
+  crop or hover zoom.
+
+The gallery is now an existing floating-CTA visibility zone, preventing the
+compact WhatsApp pill from covering gallery content. The secondary-products
+section already provided the same protection.
+
+The public **04 Worn** panel now contains only its step label and the approved
+supporting line, “See how the finished custom tees look in real life.” Public
+references to face hiding, privacy, consent and internal asset status were
+removed. Consent status remains documented internally.
+
+Mobile-only category media rules now use a padded 4:3 warm-neutral frame with
+full-width, centered `object-fit: contain` imagery. Caps, coasters, mugs, tote
+bags and bottles therefore remain fully visible without changing their source
+assets, names, order, copy or WhatsApp messages. Base desktop category-card
+layout and image treatment are unchanged.
+
+No JavaScript, image, video, Netlify configuration or 180/240 selector file,
+state, copy, asset or responsive rule changed.
+
 ## Release boundary
 
 No Netlify deployment, DNS change, Netlify configuration change, merge or

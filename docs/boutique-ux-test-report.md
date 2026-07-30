@@ -324,6 +324,74 @@ check.
 Result: **pass for scoped source, asset, truthfulness, accessibility,
 delivery and locked-selector checks**.
 
+## Responsive gallery and mobile category validation
+
+Responsive constraint results:
+
+| Viewport | Gallery card/frame | Gallery mode | Mobile category media |
+| ---: | --- | --- | --- |
+| 320 px | 268.8×336 px | Horizontal scroll snap | Padded 4:3 containment |
+| 360 px | 302.4×378 px | Horizontal scroll snap | Padded 4:3 containment |
+| 390 px | 327.6×409.5 px | Horizontal scroll snap | Padded 4:3 containment |
+| 430 px | 340×425 px | Horizontal scroll snap | Padded 4:3 containment |
+| 768 px | 190×237.5 px | Horizontal row | Desktop rules unchanged |
+| 1024 px | 240×300 px | Horizontal row | Desktop rules unchanged |
+| 1440 px | approximately 210.4×263 px | Five-card row | Desktop rules unchanged |
+
+The five square source designs are contained and centred inside the declared
+4:5 frames, so the hanger, tee and artwork remain complete. The frame centres
+any intentional breathing room instead of placing it above the product, and
+the title remains in normal flow directly below the image. The gallery hides
+its scrollbar and has no nested vertical scrolling.
+
+At 320, 360, 390 and 430 px, category images use `width: 100%`,
+`max-width: 100%`, a 4:3 frame, internal padding, centered
+`object-fit: contain` and centered positioning. The three portrait 900×1125
+assets and two landscape 1448×1086 assets decode at the dimensions declared
+in HTML. Their cards remain in the existing intentional horizontal scroller;
+copy and links stay in normal flow below the media.
+
+The gallery itself now participates in the existing WhatsApp-zone observer.
+The floating pill is therefore suppressed while gallery content is visible,
+as it already is throughout the secondary-products section. No message
+builder or WhatsApp destination changed.
+
+The Worn panel source contains no public-facing face-hiding, privacy,
+publication-permission, consent or internal-asset wording. Its visible copy is
+limited to **04 Worn** and “See how the finished custom tees look in real
+life.”
+
+Static and local-delivery checks:
+
+- 20 unique local asset references resolve; missing references: 0;
+- duplicate IDs: 0;
+- CSS braces: 293 opening and 293 closing;
+- page, CSS and JavaScript return HTTP 200 locally;
+- `git diff --check` passes;
+- `node --check assets/js/site.js` passes; and
+- JavaScript, category assets, gallery assets and story media are unchanged.
+
+Locked-selector comparison against `7c28f3b`:
+
+- complete selector HTML range SHA-256 matches:
+  `3c670f9c5c3af6d1ed576b4680036a24d08c058e9a87a43182c078074e38d389`;
+- selector base CSS SHA-256 matches:
+  `708037aaf4493490e809dd29fac40ff6b9e0610a91ed9f7e2f4b89ba9c1892c1`;
+- selector product-data SHA-256 matches:
+  `dec5817210d98ee71f035193a6af20c2fd0316592954b4b5e4cd592b695e0d26`;
+- selector update-function SHA-256 matches:
+  `aec398c64dcf832ba94750ea3a865800357ec438a1c46cd45bf8a31910174da3`;
+- selector product assets changed: 0; and
+- JavaScript changed in this update: 0.
+
+The browser runtime was unavailable. The requested widths were validated from
+the responsive constraints, intrinsic asset dimensions, containment rules and
+local delivery; final browser-rendered and physical-device inspection remains
+a release check.
+
+Result: **pass for scoped responsive rules, complete-image containment,
+public Worn copy, local delivery, syntax and locked-selector integrity**.
+
 ## Unresolved owner and release decisions
 
 1. Confirm documented publication permission for all five gallery artworks,
