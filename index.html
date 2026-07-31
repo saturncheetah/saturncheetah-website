@@ -144,10 +144,10 @@
             <figure class="tee-visual">
               <img
                 id="tee-image"
-                src="assets/images/products/tshirt-180-regular-black-640.webp"
+                src="assets/images/products/180/tshirt-180-black-640.webp"
                 srcset="
-                  assets/images/products/tshirt-180-regular-black-640.webp 640w,
-                  assets/images/products/tshirt-180-regular-black-994.webp 994w
+                  assets/images/products/180/tshirt-180-black-640.webp 640w,
+                  assets/images/products/180/tshirt-180-black-994.webp 994w
                 "
                 sizes="(max-width: 767px) calc(100vw - 64px), (max-width: 900px) 460px, (max-width: 1200px) 42vw, 560px"
                 alt="Black 180 GSM unisex regular-fit T-shirt shown from front and back"
@@ -163,6 +163,24 @@
               <p class="product-spec" id="tee-spec">180 GSM · Unisex · Cotton</p>
               <h3 id="tee-name">Regular Fit T-shirt</h3>
               <p class="tee-summary" id="tee-summary">A familiar everyday silhouette with an easy, regular fit.</p>
+              <div class="tee-options">
+                <fieldset class="tee-option-group tee-colour-group">
+                  <legend>Colour: <strong id="tee-colour-label">Black</strong></legend>
+                  <div class="tee-colour-options" id="tee-colour-options"></div>
+                </fieldset>
+                <fieldset class="tee-option-group tee-size-group" aria-describedby="tee-size-prompt">
+                  <legend>Size</legend>
+                  <div class="tee-size-options" id="tee-size-options">
+                    <button type="button" data-tee-size="XS" aria-pressed="false">XS</button>
+                    <button type="button" data-tee-size="S" aria-pressed="false">S</button>
+                    <button type="button" data-tee-size="M" aria-pressed="false">M</button>
+                    <button type="button" data-tee-size="L" aria-pressed="false">L</button>
+                    <button type="button" data-tee-size="XL" aria-pressed="false">XL</button>
+                    <button type="button" data-tee-size="XXL" aria-pressed="false">XXL</button>
+                  </div>
+                  <p class="tee-size-prompt" id="tee-size-prompt" role="alert" hidden>Please choose a size.</p>
+                </fieldset>
+              </div>
               <dl>
                 <div>
                   <dt>Fit</dt>
@@ -175,6 +193,7 @@
               </dl>
               <button
                 class="button button-primary"
+                id="tee-customise-button"
                 type="button"
                 data-open-tab="direction-create"
                 data-scroll-target="direction"
@@ -206,7 +225,7 @@
                 <li>Printing</li>
                 <li>Bulk Embroidery</li>
               </ul>
-              <p class="bulk-range-note">Wider fabric, GSM and colour options are available. Embroidery is available for bulk orders only.</p>
+              <p class="bulk-range-note">Wider fabric, GSM and colour options are available. Embroidery is available for bulk orders only. Kids’ sizes are available for bulk orders.</p>
             </div>
             <button
               class="button button-secondary bulk-options-toggle"
@@ -480,6 +499,8 @@
             hidden
           >
             <form class="customise-form" id="customise" data-whatsapp-zone>
+              <input id="custom-selected-colour" name="selectedColour" type="hidden" value="Black">
+              <input id="custom-selected-size" name="selectedSize" type="hidden" value="">
               <div class="form-grid">
                 <div class="field">
                   <label for="custom-product">Product</label>
@@ -509,10 +530,6 @@
                   <div class="field">
                     <label for="customer-name">Name</label>
                     <input id="customer-name" name="customerName" type="text" autocomplete="name">
-                  </div>
-                  <div class="field">
-                    <label for="custom-colour">Preferred colour</label>
-                    <input id="custom-colour" name="colour" type="text" placeholder="For example, black">
                   </div>
                   <div class="field">
                     <label for="custom-placement">Print placement</label>

@@ -897,3 +897,111 @@ No additional review or reviewer data was added.
 
 No deployment, merge, Netlify configuration change, DNS change, historical
 asset deletion or dependency installation was performed.
+
+## T-shirt colour and size selector validation — 2026-07-31
+
+### Scope and assets
+
+The production asset directories contain 28 files copied byte-for-byte from
+the supplied pack:
+
+| Fit | Mobile derivatives | Native derivatives |
+| --- | --- | --- |
+| 180 GSM | Black `640×1019`; ten other colours `640×1023` | Black `994×1583`; ten other colours `992×1586` |
+| 240 GSM | Black `640×960`; White and Off-white `640×1020` | Black `1024×1536`; White and Off-white `993×1583` |
+
+`cmp` verified all 28 production copies against their supplied derivatives.
+`file` verified every WebP encoding and dimension. `sips` could not read these
+WebPs in this environment and terminated with an `NSInvalidArgumentException`;
+this did not alter any file.
+
+The previous 180 GSM Black and 240 GSM beige/default WebPs are not
+byte-identical to the newly supplied Black and Off-white derivatives, but
+side-by-side visual inspection confirms the same approved compositions,
+colours and complete front/back product scenes. The selector now uses the
+pack's canonical derivatives.
+
+### Functional and accessibility checks
+
+- JavaScript syntax: `node --check assets/js/site.js` passed.
+- HTML IDs: 78 checked, 0 duplicates.
+- Static local references: 20 unique references checked, 0 missing.
+- Production colour-image URLs: 28/28 returned HTTP 200 from a temporary
+  localhost static server.
+- 180 GSM colour order/count: 11/11 exact; default Black.
+- 240 GSM colour order/count: 3/3 exact; default Off-white; no 180-only colour
+  is included in its data.
+- Adult-size order/count: XS, S, M, L, XL, XXL exactly; initial selected size
+  is empty.
+- Colour and size controls are semantic buttons with visible text, visible
+  focus, bordered indicators and `aria-pressed` state.
+- The live region reports both fit and colour after changes.
+- The selected colour is kept separately for each GSM; the size remains when
+  colour or fit changes.
+- Personal actions call `requireTeeSize()` and expose/focus the concise inline
+  “Please choose a size.” prompt when necessary.
+- `teeImageRequest` is incremented per image request, and the apply callback
+  accepts only the current request ID and product key. This retains and
+  strengthens the previous stale-load race guard.
+- Image switching updates `src`, `srcset`, `sizes`, `alt`, `width` and
+  `height`. CSS uses centered `object-fit: contain`, no filter, blend, zoom or
+  crop, and a stable `994 / 1583` display aspect.
+- A runtime test of the real message builder produced the required fit,
+  colour, size, quantity and design-status lines and retained WhatsApp number
+  `917780478506`.
+- The kids-size sentence occurs twice in production source: once in the bulk
+  module and once in the bulk-message builder. It is absent from the personal
+  selector and personal message.
+
+Sample personal message from the runtime test:
+
+```text
+Hello Saturn Cheetah Store,
+
+I’d like to customise a T-shirt.
+
+Fit: 180 GSM Regular Fit
+Colour: Green
+Size: L
+Quantity: 2
+Design status: I have a ready design
+
+I will attach my design or reference in WhatsApp.
+Please help me confirm availability, final price and timeline.
+```
+
+### Responsive geometry
+
+At 320, 360, 390 and 430 px, the 16 px page gutters produce selector widths
+of 288, 328, 358 and 398 px. The image well has 16 px internal padding, so its
+available widths are 256, 296, 326 and 366 px; the image is capped at 360 px.
+The fixed aspect box and `contain` fitting preserve the full front/back tee,
+trousers and shoes. The colour row scrolls within its own available width and
+cannot enlarge the page. Size controls have a 44 px minimum height and wrap
+inside the panel (four/two at 320 px, five/one at 360 px, and one row from
+390 px where label widths permit).
+
+At 768 px the selector is a single-column stage with approximately 722 px of
+container width. At 1024 px its approximately 963 px container uses the
+existing 0.9/1.1 split. At 1440 and 1920 px the container remains capped at
+1180 px and uses two balanced columns. Controls wrap within their
+`max-width: 570px` detail area; the image remains capped at 560 px. All grid
+tracks use zero-minimum containment where needed, and the only horizontal
+overflow is the intentional mobile colour scroller, so calculated page-level
+horizontal overflow is zero at all eight required widths.
+
+Browser automation is not installed in this dependency-free repository, so
+these responsive results use explicit CSS geometry, intrinsic image data,
+static source checks and local HTTP delivery rather than claiming a rendered
+browser/device pass. Physical-device confirmation remains a release gate.
+
+### Regression and release boundary
+
+`git diff --check` passed. Changes are limited to the selector markup/styles/
+logic, replacement of the superseded free-text personal colour field with the
+selector state, the instructed bulk note, the two UX documents, and 28 product
+WebPs. Hero, connected story, Explore Our Designs, secondary products,
+reviews, FAQ, footer, navigation and `netlify.toml` are unchanged.
+
+No deployment, merge, library installation, DNS change or Netlify
+configuration change was performed.

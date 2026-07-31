@@ -477,3 +477,38 @@ asset was added or modified.
 
 No Netlify deployment, DNS change, Netlify configuration change, merge or
 dependency installation was performed.
+
+## T-shirt colours and adult sizes — 2026-07-31
+
+The existing 180 GSM / 240 GSM selector now adds approved colour-specific
+product imagery and an explicit adult-size choice without changing its fit
+copy, quantity/design-status form, responsive product containment or WhatsApp
+destination.
+
+- 180 GSM Regular Fit offers Black, White, Off-white, Blue, Green, Gray, Red,
+  Yellow, Pink, Orange and Navy Blue, with Black as its default.
+- 240 GSM Oversized offers Black, White and Off-white only, with Off-white as
+  its default.
+- Each fit remembers its last selected colour for the page session.
+- Adult sizes are exactly XS, S, M, L, XL and XXL. No size is preselected;
+  personal-order actions expose an inline accessible prompt until one is
+  chosen.
+- Selected fit, colour, size, quantity and the existing design status/details
+  are included in the personal WhatsApp message.
+- The exact note “Kids’ sizes are available for bulk orders.” appears only in
+  the bulk module and its generated bulk quote message.
+
+Twenty-eight supplied responsive WebPs were imported byte-for-byte into
+`assets/images/products/180/` and `assets/images/products/240/`. Every colour
+uses its 640 px derivative as the mobile candidate and its native-width
+derivative as the desktop candidate. The image element updates its `src`,
+`srcset`, alternative text and intrinsic dimensions while a stable contained
+aspect box prevents layout shift and preserves the complete product scene.
+
+The image request token in `updateTeeProduct()` supersedes stale image loads
+during rapid fit/colour switching. No colour filters, tinting, cropping or
+zoom are used.
+
+No hero, connected-story, design-gallery, secondary-product, review, FAQ,
+footer, navigation or Netlify-configuration behavior was changed. No library
+was installed and no deployment or merge occurred.

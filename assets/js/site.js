@@ -25,12 +25,22 @@ const productData = {
     summary: "A familiar everyday silhouette with an easy, regular fit.",
     fit: "Regular and easy to wear",
     use: "Everyday wear, gifting and event tees",
-    image: "assets/images/products/tshirt-180-regular-black-640.webp",
-    srcset: "assets/images/products/tshirt-180-regular-black-640.webp 640w, assets/images/products/tshirt-180-regular-black-994.webp 994w",
     sizes: "(max-width: 767px) calc(100vw - 64px), (max-width: 900px) 460px, (max-width: 1200px) 42vw, 560px",
-    alt: "Black 180 GSM unisex regular-fit T-shirt shown from front and back",
-    width: "994",
-    height: "1583"
+    altFit: "regular-fit",
+    defaultColour: "black",
+    colours: [
+      { slug: "black", label: "Black", swatch: "#111111", width: 994, height: 1583 },
+      { slug: "white", label: "White", swatch: "#f7f7f4", width: 992, height: 1586 },
+      { slug: "off-white", label: "Off-white", swatch: "#eee7d8", width: 992, height: 1586 },
+      { slug: "blue", label: "Blue", swatch: "#0b50d2", width: 992, height: 1586 },
+      { slug: "green", label: "Green", swatch: "#00843d", width: 992, height: 1586 },
+      { slug: "gray", label: "Gray", swatch: "#b9b9b9", width: 992, height: 1586 },
+      { slug: "red", label: "Red", swatch: "#d20a16", width: 992, height: 1586 },
+      { slug: "yellow", label: "Yellow", swatch: "#f5d000", width: 992, height: 1586 },
+      { slug: "pink", label: "Pink", swatch: "#e779a5", width: 992, height: 1586 },
+      { slug: "orange", label: "Orange", swatch: "#f57c00", width: 992, height: 1586 },
+      { slug: "navy-blue", label: "Navy Blue", swatch: "#111d48", width: 992, height: 1586 }
+    ]
   },
   "240": {
     value: "240 GSM Unisex Oversized",
@@ -40,16 +50,21 @@ const productData = {
     summary: "A heavier, relaxed silhouette with an oversized streetwear fit.",
     fit: "Relaxed and oversized",
     use: "Bold front, back and streetwear-style prints",
-    image: "assets/images/products/tshirt-240-oversized-beige-640.webp",
-    srcset: "assets/images/products/tshirt-240-oversized-beige-640.webp 640w, assets/images/products/tshirt-240-oversized-beige-994.webp 993w",
     sizes: "(max-width: 767px) calc(100vw - 64px), (max-width: 900px) 460px, (max-width: 1200px) 42vw, 560px",
-    alt: "Beige 240 GSM unisex oversized T-shirt shown from front and back",
-    width: "993",
-    height: "1583"
+    altFit: "oversized",
+    defaultColour: "off-white",
+    colours: [
+      { slug: "black", label: "Black", swatch: "#111111", width: 1024, height: 1536 },
+      { slug: "white", label: "White", swatch: "#f7f7f4", width: 993, height: 1583 },
+      { slug: "off-white", label: "Off-white", swatch: "#eee7d8", width: 993, height: 1583 }
+    ]
   }
 };
 
 let selectedProductKey = "180";
+const selectedColourByProduct = { "180": "black", "240": "off-white" };
+let selectedSize = "";
+let teeImageRequest = 0;
 let pillReady = false;
 let pillDelayTimer;
 const visibleWhatsappZones = new Set();
@@ -304,25 +319,102 @@ function setupStorySwipe() {
   stage.addEventListener("pointercancel", resetSwipe);
 }
 
+function getSelectedColour(productKey = selectedProductKey) {
+  const product = productData[productKey];
+  const selectedSlug = selectedColourByProduct[productKey] || product.defaultColour;
+  return product.colours.find(colour => colour.slug === selectedSlug)
+    || product.colours.find(colour => colour.slug === product.defaultColour);
+}
+
+function getProductImage(productKey, colour) {
+  const basePath = `assets/images/products/${productKey}/tshirt-${productKey}-${colour.slug}`;
+  return {
+    src: `${basePath}-640.webp`,
+    srcset: `${basePath}-640.webp 640w, ${basePath}-${colour.width}.webp ${colour.width}w`,
+    width: colour.width,
+    height: colour.height
+  };
+}
+
+function updateColourButtonStates() {
+  const selectedSlug = selectedColourByProduct[selectedProductKey];
+  document.querySelectorAll("[data-tee-colour]").forEach(button => {
+    button.setAttribute("aria-pressed", String(button.dataset.teeColour === selectedSlug));
+  });
+}
+
+function renderColourOptions(productKey) {
+  const colourOptions = document.querySelector("#tee-colour-options");
+  const colourLabel = document.querySelector("#tee-colour-label");
+  const selectedColour = getSelectedColour(productKey);
+
+  if (!colourOptions || !selectedColour) return;
+  colourOptions.replaceChildren();
+
+  productData[productKey].colours.forEach(colour => {
+    const button = document.createElement("button");
+    const indicator = document.createElement("span");
+    const label = document.createElement("span");
+
+    button.type = "button";
+    button.dataset.teeColour = colour.slug;
+    button.setAttribute("aria-pressed", String(colour.slug === selectedColour.slug));
+    button.style.setProperty("--swatch-colour", colour.swatch);
+    indicator.className = "tee-colour-indicator";
+    indicator.setAttribute("aria-hidden", "true");
+    label.textContent = colour.label;
+    button.append(indicator, label);
+    colourOptions.append(button);
+  });
+
+  if (colourLabel) colourLabel.textContent = selectedColour.label;
+}
+
+function setSelectedSize(size) {
+  selectedSize = size;
+  document.querySelectorAll("[data-tee-size]").forEach(button => {
+    button.setAttribute("aria-pressed", String(button.dataset.teeSize === size));
+  });
+
+  const sizeInput = document.querySelector("#custom-selected-size");
+  const sizePrompt = document.querySelector("#tee-size-prompt");
+  if (sizeInput) sizeInput.value = size;
+  if (sizePrompt) sizePrompt.hidden = true;
+  updateWhatsAppLinks();
+}
+
+function requireTeeSize() {
+  if (selectedSize) return true;
+
+  const sizePrompt = document.querySelector("#tee-size-prompt");
+  if (sizePrompt) sizePrompt.hidden = false;
+  document.querySelector("[data-tee-size]")?.focus();
+  return false;
+}
+
 function updateTeeProduct(productKey, announce = true) {
   const product = productData[productKey];
+  const colour = product ? getSelectedColour(productKey) : null;
   const teeImage = document.querySelector("#tee-image");
   const teeVisual = document.querySelector(".tee-visual");
 
-  if (!product || !teeImage) return;
+  if (!product || !colour || !teeImage) return;
   selectedProductKey = productKey;
+  const image = getProductImage(productKey, colour);
+  const requestId = ++teeImageRequest;
 
   teeVisual?.classList.add("is-changing");
+  renderColourOptions(productKey);
 
   const applyProduct = () => {
-    if (selectedProductKey !== productKey) return;
+    if (requestId !== teeImageRequest || selectedProductKey !== productKey) return;
 
-    teeImage.src = product.image;
-    teeImage.srcset = product.srcset;
+    teeImage.src = image.src;
+    teeImage.srcset = image.srcset;
     teeImage.sizes = product.sizes;
-    teeImage.alt = product.alt;
-    teeImage.width = Number(product.width);
-    teeImage.height = Number(product.height);
+    teeImage.alt = `${colour.label} ${productKey} GSM unisex ${product.altFit} T-shirt shown from front and back`;
+    teeImage.width = image.width;
+    teeImage.height = image.height;
     document.querySelector("#tee-spec").textContent = product.spec;
     document.querySelector("#tee-name").textContent = product.name;
     document.querySelector("#tee-summary").textContent = product.summary;
@@ -330,17 +422,19 @@ function updateTeeProduct(productKey, announce = true) {
     document.querySelector("#tee-use").textContent = product.use;
 
     if (productSelect) productSelect.value = product.value;
-    if (finalSelection) finalSelection.textContent = `Currently showing: ${product.shortLabel}.`;
-    if (announce) document.querySelector("#tee-status").textContent = `${product.shortLabel} selected.`;
+    const colourInput = document.querySelector("#custom-selected-colour");
+    if (colourInput) colourInput.value = colour.label;
+    if (finalSelection) finalSelection.textContent = `Currently showing: ${colour.label} ${product.shortLabel}.`;
+    if (announce) document.querySelector("#tee-status").textContent = `${product.shortLabel}, ${colour.label} selected.`;
 
     updateWhatsAppLinks();
     window.requestAnimationFrame(() => teeVisual?.classList.remove("is-changing"));
   };
 
   const preloadedImage = new Image();
-  preloadedImage.srcset = product.srcset;
+  preloadedImage.srcset = image.srcset;
   preloadedImage.sizes = product.sizes;
-  preloadedImage.src = product.image;
+  preloadedImage.src = image.src;
 
   if (preloadedImage.complete) {
     applyProduct();
@@ -351,10 +445,34 @@ function updateTeeProduct(productKey, announce = true) {
 }
 
 function setupTeeSelector() {
+  const colourOptions = document.querySelector("#tee-colour-options");
+  const sizeOptions = document.querySelector("#tee-size-options");
+  const customiseButton = document.querySelector("#tee-customise-button");
+
   document.querySelectorAll("input[name='tee-option']").forEach(input => {
     input.addEventListener("change", () => {
       if (input.checked) updateTeeProduct(input.value);
     });
+  });
+
+  colourOptions?.addEventListener("click", event => {
+    const button = event.target.closest("[data-tee-colour]");
+    if (!button || button.getAttribute("aria-pressed") === "true") return;
+
+    selectedColourByProduct[selectedProductKey] = button.dataset.teeColour;
+    updateColourButtonStates();
+    updateTeeProduct(selectedProductKey);
+  });
+
+  sizeOptions?.addEventListener("click", event => {
+    const button = event.target.closest("[data-tee-size]");
+    if (button) setSelectedSize(button.dataset.teeSize);
+  });
+
+  customiseButton?.addEventListener("click", event => {
+    if (requireTeeSize()) return;
+    event.preventDefault();
+    event.stopPropagation();
   });
 
   productSelect?.addEventListener("change", () => {
@@ -381,7 +499,6 @@ function getOptionalFormLines(formData) {
 
   return [
     ["Name", value("customerName")],
-    ["Preferred colour", value("colour")],
     ["Print placement", value("placement")],
     ["Required date", value("requiredDate")],
     ["City", value("city")],
@@ -394,45 +511,57 @@ function getOptionalFormLines(formData) {
 function buildCustomMessage() {
   const formData = new FormData(customiseForm);
   const product = String(formData.get("product") || "").trim();
+  const isPersonalTee = product === productData["180"].value || product === productData["240"].value;
+  const selectedProduct = Object.values(productData).find(item => item.value === product);
+  const colour = String(formData.get("selectedColour") || "").trim();
+  const size = String(formData.get("selectedSize") || "").trim();
   const quantity = String(formData.get("quantity") || "").trim();
   const designStatus = String(formData.get("designStatus") || "").trim();
-  const opening = product === productData["180"].value
-    ? "I’d like to customise an 180 GSM regular-fit T-shirt."
-    : product === productData["240"].value
-      ? "I’d like to customise a 240 GSM oversized T-shirt."
-      : "I’d like to discuss a bulk custom-product order.";
+  const opening = isPersonalTee
+    ? "I’d like to customise a T-shirt."
+    : "I’d like to discuss a bulk custom-product order.";
   const designNextStep = designStatus === "I need design assistance"
     ? "I’d like help shaping the design direction."
     : "I will attach my design or reference in WhatsApp.";
+  const productLines = isPersonalTee
+    ? [`Fit: ${selectedProduct.shortLabel}`, `Colour: ${colour}`, `Size: ${size}`]
+    : [`Product: ${product}`];
 
   return [
     "Hello Saturn Cheetah Store,",
     "",
     opening,
     "",
-    `Product: ${product}`,
+    ...productLines,
     `Quantity: ${quantity}`,
     `Design status: ${designStatus}`,
     ...getOptionalFormLines(formData),
     "",
     designNextStep,
-    "Please confirm feasibility, final price and timeline."
+    isPersonalTee
+      ? "Please help me confirm availability, final price and timeline."
+      : "Please confirm feasibility, final price and timeline."
   ].join("\n");
 }
 
 function buildProductMessage(context) {
   const product = getCurrentProductValue();
   const productLabel = getProductLabel(product);
+  const isPersonalTee = product === productData["180"].value || product === productData["240"].value;
+  const colour = getSelectedColour();
   const opening = context === "print"
     ? `I’d like to print my idea on a ${productLabel}.`
     : `I’d like to continue with a ${productLabel} enquiry.`;
+  const selectionLines = isPersonalTee
+    ? [`Fit: ${productData[selectedProductKey].shortLabel}`, `Colour: ${colour.label}`, `Size: ${selectedSize}`]
+    : [`Product: ${product}`];
 
   return [
     "Hello Saturn Cheetah Store,",
     "",
     opening,
     "",
-    `Product: ${product}`,
+    ...selectionLines,
     "Design status: I will share my design, reference or idea in WhatsApp.",
     "",
     "Please confirm feasibility, final price and timeline."
@@ -476,6 +605,7 @@ function buildBulkTeeMessage(form) {
     `Quantity: ${value("quantity")}`,
     `Preferred colours: ${value("colours")}`,
     `Size breakup: ${value("sizes")}`,
+    "Kids’ sizes are available for bulk orders.",
     `Printing / bulk embroidery: ${value("decoration")}`,
     `Branding position: ${value("position")}`,
     `Required date: ${value("requiredDate")}`,
@@ -511,7 +641,22 @@ function setupWhatsAppFlow() {
   customiseForm?.addEventListener("submit", event => {
     event.preventDefault();
     if (!customiseForm.reportValidity()) return;
+    const product = productSelect?.value;
+    const isPersonalTee = product === productData["180"].value || product === productData["240"].value;
+    if (isPersonalTee && !requireTeeSize()) {
+      document.querySelector("#tees")?.scrollIntoView({ behavior: reducedMotion.matches ? "auto" : "smooth" });
+      return;
+    }
     window.location.assign(whatsappUrl(buildCustomMessage()));
+  });
+
+  document.addEventListener("click", event => {
+    const trigger = event.target.closest("[data-whatsapp-action='print'], [data-whatsapp-action='final'], [data-whatsapp-action='pill']");
+    const product = getCurrentProductValue();
+    const isPersonalTee = product === productData["180"].value || product === productData["240"].value;
+    if (!trigger || !isPersonalTee || requireTeeSize()) return;
+    event.preventDefault();
+    document.querySelector("#tees")?.scrollIntoView({ behavior: reducedMotion.matches ? "auto" : "smooth" });
   });
 
   updateWhatsAppLinks();
