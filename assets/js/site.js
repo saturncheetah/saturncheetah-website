@@ -715,20 +715,18 @@ function buildWidgetGeneralMessage() {
 
 function buildAfterDarkMessage() {
   const formData = new FormData(afterDarkConfigurator);
+  const details = formData.getAll("afterDarkDetails").map(value => String(value).trim()).filter(Boolean);
 
   return [
     "Hello Saturn Cheetah Store,",
     "",
     "I want a Saturn After Dark custom piece.",
     "",
-    widgetField("Garment", formData.get("afterDarkGarment")),
-    widgetField("Hardware", formData.get("afterDarkHardware")),
-    widgetField("Panel", formData.get("afterDarkPanel")),
-    widgetField("Finish", formData.get("afterDarkFinish")),
+    widgetField("Style", formData.get("afterDarkStyle")),
+    widgetField("Details", details.length ? details.join(", ") : "None"),
+    widgetField("Acid spray", formData.has("afterDarkAcidSpray") ? "Yes" : "No"),
     widgetField("Size", formData.get("afterDarkSize")),
     widgetField("Quantity", formData.get("afterDarkQuantity")),
-    widgetField("Placement", formData.get("afterDarkPlacement")),
-    widgetField("Design status", formData.get("afterDarkDesignStatus")),
     "",
     "Please confirm feasibility, pricing and next steps."
   ].join("\n");
@@ -738,14 +736,11 @@ function getAfterDarkSelection() {
   if (!afterDarkConfigurator) return null;
   const formData = new FormData(afterDarkConfigurator);
   return {
-    garment: String(formData.get("afterDarkGarment") || "").trim(),
-    hardware: String(formData.get("afterDarkHardware") || "").trim(),
-    panel: String(formData.get("afterDarkPanel") || "").trim(),
-    finish: String(formData.get("afterDarkFinish") || "").trim(),
+    style: String(formData.get("afterDarkStyle") || "").trim(),
+    details: formData.getAll("afterDarkDetails").map(value => String(value).trim()).filter(Boolean),
+    acidSpray: formData.has("afterDarkAcidSpray") ? "Yes" : "No",
     size: String(formData.get("afterDarkSize") || "").trim(),
-    quantity: String(formData.get("afterDarkQuantity") || "").trim(),
-    placement: String(formData.get("afterDarkPlacement") || "").trim(),
-    designStatus: String(formData.get("afterDarkDesignStatus") || "").trim()
+    quantity: String(formData.get("afterDarkQuantity") || "").trim()
   };
 }
 
@@ -759,14 +754,11 @@ function setupAfterDarkConfigurator() {
     const selection = getAfterDarkSelection();
     if (!selection || !summary) return;
     summary.textContent = [
-      selection.garment,
-      selection.hardware,
-      selection.panel,
-      selection.finish,
+      selection.style,
+      selection.details.length ? selection.details.join(", ") : "No added details",
+      `Acid spray: ${selection.acidSpray}`,
       `Size ${selection.size}`,
-      `Qty ${selection.quantity}`,
-      selection.placement,
-      selection.designStatus
+      `Qty ${selection.quantity}`
     ].join(" · ");
   };
 
@@ -800,6 +792,36 @@ function setupAfterDarkConfigurator() {
   });
 
   updateSummary();
+}
+
+function setupAfterDarkGallery() {
+  const gallery = document.querySelector(".after-dark-gallery");
+  const status = document.querySelector("#after-dark-gallery-status");
+  if (!gallery || !status) return;
+  const cards = [...gallery.querySelectorAll(".after-dark-gallery-card")];
+
+  const updateStatus = () => {
+    if (window.matchMedia("(min-width: 769px)").matches) {
+      status.textContent = `${cards.length} design directions`;
+      return;
+    }
+    const galleryLeft = gallery.getBoundingClientRect().left;
+    const currentIndex = cards.reduce((closest, card, index) => {
+      const distance = Math.abs(card.getBoundingClientRect().left - galleryLeft);
+      return distance < closest.distance ? { index, distance } : closest;
+    }, { index: 0, distance: Number.POSITIVE_INFINITY }).index;
+    status.textContent = `${currentIndex + 1} of ${cards.length}`;
+  };
+
+  gallery.addEventListener("scroll", updateStatus, { passive: true });
+  gallery.addEventListener("keydown", event => {
+    if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+    event.preventDefault();
+    const direction = event.key === "ArrowRight" ? 1 : -1;
+    gallery.scrollBy({ left: direction * gallery.clientWidth * 0.78, behavior: "smooth" });
+  });
+  window.addEventListener("resize", updateStatus);
+  updateStatus();
 }
 
 function updateWidgetEnquiryLinks() {
@@ -1206,6 +1228,7 @@ setupWhatsAppFlow();
 setupWhatsAppWidget();
 setupBulkTeeFlow();
 setupAfterDarkConfigurator();
+setupAfterDarkGallery();
 setupReviewCarousel();
 setupDesignGallery();
 setupFloatingPill();

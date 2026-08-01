@@ -1006,6 +1006,42 @@ reviews, FAQ, footer, navigation and `netlify.toml` are unchanged.
 No deployment, merge, library installation, DNS change or Netlify
 configuration change was performed.
 
+## Final approved Saturn After Dark validation — 2026-08-01
+
+Validated the simplified section against the supplied final prompt at 320,
+360, 390, 430, 768, 1024 and 1440 px through responsive CSS geometry and
+static interaction checks. At 768 px and below the gallery uses an 82%-width
+snap card capped at 330 px, leaving the next card visible; at desktop widths
+all four approved gallery images use equal `minmax(0, 1fr)` tracks. The hero
+and all detail imagery use contained rendering, so garment and hardware detail
+is not cropped.
+
+Checks passed:
+
+- Approved hero, gallery order, style, detail and acid-spray assets resolve
+  locally; 15 production WebPs were checked against their source dimensions.
+- Style and size are single-choice, details are true multi-select, acid spray
+  is an independent Yes/No toggle and quantity is bounded from 1 to 500.
+- The live summary and WhatsApp message are generated from identical current
+  form state. With Regular T-shirt, Silver rings + Chains, acid spray enabled,
+  M and quantity 2, the message contains exactly those values and no empty
+  questionnaire fields.
+- WhatsApp target remains `917780478506` and uses the existing encoded URL
+  helper. No new unsafe external link was introduced.
+- Native radio/checkbox/input/button semantics, visible focus treatment,
+  44 px minimum controls and keyboard gallery navigation are present.
+- JavaScript syntax, duplicate-ID scan, ARIA target scan, local-reference
+  scan, CSS brace balance and `git diff --check` pass.
+- Section-local geometry uses zero-minimum tracks, contained media and an
+  internally scrolling gallery, preventing page-level horizontal overflow at
+  all requested widths.
+- Protected homepage section markup, product data, dependencies and Netlify
+  configuration are unchanged.
+
+Browser automation is unavailable in this dependency-free repository, so
+physical browser/device confirmation remains the release gate. Nothing was
+deployed or installed.
+
 ## Focused Saturn After Dark redesign validation — 2026-08-01
 
 ### Structure, imagery and copy

@@ -682,3 +682,28 @@ and use approved imagery as visual context without horizontal scrolling.
 
 No production asset, protected section, wider-site accent, Netlify setting or
 dependency changed. No deployment or merge occurred.
+
+## Final approved Saturn After Dark experience — 2026-08-01
+
+Rebuilt only the Saturn After Dark section from the final approved asset pack.
+The section now opens with the dedicated flat-lay hero, followed by the four
+approved gallery images in the prescribed collection, tee-and-vest, black-net
+and acid-spray order. On mobile the gallery is a compact, no-autoplay swipe
+rail with one image and a next-card preview; on desktop it becomes a balanced
+four-image editorial row. Every informational image uses `object-fit: contain`
+and carries the required design-inspiration feasibility note.
+
+Simplified the configurator to the final five-step flow: one style, any number
+of silver rings/eyelets/chains/metal pressings/black-net details, an optional
+acid-spray toggle, one size and validated quantity. The visible current-state
+summary and `buildAfterDarkMessage()` consume the same form values. Removed
+the superseded panel, finish-list, placement and design-status questionnaire.
+
+Added `setupAfterDarkGallery()` for live `1 of 4` swipe status and Left/Right
+keyboard navigation, while retaining native scrolling and reduced-motion
+support. New production WebP assets live under
+`assets/images/after-dark-approved/`; the supplied PNG masters remain
+unchanged inside the ignored instruction pack.
+
+No homepage section outside Saturn After Dark, product data, Netlify setting
+or dependency was changed. Nothing was deployed.
