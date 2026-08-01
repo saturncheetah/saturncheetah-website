@@ -583,34 +583,26 @@
           <p class="after-dark-feasibility">Made to order. Final customisation depends on design feasibility.</p>
         </header>
 
-        <figure class="after-dark-hero-visual">
-          <img src="assets/images/after-dark-approved/saturn-after-dark-hero-flatlay-720.webp" srcset="assets/images/after-dark-approved/saturn-after-dark-hero-flatlay-720.webp 720w, assets/images/after-dark-approved/saturn-after-dark-hero-flatlay.webp 1122w" sizes="(max-width: 900px) calc(100vw - 32px), 620px" alt="Black T-shirt and sleeveless vest with silver rings, chains and stitched black-net details in the Saturn After Dark style" width="1122" height="1402" loading="lazy" decoding="async">
-          <figcaption>Design inspiration. Final customisation depends on feasibility.</figcaption>
-        </figure>
-
         <div class="after-dark-gallery-block">
-          <div class="after-dark-gallery-heading">
-            <h3>Explore the collection</h3>
-            <p id="after-dark-gallery-status" aria-live="polite" aria-atomic="true">1 of 4</p>
-          </div>
+          <p class="after-dark-gallery-status" id="after-dark-gallery-status" aria-live="polite" aria-atomic="true">1 / 5</p>
           <div class="after-dark-gallery" tabindex="0" aria-label="Saturn After Dark design inspiration gallery" aria-describedby="after-dark-gallery-status">
+            <figure class="after-dark-gallery-card after-dark-gallery-hero">
+              <img src="assets/images/after-dark-approved/saturn-after-dark-hero-flatlay-720.webp" srcset="assets/images/after-dark-approved/saturn-after-dark-hero-flatlay-720.webp 720w, assets/images/after-dark-approved/saturn-after-dark-hero-flatlay.webp 1122w" sizes="(max-width: 768px) 88vw, 560px" alt="Black T-shirt and sleeveless vest with silver rings, chains and stitched black-net details in the Saturn After Dark style" width="1122" height="1402" loading="lazy" decoding="async">
+            </figure>
             <figure class="after-dark-gallery-card">
               <img src="assets/images/after-dark-approved/sad-gallery-collection-rack.webp" alt="Saturn After Dark collection rack with black tees and sleeveless vests" width="1122" height="1402" loading="lazy" decoding="async">
-              <figcaption>Collection direction</figcaption>
             </figure>
             <figure class="after-dark-gallery-card">
               <img src="assets/images/after-dark-approved/sad-gallery-tee-vest-detail.webp" alt="Black T-shirt and sleeveless vest with silver hardware details" width="1123" height="1401" loading="lazy" decoding="async">
-              <figcaption>Tee and vest details</figcaption>
             </figure>
             <figure class="after-dark-gallery-card">
               <img src="assets/images/after-dark-approved/sad-gallery-black-net.webp" alt="Close view of stitched black-net detailing on a black garment" width="1254" height="1254" loading="lazy" decoding="async">
-              <figcaption>Stitched black-net detail</figcaption>
             </figure>
             <figure class="after-dark-gallery-card">
               <img src="assets/images/after-dark-approved/sad-gallery-acid-spray.webp" alt="Black garment with an optional orangish acid-spray finish" width="1254" height="1254" loading="lazy" decoding="async">
-              <figcaption>Optional acid-spray finish</figcaption>
             </figure>
           </div>
+          <p class="after-dark-gallery-note">Design inspiration. Final customisation depends on feasibility.</p>
         </div>
 
         <form class="after-dark-configurator" id="after-dark-configurator">
@@ -643,7 +635,10 @@
 
             <fieldset class="after-dark-detail-card after-dark-finish-card">
               <legend><span>03</span> Optional finish</legend>
-              <label class="after-dark-acid-choice"><input type="checkbox" name="afterDarkAcidSpray" value="Yes"><span><img src="assets/images/after-dark-approved/sad-finish-acid-spray.webp" alt="" width="1254" height="1254" loading="lazy" decoding="async"><b>Add acid spray</b><small>Orangish bleach/spray effect on black fabric</small></span></label>
+              <div class="after-dark-image-choices after-dark-finish-choices">
+                <label class="after-dark-acid-choice"><input type="checkbox" name="afterDarkAcidSpray" value="Yes"><span><img src="assets/images/after-dark-approved/sad-finish-acid-spray.webp" alt="" width="1254" height="1254" loading="lazy" decoding="async"><b>Add acid spray</b></span></label>
+              </div>
+              <p class="after-dark-finish-note">Optional orangish bleach-spray effect on black fabric.</p>
             </fieldset>
 
             <fieldset class="after-dark-detail-card">

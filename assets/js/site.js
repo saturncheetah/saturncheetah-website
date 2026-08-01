@@ -801,16 +801,12 @@ function setupAfterDarkGallery() {
   const cards = [...gallery.querySelectorAll(".after-dark-gallery-card")];
 
   const updateStatus = () => {
-    if (window.matchMedia("(min-width: 769px)").matches) {
-      status.textContent = `${cards.length} design directions`;
-      return;
-    }
     const galleryLeft = gallery.getBoundingClientRect().left;
     const currentIndex = cards.reduce((closest, card, index) => {
       const distance = Math.abs(card.getBoundingClientRect().left - galleryLeft);
       return distance < closest.distance ? { index, distance } : closest;
     }, { index: 0, distance: Number.POSITIVE_INFINITY }).index;
-    status.textContent = `${currentIndex + 1} of ${cards.length}`;
+    status.textContent = `${currentIndex + 1} / ${cards.length}`;
   };
 
   gallery.addEventListener("scroll", updateStatus, { passive: true });

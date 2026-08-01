@@ -4131,6 +4131,148 @@ html:not(.js-enabled) .story-panel[hidden] {
   }
 }
 
+/* One continuous After Dark hero and inspiration series. */
+.after-dark-section .after-dark-shell {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.after-dark-section .after-dark-intro,
+.after-dark-gallery-block,
+.after-dark-configurator {
+  grid-column: 1;
+}
+
+.after-dark-section .after-dark-intro {
+  max-width: 760px;
+}
+
+.after-dark-gallery-block {
+  min-width: 0;
+  padding-top: 0;
+}
+
+.after-dark-gallery-status {
+  margin: 0 0 10px;
+  color: #d49a91;
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-align: right;
+}
+
+.after-dark-gallery {
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  gap: 18px;
+  padding: 3px 3px 12px;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scroll-padding-inline: 3px;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+  touch-action: pan-x pan-y;
+}
+
+.after-dark-gallery-card {
+  flex: 0 0 clamp(220px, 25%, 290px);
+  height: auto;
+  min-height: 0;
+  align-self: start;
+  scroll-snap-align: start;
+}
+
+.after-dark-gallery-card.after-dark-gallery-hero {
+  flex-basis: clamp(420px, 48%, 560px);
+}
+
+.after-dark-gallery-card img {
+  width: 100%;
+  height: auto;
+  max-height: min(68vh, 640px);
+  aspect-ratio: auto;
+  object-fit: contain;
+}
+
+.after-dark-gallery-note {
+  margin: 8px 3px 0;
+  color: var(--sad-silver);
+  font-size: 0.76rem;
+}
+
+/* Acid spray uses the same compact image-card pattern as Details. */
+.after-dark-finish-choices {
+  grid-template-columns: minmax(150px, 180px);
+  justify-content: start;
+}
+
+.after-dark-finish-choices .after-dark-acid-choice,
+.after-dark-finish-choices .after-dark-acid-choice > span {
+  width: auto;
+  height: auto;
+  min-height: 0;
+  align-self: start;
+}
+
+.after-dark-finish-choices .after-dark-acid-choice > span {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  align-items: start;
+  align-content: start;
+  gap: 0;
+  text-align: center;
+}
+
+.after-dark-finish-choices .after-dark-acid-choice img {
+  grid-row: auto;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+}
+
+.after-dark-finish-choices .after-dark-acid-choice b {
+  align-self: start;
+  padding: 9px 3px 3px;
+}
+
+.after-dark-finish-note {
+  max-width: 360px;
+  margin: 10px 0 0;
+  color: var(--sad-silver);
+  font-size: 0.72rem;
+  line-height: 1.45;
+}
+
+@media (max-width: 768px) {
+  .after-dark-gallery {
+    width: calc(100% + 16px);
+    gap: 18px;
+    padding-right: 16px;
+  }
+
+  .after-dark-gallery-card,
+  .after-dark-gallery-card.after-dark-gallery-hero {
+    flex: 0 0 min(88vw, 420px);
+  }
+
+  .after-dark-gallery-card img {
+    max-height: min(68vh, 560px);
+  }
+
+  .after-dark-finish-choices {
+    grid-template-columns: minmax(0, min(46vw, 180px));
+  }
+
+  .after-dark-finish-choices .after-dark-acid-choice img {
+    width: min(100%, 140px);
+    justify-self: center;
+  }
+}
+
 @media (max-width: 480px) {
   .after-dark-intro h2 {
     font-size: clamp(2.55rem, 14vw, 4rem);
