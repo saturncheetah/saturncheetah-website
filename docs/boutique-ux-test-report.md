@@ -1006,6 +1006,93 @@ reviews, FAQ, footer, navigation and `netlify.toml` are unchanged.
 No deployment, merge, library installation, DNS change or Netlify
 configuration change was performed.
 
+## Focused Saturn After Dark redesign validation — 2026-08-01
+
+### Structure, imagery and copy
+
+- The section remains after Explore Our Designs and before More Ways to
+  Customise.
+- Exactly one informative `<img>` appears inside the section: the approved
+  1122×1402 lead WebP with its 720×900 responsive candidate.
+- The complete lead frame uses `object-fit: contain`; the T-shirts, sleeveless
+  vest, silver hardware, chains and black-net details remain visible.
+- Context thumbnails reference only the approved optimized lead,
+  silver-hardware, black-net and full-collection WebPs. All four CSS references
+  resolve locally.
+- The media well uses lifted charcoal/wine surfaces and antique-silver borders
+  rather than a black-on-black card. No CSS filter or tint is applied.
+- Public copy contains “Built in shadow. Designed by you.” and the approved
+  support/feasibility copy. “Acid spray” replaces acid-text wording and is
+  explained as an optional orangish bleach/spray effect.
+- No excluded garment or unsupported-construction claim appears.
+
+### Configurator and WhatsApp
+
+- Style values: Regular T-shirt, Oversized T-shirt, Sleeveless Vest.
+- Hardware values: Silver rings, Eyelets, Chains, Metal pressings.
+- Panel values: Black-net insert, No net, Mixed detailing where feasible.
+- Finish values: Clean black, Distressed text, Acid spray.
+- Sizes: XS, S, M, L, XL, XXL exactly.
+- Quantity uses two semantic 48 px buttons around a validated numeric input;
+  JavaScript clamps stepping to 1–500 and restores an invalid field to 1 on
+  blur.
+- Placement and design-status options match the instructed lists exactly.
+- Every visual option is a semantic radio inside a label with a minimum 72 px
+  surface; size/status options and all interactive controls meet the 44 px
+  touch minimum and have visible focus treatment.
+- The live summary and WhatsApp message read the same `FormData` values.
+
+Runtime example:
+
+```text
+Hello Saturn Cheetah Store,
+
+I want a Saturn After Dark custom piece.
+
+Garment: Sleeveless Vest
+Hardware: Chains
+Panel: Black-net insert
+Finish: Acid spray
+Size: L
+Quantity: 2
+Placement: Side panel
+Design status: I have a reference
+
+Please confirm feasibility, pricing and next steps.
+```
+
+The generated URL begins `https://wa.me/917780478506?text=`. No empty field,
+unselected option list or internal feasibility repetition appears.
+
+### Responsive and regression checks
+
+- At 320, 360, 390 and 430 px, the hero, main image, numbered cards, follow-up
+  controls and actions use one contained column. Hardware uses a compact 2×2
+  visual grid; three-choice and six-size grids use zero-minimum tracks within
+  the available width.
+- At 768 px the same clear single-column structure remains. At 1024 and
+  1440 px the hero is two-column and detail cards use the balanced desktop
+  grid.
+- There is no horizontal rail or negative-margin scroller in the redesigned
+  section. Calculated page-level horizontal overflow is zero at all seven
+  instructed widths.
+- HTML IDs: 87 checked, 0 duplicates.
+- HTML/CSS local references: 29 checked, 0 missing.
+- CSS braces: 561 opening and 561 closing.
+- JavaScript syntax and `git diff --check`: passed.
+- Keyboard focus rules cover visual radios, size/status radios, quantity
+  buttons, selects and CTAs.
+- Hero, T-shirt selector, bulk, story, Explore Our Designs, secondary products,
+  reviews, FAQ, final CTA and footer markup match the pre-task commit.
+- Production images, Netlify configuration and dependency state are unchanged.
+
+Browser automation remains unavailable. Responsive conclusions use explicit
+CSS geometry, source inspection, runtime message evaluation and static
+interaction-path checks; physical-device confirmation remains a release gate.
+
+No deployment, merge, library installation, DNS change or Netlify
+configuration change was performed.
+
 ## Final selector and After Dark correction validation — 2026-08-01
 
 ### Mobile T-shirt order and regression

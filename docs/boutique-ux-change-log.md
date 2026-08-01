@@ -645,3 +645,40 @@ so the concise WhatsApp message contains only actual, non-empty selections.
 
 No unrelated product data, protected content, Netlify configuration or
 dependency changed. No deployment or merge occurred.
+
+## Focused Saturn After Dark customisation experience — 2026-08-01
+
+Replaced the competing lead/supporting-gallery composition with one clear
+editorial hero. The approved `saturn-after-dark-lead` image is now the only
+full section image, presented uncropped in a brighter wine-charcoal media well
+beside the mood-led introduction “Built in shadow. Designed by you.” The
+existing optimized silver-hardware, black-net and full-collection derivatives
+are reused only as small contextual choice thumbnails; there is no carousel or
+secondary image stack.
+
+The configurator is now a numbered “Choose Your Details” sequence:
+
+1. Style — Regular T-shirt, Oversized T-shirt or Sleeveless Vest.
+2. Hardware — Silver rings, Eyelets, Chains or Metal pressings.
+3. Panel — Black-net insert, No net or Mixed detailing where feasible.
+4. Finish — Clean black, Distressed text or Acid spray.
+5. Size — XS through XXL.
+6. Quantity — accessible minus/input/plus control with bounds 1–500.
+
+Acid spray is publicly defined as an optional orangish bleach/spray effect on
+black fabric. The previous public acid-effect-text wording is removed. The
+existing placement and design-status choices follow the numbered grid, with a
+live current-selection summary and the two approved CTAs.
+
+`buildAfterDarkMessage()` now emits separate Garment, Hardware, Panel, Finish,
+Size, Quantity, Placement and Design status lines using only current form
+values. `setupAfterDarkConfigurator()` keeps the live summary synchronized and
+adds bounded keyboard-accessible quantity stepping.
+
+At desktop widths the hero uses an editorial two-column composition and the
+detail area uses a balanced two-column grid. At 900 px and below the hero and
+detail cards become a clear single column. Mobile choice cards remain compact
+and use approved imagery as visual context without horizontal scrolling.
+
+No production asset, protected section, wider-site accent, Netlify setting or
+dependency changed. No deployment or merge occurred.

@@ -715,9 +715,6 @@ function buildWidgetGeneralMessage() {
 
 function buildAfterDarkMessage() {
   const formData = new FormData(afterDarkConfigurator);
-  const customisations = formData.getAll("afterDarkCustomisation")
-    .map(value => String(value).trim())
-    .filter(Boolean);
 
   return [
     "Hello Saturn Cheetah Store,",
@@ -725,7 +722,9 @@ function buildAfterDarkMessage() {
     "I want a Saturn After Dark custom piece.",
     "",
     widgetField("Garment", formData.get("afterDarkGarment")),
-    widgetField("Customisation", customisations.join(", ")),
+    widgetField("Hardware", formData.get("afterDarkHardware")),
+    widgetField("Panel", formData.get("afterDarkPanel")),
+    widgetField("Finish", formData.get("afterDarkFinish")),
     widgetField("Size", formData.get("afterDarkSize")),
     widgetField("Quantity", formData.get("afterDarkQuantity")),
     widgetField("Placement", formData.get("afterDarkPlacement")),
@@ -740,7 +739,9 @@ function getAfterDarkSelection() {
   const formData = new FormData(afterDarkConfigurator);
   return {
     garment: String(formData.get("afterDarkGarment") || "").trim(),
-    customisations: formData.getAll("afterDarkCustomisation").map(value => String(value).trim()).filter(Boolean),
+    hardware: String(formData.get("afterDarkHardware") || "").trim(),
+    panel: String(formData.get("afterDarkPanel") || "").trim(),
+    finish: String(formData.get("afterDarkFinish") || "").trim(),
     size: String(formData.get("afterDarkSize") || "").trim(),
     quantity: String(formData.get("afterDarkQuantity") || "").trim(),
     placement: String(formData.get("afterDarkPlacement") || "").trim(),
@@ -750,24 +751,18 @@ function getAfterDarkSelection() {
 
 function setupAfterDarkConfigurator() {
   if (!afterDarkConfigurator) return;
-  const customisationInputs = [...afterDarkConfigurator.querySelectorAll("input[name='afterDarkCustomisation']")];
-  const combinationInput = afterDarkConfigurator.querySelector("[data-after-dark-combination]");
   const quantityInput = document.querySelector("#after-dark-quantity");
-  const error = document.querySelector("#after-dark-customisation-error");
+  const quantityButtons = [...afterDarkConfigurator.querySelectorAll("[data-after-dark-quantity-step]")];
   const summary = document.querySelector("#after-dark-selection-summary");
-
-  const validateCustomisation = () => {
-    const hasSelection = customisationInputs.some(input => input.checked);
-    if (error) error.hidden = hasSelection;
-    return hasSelection;
-  };
 
   const updateSummary = () => {
     const selection = getAfterDarkSelection();
     if (!selection || !summary) return;
     summary.textContent = [
       selection.garment,
-      selection.customisations.join(", "),
+      selection.hardware,
+      selection.panel,
+      selection.finish,
       `Size ${selection.size}`,
       `Qty ${selection.quantity}`,
       selection.placement,
@@ -775,19 +770,7 @@ function setupAfterDarkConfigurator() {
     ].join(" · ");
   };
 
-  afterDarkConfigurator.addEventListener("change", event => {
-    const changedInput = event.target.closest("input[name='afterDarkCustomisation']");
-    if (changedInput?.checked && changedInput === combinationInput) {
-      customisationInputs.forEach(input => {
-        if (input !== combinationInput) input.checked = false;
-      });
-    } else if (changedInput?.checked && combinationInput) {
-      combinationInput.checked = false;
-    }
-    if (changedInput && !customisationInputs.some(input => input.checked)) changedInput.checked = true;
-    validateCustomisation();
-    updateSummary();
-  });
+  afterDarkConfigurator.addEventListener("change", updateSummary);
 
   afterDarkConfigurator.addEventListener("input", event => {
     if (event.target.matches("input[type='number']")) updateSummary();
@@ -798,12 +781,20 @@ function setupAfterDarkConfigurator() {
     updateSummary();
   });
 
+  quantityButtons.forEach(button => {
+    button.addEventListener("click", () => {
+      if (!quantityInput) return;
+      const step = Number(button.dataset.afterDarkQuantityStep);
+      const current = Number.parseInt(quantityInput.value, 10) || 1;
+      const minimum = Number(quantityInput.min) || 1;
+      const maximum = Number(quantityInput.max) || 500;
+      quantityInput.value = String(Math.max(minimum, Math.min(maximum, current + step)));
+      updateSummary();
+    });
+  });
+
   afterDarkConfigurator.addEventListener("submit", event => {
     event.preventDefault();
-    if (!validateCustomisation()) {
-      customisationInputs[0]?.focus();
-      return;
-    }
     if (!afterDarkConfigurator.reportValidity()) return;
     window.location.assign(whatsappUrl(buildAfterDarkMessage()));
   });
