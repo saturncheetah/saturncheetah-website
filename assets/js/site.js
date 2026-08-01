@@ -15,6 +15,7 @@ const floatingWhatsapp = document.querySelector("#floating-whatsapp");
 const whatsappEnquiryPanel = document.querySelector("#whatsapp-enquiry-panel");
 const productSelect = document.querySelector("#custom-product");
 const customiseForm = document.querySelector("#customise");
+const afterDarkConfigurator = document.querySelector("#after-dark-configurator");
 const finalSelection = document.querySelector("#final-selection");
 
 const productData = {
@@ -713,26 +714,101 @@ function buildWidgetGeneralMessage() {
 }
 
 function buildAfterDarkMessage() {
+  const formData = new FormData(afterDarkConfigurator);
+  const customisations = formData.getAll("afterDarkCustomisation")
+    .map(value => String(value).trim())
+    .filter(Boolean);
+
   return [
     "Hello Saturn Cheetah Store,",
     "",
-    "I’m interested in a Saturn After Dark custom piece.",
+    "I want a Saturn After Dark custom piece.",
     "",
-    "Garment:",
-    "Regular T-shirt / Oversized T-shirt / Sleeveless vest",
+    widgetField("Garment", formData.get("afterDarkGarment")),
+    widgetField("Customisation", customisations.join(", ")),
+    widgetField("Size", formData.get("afterDarkSize")),
+    widgetField("Quantity", formData.get("afterDarkQuantity")),
+    widgetField("Placement", formData.get("afterDarkPlacement")),
+    widgetField("Design status", formData.get("afterDarkDesignStatus")),
     "",
-    "Customisation:",
-    "Silver rings or eyelets / Chains / Black-net insert / Distressed text / Acid-effect text / Combination",
-    "",
-    "Size:",
-    "Quantity:",
-    "Placement idea:",
-    "Design or reference ready:",
-    "Required date:",
-    "Delivery city:",
-    "",
-    "Please confirm feasibility, estimated pricing and next steps."
+    "Please confirm feasibility, pricing and next steps."
   ].join("\n");
+}
+
+function getAfterDarkSelection() {
+  if (!afterDarkConfigurator) return null;
+  const formData = new FormData(afterDarkConfigurator);
+  return {
+    garment: String(formData.get("afterDarkGarment") || "").trim(),
+    customisations: formData.getAll("afterDarkCustomisation").map(value => String(value).trim()).filter(Boolean),
+    size: String(formData.get("afterDarkSize") || "").trim(),
+    quantity: String(formData.get("afterDarkQuantity") || "").trim(),
+    placement: String(formData.get("afterDarkPlacement") || "").trim(),
+    designStatus: String(formData.get("afterDarkDesignStatus") || "").trim()
+  };
+}
+
+function setupAfterDarkConfigurator() {
+  if (!afterDarkConfigurator) return;
+  const customisationInputs = [...afterDarkConfigurator.querySelectorAll("input[name='afterDarkCustomisation']")];
+  const combinationInput = afterDarkConfigurator.querySelector("[data-after-dark-combination]");
+  const quantityInput = document.querySelector("#after-dark-quantity");
+  const error = document.querySelector("#after-dark-customisation-error");
+  const summary = document.querySelector("#after-dark-selection-summary");
+
+  const validateCustomisation = () => {
+    const hasSelection = customisationInputs.some(input => input.checked);
+    if (error) error.hidden = hasSelection;
+    return hasSelection;
+  };
+
+  const updateSummary = () => {
+    const selection = getAfterDarkSelection();
+    if (!selection || !summary) return;
+    summary.textContent = [
+      selection.garment,
+      selection.customisations.join(", "),
+      `Size ${selection.size}`,
+      `Qty ${selection.quantity}`,
+      selection.placement,
+      selection.designStatus
+    ].join(" · ");
+  };
+
+  afterDarkConfigurator.addEventListener("change", event => {
+    const changedInput = event.target.closest("input[name='afterDarkCustomisation']");
+    if (changedInput?.checked && changedInput === combinationInput) {
+      customisationInputs.forEach(input => {
+        if (input !== combinationInput) input.checked = false;
+      });
+    } else if (changedInput?.checked && combinationInput) {
+      combinationInput.checked = false;
+    }
+    if (changedInput && !customisationInputs.some(input => input.checked)) changedInput.checked = true;
+    validateCustomisation();
+    updateSummary();
+  });
+
+  afterDarkConfigurator.addEventListener("input", event => {
+    if (event.target.matches("input[type='number']")) updateSummary();
+  });
+
+  quantityInput?.addEventListener("blur", () => {
+    if (!quantityInput.checkValidity()) quantityInput.value = "1";
+    updateSummary();
+  });
+
+  afterDarkConfigurator.addEventListener("submit", event => {
+    event.preventDefault();
+    if (!validateCustomisation()) {
+      customisationInputs[0]?.focus();
+      return;
+    }
+    if (!afterDarkConfigurator.reportValidity()) return;
+    window.location.assign(whatsappUrl(buildAfterDarkMessage()));
+  });
+
+  updateSummary();
 }
 
 function updateWidgetEnquiryLinks() {
@@ -818,9 +894,6 @@ function updateWhatsAppLinks() {
     link.href = whatsappUrl(buildDesignMessage(link.dataset.designTitle));
   });
 
-  document.querySelectorAll("[data-after-dark-action]").forEach(link => {
-    link.href = whatsappUrl(buildAfterDarkMessage());
-  });
 }
 
 function setupWhatsAppFlow() {
@@ -1097,7 +1170,7 @@ function setupGalleryModal() {
 
 function setupSectionReveals() {
   const revealItems = document.querySelectorAll(
-    ".section-heading, .tee-selector, .tab-module, .after-dark-intro, .after-dark-lead-visual, .after-dark-options, .after-dark-supporting, .secondary-scroller, .faq-list, .final-cta-inner"
+    ".section-heading, .tee-selector, .tab-module, .after-dark-intro, .after-dark-media, .after-dark-configurator, .secondary-scroller, .faq-list, .final-cta-inner"
   );
 
   revealItems.forEach(item => item.classList.add("reveal-item"));
@@ -1141,6 +1214,7 @@ setupTeeSelector();
 setupWhatsAppFlow();
 setupWhatsAppWidget();
 setupBulkTeeFlow();
+setupAfterDarkConfigurator();
 setupReviewCarousel();
 setupDesignGallery();
 setupFloatingPill();

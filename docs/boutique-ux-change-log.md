@@ -591,3 +591,57 @@ pink identity remains dominant, and no protected section became gothic.
 
 No protected content, 180/240 product data or assets, Netlify configuration
 or dependency changed. No deployment or merge occurred.
+
+## Final mobile selector and Saturn After Dark rebuild — 2026-08-01
+
+This correction supersedes the previous Saturn After Dark media composition
+and blank questionnaire-style enquiry while retaining the section’s approved
+placement and wider-site accent balance.
+
+On viewports up to 900 px, the single existing T-shirt control group now
+renders in this order: 180/240 selector, colour controls, size controls,
+product image, primary product details and secondary details/actions. Desktop
+retains the image-left, details-right composition and its original internal
+order. No colour or size control was duplicated. Product data, colour assets,
+selected size/colour state, image preload/switching logic and personal
+WhatsApp state are unchanged. `renderColourOptions()` still runs before the
+new image request is applied when switching GSM.
+
+The rebuilt Saturn After Dark section uses exactly four new approved source
+masters in the required order. The untouched PNGs remain in the ignored
+incoming source folder. Eight stripped, optimized WebP derivatives were
+created in `assets/images/after-dark-final/` with a restrained baked
+brightness/contrast lift; no CSS tinting is applied:
+
+| Production asset | Dimensions |
+| --- | --- |
+| `saturn-after-dark-lead.webp` | 1122×1402 |
+| `saturn-after-dark-lead-720.webp` | 720×900 |
+| `saturn-after-dark-silver-hardware.webp` | 1672×941 |
+| `saturn-after-dark-silver-hardware-720.webp` | 720×405 |
+| `saturn-after-dark-black-net.webp` | 1086×1448 |
+| `saturn-after-dark-black-net-720.webp` | 720×960 |
+| `saturn-after-dark-full-collection.webp` | 1086×1448 |
+| `saturn-after-dark-full-collection-720.webp` | 720×960 |
+
+The optional fifth source was deliberately not used because the three
+required supporting images complete the desktop editorial grid and prevent a
+longer, repetitive mobile rail. The former After Dark WebPs remain preserved
+but are no longer referenced by the section.
+
+Mobile now presents concise copy, one strong portrait lead, one swipeable
+three-card supporting rail, the compact configurator and its CTAs. Desktop
+uses an asymmetric two-column layout with introduction/configurator opposite
+the lead and three supporting images. Lifted production derivatives, wine-
+charcoal media wells, antique-silver borders and controlled oxblood highlights
+keep black garments distinct without changing the wider brand balance.
+
+The on-site configurator uses semantic radio controls and checkboxes for
+garment, one or more customisations, size and design status, plus validated
+quantity and placement fields. Combination is mutually exclusive with
+individual techniques, and the final customisation cannot be accidentally
+cleared. A live summary and `buildAfterDarkMessage()` read the same form state,
+so the concise WhatsApp message contains only actual, non-empty selections.
+
+No unrelated product data, protected content, Netlify configuration or
+dependency changed. No deployment or merge occurred.

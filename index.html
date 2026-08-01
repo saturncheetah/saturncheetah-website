@@ -141,6 +141,25 @@
           </fieldset>
 
           <div class="tee-stage">
+            <div class="tee-options">
+              <fieldset class="tee-option-group tee-colour-group">
+                <legend>Colour: <strong id="tee-colour-label">Black</strong></legend>
+                <div class="tee-colour-options" id="tee-colour-options"></div>
+              </fieldset>
+              <fieldset class="tee-option-group tee-size-group" aria-describedby="tee-size-prompt">
+                <legend>Size</legend>
+                <div class="tee-size-options" id="tee-size-options">
+                  <button type="button" data-tee-size="XS" aria-pressed="false">XS</button>
+                  <button type="button" data-tee-size="S" aria-pressed="false">S</button>
+                  <button type="button" data-tee-size="M" aria-pressed="false">M</button>
+                  <button type="button" data-tee-size="L" aria-pressed="false">L</button>
+                  <button type="button" data-tee-size="XL" aria-pressed="false">XL</button>
+                  <button type="button" data-tee-size="XXL" aria-pressed="false">XXL</button>
+                </div>
+                <p class="tee-size-prompt" id="tee-size-prompt" role="alert" hidden>Please choose a size.</p>
+              </fieldset>
+            </div>
+
             <figure class="tee-visual">
               <img
                 id="tee-image"
@@ -159,28 +178,13 @@
               <figcaption>Current product view</figcaption>
             </figure>
 
-            <div class="tee-details">
+            <div class="tee-details tee-details-primary">
               <p class="product-spec" id="tee-spec">180 GSM · Unisex · Cotton</p>
               <h3 id="tee-name">Regular Fit T-shirt</h3>
               <p class="tee-summary" id="tee-summary">A familiar everyday silhouette with an easy, regular fit.</p>
-              <div class="tee-options">
-                <fieldset class="tee-option-group tee-colour-group">
-                  <legend>Colour: <strong id="tee-colour-label">Black</strong></legend>
-                  <div class="tee-colour-options" id="tee-colour-options"></div>
-                </fieldset>
-                <fieldset class="tee-option-group tee-size-group" aria-describedby="tee-size-prompt">
-                  <legend>Size</legend>
-                  <div class="tee-size-options" id="tee-size-options">
-                    <button type="button" data-tee-size="XS" aria-pressed="false">XS</button>
-                    <button type="button" data-tee-size="S" aria-pressed="false">S</button>
-                    <button type="button" data-tee-size="M" aria-pressed="false">M</button>
-                    <button type="button" data-tee-size="L" aria-pressed="false">L</button>
-                    <button type="button" data-tee-size="XL" aria-pressed="false">XL</button>
-                    <button type="button" data-tee-size="XXL" aria-pressed="false">XXL</button>
-                  </div>
-                  <p class="tee-size-prompt" id="tee-size-prompt" role="alert" hidden>Please choose a size.</p>
-                </fieldset>
-              </div>
+            </div>
+
+            <div class="tee-details tee-details-secondary">
               <dl>
                 <div>
                   <dt>Fit</dt>
@@ -574,73 +578,108 @@
         <div class="after-dark-intro">
           <p class="after-dark-kicker">A darker Saturn Cheetah expression</p>
           <h2 id="after-dark-title">Saturn After Dark</h2>
-          <p class="after-dark-lead">Pure-black tees and sleeveless vests customised with silver rings, chains, eyelets and stitched black-net detailing.</p>
+          <p class="after-dark-lead">Custom black tees and sleeveless vests with silver rings, chains, eyelets and stitched black-net detailing.</p>
           <p class="after-dark-feasibility">Made to order. Final customisation depends on design feasibility.</p>
+        </div>
 
-          <ul class="after-dark-garments" aria-label="Available Saturn After Dark garments">
-            <li>Black regular-fit T-shirt</li>
-            <li>Black oversized T-shirt</li>
-            <li>Black sleeveless vest</li>
-          </ul>
+        <div class="after-dark-media">
+          <figure class="after-dark-lead-visual">
+            <img src="assets/images/after-dark-final/saturn-after-dark-lead-720.webp" srcset="assets/images/after-dark-final/saturn-after-dark-lead-720.webp 720w, assets/images/after-dark-final/saturn-after-dark-lead.webp 1122w" sizes="(max-width: 900px) calc(100vw - 32px), (max-width: 1200px) 52vw, 650px" alt="Saturn After Dark concept rack of black T-shirts and sleeveless vests with silver hardware, chains and black-net details" width="1122" height="1402" loading="lazy" decoding="async">
+            <figcaption>Design inspiration. Each final piece is made to order and subject to feasibility.</figcaption>
+          </figure>
 
-          <div class="after-dark-actions">
-            <a class="button button-primary" href="https://wa.me/917780478506" target="_blank" rel="noopener noreferrer" data-after-dark-action>
-              Build My After Dark Piece <span aria-hidden="true">↗</span>
-            </a>
-            <a class="button button-secondary" href="https://wa.me/917780478506" target="_blank" rel="noopener noreferrer" data-after-dark-action>
-              Ask What’s Possible <span aria-hidden="true">↗</span>
-            </a>
+          <div class="after-dark-supporting" tabindex="0" aria-label="Saturn After Dark supporting collection images">
+            <figure>
+              <img src="assets/images/after-dark-final/saturn-after-dark-silver-hardware-720.webp" srcset="assets/images/after-dark-final/saturn-after-dark-silver-hardware-720.webp 720w, assets/images/after-dark-final/saturn-after-dark-silver-hardware.webp 1672w" sizes="(max-width: 767px) 76vw, 210px" alt="Black T-shirt and vest collection showing silver rings, eyelets and chain placements" width="1672" height="941" loading="lazy" decoding="async">
+              <figcaption>Silver hardware &amp; chains</figcaption>
+            </figure>
+            <figure>
+              <img src="assets/images/after-dark-final/saturn-after-dark-black-net-720.webp" srcset="assets/images/after-dark-final/saturn-after-dark-black-net-720.webp 720w, assets/images/after-dark-final/saturn-after-dark-black-net.webp 1086w" sizes="(max-width: 767px) 76vw, 210px" alt="Pure-black concept collection with stitched black-net panels and restrained metal detailing" width="1086" height="1448" loading="lazy" decoding="async">
+              <figcaption>Black-net customisation</figcaption>
+            </figure>
+            <figure>
+              <img src="assets/images/after-dark-final/saturn-after-dark-full-collection-720.webp" srcset="assets/images/after-dark-final/saturn-after-dark-full-collection-720.webp 720w, assets/images/after-dark-final/saturn-after-dark-full-collection.webp 1086w" sizes="(max-width: 767px) 76vw, 210px" alt="Full Saturn After Dark concept display of black tees, sleeveless vests, hardware and net details" width="1086" height="1448" loading="lazy" decoding="async">
+              <figcaption>Full collection showcase</figcaption>
+            </figure>
           </div>
         </div>
 
-        <figure class="after-dark-lead-visual">
-          <picture>
-            <source media="(max-width: 767px)" srcset="assets/images/after-dark/after-dark-portrait-collection-mobile.webp 960w, assets/images/after-dark/after-dark-portrait-collection.webp 1086w" sizes="calc(100vw - 32px)">
-            <source srcset="assets/images/after-dark/after-dark-wide-rack-mobile.webp 960w, assets/images/after-dark/after-dark-wide-rack.webp 1672w" sizes="(max-width: 1180px) 52vw, 620px">
-            <img src="assets/images/after-dark/after-dark-wide-rack.webp" alt="Saturn After Dark concept collection of black T-shirts and sleeveless vests with silver hardware, chains and net details" width="1672" height="941" loading="lazy" decoding="async">
-          </picture>
-          <figcaption>Concept visuals for inspiration. Every piece is made to order and subject to feasibility.</figcaption>
-        </figure>
+        <form class="after-dark-configurator" id="after-dark-configurator">
+          <div class="after-dark-configurator-heading">
+            <p class="after-dark-step">Build your enquiry</p>
+            <h3>Choose your piece and details</h3>
+          </div>
 
-        <div class="after-dark-options" tabindex="0" aria-label="Saturn After Dark customisation options">
-          <article class="after-dark-option">
-            <span aria-hidden="true">01</span>
-            <h3>Silver Hardware</h3>
-            <p>Rings, eyelets and metal accents for shoulders, sleeves or hems.</p>
-          </article>
-          <article class="after-dark-option">
-            <span aria-hidden="true">02</span>
-            <h3>Chain Details</h3>
-            <p>Fixed or detachable silver chains for front, side or back placement.</p>
-          </article>
-          <article class="after-dark-option">
-            <span aria-hidden="true">03</span>
-            <h3>Black-Net Inserts</h3>
-            <p>Selected sections cut and replaced with securely stitched black net.</p>
-          </article>
-          <article class="after-dark-option">
-            <span aria-hidden="true">04</span>
-            <h3>Dark Text Treatments</h3>
-            <p>Distressed text and optional acid-effect wording after feasibility review.</p>
-          </article>
-        </div>
+          <fieldset class="after-dark-choice-group">
+            <legend>Garment</legend>
+            <div class="after-dark-choice-grid after-dark-choice-grid-three">
+              <label><input type="radio" name="afterDarkGarment" value="Regular T-shirt" checked><span>Regular T-shirt</span></label>
+              <label><input type="radio" name="afterDarkGarment" value="Oversized T-shirt"><span>Oversized T-shirt</span></label>
+              <label><input type="radio" name="afterDarkGarment" value="Sleeveless vest"><span>Sleeveless vest</span></label>
+            </div>
+          </fieldset>
 
-        <div class="after-dark-supporting" aria-label="Saturn After Dark design details">
-          <figure>
-            <picture>
-              <source media="(max-width: 767px)" srcset="assets/images/after-dark/after-dark-detail-tee-vest-mobile.webp 960w, assets/images/after-dark/after-dark-detail-tee-vest.webp 1123w" sizes="76vw">
-              <img src="assets/images/after-dark/after-dark-detail-tee-vest.webp" alt="Black T-shirt and sleeveless vest concept showing silver rings, chains and a stitched black-net panel" width="1123" height="1401" loading="lazy" decoding="async">
-            </picture>
-            <figcaption>Hardware &amp; net details</figcaption>
-          </figure>
-          <figure>
-            <picture>
-              <source media="(max-width: 767px)" srcset="assets/images/after-dark/after-dark-full-collection-mobile.webp 960w, assets/images/after-dark/after-dark-full-collection.webp 1024w" sizes="76vw">
-              <img src="assets/images/after-dark/after-dark-full-collection.webp" alt="Saturn After Dark concept collection of black tees and sleeveless vests with restrained gothic detailing" width="1024" height="1536" loading="lazy" decoding="async">
-            </picture>
-            <figcaption>Collection direction</figcaption>
-          </figure>
-        </div>
+          <fieldset class="after-dark-choice-group" aria-describedby="after-dark-customisation-error">
+            <legend>Customisation <span>Select one or more</span></legend>
+            <div class="after-dark-choice-grid after-dark-customisation-grid">
+              <label><input type="checkbox" name="afterDarkCustomisation" value="Silver rings / eyelets" checked><span>Silver rings / eyelets</span></label>
+              <label><input type="checkbox" name="afterDarkCustomisation" value="Chains"><span>Chains</span></label>
+              <label><input type="checkbox" name="afterDarkCustomisation" value="Black-net insert"><span>Black-net insert</span></label>
+              <label><input type="checkbox" name="afterDarkCustomisation" value="Distressed text"><span>Distressed text</span></label>
+              <label><input type="checkbox" name="afterDarkCustomisation" value="Acid-effect text"><span>Acid-effect text</span></label>
+              <label><input type="checkbox" name="afterDarkCustomisation" value="Combination" data-after-dark-combination><span>Combination</span></label>
+            </div>
+            <p class="after-dark-field-error" id="after-dark-customisation-error" role="alert" hidden>Select at least one customisation.</p>
+          </fieldset>
+
+          <fieldset class="after-dark-choice-group">
+            <legend>Size</legend>
+            <div class="after-dark-choice-grid after-dark-size-grid">
+              <label><input type="radio" name="afterDarkSize" value="XS"><span>XS</span></label>
+              <label><input type="radio" name="afterDarkSize" value="S"><span>S</span></label>
+              <label><input type="radio" name="afterDarkSize" value="M" checked><span>M</span></label>
+              <label><input type="radio" name="afterDarkSize" value="L"><span>L</span></label>
+              <label><input type="radio" name="afterDarkSize" value="XL"><span>XL</span></label>
+              <label><input type="radio" name="afterDarkSize" value="XXL"><span>XXL</span></label>
+            </div>
+          </fieldset>
+
+          <div class="after-dark-form-grid">
+            <div class="field">
+              <label for="after-dark-quantity">Quantity</label>
+              <input id="after-dark-quantity" name="afterDarkQuantity" type="number" min="1" max="500" step="1" value="1" inputmode="numeric" required>
+            </div>
+            <div class="field">
+              <label for="after-dark-placement">Placement</label>
+              <select id="after-dark-placement" name="afterDarkPlacement" required>
+                <option>Front</option>
+                <option>Back</option>
+                <option>Sleeve</option>
+                <option>Shoulder</option>
+                <option>Side panel</option>
+                <option>Multiple areas</option>
+              </select>
+            </div>
+          </div>
+
+          <fieldset class="after-dark-choice-group">
+            <legend>Design status</legend>
+            <div class="after-dark-choice-grid after-dark-choice-grid-two">
+              <label><input type="radio" name="afterDarkDesignStatus" value="I have a reference" checked><span>I have a reference</span></label>
+              <label><input type="radio" name="afterDarkDesignStatus" value="I need help developing it"><span>I need help developing it</span></label>
+            </div>
+          </fieldset>
+
+          <div class="after-dark-summary" aria-live="polite" aria-atomic="true">
+            <span>Current selection</span>
+            <p id="after-dark-selection-summary"></p>
+          </div>
+
+          <div class="after-dark-actions">
+            <button class="button button-primary" type="submit">Build My After Dark Piece <span aria-hidden="true">↗</span></button>
+            <button class="button button-secondary" type="submit">Ask What’s Possible <span aria-hidden="true">↗</span></button>
+          </div>
+        </form>
       </div>
     </section>
 

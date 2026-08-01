@@ -1006,6 +1006,107 @@ reviews, FAQ, footer, navigation and `netlify.toml` are unchanged.
 No deployment, merge, library installation, DNS change or Netlify
 configuration change was performed.
 
+## Final selector and After Dark correction validation — 2026-08-01
+
+### Mobile T-shirt order and regression
+
+- At 320, 360, 390, 430, 768 and every width through the 900 px breakpoint,
+  `.tee-stage` uses the explicit grid order `options`, `visual`, `primary`,
+  `secondary`; `.tee-segments` remains immediately before that stage.
+- The selector contains one `#tee-colour-options` and one
+  `#tee-size-options`; all colour and size controls remain semantic buttons.
+- Colour and size controls have 44 px minimum height. Mobile colour overflow
+  remains contained within its intentional horizontal rail.
+- The complete `productData` block and `updateTeeProduct()` implementation
+  match the pre-task commit. Product image paths, responsive sources, selected
+  colour-per-fit state, selected size, stale-load guard and WhatsApp state are
+  unchanged.
+- `renderColourOptions(productKey)` is called synchronously before image
+  preloading/application, so the 180/240 colour set updates before the visible
+  image replacement.
+- At 1024 and 1440 px, grid areas retain the image-left and product-details-
+  right desktop sequence.
+
+### Approved media
+
+- Production order is exact: lead rack, silver hardware rack, black-on-black
+  net collection, then full red-lit collection.
+- The optional fifth image is not referenced or converted.
+- The four incoming PNG SHA-256 values remain unchanged after processing.
+- `file` verified the eight WebPs and their documented dimensions.
+- HTML intrinsic dimensions, responsive `srcset` candidates and
+  `object-fit: contain` preserve complete informational frames.
+- Visual inspection of the optimized WebPs confirmed stronger local contrast,
+  visible black garment edges, readable hardware/net details and no important
+  cropping. No CSS filter or tint is applied.
+
+### Configurator, WhatsApp and accessibility
+
+- Garment radios offer Regular T-shirt, Oversized T-shirt and Sleeveless vest.
+- Customisation checkboxes offer the six approved options. Combination clears
+  individual techniques; choosing an individual technique clears Combination;
+  the last chosen technique cannot be cleared to an empty state.
+- Size radios are exactly XS through XXL. Quantity is required with integer
+  bounds 1–500; an invalid cleared value restores to 1 on blur. Placement and
+  design-status controls contain exactly the instructed options.
+- Every custom choice surface and CTA has at least 44 px height, with visible
+  keyboard focus. Native radio, checkbox, number and select semantics are
+  retained.
+- The live selection summary and concise WhatsApp builder use the same
+  `FormData` values. Runtime evaluation with Oversized T-shirt, Chains plus
+  Black-net insert, XL, quantity 3, Shoulder and design-help status produced:
+
+```text
+Hello Saturn Cheetah Store,
+
+I want a Saturn After Dark custom piece.
+
+Garment: Oversized T-shirt
+Customisation: Chains, Black-net insert
+Size: XL
+Quantity: 3
+Placement: Shoulder
+Design status: I need help developing it
+
+Please confirm feasibility, pricing and next steps.
+```
+
+- The encoded URL begins `https://wa.me/917780478506?text=`. No unselected
+  option, blank questionnaire field or repeated internal note is included.
+- The enquiry-widget After Dark path calls the same current-state builder.
+
+### Responsive geometry and static checks
+
+- At 320 px the configurator content width is 256 px after padding. Two-column
+  customisation/design tracks and six zero-minimum size tracks remain inside
+  that width; touch height remains 44 px. The same constraints expand safely
+  at 360, 390 and 430 px.
+- The supporting-media rail uses contained horizontal scrolling with
+  `touch-action: pan-x pan-y`; it does not trap vertical scrolling or widen the
+  page. At 768 px the section remains single-column. At 1024 and 1440 px it
+  uses the asymmetric desktop composition within the 1180 px container cap.
+- Calculated page-level horizontal overflow is zero at all seven instructed
+  widths.
+- HTML IDs: 88 checked, 0 duplicates.
+- Local asset references: 34 checked, 0 missing.
+- Required After Dark image count/order: 4/4 exact.
+- JavaScript syntax and `git diff --check`: passed.
+- CSS braces: 491 opening and 491 closing.
+- Protected bulk, story, design, secondary-product, review, FAQ, final-CTA and
+  footer markup matches the pre-task commit. T-shirt content/data is unchanged
+  apart from the required structural ordering wrappers.
+- Existing product images, Netlify configuration and package/dependency state
+  are unchanged.
+
+Browser automation remains unavailable in this dependency-free repository.
+Responsive conclusions use explicit CSS geometry, production-image visual
+inspection, source comparisons, real message-builder runtime evaluation and
+static interaction-path checks. Physical-device confirmation remains a
+release gate and is not claimed here.
+
+No deployment, merge, library installation, DNS change or Netlify
+configuration change was performed.
+
 ## Native WhatsApp enquiry widget validation — 2026-08-01
 
 ### Functional and message checks
