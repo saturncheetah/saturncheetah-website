@@ -787,20 +787,52 @@
     </div>
   </footer>
 
-  <a
-    class="floating-whatsapp"
-    id="floating-whatsapp"
-    href="https://wa.me/917780478506"
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label="Continue your Saturn Cheetah enquiry on WhatsApp"
-    aria-hidden="true"
-    tabindex="-1"
-    data-whatsapp-action="pill"
-  >
-    <span class="whatsapp-dot" aria-hidden="true"></span>
-    <span>WhatsApp</span>
-  </a>
+  <div class="whatsapp-widget" id="whatsapp-widget">
+    <section
+      class="whatsapp-enquiry-panel"
+      id="whatsapp-enquiry-panel"
+      role="dialog"
+      aria-modal="false"
+      aria-labelledby="whatsapp-enquiry-title"
+      hidden
+    >
+      <div class="whatsapp-enquiry-header">
+        <div>
+          <p class="eyebrow">WhatsApp enquiry</p>
+          <h2 id="whatsapp-enquiry-title">Hi! What would you like to customise?</h2>
+        </div>
+        <button class="whatsapp-enquiry-close" type="button" aria-label="Close WhatsApp enquiry options">×</button>
+      </div>
+      <div class="whatsapp-enquiry-options">
+        <a href="https://wa.me/917780478506" target="_blank" rel="noopener noreferrer" data-widget-enquiry="custom-tee">
+          <span>Custom T-shirt</span><span aria-hidden="true">↗</span>
+        </a>
+        <a href="https://wa.me/917780478506" target="_blank" rel="noopener noreferrer" data-widget-enquiry="design">
+          <span>Explore one of our designs</span><span aria-hidden="true">↗</span>
+        </a>
+        <a href="https://wa.me/917780478506" target="_blank" rel="noopener noreferrer" data-widget-enquiry="bulk-tee">
+          <span>Bulk T-shirts &amp; embroidery</span><span aria-hidden="true">↗</span>
+        </a>
+        <a href="https://wa.me/917780478506" target="_blank" rel="noopener noreferrer" data-widget-enquiry="secondary">
+          <span>Caps, mugs, coasters, tote bags or bottles</span><span aria-hidden="true">↗</span>
+        </a>
+        <a href="https://wa.me/917780478506" target="_blank" rel="noopener noreferrer" data-widget-enquiry="general">
+          <span>General enquiry</span><span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </section>
+    <button
+      class="floating-whatsapp"
+      id="floating-whatsapp"
+      type="button"
+      aria-label="Open WhatsApp enquiry options"
+      aria-expanded="false"
+      aria-controls="whatsapp-enquiry-panel"
+    >
+      <span class="whatsapp-dot" aria-hidden="true"></span>
+      <span>WhatsApp</span>
+    </button>
+  </div>
 
   <dialog class="design-modal" id="design-modal" aria-labelledby="design-modal-title">
     <div class="modal-shell">

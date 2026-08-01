@@ -3,7 +3,6 @@
 const WHATSAPP_PHONE = "917780478506";
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 const mobileNavigation = window.matchMedia("(max-width: 900px)");
-const mobilePillViewport = window.matchMedia("(max-width: 767px)");
 
 document.documentElement.classList.add("js-enabled");
 
@@ -11,7 +10,9 @@ const header = document.querySelector(".site-header");
 const hero = document.querySelector(".hero");
 const navToggle = document.querySelector(".nav-toggle");
 const primaryNav = document.querySelector(".primary-nav");
+const whatsappWidget = document.querySelector("#whatsapp-widget");
 const floatingWhatsapp = document.querySelector("#floating-whatsapp");
+const whatsappEnquiryPanel = document.querySelector("#whatsapp-enquiry-panel");
 const productSelect = document.querySelector("#custom-product");
 const customiseForm = document.querySelector("#customise");
 const finalSelection = document.querySelector("#final-selection");
@@ -65,8 +66,6 @@ let selectedProductKey = "180";
 const selectedColourByProduct = { "180": "black", "240": "off-white" };
 let selectedSize = "";
 let teeImageRequest = 0;
-let pillReady = false;
-let pillDelayTimer;
 const visibleWhatsappZones = new Set();
 
 function whatsappUrl(message) {
@@ -95,21 +94,21 @@ function updateHeaderState() {
 }
 
 function refreshFloatingPill() {
-  if (!floatingWhatsapp) return;
+  if (!whatsappWidget || !floatingWhatsapp) return;
 
-  const shouldShow = pillReady
-    && mobilePillViewport.matches
-    && visibleWhatsappZones.size === 0
+  const shouldShow = visibleWhatsappZones.size === 0
     && !primaryNav?.classList.contains("is-open")
     && !document.body.classList.contains("modal-open");
 
-  floatingWhatsapp.classList.toggle("is-visible", shouldShow);
-  floatingWhatsapp.setAttribute("aria-hidden", String(!shouldShow));
+  whatsappWidget.classList.toggle("is-visible", shouldShow);
+  whatsappWidget.toggleAttribute("inert", !shouldShow);
   floatingWhatsapp.tabIndex = shouldShow ? 0 : -1;
+  if (!shouldShow) closeWhatsAppWidget(false);
 }
 
 function setNavigationOpen(isOpen, returnFocus = false) {
   if (!navToggle || !primaryNav) return;
+  if (isOpen) closeWhatsAppWidget(false);
 
   primaryNav.classList.toggle("is-open", isOpen);
   header?.classList.toggle("is-menu-open", isOpen);
@@ -616,6 +615,168 @@ function buildBulkTeeMessage(form) {
   ].join("\n");
 }
 
+function widgetField(label, value = "") {
+  return `${label}: ${String(value || "").trim()}`;
+}
+
+function buildWidgetCustomTeeMessage() {
+  const colour = getSelectedColour();
+  const quantity = document.querySelector("#custom-quantity")?.value || "";
+  const designStatus = document.querySelector("#custom-design-status")?.value || "";
+
+  return [
+    "Hello Saturn Cheetah Store,",
+    "",
+    "I would like to customise a T-shirt.",
+    "",
+    widgetField("GSM / fit", productData[selectedProductKey].shortLabel),
+    widgetField("Colour", colour?.label),
+    widgetField("Size", selectedSize),
+    widgetField("Quantity", quantity),
+    widgetField("Design status", designStatus),
+    "",
+    "Please help me with availability, pricing and the next steps."
+  ].join("\n");
+}
+
+function buildWidgetDesignMessage() {
+  const colour = getSelectedColour();
+  const quantity = document.querySelector("#custom-quantity")?.value || "";
+  const designTitle = document.querySelector(".design-card.is-active h3")?.textContent || "";
+
+  return [
+    "Hello Saturn Cheetah Store,",
+    "",
+    "I would like to customise one of your existing T-shirt designs.",
+    "",
+    widgetField("Design name", designTitle),
+    widgetField("GSM / fit", productData[selectedProductKey].shortLabel),
+    widgetField("Colour", colour?.label),
+    widgetField("Size", selectedSize),
+    widgetField("Quantity", quantity),
+    "",
+    "Please help me continue with this order."
+  ].join("\n");
+}
+
+function buildWidgetBulkMessage() {
+  const form = document.querySelector("#bulk-options-panel");
+  const formData = form ? new FormData(form) : new FormData();
+  const value = name => String(formData.get(name) || "").trim();
+
+  return [
+    "Hello Saturn Cheetah Store,",
+    "",
+    "I am interested in a bulk apparel order.",
+    "",
+    widgetField("Organisation / purpose", value("purpose")),
+    widgetField("Product style", value("productType")),
+    widgetField("Quantity", value("quantity")),
+    widgetField("Colours", value("colours")),
+    widgetField("Adult size breakup", value("sizes")),
+    "Kids size breakup, if required:",
+    widgetField("Branding", value("position")),
+    widgetField("Printing / bulk embroidery / both", value("decoration")),
+    widgetField("Required date", value("requiredDate")),
+    widgetField("Delivery city", value("city")),
+    "",
+    "Please share suitable options and a quotation."
+  ].join("\n");
+}
+
+function buildWidgetSecondaryMessage() {
+  return [
+    "Hello Saturn Cheetah Store,",
+    "",
+    "I am interested in custom products for a bulk requirement.",
+    "",
+    "Product:",
+    "Caps / mugs / coasters / tote bags / bottles / other",
+    "",
+    "Quantity:",
+    "Artwork or logo ready:",
+    "Required date:",
+    "Delivery city:",
+    "",
+    "Please share available options and pricing."
+  ].join("\n");
+}
+
+function buildWidgetGeneralMessage() {
+  return [
+    "Hello Saturn Cheetah Store,",
+    "",
+    "I have a customisation enquiry.",
+    "",
+    "Please help me with the available options."
+  ].join("\n");
+}
+
+function updateWidgetEnquiryLinks() {
+  const builders = {
+    "custom-tee": buildWidgetCustomTeeMessage,
+    design: buildWidgetDesignMessage,
+    "bulk-tee": buildWidgetBulkMessage,
+    secondary: buildWidgetSecondaryMessage,
+    general: buildWidgetGeneralMessage
+  };
+
+  document.querySelectorAll("[data-widget-enquiry]").forEach(link => {
+    const buildMessage = builders[link.dataset.widgetEnquiry];
+    if (buildMessage) link.href = whatsappUrl(buildMessage());
+  });
+}
+
+function closeWhatsAppWidget(returnFocus = true) {
+  if (!floatingWhatsapp || !whatsappEnquiryPanel || whatsappEnquiryPanel.hidden) return;
+  whatsappEnquiryPanel.hidden = true;
+  floatingWhatsapp.setAttribute("aria-expanded", "false");
+  document.body.classList.remove("whatsapp-widget-open");
+  if (returnFocus) floatingWhatsapp.focus();
+}
+
+function openWhatsAppWidget() {
+  if (!floatingWhatsapp || !whatsappEnquiryPanel) return;
+  setNavigationOpen(false);
+  updateWidgetEnquiryLinks();
+  whatsappEnquiryPanel.hidden = false;
+  floatingWhatsapp.setAttribute("aria-expanded", "true");
+  document.body.classList.add("whatsapp-widget-open");
+  whatsappEnquiryPanel.querySelector(".whatsapp-enquiry-close")?.focus();
+}
+
+function setupWhatsAppWidget() {
+  if (!floatingWhatsapp || !whatsappEnquiryPanel) return;
+
+  floatingWhatsapp.addEventListener("click", () => {
+    if (floatingWhatsapp.getAttribute("aria-expanded") === "true") {
+      closeWhatsAppWidget();
+    } else {
+      openWhatsAppWidget();
+    }
+  });
+
+  whatsappEnquiryPanel.querySelector(".whatsapp-enquiry-close")?.addEventListener("click", () => {
+    closeWhatsAppWidget();
+  });
+
+  whatsappEnquiryPanel.addEventListener("click", event => {
+    if (event.target.closest("[data-widget-enquiry]")) closeWhatsAppWidget(false);
+  });
+
+  document.addEventListener("click", event => {
+    if (whatsappEnquiryPanel.hidden || whatsappWidget?.contains(event.target)) return;
+    closeWhatsAppWidget();
+  });
+
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape" && !whatsappEnquiryPanel.hidden) {
+      event.preventDefault();
+      closeWhatsAppWidget();
+    }
+  });
+}
+
 function updateWhatsAppLinks() {
   document.querySelectorAll("[data-whatsapp-action='print']").forEach(link => {
     link.href = whatsappUrl(buildProductMessage("print"));
@@ -805,23 +966,10 @@ function setupDesignGallery() {
 }
 
 function setupFloatingPill() {
-  if (!floatingWhatsapp || !hero || !("IntersectionObserver" in window)) return;
-
-  const heroObserver = new IntersectionObserver(entries => {
-    const entry = entries[0];
-    const passedHero = !entry.isIntersecting && entry.boundingClientRect.bottom < 0;
-
-    window.clearTimeout(pillDelayTimer);
-    pillReady = false;
-    refreshFloatingPill();
-
-    if (passedHero) {
-      pillDelayTimer = window.setTimeout(() => {
-        pillReady = true;
-        refreshFloatingPill();
-      }, 700);
-    }
-  }, { threshold: 0 });
+  if (!floatingWhatsapp || !("IntersectionObserver" in window)) {
+    whatsappWidget?.classList.add("is-visible");
+    return;
+  }
 
   const zoneObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
@@ -834,10 +982,9 @@ function setupFloatingPill() {
     refreshFloatingPill();
   }, { threshold: 0.08 });
 
-  heroObserver.observe(hero);
-  document.querySelectorAll("[data-whatsapp-zone]").forEach(zone => zoneObserver.observe(zone));
+  document.querySelectorAll("[data-whatsapp-zone], .tee-selector").forEach(zone => zoneObserver.observe(zone));
 
-  mobilePillViewport.addEventListener("change", refreshFloatingPill);
+  refreshFloatingPill();
 }
 
 function setupGalleryModal() {
@@ -964,6 +1111,7 @@ setupTabs();
 setupStorySwipe();
 setupTeeSelector();
 setupWhatsAppFlow();
+setupWhatsAppWidget();
 setupBulkTeeFlow();
 setupReviewCarousel();
 setupDesignGallery();

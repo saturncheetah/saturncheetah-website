@@ -512,3 +512,36 @@ zoom are used.
 No hero, connected-story, design-gallery, secondary-product, review, FAQ,
 footer, navigation or Netlify-configuration behavior was changed. No library
 was installed and no deployment or merge occurred.
+
+## Native WhatsApp enquiry widget — 2026-08-01
+
+The previous delayed mobile WhatsApp link is now a dependency-free enquiry
+widget built with the existing HTML, CSS and JavaScript. Its semantic button
+opens a compact black, cream and orange panel containing five WhatsApp enquiry
+paths: custom T-shirt, an existing design, bulk T-shirts and embroidery,
+secondary custom products, and a general enquiry. Each path generates its own
+message for `917780478506` and opens externally with `noopener noreferrer`.
+
+The custom T-shirt and design paths reuse the current GSM/fit, colour, adult
+size and quantity selection. The design path also uses the active gallery
+title. The bulk path reuses any values already entered in the existing bulk
+form. Existing product, design, secondary-product and bulk-form WhatsApp links
+and their message builders remain unchanged.
+
+On desktop, the panel is capped at 340 px and opens above the bottom-right
+button. On mobile it behaves as a compact, internally scrollable floating
+panel with a viewport-height cap and safe-area bottom/right offsets. The
+existing intersection guards now also include the full T-shirt selector, so
+the widget is removed from interaction while product controls, WhatsApp zones,
+the final CTA or footer are visible. Opening mobile navigation closes the
+widget, and opening the widget closes navigation.
+
+The trigger exposes `aria-expanded` and `aria-controls`; the panel has an
+accessible title and an explicit 44 px close control. Opening moves focus to
+the close button. Escape, outside click and the close control dismiss the
+panel, with focus restored to the trigger where appropriate. All controls
+meet the 44 px touch-target minimum, visible focus styling is provided, and
+the site-wide reduced-motion rule suppresses transitions.
+
+No protected content, product data, colour image, Netlify configuration or
+dependency changed. No deployment or merge occurred.

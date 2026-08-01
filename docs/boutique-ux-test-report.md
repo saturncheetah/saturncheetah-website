@@ -1005,3 +1005,110 @@ reviews, FAQ, footer, navigation and `netlify.toml` are unchanged.
 
 No deployment, merge, library installation, DNS change or Netlify
 configuration change was performed.
+
+## Native WhatsApp enquiry widget validation — 2026-08-01
+
+### Functional and message checks
+
+- WhatsApp destination: all five widget URLs begin with
+  `https://wa.me/917780478506?text=`.
+- Runtime evaluation of the real message builders confirmed five distinct,
+  correctly encoded message bodies with the requested openings, fields and
+  closing prompts.
+- The custom T-shirt builder populated the current 180 GSM Regular Fit, Black
+  colour, quantity and design status while leaving the intentionally
+  unselected adult size blank.
+- The design builder populated the active `Echo Silhouette` title plus the
+  current T-shirt state in the validation fixture.
+- The bulk builder reads existing bulk-form values without changing or
+  submitting that form. The secondary-product and general templates retain
+  their instructed blank fields.
+- Existing `buildCustomMessage`, `buildProductMessage`, `buildDesignMessage`,
+  `buildBulkMessage` and `buildBulkTeeMessage` functions remain present and
+  continue to serve their original links.
+- Every new external WhatsApp link uses `target="_blank"` with
+  `rel="noopener noreferrer"`.
+
+Example custom T-shirt widget message:
+
+```text
+Hello Saturn Cheetah Store,
+
+I would like to customise a T-shirt.
+
+GSM / fit: 180 GSM Regular Fit
+Colour: Black
+Size:
+Quantity: 2
+Design status: I have a ready design
+
+Please help me with availability, pricing and the next steps.
+```
+
+Example design widget message:
+
+```text
+Hello Saturn Cheetah Store,
+
+I would like to customise one of your existing T-shirt designs.
+
+Design name: Echo Silhouette
+GSM / fit: 180 GSM Regular Fit
+Colour: Black
+Size:
+Quantity: 2
+
+Please help me continue with this order.
+```
+
+### Interaction and accessibility
+
+- The trigger is a native button labelled “Open WhatsApp enquiry options”
+  with `aria-expanded="false"` and a valid `aria-controls` relationship.
+- The non-modal panel uses `role="dialog"`, `aria-modal="false"` and an
+  `aria-labelledby` relationship to its visible heading.
+- Open moves keyboard focus into the panel. Close button, Escape and outside
+  click close it; explicit close and outside/Escape paths return focus to the
+  trigger.
+- Mobile navigation and the widget close one another, preventing simultaneous
+  open states.
+- Trigger, close control and all five enquiry options have minimum dimensions
+  of at least 44 px and explicit `:focus-visible` outlines.
+- No automatic opening or large animation was added. The existing
+  `prefers-reduced-motion: reduce` override reduces all widget transitions to
+  effectively zero.
+
+### Responsive geometry and overlap protection
+
+At 320, 360, 390 and 430 px, the mobile panel width resolves to the viewport
+minus 28 px: 292, 332, 362 and 402 px respectively. It remains 14 px from each
+side at its widest, and its height is capped below the viewport with internal
+vertical scrolling. At 768 px and above, it is capped at 340 px. At 1024 and
+1440 px it therefore remains a compact panel above the trigger rather than a
+page overlay. Safe-area right and bottom insets are included in the fixed
+position.
+
+The existing observed WhatsApp zones cover the bulk module, design gallery,
+customisation form, secondary products, final CTA and footer. The selector is
+now observed explicitly as well. The trigger and any open panel become inert
+and hidden when these regions intersect, so they cannot cover colour, size,
+quantity, CTA or footer controls. Panel width uses viewport-relative caps and
+all inner tracks are width-constrained; calculated page-level horizontal
+overflow is zero at 320, 360, 390, 430, 768, 1024 and 1440 px.
+
+### Static checks and limitations
+
+- `node --check assets/js/site.js`: passed.
+- `git diff --check`: passed.
+- HTML IDs: checked with no duplicates.
+- CSS opening/closing brace counts: equal.
+- New ID references, five enquiry keys and safe link attributes: passed.
+- Protected product data/image paths and Netlify configuration: unchanged.
+
+No browser automation is installed in this dependency-free repository.
+Responsive conclusions therefore use explicit CSS geometry, real builder
+runtime evaluation and static interaction-path inspection; physical-device
+confirmation remains a release gate and is not claimed here.
+
+No deployment, merge, dependency installation, DNS change or Netlify
+configuration change was performed.
