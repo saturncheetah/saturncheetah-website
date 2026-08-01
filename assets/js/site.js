@@ -712,12 +712,36 @@ function buildWidgetGeneralMessage() {
   ].join("\n");
 }
 
+function buildAfterDarkMessage() {
+  return [
+    "Hello Saturn Cheetah Store,",
+    "",
+    "I’m interested in a Saturn After Dark custom piece.",
+    "",
+    "Garment:",
+    "Regular T-shirt / Oversized T-shirt / Sleeveless vest",
+    "",
+    "Customisation:",
+    "Silver rings or eyelets / Chains / Black-net insert / Distressed text / Acid-effect text / Combination",
+    "",
+    "Size:",
+    "Quantity:",
+    "Placement idea:",
+    "Design or reference ready:",
+    "Required date:",
+    "Delivery city:",
+    "",
+    "Please confirm feasibility, estimated pricing and next steps."
+  ].join("\n");
+}
+
 function updateWidgetEnquiryLinks() {
   const builders = {
     "custom-tee": buildWidgetCustomTeeMessage,
     design: buildWidgetDesignMessage,
     "bulk-tee": buildWidgetBulkMessage,
     secondary: buildWidgetSecondaryMessage,
+    "after-dark": buildAfterDarkMessage,
     general: buildWidgetGeneralMessage
   };
 
@@ -792,6 +816,10 @@ function updateWhatsAppLinks() {
 
   document.querySelectorAll("[data-design-title]").forEach(link => {
     link.href = whatsappUrl(buildDesignMessage(link.dataset.designTitle));
+  });
+
+  document.querySelectorAll("[data-after-dark-action]").forEach(link => {
+    link.href = whatsappUrl(buildAfterDarkMessage());
   });
 }
 
@@ -1069,7 +1097,7 @@ function setupGalleryModal() {
 
 function setupSectionReveals() {
   const revealItems = document.querySelectorAll(
-    ".section-heading, .tee-selector, .tab-module, .secondary-scroller, .faq-list, .final-cta-inner"
+    ".section-heading, .tee-selector, .tab-module, .after-dark-intro, .after-dark-lead-visual, .after-dark-options, .after-dark-supporting, .secondary-scroller, .faq-list, .final-cta-inner"
   );
 
   revealItems.forEach(item => item.classList.add("reveal-item"));

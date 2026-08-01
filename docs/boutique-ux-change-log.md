@@ -545,3 +545,49 @@ the site-wide reduced-motion rule suppresses transitions.
 
 No protected content, product data, colour image, Netlify configuration or
 dependency changed. No deployment or merge occurred.
+
+## Saturn After Dark collection — 2026-08-01
+
+Added one contained premium sub-collection between Explore Our Designs and
+More Ways to Customise. The section positions Saturn After Dark as made-to-
+order inspiration for pure-black regular-fit and oversized T-shirts plus
+sleeveless vests. Public options are limited to silver rings, eyelets and
+pressings, fixed or detachable chains, securely stitched black-net inserts,
+distressed text and acid-effect text after feasibility review.
+
+The desktop layout is a compact two-column composition with live copy and
+actions beside the wide rack visual. Four short customisation cards and two
+small supporting detail cards complete the section without becoming a long
+gallery. At 900 px and below the section becomes one column; at 767 px and
+below the lead switches to the portrait collection, while options and support
+cards become native horizontal swipe rails that preserve vertical scrolling.
+All informational media use complete, uncropped `object-fit: contain`
+presentation.
+
+Imported eight approved WebP derivatives into `assets/images/after-dark/`:
+
+| Asset | Dimensions |
+| --- | --- |
+| `after-dark-wide-rack.webp` | 1672×941 |
+| `after-dark-wide-rack-mobile.webp` | 960×540 |
+| `after-dark-portrait-collection.webp` | 1086×1448 |
+| `after-dark-portrait-collection-mobile.webp` | 960×1280 |
+| `after-dark-detail-tee-vest.webp` | 1123×1401 |
+| `after-dark-detail-tee-vest-mobile.webp` | 960×1198 |
+| `after-dark-full-collection.webp` | 1024×1536 |
+| `after-dark-full-collection-mobile.webp` | 960×1440 |
+
+Both section CTAs and the added Saturn After Dark enquiry-widget path use a
+dedicated feasibility-first WhatsApp message for `917780478506`. No price,
+stock or delivery promise is made. The previous enquiry paths and all existing
+product-specific WhatsApp builders remain unchanged.
+
+The full obsidian, oxblood, burgundy, bone and antique-silver treatment is
+scoped to `.after-dark-section`; orange remains the primary CTA. Wider-site
+continuity is deliberately restrained to thin silver dividers on selected
+dark sections, antique-silver border tints on selected surfaces and a small
+burgundy keyboard-focus halo. The established black, cream, orange and neon-
+pink identity remains dominant, and no protected section became gothic.
+
+No protected content, 180/240 product data or assets, Netlify configuration
+or dependency changed. No deployment or merge occurred.

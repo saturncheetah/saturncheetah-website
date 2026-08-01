@@ -1112,3 +1112,102 @@ confirmation remains a release gate and is not claimed here.
 
 No deployment, merge, dependency installation, DNS change or Netlify
 configuration change was performed.
+
+## Saturn After Dark validation — 2026-08-01
+
+### Asset and content checks
+
+- All eight production WebPs are byte-identical to their approved pack
+  sources; SHA-256 checksums were captured during import.
+- `file` verified WebP encoding and the expected 1672×941, 960×540,
+  1086×1448, 960×1280, 1123×1401, 960×1198, 1024×1536 and 960×1440
+  dimensions.
+- Desktop lead role uses `after-dark-wide-rack.webp`; the mobile lead switches
+  to the portrait collection. Detail and full-collection cards use responsive
+  desktop/mobile source pairs.
+- Visual inspection confirmed complete garment silhouettes and visible
+  hardware/net details. CSS uses intrinsic dimensions and `object-fit:
+  contain`; no production detail is cropped.
+- The section is positioned after `#direction` and before `#more-custom`.
+- Public copy contains only the approved garments and customisations, clearly
+  labels visuals as concepts, and states that every piece is made to order and
+  subject to feasibility.
+- Public HTML contains none of the excluded garment terms.
+
+### WhatsApp and accessibility checks
+
+- Runtime evaluation of `buildAfterDarkMessage()` produced the exact required
+  enquiry template and a URL beginning
+  `https://wa.me/917780478506?text=`.
+- Both section CTAs and the enquiry-widget option use that builder. Every new
+  external link uses `target="_blank"` and `rel="noopener noreferrer"`.
+- CTAs have 48 px minimum height. The option rail is keyboard focusable and
+  has an explicit accessible label and visible focus state.
+- Heading association, garment-list label, informative alternative text and
+  concept/feasibility captions are present.
+- Reveal motion uses the existing progressive system. Card lift is limited to
+  hover-capable devices, and the existing reduced-motion override suppresses
+  transitions.
+
+Example message:
+
+```text
+Hello Saturn Cheetah Store,
+
+I’m interested in a Saturn After Dark custom piece.
+
+Garment:
+Regular T-shirt / Oversized T-shirt / Sleeveless vest
+
+Customisation:
+Silver rings or eyelets / Chains / Black-net insert / Distressed text / Acid-effect text / Combination
+
+Size:
+Quantity:
+Placement idea:
+Design or reference ready:
+Required date:
+Delivery city:
+
+Please confirm feasibility, estimated pricing and next steps.
+```
+
+### Responsive geometry
+
+At 320, 360, 390 and 430 px, the 16 px site gutters yield content widths of
+288, 328, 358 and 398 px. The lead media uses the portrait source at those
+widths and remains fully visible at its intrinsic 3:4 ratio. Option cards are
+capped at `min(78vw, 286px)` and support cards at `min(76vw, 300px)`; both
+rails include gutter padding, `min-width: 0`, contained overscroll and
+`touch-action: pan-x pan-y`, so horizontal swiping does not enlarge the page
+or trap vertical scrolling.
+
+At 768 px the layout is a single column with the compact wide lead. At 1024
+and 1440 px it uses the instructed two-column lead composition within the
+existing 1180 px container cap. Four option cards use equal zero-minimum grid
+tracks and the two supporting cards remain compact. Calculated page-level
+horizontal overflow is zero at all seven requested widths.
+
+### Regression and static checks
+
+- JavaScript syntax: passed with `node --check assets/js/site.js`.
+- HTML IDs: 83 checked, 0 duplicates.
+- Local image references: 33 checked, 0 missing.
+- CSS braces: 445 opening and 445 closing.
+- `git diff --check`: passed.
+- Protected section markup for hero, selector, bulk, connected story, Explore
+  Our Designs, secondary products, reviews, FAQ and final CTA matches the
+  pre-task commit. Footer markup is unchanged.
+- The complete `productData` block is unchanged. Existing WhatsApp builders
+  are retained; only the new After Dark builder/path was added.
+- Netlify configuration, package/dependency state and existing media assets
+  are unchanged.
+
+Browser automation is not installed in this dependency-free repository.
+Responsive conclusions use explicit CSS geometry, real message-builder
+runtime evaluation, source-dimension checks, local-reference checks and
+static interaction inspection. Physical phone/desktop confirmation remains a
+release gate and is not claimed here.
+
+No deployment, merge, library installation, DNS change or Netlify
+configuration change was performed.
