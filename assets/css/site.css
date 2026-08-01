@@ -4177,3 +4177,68 @@ html:not(.js-enabled) .story-panel[hidden] {
     width: 100%;
   }
 }
+
+/* Keep After Dark configurator option cards content-sized. */
+.after-dark-detail-grid,
+.after-dark-image-choices {
+  align-items: start;
+  grid-auto-rows: max-content;
+}
+
+.after-dark-detail-card,
+.after-dark-image-choices label,
+.after-dark-acid-choice {
+  height: auto;
+  min-height: 0;
+  align-self: start;
+}
+
+.after-dark-style-choices,
+.after-dark-details-choices {
+  grid-template-columns: repeat(auto-fit, minmax(150px, 180px));
+  justify-content: start;
+}
+
+.after-dark-image-choices label > span,
+.after-dark-acid-choice > span {
+  height: auto;
+  min-height: 0;
+  align-content: start;
+}
+
+.after-dark-image-choices img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+}
+
+.after-dark-image-choices b {
+  align-self: start;
+}
+
+@media (max-width: 768px) {
+  .after-dark-style-choices,
+  .after-dark-details-choices {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    justify-content: stretch;
+  }
+
+  .after-dark-style-choices label:last-child,
+  .after-dark-details-choices label:last-child {
+    grid-column: auto;
+  }
+
+  .after-dark-image-choices label > span {
+    display: grid;
+    grid-template-rows: auto auto;
+  }
+
+  .after-dark-image-choices img,
+  .after-dark-image-choices label:last-child img {
+    width: min(100%, 140px);
+    height: auto;
+    max-height: none;
+    justify-self: center;
+  }
+}
