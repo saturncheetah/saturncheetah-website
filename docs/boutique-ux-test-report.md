@@ -1006,6 +1006,77 @@ reviews, FAQ, footer, navigation and `netlify.toml` are unchanged.
 No deployment, merge, library installation, DNS change or Netlify
 configuration change was performed.
 
+## Phase 1 stable-journey declutter validation — 2026-08-05
+
+Baseline: `b2059c3219d7637d3246671b83ced6410cf51904`
+
+### Protected scope
+
+- `assets/js/site.js` is byte-identical to the baseline; SHA-256:
+  `64a9ef344cb01b8955762d25ba602dae461824faf76a9cb099567b0ecb2687c2`.
+- All Classic, design, bulk, widget and After Dark message builders therefore
+  remain unchanged.
+- HTML image and `srcset` references match the baseline in content and order.
+- Review excerpts and reviewer order match the baseline.
+- Page section order matches the baseline.
+- `assets/images/` and `netlify.toml` have no diff.
+- `WHATSAPP_PHONE` remains `917780478506`.
+
+Result: **pass**.
+
+### Structure and accessibility
+
+- Static HTML IDs: 87; duplicate IDs: 0.
+- Missing `for`, `aria-controls`, `aria-labelledby` or `aria-describedby`
+  targets: 0.
+- Missing internal anchor targets: 0.
+- Rendered images: 32; missing intrinsic dimensions: 0.
+- Classic and After Dark remain separate `#customise` and
+  `#after-dark-configurator` forms with their original field names.
+- Classic optional details use a native disclosure without an `open`
+  attribute and are collapsed by default.
+- `#bulk-options-panel` retains `hidden` and its accessible toggle.
+- Existing mobile-menu semantics, focus handling and Escape behavior remain
+  unchanged because JavaScript was not modified.
+
+Result: **pass**.
+
+### Syntax and CSS integrity
+
+- `node --check assets/js/site.js`: passed.
+- `git diff --check`: passed.
+- CSS braces: 706 opening and 706 closing.
+- The Phase 1 diff introduces no `backdrop-filter`, decorative blob,
+  `@keyframes`, animation rule or gradient.
+- Existing minimum 44 px touch-target rules remain intact.
+
+Result: **pass**.
+
+### Static responsive-rule audit
+
+| Width | Major spacing | Layout/overflow assessment |
+| ---: | ---: | --- |
+| 320 px | 60 px | Single-column forms; bounded horizontal galleries; pass |
+| 360 px | 60 px | Single-column forms; bounded horizontal galleries; pass |
+| 390 px | 60 px | Single-column forms; bounded horizontal galleries; pass |
+| 430 px | 60 px | Compact tabs and full-width primary actions; pass |
+| 768 px | responsive desktop token | Zero-minimum grids and bounded rails; pass |
+| 1024 px | responsive desktop token | Existing contained multi-column layout; pass |
+| 1440 px | responsive desktop token | Existing 1180 px container cap; pass |
+| 1920 px | responsive desktop token | Existing 1180 px container cap; pass |
+
+Intentional design, secondary-product, review and After Dark rails own their
+horizontal scrolling. Other layouts retain zero-minimum grid tracks, bounded
+containers and responsive media; no new source rule can create page-level
+horizontal overflow.
+
+Result: **pass for static responsive rules**. Physical browser measurement,
+touch swiping and WhatsApp application handoff remain release checks and are
+not claimed by this source-only audit.
+
+No glassmorphism, new motion, asset change, dependency installation, Netlify
+change or deployment was performed.
+
 ## Final approved Saturn After Dark validation — 2026-08-01
 
 Validated the simplified section against the supplied final prompt at 320,

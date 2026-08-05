@@ -707,3 +707,47 @@ unchanged inside the ignored instruction pack.
 
 No homepage section outside Saturn After Dark, product data, Netlify setting
 or dependency was changed. Nothing was deployed.
+
+## Phase 1 stable-journey declutter — 2026-08-05
+
+Baseline: `b2059c3219d7637d3246671b83ced6410cf51904`
+
+This phase reduces repetition and vertical density without introducing
+glassmorphism, decorative blobs, backdrop filters, new motion or new
+dependencies.
+
+Navigation now exposes only T-shirts, Designs, Process, Bulk and WhatsApp.
+The links retain existing section anchors and mobile-menu behavior. The
+duplicate footer WhatsApp link was removed because the required navigation,
+final action and floating enquiry widget remain.
+
+Visible copy was shortened without changing product meaning or factual
+claims. Removed repetition includes the hero WhatsApp instruction, duplicate
+bulk qualification paragraphs, repeated design-to-print explanations, one
+duplicated After Dark feasibility note, repeated secondary-card category
+labels and decorative review/final-CTA eyebrow copy. The printing video and
+finished-piece text still explicitly state that they are not confirmed as the
+same production sequence.
+
+Classic optional fields remain in one native disclosure, now labelled “Add
+details (optional)” and collapsed by default. The existing optional-field
+message behavior is unchanged. The advanced bulk form remains behind its
+existing collapsed “View bulk options” control; all bulk styles, GSM/fabric/
+colour availability, printing, bulk-only embroidery and bulk kids-size facts
+remain visible in the summary and chips.
+
+All five secondary products and their product-specific links remain. Their
+repeated “Bulk & branding” card labels were removed and “Ask on WhatsApp” was
+shortened to “Enquire”; the existing `data-bulk-product` values and generated
+messages are unchanged.
+
+CSS spacing adjustments reduce heading margins, story media height, card
+padding, review height, After Dark configurator gaps and final-CTA spacing.
+Mobile major-section spacing is 60 px, within the requested 56–72 px target;
+internal gaps are generally 16–24 px and touch targets retain their existing
+44 px minimum.
+
+Changed production files: `index.html` and `assets/css/site.css`. The two UX
+reports were updated. JavaScript, product data, approved assets, review text,
+section order, dependencies and `netlify.toml` are unchanged. No deployment
+occurred.

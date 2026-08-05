@@ -4384,3 +4384,147 @@ html:not(.js-enabled) .story-panel[hidden] {
     justify-self: center;
   }
 }
+
+/* Phase 1 declutter: compact the stable presentation without a new visual system. */
+.section-heading {
+  margin-bottom: clamp(24px, 3vw, 34px);
+}
+
+.bulk-tee-overview,
+.story-copy,
+.after-dark-configurator {
+  padding: clamp(20px, 3vw, 32px);
+}
+
+.story-stage,
+.story-panel {
+  min-height: 410px;
+}
+
+.story-media img,
+.story-media video {
+  height: 370px;
+}
+
+.story-copy > p:last-child {
+  margin-top: 12px;
+}
+
+.secondary-copy h3 {
+  margin-top: 0;
+}
+
+.review-card {
+  min-height: 230px;
+  padding: clamp(18px, 2.4vw, 24px);
+}
+
+.review-card blockquote {
+  margin-block: 16px;
+}
+
+.after-dark-configurator-heading {
+  margin-bottom: 18px;
+}
+
+.after-dark-detail-grid {
+  gap: 12px;
+}
+
+.after-dark-detail-card {
+  padding: 15px;
+}
+
+.final-cta-inner {
+  gap: 24px;
+}
+
+@media (max-width: 767px) {
+  :root {
+    --section-space: 60px;
+  }
+
+  .section-heading {
+    margin-bottom: 24px;
+  }
+
+  .hero-content {
+    padding-top: calc(var(--mobile-header-height) + 24px);
+    padding-bottom: 20px;
+  }
+
+  .hero-picture {
+    margin-top: 16px;
+  }
+
+  .tee-options,
+  .story-copy {
+    padding: 20px 18px;
+  }
+
+  .tee-details-primary {
+    padding-top: 22px;
+  }
+
+  .tee-details-secondary {
+    padding-bottom: 24px;
+  }
+
+  .story-stage,
+  .story-panel {
+    min-height: 0;
+  }
+
+  .story-media img,
+  .story-media video {
+    height: min(78vw, 300px);
+  }
+
+  .story-action {
+    padding: 0 18px 20px;
+  }
+
+  .bulk-tee-section,
+  .reviews-section,
+  .after-dark-section {
+    padding-block: 56px;
+  }
+
+  .bulk-tee-overview {
+    gap: 16px;
+    padding: 18px;
+  }
+
+  .after-dark-shell {
+    gap: 20px;
+  }
+
+  .after-dark-configurator {
+    padding: 16px 14px;
+  }
+
+  .after-dark-configurator-heading {
+    margin-bottom: 16px;
+  }
+
+  .after-dark-detail-grid {
+    margin-top: 16px;
+  }
+
+  .after-dark-detail-card {
+    padding: 12px;
+  }
+
+  .secondary-card .secondary-copy {
+    min-height: 104px;
+  }
+
+  .review-card {
+    min-height: 220px;
+    padding: 18px;
+  }
+
+  .final-cta-inner {
+    gap: 20px;
+  }
+}
