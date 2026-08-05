@@ -63,6 +63,22 @@ Use equivalent project tokens if they already exist.
 - Use real HTML for all meaningful text.
 - Do not treat small generated text inside scene artwork as business information.
 
+## Minified assets (added 2026-08-05)
+
+`index.html` now loads `assets/css/site.min.css` and `assets/js/site.min.js`,
+not the unminified `site.css`/`site.js`. Those unminified files remain the
+source of truth for editing — after changing either one, regenerate its
+minified counterpart before committing:
+
+```
+npx --yes clean-css-cli -O2 -o assets/css/site.min.css assets/css/site.css
+npx --yes terser assets/js/site.js --compress --mangle --format comments=false -o assets/js/site.min.js
+```
+
+No `package.json` or build step was added to the repo — Netlify still just
+serves static files (`publish = "."`, no `[build] command`), unchanged from
+before. This is a local, manual regeneration step only.
+
 ## Definition of done
 
 - Navigation is clear on desktop, tablet, and mobile.
