@@ -171,6 +171,13 @@ function setupNavigation() {
   });
 }
 
+function setupExperienceOrder() {
+  const teeSection = document.querySelector("#tees");
+  const afterDarkSection = document.querySelector("#after-dark");
+
+  if (teeSection && afterDarkSection) teeSection.after(afterDarkSection);
+}
+
 function setupActiveNavigation() {
   if (!("IntersectionObserver" in window)) return;
 
@@ -1335,21 +1342,35 @@ function setupGalleryModal() {
   const modalImage = document.querySelector("#modal-image");
   const modalCaption = document.querySelector("#modal-caption");
   const modalCount = document.querySelector("#modal-count");
+  const viewOptions = document.querySelector("#modal-view-options");
+  const viewButtons = [...viewOptions?.querySelectorAll("[data-modal-view]") || []];
   const galleryItems = [...document.querySelectorAll("[data-gallery-index]")];
   let activeIndex = 0;
+  let activeView = "editorial";
   let previousFocus;
 
   if (!modal || !modalImage || galleryItems.length === 0) return;
 
+  function renderView() {
+    const item = galleryItems[activeIndex];
+    const sourceImage = item.querySelector("img");
+    const showDetail = activeView === "detail" && item.dataset.detailSrc;
+
+    modalImage.src = showDetail ? item.dataset.detailSrc : sourceImage.src;
+    modalImage.alt = showDetail ? item.dataset.detailAlt : sourceImage.alt;
+    modalImage.width = showDetail ? 720 : Number(sourceImage.getAttribute("width"));
+    modalImage.height = showDetail ? 720 : Number(sourceImage.getAttribute("height"));
+    viewButtons.forEach(button => button.setAttribute("aria-pressed", String(button.dataset.modalView === activeView)));
+  }
+
   function renderModal(index) {
     activeIndex = (index + galleryItems.length) % galleryItems.length;
-    const sourceImage = galleryItems[activeIndex].querySelector("img");
-    const caption = galleryItems[activeIndex].querySelector("h3")?.textContent || "Design preview";
+    const item = galleryItems[activeIndex];
+    const caption = item.querySelector("h3")?.textContent || "Design preview";
 
-    modalImage.src = sourceImage.src;
-    modalImage.alt = sourceImage.alt;
-    modalImage.width = Number(sourceImage.getAttribute("width"));
-    modalImage.height = Number(sourceImage.getAttribute("height"));
+    activeView = "editorial";
+    viewOptions.hidden = !item.dataset.detailSrc;
+    renderView();
     modalCaption.textContent = caption;
     modalCount.textContent = `${activeIndex + 1} of ${galleryItems.length}`;
   }
@@ -1388,6 +1409,10 @@ function setupGalleryModal() {
   modal.querySelector(".modal-close")?.addEventListener("click", closeModal);
   modal.querySelector("[data-gallery-previous]")?.addEventListener("click", () => renderModal(activeIndex - 1));
   modal.querySelector("[data-gallery-next]")?.addEventListener("click", () => renderModal(activeIndex + 1));
+  viewButtons.forEach(button => button.addEventListener("click", () => {
+    activeView = button.dataset.modalView;
+    renderView();
+  }));
 
   modal.addEventListener("click", event => {
     if (event.target === modal) closeModal();
@@ -1448,6 +1473,7 @@ function respectReducedMotion() {
   document.querySelectorAll("video").forEach(video => video.pause());
 }
 
+setupExperienceOrder();
 setupNavigation();
 setupActiveNavigation();
 setupHeroEntrance();

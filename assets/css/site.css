@@ -955,7 +955,7 @@ h3 {
 .design-preview {
   display: grid;
   width: 100%;
-  aspect-ratio: 1;
+  aspect-ratio: 4 / 5;
   place-items: center;
   overflow: hidden;
   padding: 8px;
@@ -971,9 +971,22 @@ h3 {
   min-height: 0;
   max-width: 100%;
   max-height: 100%;
-  object-fit: contain;
+  object-fit: cover;
   object-position: center;
   transform: none;
+}
+
+.design-card-kicker {
+  margin: 0 0 5px;
+  color: #9a3d15;
+  font-size: 0.62rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.design-card-custom-story {
+  border-color: rgb(255 135 56 / 52%);
 }
 
 .design-card[data-tee-tone="black"] .design-preview {
@@ -2813,6 +2826,34 @@ html:not(.js-enabled) .story-panel[hidden] {
   font-size: 0.86rem;
 }
 
+.modal-view-options {
+  display: flex;
+  width: fit-content;
+  gap: 6px;
+  margin: 0 auto 14px;
+  padding: 5px;
+  border: 1px solid var(--line-dark);
+  border-radius: 999px;
+  background: rgb(255 247 237 / 5%);
+}
+
+.modal-view-options button {
+  min-height: 42px;
+  padding: 8px 15px;
+  border: 0;
+  border-radius: 999px;
+  color: var(--text-muted);
+  background: transparent;
+  font-size: 0.78rem;
+  font-weight: 850;
+  cursor: pointer;
+}
+
+.modal-view-options button[aria-pressed="true"] {
+  color: var(--ink);
+  background: var(--orange);
+}
+
 .modal-controls {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
@@ -2911,7 +2952,7 @@ html:not(.js-enabled) .story-panel[hidden] {
 @media (min-width: 1200px) {
   .design-gallery {
     display: grid;
-    grid-template-columns: repeat(5, minmax(190px, 240px));
+    grid-template-columns: repeat(6, minmax(0, 1fr));
     justify-content: space-between;
     overflow: visible;
     padding-bottom: 14px;
