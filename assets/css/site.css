@@ -3712,6 +3712,202 @@ html:not(.js-enabled) .story-panel[hidden] {
   }
 }
 
+/* After Dark configurator: one rhythm across groups with different choice counts. */
+.after-dark-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.after-dark-style-card,
+.after-dark-details-card,
+.after-dark-finish-card {
+  grid-column: 1 / -1;
+}
+
+.after-dark-size-card,
+.after-dark-quantity-card {
+  min-width: 0;
+}
+
+.after-dark-style-choices {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.after-dark-details-choices {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.after-dark-style-choices,
+.after-dark-details-choices,
+.after-dark-finish-choices {
+  width: 100%;
+  justify-content: stretch;
+}
+
+.after-dark-finish-choices {
+  display: block;
+}
+
+.after-dark-acid-choice {
+  display: block;
+  width: 100%;
+}
+
+.after-dark-acid-choice > span {
+  display: grid;
+  grid-template-columns: clamp(130px, 18vw, 210px) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(18px, 3vw, 38px);
+  padding: 12px;
+}
+
+.after-dark-acid-choice img {
+  grid-row: 1;
+  width: 100%;
+}
+
+.after-dark-acid-copy {
+  display: grid;
+  gap: 8px;
+  padding-right: clamp(10px, 3vw, 34px);
+}
+
+.after-dark-acid-copy b {
+  font-size: clamp(1rem, 2vw, 1.3rem);
+}
+
+.after-dark-acid-copy small {
+  max-width: 48ch;
+  color: var(--sad-silver, #a9a7a2);
+  font-size: .82rem;
+  line-height: 1.5;
+}
+
+.after-dark-image-choices label > span,
+.after-dark-acid-choice > span {
+  position: relative;
+}
+
+.after-dark-image-choices label > span::after,
+.after-dark-acid-choice > span::after {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: grid;
+  width: 25px;
+  height: 25px;
+  place-items: center;
+  border: 1px solid rgb(255 255 255 / 34%);
+  border-radius: 50%;
+  color: #151011;
+  background: var(--sad-acid, #d9ff3f);
+  box-shadow: 0 5px 18px rgb(0 0 0 / 34%);
+  content: "\2713";
+  font-size: .76rem;
+  font-weight: 900;
+  opacity: 0;
+  transform: translateY(-5px) scale(.72);
+  transition: opacity 180ms ease, transform 240ms cubic-bezier(.2, .8, .2, 1);
+}
+
+.after-dark-image-choices input:checked + span::after,
+.after-dark-acid-choice input:checked + span::after {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.after-dark-image-choices label:is(:hover, :focus-within) > span,
+.after-dark-acid-choice:is(:hover, :focus-within) > span {
+  filter: brightness(1.06);
+  transform: translateY(-3px) scale(1.01);
+}
+
+.after-dark-image-choices label > span.is-just-selected,
+.after-dark-acid-choice > span.is-just-selected {
+  animation: after-dark-choice-settle 420ms cubic-bezier(.2, .8, .2, 1);
+}
+
+#after-dark-selection-summary.is-updating {
+  animation: after-dark-summary-shift 380ms ease-out;
+}
+
+@keyframes after-dark-choice-settle {
+  0% { transform: scale(.985); }
+  48% { transform: translateY(-3px) scale(1.018); }
+  100% { transform: scale(1); }
+}
+
+@keyframes after-dark-summary-shift {
+  0% { opacity: .5; transform: translateY(4px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 767px) {
+  .after-dark-detail-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .after-dark-style-card,
+  .after-dark-details-card,
+  .after-dark-finish-card,
+  .after-dark-size-card,
+  .after-dark-quantity-card {
+    grid-column: 1;
+  }
+
+  .after-dark-style-choices,
+  .after-dark-details-choices {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    padding: 2px 2px 12px;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: thin;
+  }
+
+  .after-dark-style-choices label,
+  .after-dark-details-choices label {
+    flex: 0 0 min(43vw, 175px);
+    scroll-snap-align: start;
+  }
+
+  .after-dark-acid-choice > span {
+    grid-template-columns: minmax(105px, 34vw) minmax(0, 1fr);
+    gap: 14px;
+    padding: 10px;
+  }
+
+  .after-dark-acid-copy {
+    padding-right: 4px;
+  }
+
+  .after-dark-acid-copy small {
+    font-size: .74rem;
+  }
+}
+
+@media (hover: none) {
+  .after-dark-image-choices label:is(:hover, :focus-within) > span,
+  .after-dark-acid-choice:is(:hover, :focus-within) > span {
+    filter: none;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .after-dark-image-choices label > span.is-just-selected,
+  .after-dark-acid-choice > span.is-just-selected,
+  #after-dark-selection-summary.is-updating {
+    animation: none;
+  }
+
+  .after-dark-style-choices,
+  .after-dark-details-choices {
+    scroll-behavior: auto;
+  }
+}
+
 /* Saturn After Dark — final approved asset experience */
 .after-dark-section {
   --sad-obsidian: #080808;
@@ -4987,5 +5183,131 @@ html:not(.js-enabled) .story-panel[hidden] {
   .after-dark-image-choices label > span,
   .after-dark-acid-choice > span {
     transition-duration: 0.01ms;
+  }
+}
+
+/* Final After Dark layout overrides; kept last to supersede legacy iterations above. */
+.after-dark-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.after-dark-style-card,
+.after-dark-details-card,
+.after-dark-finish-card {
+  grid-column: 1 / -1;
+}
+
+.after-dark-style-choices {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.after-dark-details-choices {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.after-dark-style-choices,
+.after-dark-details-choices,
+.after-dark-finish-choices {
+  width: 100%;
+  justify-content: stretch;
+}
+
+.after-dark-finish-choices {
+  display: block;
+}
+
+.after-dark-acid-choice {
+  display: block;
+  width: 100%;
+}
+
+.after-dark-acid-choice > span {
+  display: grid;
+  grid-template-columns: clamp(130px, 18vw, 210px) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(18px, 3vw, 38px);
+  padding: 12px;
+}
+
+.after-dark-acid-choice img {
+  grid-row: 1;
+  width: 100%;
+}
+
+.after-dark-acid-copy {
+  display: grid;
+  gap: 8px;
+  padding-right: clamp(10px, 3vw, 34px);
+}
+
+.after-dark-acid-copy b {
+  font-size: clamp(1rem, 2vw, 1.3rem);
+}
+
+.after-dark-acid-copy small {
+  max-width: 48ch;
+  color: var(--sad-silver, #a9a7a2);
+  font-size: .82rem;
+  line-height: 1.5;
+}
+
+.after-dark-image-choices label:is(:hover, :focus-within) > span,
+.after-dark-acid-choice:is(:hover, :focus-within) > span {
+  filter: brightness(1.06);
+  transform: translateY(-3px) scale(1.01);
+}
+
+@media (max-width: 767px) {
+  .after-dark-detail-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .after-dark-style-card,
+  .after-dark-details-card,
+  .after-dark-finish-card,
+  .after-dark-size-card,
+  .after-dark-quantity-card {
+    grid-column: 1;
+  }
+
+  .after-dark-style-choices,
+  .after-dark-details-choices {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    padding: 2px 2px 12px;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: thin;
+  }
+
+  .after-dark-style-choices label,
+  .after-dark-details-choices label {
+    flex: 0 0 min(43vw, 175px);
+    grid-column: auto;
+    scroll-snap-align: start;
+  }
+
+  .after-dark-acid-choice > span {
+    grid-template-columns: minmax(105px, 34vw) minmax(0, 1fr);
+    gap: 14px;
+    padding: 10px;
+  }
+
+  .after-dark-acid-copy {
+    padding-right: 4px;
+  }
+
+  .after-dark-acid-copy small {
+    font-size: .74rem;
+  }
+}
+
+@media (hover: none) {
+  .after-dark-image-choices label:is(:hover, :focus-within) > span,
+  .after-dark-acid-choice:is(:hover, :focus-within) > span {
+    filter: none;
+    transform: none;
   }
 }

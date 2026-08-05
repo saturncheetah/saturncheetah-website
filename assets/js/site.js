@@ -756,8 +756,18 @@ function setupAfterDarkConfigurator() {
   const quantityInput = document.querySelector("#after-dark-quantity");
   const quantityButtons = [...afterDarkConfigurator.querySelectorAll("[data-after-dark-quantity-step]")];
   const summary = document.querySelector("#after-dark-selection-summary");
+  let summaryMotionTimer = 0;
 
-  const updateSummary = () => {
+  const showSelectionMotion = target => {
+    if (reducedMotion.matches) return;
+    const choice = target.closest("label")?.querySelector(":scope > span");
+    if (!choice) return;
+    choice.classList.remove("is-just-selected");
+    requestAnimationFrame(() => choice.classList.add("is-just-selected"));
+    window.setTimeout(() => choice.classList.remove("is-just-selected"), 460);
+  };
+
+  const updateSummary = (animate = false) => {
     const selection = getAfterDarkSelection();
     if (!selection || !summary) return;
     summary.textContent = [
@@ -767,17 +777,26 @@ function setupAfterDarkConfigurator() {
       `Size ${selection.size}`,
       `Qty ${selection.quantity}`
     ].join(" · ");
+    if (animate && !reducedMotion.matches) {
+      summary.classList.remove("is-updating");
+      requestAnimationFrame(() => summary.classList.add("is-updating"));
+      window.clearTimeout(summaryMotionTimer);
+      summaryMotionTimer = window.setTimeout(() => summary.classList.remove("is-updating"), 420);
+    }
   };
 
-  afterDarkConfigurator.addEventListener("change", updateSummary);
+  afterDarkConfigurator.addEventListener("change", event => {
+    showSelectionMotion(event.target);
+    updateSummary(true);
+  });
 
   afterDarkConfigurator.addEventListener("input", event => {
-    if (event.target.matches("input[type='number']")) updateSummary();
+    if (event.target.matches("input[type='number']")) updateSummary(true);
   });
 
   quantityInput?.addEventListener("blur", () => {
     if (!quantityInput.checkValidity()) quantityInput.value = "1";
-    updateSummary();
+    updateSummary(true);
   });
 
   quantityButtons.forEach(button => {
@@ -788,7 +807,7 @@ function setupAfterDarkConfigurator() {
       const minimum = Number(quantityInput.min) || 1;
       const maximum = Number(quantityInput.max) || 500;
       quantityInput.value = String(Math.max(minimum, Math.min(maximum, current + step)));
-      updateSummary();
+      updateSummary(true);
     });
   });
 
