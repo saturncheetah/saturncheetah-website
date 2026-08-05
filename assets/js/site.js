@@ -788,7 +788,7 @@ function setupAfterDarkConfigurator() {
   afterDarkConfigurator.addEventListener("submit", event => {
     event.preventDefault();
     if (!afterDarkConfigurator.reportValidity()) return;
-    window.location.assign(whatsappUrl(buildAfterDarkMessage()));
+    window.open(whatsappUrl(buildAfterDarkMessage()), "_blank", "noopener");
   });
 
   updateSummary();
@@ -1126,7 +1126,7 @@ function setupWhatsAppFlow() {
       document.querySelector("#tees")?.scrollIntoView({ behavior: reducedMotion.matches ? "auto" : "smooth" });
       return;
     }
-    window.location.assign(whatsappUrl(buildCustomMessage()));
+    window.open(whatsappUrl(buildCustomMessage()), "_blank", "noopener");
   });
 
   document.addEventListener("click", event => {
@@ -1159,7 +1159,7 @@ function setupBulkTeeFlow() {
   panel.addEventListener("submit", event => {
     event.preventDefault();
     if (!panel.reportValidity()) return;
-    window.location.assign(whatsappUrl(buildBulkTeeMessage(panel)));
+    window.open(whatsappUrl(buildBulkTeeMessage(panel)), "_blank", "noopener");
   });
 }
 
