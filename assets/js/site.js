@@ -1482,6 +1482,99 @@ function setupSectionReveals() {
   revealItems.forEach(item => observer.observe(item));
 }
 
+function setupStoreJourney() {
+  const chapters = [
+    { element: document.querySelector(".hero"), mood: "boutique" },
+    { element: document.querySelector("#tees"), mood: "studio" },
+    { element: document.querySelector("#direction"), mood: "lookbook" },
+    { element: document.querySelector("#after-dark"), mood: "after-dark" }
+  ].filter(chapter => chapter.element);
+
+  if (!chapters.length || reducedMotion.matches) return;
+
+  document.documentElement.classList.add("store-journey-enabled");
+  let frame = 0;
+
+  const updateJourney = () => {
+    frame = 0;
+    const viewportHeight = window.innerHeight;
+    const focusLine = viewportHeight * 0.48;
+    let activeChapter = chapters[0];
+    let closestDistance = Number.POSITIVE_INFINITY;
+
+    chapters.forEach(chapter => {
+      const bounds = chapter.element.getBoundingClientRect();
+      const progress = Math.max(0, Math.min(1, (viewportHeight - bounds.top) / (viewportHeight + bounds.height)));
+      chapter.element.style.setProperty("--journey-progress", progress.toFixed(4));
+      chapter.element.style.setProperty("--journey-shift", `${((progress - 0.5) * 18).toFixed(2)}px`);
+      chapter.element.style.setProperty("--journey-lift", `${((0.5 - progress) * 18).toFixed(2)}px`);
+      chapter.element.style.setProperty("--journey-parallax", `${(progress * 18).toFixed(2)}px`);
+      chapter.element.style.setProperty("--journey-scale", (1 + progress * 0.018).toFixed(4));
+      chapter.element.style.setProperty("--journey-opacity", (0.3 + progress * 0.7).toFixed(3));
+      chapter.element.style.setProperty("--journey-sweep", `${(progress * 82).toFixed(2)}%`);
+      chapter.element.style.setProperty("--journey-glow-x", `${(18 + progress * 48).toFixed(2)}%`);
+      chapter.element.style.setProperty("--journey-dark-glow-x", `${(88 - progress * 38).toFixed(2)}%`);
+      const chapterCenter = bounds.top + bounds.height / 2;
+      const distance = Math.abs(chapterCenter - focusLine);
+      if (distance < closestDistance) {
+        closestDistance = distance;
+        activeChapter = chapter;
+      }
+    });
+
+    document.documentElement.dataset.storeMood = activeChapter.mood;
+  };
+
+  const requestJourneyUpdate = () => {
+    if (frame) return;
+    frame = window.requestAnimationFrame(updateJourney);
+  };
+
+  window.addEventListener("scroll", requestJourneyUpdate, { passive: true });
+  window.addEventListener("resize", requestJourneyUpdate);
+  updateJourney();
+}
+
+function setupAfterDarkPowerSwitch() {
+  const section = document.querySelector("#after-dark");
+  const powerSwitch = section?.querySelector(".after-dark-power-switch");
+  if (!section || !powerSwitch) return;
+
+  const playSwitchClick = poweredOn => {
+    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContextClass) return;
+    const context = new AudioContextClass();
+    const start = context.currentTime;
+    const oscillator = context.createOscillator();
+    const gain = context.createGain();
+    oscillator.type = "square";
+    oscillator.frequency.setValueAtTime(poweredOn ? 145 : 105, start);
+    oscillator.frequency.exponentialRampToValueAtTime(poweredOn ? 58 : 42, start + 0.065);
+    gain.gain.setValueAtTime(0.0001, start);
+    gain.gain.exponentialRampToValueAtTime(0.12, start + 0.006);
+    gain.gain.exponentialRampToValueAtTime(0.0001, start + 0.085);
+    oscillator.connect(gain).connect(context.destination);
+    oscillator.start(start);
+    oscillator.stop(start + 0.09);
+    oscillator.addEventListener("ended", () => context.close());
+  };
+
+  powerSwitch.addEventListener("click", () => {
+    const poweredOn = !section.classList.contains("is-powered");
+    section.classList.toggle("is-powered", poweredOn);
+    powerSwitch.setAttribute("aria-pressed", String(poweredOn));
+    powerSwitch.querySelector("strong").textContent = poweredOn ? "After Dark is on" : "Turn on After Dark";
+    playSwitchClick(poweredOn);
+  });
+
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => section.classList.toggle("is-in-view", entry.isIntersecting));
+    }, { threshold: 0.3 });
+    observer.observe(section);
+  }
+}
+
 function setupFooterYear() {
   const year = document.querySelector("#current-year");
   if (year) year.textContent = String(new Date().getFullYear());
@@ -1509,5 +1602,7 @@ setupDesignGallery();
 setupFloatingPill();
 setupGalleryModal();
 setupSectionReveals();
+setupStoreJourney();
+setupAfterDarkPowerSwitch();
 setupFooterYear();
 respectReducedMotion();
