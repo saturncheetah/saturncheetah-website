@@ -645,7 +645,14 @@ h3 {
   aspect-ratio: 994 / 1583;
   object-fit: contain;
   object-position: center;
-  transition: opacity 180ms ease;
+  transition: opacity 180ms ease, transform 700ms var(--ease-premium), filter 500ms ease;
+}
+
+@media (hover: hover) {
+  .tee-visual:hover img {
+    filter: contrast(1.025) saturate(1.04);
+    transform: scale(1.025);
+  }
 }
 
 .tee-visual.is-changing img {
@@ -5923,6 +5930,178 @@ html:not(.js-enabled) .story-panel[hidden] {
   }
 }
 
+/* Final jewel editorial palette: dark at the entrance and close, coloured through the store. */
+.tee-section {
+  color: #24191d;
+  background: radial-gradient(circle at 86% 12%, rgb(255 225 222 / 20%), transparent 25rem), linear-gradient(145deg, #c7a1a7, #b98995);
+}
+
+.bulk-tee-section {
+  color: #fff5ee;
+  background: radial-gradient(circle at 12% 78%, rgb(179 91 122 / 20%), transparent 28rem), linear-gradient(145deg, #251725, #422338);
+}
+
+.process-section {
+  color: #fff7f1;
+  background: radial-gradient(circle at 82% 18%, rgb(255 210 214 / 16%), transparent 26rem), linear-gradient(145deg, #765061, #492d42);
+}
+
+.direction-section {
+  color: #fff7f1;
+  background: radial-gradient(circle at 82% 18%, rgb(177 65 103 / 22%), transparent 28rem), linear-gradient(155deg, #1d1420, #3c2033);
+}
+
+.secondary-section {
+  color: #21171b;
+  background: linear-gradient(145deg, #bd969f, #a87988);
+}
+
+.reviews-section {
+  color: #fff7f1;
+  background: radial-gradient(circle at 16% 22%, rgb(181 89 123 / 18%), transparent 24rem), linear-gradient(145deg, #321d2d, #51283f);
+}
+
+.faq-section {
+  color: #24191d;
+  background: linear-gradient(145deg, #d0afb0, #b98e99);
+}
+
+.tee-section .section-heading h2,
+.tee-section .section-heading > p:last-child,
+.secondary-section .section-heading h2,
+.secondary-section .section-heading > p:last-child,
+.faq-section .section-heading h2,
+.faq-section .section-heading > p:last-child {
+  color: #24191d;
+}
+
+.bulk-tee-section .section-heading h2,
+.process-section .section-heading h2,
+.direction-section .section-heading h2,
+.direction-section .panel-intro h3,
+.reviews-section .section-heading h2 {
+  color: #fff7f1;
+}
+
+.bulk-tee-section .section-heading > p:last-child,
+.process-section .section-heading > p:last-child,
+.direction-section .section-heading > p:last-child,
+.direction-section .panel-intro p,
+.reviews-section .section-heading > p:last-child {
+  color: rgb(255 241 234 / 70%);
+}
+
+.tee-section .eyebrow,
+.secondary-section .eyebrow,
+.faq-section .eyebrow {
+  color: #67243a;
+}
+
+.bulk-tee-section .eyebrow,
+.process-section .eyebrow,
+.direction-section .eyebrow,
+.reviews-section .eyebrow,
+.direction-section .design-gallery-meta {
+  color: #e9a7b7;
+}
+
+.tee-selector,
+.secondary-card,
+.faq-item {
+  border-color: rgb(75 34 49 / 16%);
+  color: #24191d;
+  background: linear-gradient(145deg, #f4dfdc, #dfbdc0);
+  box-shadow: 0 22px 55px rgb(69 29 44 / 14%);
+}
+
+.bulk-tee-card,
+.bulk-options-panel,
+.story-panel,
+.review-card {
+  border-color: rgb(255 225 222 / 14%);
+  color: #fff7f1;
+  background: linear-gradient(145deg, rgb(91 48 72 / 88%), rgb(48 29 45 / 94%));
+  box-shadow: 0 22px 58px rgb(13 8 13 / 25%);
+}
+
+.direction-section .tab-module,
+.direction-section .tab-panel {
+  border-color: rgb(255 225 222 / 12%);
+  background: transparent;
+}
+
+.direction-section .tab-list {
+  border-color: rgb(255 225 222 / 14%);
+  background: rgb(27 18 29 / 78%);
+  box-shadow: 0 14px 38px rgb(0 0 0 / 24%);
+}
+
+.direction-section .tab-list button {
+  color: rgb(255 241 234 / 62%);
+}
+
+.direction-section .tab-list button[aria-selected="true"] {
+  color: #fff9f5;
+  background: linear-gradient(135deg, #7d2b48, #a04460);
+  box-shadow: 0 10px 28px rgb(126 43 72 / 30%);
+}
+
+.secondary-card p,
+.faq-item p,
+.faq-item summary {
+  color: #3f2931;
+}
+
+.bulk-tee-card p,
+.bulk-options-panel p,
+.story-panel p,
+.review-card p {
+  color: rgb(255 241 234 / 72%);
+}
+
+.final-cta {
+  color: #fff8f2;
+  background: radial-gradient(circle at 82% 20%, rgb(190 70 108 / 18%), transparent 24rem), linear-gradient(145deg, #160f18, #3b1c30);
+}
+
+.site-footer {
+  background: #0c090d;
+}
+
+/* Selective high-fashion typography; utility and shopping controls stay sans-serif. */
+:root {
+  --font-editorial: "Bodoni Moda", "Bodoni 72", Didot, "Iowan Old Style", Georgia, serif;
+}
+
+.section-heading h2,
+.direction-section .panel-intro h3,
+.after-dark-intro h2,
+.after-dark-configurator-heading h3,
+.final-cta h2 {
+  font-family: var(--font-editorial);
+  font-weight: 600;
+  letter-spacing: -.045em;
+}
+
+.after-dark-intro h2 {
+  font-style: italic;
+  font-weight: 500;
+  letter-spacing: -.055em;
+}
+
+.design-card-body h3,
+.secondary-card h3,
+.review-card blockquote {
+  font-family: var(--font-editorial);
+  font-weight: 500;
+}
+
+.after-dark-tagline {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-weight: 400;
+}
+
 /* Final After Dark layout overrides; kept last to supersede legacy iterations above. */
 .after-dark-detail-grid {
   display: grid;
@@ -5936,15 +6115,18 @@ html:not(.js-enabled) .story-panel[hidden] {
 }
 
 .after-dark-finish-card {
-  grid-column: span 6;
+  grid-column: 1 / -1;
+  background:
+    radial-gradient(circle at 50% 54%, rgb(135 61 56 / 16%), transparent 25rem),
+    rgb(27 21 22 / 58%);
 }
 
 .after-dark-size-card {
-  grid-column: span 4;
+  grid-column: span 6;
 }
 
 .after-dark-quantity-card {
-  grid-column: span 2;
+  grid-column: span 6;
 }
 
 .after-dark-style-choices {
@@ -5964,6 +6146,8 @@ html:not(.js-enabled) .story-panel[hidden] {
 
 .after-dark-finish-choices {
   display: block;
+  max-width: 390px;
+  margin-inline: auto;
 }
 
 .after-dark-acid-choice {
