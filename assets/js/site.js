@@ -1545,18 +1545,59 @@ function setupAfterDarkPowerSwitch() {
     if (!AudioContextClass) return;
     const context = new AudioContextClass();
     const start = context.currentTime;
-    const oscillator = context.createOscillator();
-    const gain = context.createGain();
-    oscillator.type = "square";
-    oscillator.frequency.setValueAtTime(poweredOn ? 145 : 105, start);
-    oscillator.frequency.exponentialRampToValueAtTime(poweredOn ? 58 : 42, start + 0.065);
-    gain.gain.setValueAtTime(0.0001, start);
-    gain.gain.exponentialRampToValueAtTime(0.12, start + 0.006);
-    gain.gain.exponentialRampToValueAtTime(0.0001, start + 0.085);
-    oscillator.connect(gain).connect(context.destination);
-    oscillator.start(start);
-    oscillator.stop(start + 0.09);
-    oscillator.addEventListener("ended", () => context.close());
+
+    const clickLength = Math.floor(context.sampleRate * 0.042);
+    const clickBuffer = context.createBuffer(1, clickLength, context.sampleRate);
+    const clickData = clickBuffer.getChannelData(0);
+    for (let index = 0; index < clickLength; index += 1) {
+      const decay = 1 - index / clickLength;
+      clickData[index] = (Math.random() * 2 - 1) * decay * decay;
+    }
+
+    const click = context.createBufferSource();
+    const clickFilter = context.createBiquadFilter();
+    const clickGain = context.createGain();
+    click.buffer = clickBuffer;
+    clickFilter.type = "bandpass";
+    clickFilter.frequency.value = poweredOn ? 2150 : 1650;
+    clickFilter.Q.value = 0.75;
+    clickGain.gain.setValueAtTime(0.19, start);
+    clickGain.gain.exponentialRampToValueAtTime(0.0001, start + 0.045);
+    click.connect(clickFilter).connect(clickGain).connect(context.destination);
+
+    const relay = context.createOscillator();
+    const relayGain = context.createGain();
+    relay.type = "sine";
+    relay.frequency.setValueAtTime(poweredOn ? 72 : 58, start);
+    relay.frequency.exponentialRampToValueAtTime(38, start + 0.072);
+    relayGain.gain.setValueAtTime(0.0001, start);
+    relayGain.gain.exponentialRampToValueAtTime(0.055, start + 0.008);
+    relayGain.gain.exponentialRampToValueAtTime(0.0001, start + 0.085);
+    relay.connect(relayGain).connect(context.destination);
+
+    const airLength = Math.floor(context.sampleRate * 0.14);
+    const airBuffer = context.createBuffer(1, airLength, context.sampleRate);
+    const airData = airBuffer.getChannelData(0);
+    for (let index = 0; index < airLength; index += 1) {
+      const decay = 1 - index / airLength;
+      airData[index] = (Math.random() * 2 - 1) * decay * decay * decay;
+    }
+    const air = context.createBufferSource();
+    const airFilter = context.createBiquadFilter();
+    const airGain = context.createGain();
+    air.buffer = airBuffer;
+    airFilter.type = "highpass";
+    airFilter.frequency.value = 3200;
+    airGain.gain.setValueAtTime(0.0001, start + 0.018);
+    airGain.gain.exponentialRampToValueAtTime(poweredOn ? 0.024 : 0.014, start + 0.035);
+    airGain.gain.exponentialRampToValueAtTime(0.0001, start + 0.145);
+    air.connect(airFilter).connect(airGain).connect(context.destination);
+
+    click.start(start);
+    relay.start(start);
+    air.start(start + 0.018);
+    relay.stop(start + 0.09);
+    window.setTimeout(() => context.close(), 220);
   };
 
   powerSwitch.addEventListener("click", () => {
