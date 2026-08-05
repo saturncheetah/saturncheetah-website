@@ -6102,6 +6102,255 @@ html:not(.js-enabled) .story-panel[hidden] {
   font-weight: 400;
 }
 
+/* The Fitting Room After Hours — one dark world, shaped by pools of fashion light. */
+:root {
+  --night-obsidian: #09080b;
+  --night-raised: #151116;
+  --night-plum: #241520;
+  --night-cherry: #54182d;
+  --night-wine: #7a2945;
+  --night-silver: #aaa5a8;
+  --night-champagne: #d8b5a5;
+  --night-ivory: #fff5ee;
+  --night-muted: #b9a9aa;
+  --night-line: rgb(216 181 165 / 16%);
+}
+
+.store-journey-enabled[data-store-mood="boutique"] body,
+.store-journey-enabled[data-store-mood="studio"] body,
+.store-journey-enabled[data-store-mood="lookbook"] body,
+body {
+  color: var(--night-ivory);
+  background-color: var(--night-obsidian);
+}
+
+.tee-section,
+.bulk-tee-section,
+.process-section,
+.direction-section,
+.secondary-section,
+.reviews-section,
+.faq-section {
+  color: var(--night-ivory);
+  background-color: var(--night-obsidian);
+}
+
+.tee-section {
+  background:
+    radial-gradient(ellipse at 72% 38%, rgb(216 181 165 / 18%), transparent 30rem),
+    radial-gradient(circle at 12% 88%, rgb(84 24 45 / 18%), transparent 27rem),
+    linear-gradient(145deg, #0a090c, #151016 56%, #09080b);
+}
+
+.bulk-tee-section {
+  background:
+    radial-gradient(circle at 14% 28%, rgb(122 41 69 / 20%), transparent 26rem),
+    linear-gradient(155deg, #0b090d, #1b1019 54%, #09080b);
+}
+
+.process-section {
+  background:
+    radial-gradient(ellipse at 84% 48%, rgb(216 181 165 / 12%), transparent 30rem),
+    linear-gradient(145deg, #0a090c, #21131e 58%, #0a090c);
+}
+
+.direction-section {
+  background:
+    radial-gradient(circle at 76% 20%, rgb(122 41 69 / 24%), transparent 29rem),
+    radial-gradient(circle at 8% 82%, rgb(216 181 165 / 8%), transparent 25rem),
+    #09080b;
+}
+
+.secondary-section {
+  background: linear-gradient(145deg, #0a090c, #171117 52%, #0a090c);
+}
+
+.reviews-section {
+  background:
+    radial-gradient(circle at 16% 30%, rgb(84 24 45 / 24%), transparent 25rem),
+    linear-gradient(145deg, #09080b, #1b1119);
+}
+
+.faq-section {
+  background: #0a090c;
+}
+
+.tee-section .section-heading h2,
+.bulk-tee-section .section-heading h2,
+.process-section .section-heading h2,
+.direction-section .section-heading h2,
+.secondary-section .section-heading h2,
+.reviews-section .section-heading h2,
+.faq-section .section-heading h2,
+.direction-section .panel-intro h3 {
+  color: var(--night-ivory);
+}
+
+.tee-section .section-heading > p:last-child,
+.bulk-tee-section .section-heading > p:last-child,
+.process-section .section-heading > p:last-child,
+.direction-section .section-heading > p:last-child,
+.secondary-section .section-heading > p:last-child,
+.reviews-section .section-heading > p:last-child,
+.faq-section .section-heading > p:last-child,
+.direction-section .panel-intro p {
+  color: var(--night-muted);
+}
+
+.tee-section .eyebrow,
+.bulk-tee-section .eyebrow,
+.process-section .eyebrow,
+.direction-section .eyebrow,
+.secondary-section .eyebrow,
+.reviews-section .eyebrow,
+.faq-section .eyebrow,
+.direction-section .design-gallery-meta {
+  color: #d88aa1;
+}
+
+.secondary-section .section-heading h2,
+.reviews-section .section-heading h2,
+.faq-section .section-heading h2 {
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  font-weight: 800;
+  letter-spacing: -.045em;
+}
+
+.tee-selector,
+.bulk-tee-card,
+.bulk-options-panel,
+.story-panel,
+.secondary-card,
+.review-card,
+.faq-item {
+  border-color: var(--night-line);
+  color: var(--night-ivory);
+  background: linear-gradient(145deg, rgb(36 21 32 / 94%), rgb(17 14 18 / 96%));
+  box-shadow: 0 28px 72px rgb(0 0 0 / 28%);
+}
+
+.tee-segments,
+.tee-options,
+.tee-details,
+.tee-details-secondary {
+  border-color: var(--night-line);
+  color: var(--night-ivory);
+  background: rgb(14 12 15 / 74%);
+}
+
+.tee-segments label span,
+.tee-colour-options label span,
+.tee-size-options button {
+  border-color: rgb(216 181 165 / 24%);
+  color: var(--night-ivory);
+  background: rgb(255 245 238 / 5%);
+}
+
+.tee-segments input:checked + span,
+.tee-colour-options input:checked + span,
+.tee-size-options button[aria-pressed="true"] {
+  border-color: rgb(216 181 165 / 48%);
+  color: var(--night-ivory);
+  background: linear-gradient(135deg, #54182d, #7a2945);
+  box-shadow: 0 9px 26px rgb(84 24 45 / 34%);
+}
+
+.tee-visual {
+  background:
+    radial-gradient(ellipse at 50% 42%, rgb(239 216 205 / 76%), rgb(177 142 133 / 24%) 38%, transparent 67%),
+    #171318;
+}
+
+.tee-details h3,
+.tee-details dd,
+.tee-option-group legend {
+  color: var(--night-ivory);
+}
+
+.tee-option-group legend strong {
+  color: #e9a7b7;
+}
+
+.tee-details dl div {
+  border-color: var(--night-line);
+  background: linear-gradient(145deg, rgb(84 24 45 / 52%), rgb(26 18 25 / 78%));
+}
+
+.tee-details dt {
+  color: #d88aa1;
+}
+
+.tee-summary,
+.tee-details dt,
+.secondary-card p,
+.review-card p,
+.faq-item p,
+.faq-item summary,
+.bulk-tee-card p,
+.bulk-options-panel p,
+.story-panel p {
+  color: var(--night-muted);
+}
+
+.direction-section .tab-module,
+.direction-section .tab-panel {
+  border-color: var(--night-line);
+  background: transparent;
+}
+
+.direction-section .tab-list {
+  border-color: var(--night-line);
+  background: rgb(16 13 17 / 82%);
+  box-shadow: 0 16px 40px rgb(0 0 0 / 28%);
+  backdrop-filter: blur(18px);
+}
+
+.direction-section .tab-list button {
+  color: rgb(255 245 238 / 58%);
+}
+
+.direction-section .tab-list button[aria-selected="true"] {
+  color: var(--night-ivory);
+  background: linear-gradient(135deg, #54182d, #8a3151);
+  box-shadow: 0 10px 30px rgb(84 24 45 / 38%);
+}
+
+.final-cta {
+  color: var(--night-ivory);
+  background:
+    radial-gradient(circle at 78% 18%, rgb(122 41 69 / 24%), transparent 25rem),
+    linear-gradient(145deg, #08070a, #1c101a 58%, #08070a);
+}
+
+.site-footer {
+  color: var(--night-muted);
+  background: #070609;
+}
+
+.store-journey-enabled #tees::after {
+  background: linear-gradient(112deg, transparent 28%, rgb(216 181 165 / 8%) 46%, transparent 65%);
+}
+
+.store-journey-enabled #direction::after {
+  background: radial-gradient(circle at var(--journey-glow-x) 34%, rgb(122 41 69 / 14%), transparent 27rem);
+}
+
+@media (max-width: 767px) {
+  .section-heading {
+    width: calc(100vw - (var(--gutter) * 2));
+    max-width: calc(100vw - (var(--gutter) * 2));
+    min-width: 0;
+  }
+
+  .section-heading h2 {
+    max-width: 100%;
+    font-size: clamp(2.15rem, 10.4vw, 3rem);
+    line-height: .98;
+    overflow-wrap: normal;
+    text-wrap: wrap;
+  }
+}
+
 /* Final After Dark layout overrides; kept last to supersede legacy iterations above. */
 .after-dark-detail-grid {
   display: grid;
