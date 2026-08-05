@@ -3720,9 +3720,24 @@ html:not(.js-enabled) .story-panel[hidden] {
 }
 
 .after-dark-style-card,
-.after-dark-details-card,
-.after-dark-finish-card {
+.after-dark-details-card {
   grid-column: 1 / -1;
+}
+
+.after-dark-detail-grid {
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+}
+
+.after-dark-finish-card {
+  grid-column: span 6;
+}
+
+.after-dark-size-card {
+  grid-column: span 4;
+}
+
+.after-dark-quantity-card {
+  grid-column: span 2;
 }
 
 .after-dark-size-card,
@@ -3756,10 +3771,11 @@ html:not(.js-enabled) .story-panel[hidden] {
 
 .after-dark-acid-choice > span {
   display: grid;
-  grid-template-columns: clamp(130px, 18vw, 210px) minmax(0, 1fr);
+  grid-template-columns: clamp(92px, 10vw, 125px) minmax(0, 1fr);
   align-items: center;
-  gap: clamp(18px, 3vw, 38px);
-  padding: 12px;
+  gap: 16px;
+  min-height: 100%;
+  padding: 10px;
 }
 
 .after-dark-acid-choice img {
@@ -3770,7 +3786,7 @@ html:not(.js-enabled) .story-panel[hidden] {
 .after-dark-acid-copy {
   display: grid;
   gap: 8px;
-  padding-right: clamp(10px, 3vw, 34px);
+  padding-right: 8px;
 }
 
 .after-dark-acid-copy b {
@@ -5189,14 +5205,25 @@ html:not(.js-enabled) .story-panel[hidden] {
 /* Final After Dark layout overrides; kept last to supersede legacy iterations above. */
 .after-dark-detail-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(12, minmax(0, 1fr));
   gap: 16px;
 }
 
 .after-dark-style-card,
-.after-dark-details-card,
-.after-dark-finish-card {
+.after-dark-details-card {
   grid-column: 1 / -1;
+}
+
+.after-dark-finish-card {
+  grid-column: span 6;
+}
+
+.after-dark-size-card {
+  grid-column: span 4;
+}
+
+.after-dark-quantity-card {
+  grid-column: span 2;
 }
 
 .after-dark-style-choices {
@@ -5225,10 +5252,11 @@ html:not(.js-enabled) .story-panel[hidden] {
 
 .after-dark-acid-choice > span {
   display: grid;
-  grid-template-columns: clamp(130px, 18vw, 210px) minmax(0, 1fr);
+  grid-template-columns: clamp(92px, 10vw, 125px) minmax(0, 1fr);
   align-items: center;
-  gap: clamp(18px, 3vw, 38px);
-  padding: 12px;
+  gap: 16px;
+  min-height: 100%;
+  padding: 10px;
 }
 
 .after-dark-acid-choice img {
@@ -5239,7 +5267,7 @@ html:not(.js-enabled) .story-panel[hidden] {
 .after-dark-acid-copy {
   display: grid;
   gap: 8px;
-  padding-right: clamp(10px, 3vw, 34px);
+  padding-right: 8px;
 }
 
 .after-dark-acid-copy b {
