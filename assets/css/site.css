@@ -438,6 +438,10 @@ h3 {
   color: var(--orange);
 }
 
+.hero-mobile-break {
+  display: none;
+}
+
 .hero-lead {
   max-width: 580px;
   margin: 22px 0 0;
@@ -3285,6 +3289,10 @@ html:not(.js-enabled) .story-panel[hidden] {
     line-height: 0.92;
   }
 
+  .hero-mobile-break {
+    display: initial;
+  }
+
   .hero-lead {
     margin-top: 16px;
     font-size: 0.96rem;
@@ -3908,6 +3916,347 @@ html:not(.js-enabled) .story-panel[hidden] {
   .after-dark-acid-choice:is(:hover, :focus-within) > span {
     filter: none;
     transform: none;
+  }
+}
+
+/* Final light-store colour pass; deliberately warm, layered and non-white. */
+.tee-section,
+.bulk-tee-section,
+.process-section,
+.direction-section,
+.secondary-section,
+.reviews-section,
+.faq-section {
+  color: var(--lux-ink);
+}
+
+.tee-section {
+  background: radial-gradient(circle at 88% 12%, rgb(113 41 58 / 7%), transparent 24rem), #f2ece5;
+}
+
+.bulk-tee-section {
+  background: radial-gradient(circle at 10% 72%, rgb(188 155 132 / 14%), transparent 28rem), #faf6f0;
+}
+
+.process-section {
+  background: linear-gradient(135deg, rgb(255 250 244 / 66%), transparent 52%), #e6dcd2;
+}
+
+.direction-section {
+  background:
+    radial-gradient(circle at 82% 18%, rgb(113 41 58 / 9%), transparent 26rem),
+    linear-gradient(155deg, #f5eee8, #eadfd8);
+}
+
+.secondary-section,
+.faq-section {
+  background: #faf6f0;
+}
+
+.reviews-section {
+  background: linear-gradient(155deg, #e7dbd1, #f1e8e1);
+}
+
+.tee-section .section-heading h2,
+.bulk-tee-section .section-heading h2,
+.process-section .section-heading h2,
+.direction-section .section-heading h2,
+.secondary-section .section-heading h2,
+.reviews-section .section-heading h2,
+.faq-section .section-heading h2,
+.direction-section .panel-intro h3 {
+  color: var(--lux-ink);
+}
+
+.tee-section .section-heading > p:last-child,
+.bulk-tee-section .section-heading > p:last-child,
+.process-section .section-heading > p:last-child,
+.direction-section .section-heading > p:last-child,
+.secondary-section .section-heading > p:last-child,
+.reviews-section .section-heading > p:last-child,
+.faq-section .section-heading > p:last-child,
+.direction-section .panel-intro p {
+  color: var(--lux-muted);
+}
+
+.tee-section .eyebrow,
+.bulk-tee-section .eyebrow,
+.process-section .eyebrow,
+.direction-section .eyebrow,
+.secondary-section .eyebrow,
+.reviews-section .eyebrow,
+.faq-section .eyebrow {
+  color: var(--lux-oxblood);
+}
+
+.tee-selector,
+.bulk-tee-card,
+.customise-form,
+.process-card,
+.secondary-card,
+.review-card,
+.faq-item,
+.bulk-options-panel {
+  border-color: var(--lux-line);
+  color: var(--lux-ink);
+  background: linear-gradient(145deg, #fffaf4, #f4ece5);
+  box-shadow: var(--lux-shadow);
+}
+
+.process-card p,
+.secondary-card p,
+.review-card p,
+.faq-item p,
+.bulk-options-panel p,
+.faq-item summary {
+  color: var(--lux-muted);
+}
+
+.direction-section .tab-module,
+.direction-section .tab-panel {
+  border-color: var(--lux-line);
+  background: transparent;
+}
+
+.direction-section .tab-list {
+  border-color: var(--lux-line);
+  background: rgb(255 250 244 / 84%);
+  box-shadow: 0 10px 28px rgb(70 51 43 / 9%);
+  backdrop-filter: blur(16px);
+}
+
+.direction-section .tab-list button {
+  color: var(--lux-muted);
+}
+
+.direction-section .tab-list button[aria-selected="true"] {
+  color: #fffaf6;
+  background: var(--lux-oxblood);
+  box-shadow: 0 9px 24px rgb(113 41 58 / 24%);
+}
+
+.direction-section .design-gallery-meta {
+  color: var(--lux-oxblood);
+}
+
+.tee-section .button-primary,
+.bulk-tee-section .button-primary,
+.process-section .button-primary,
+.direction-section .button-primary,
+.secondary-section .button-primary,
+.reviews-section .button-primary,
+.faq-section .button-primary {
+  color: #fffaf6;
+  background: linear-gradient(135deg, #652234, #8d3a4c);
+  box-shadow: 0 12px 28px rgb(113 41 58 / 22%);
+}
+
+.final-cta {
+  color: #fff9f5;
+  background: radial-gradient(circle at 82% 20%, rgb(255 215 206 / 18%), transparent 24rem), linear-gradient(135deg, #5b1e30, #873447);
+}
+
+.final-cta .eyebrow,
+.final-cta p:last-child {
+  color: rgb(255 244 238 / 80%);
+}
+
+.store-journey-enabled #tees::after {
+  background: linear-gradient(115deg, transparent 20%, rgb(255 255 255 / 48%) 42%, transparent 64%), radial-gradient(circle at 18% 54%, rgb(113 41 58 / 6%), transparent 30rem);
+}
+
+.store-journey-enabled #direction::after {
+  background: radial-gradient(circle at var(--journey-glow-x) 34%, rgb(113 41 58 / 7%), transparent 26rem), linear-gradient(180deg, transparent, rgb(188 155 132 / 10%));
+}
+
+/* Porcelain editorial store palette; After Dark remains the dramatic exception. */
+:root {
+  --lux-porcelain: #f4f0ea;
+  --lux-ivory: #fbf9f5;
+  --lux-champagne: #e9e1d8;
+  --lux-white: #fffdf9;
+  --lux-ink: #1c1817;
+  --lux-muted: #716762;
+  --lux-oxblood: #71293a;
+  --lux-line: rgb(52 40 36 / 13%);
+  --lux-shadow: 0 22px 60px rgb(70 51 43 / 10%);
+}
+
+.store-journey-enabled[data-store-mood="boutique"] body,
+.store-journey-enabled[data-store-mood="studio"] body,
+.store-journey-enabled[data-store-mood="lookbook"] body {
+  background-color: var(--lux-porcelain);
+}
+
+.tee-section,
+.bulk-tee-section,
+.process-section,
+.direction-section,
+.secondary-section,
+.reviews-section,
+.faq-section {
+  color: var(--lux-ink);
+}
+
+.tee-section {
+  background:
+    radial-gradient(circle at 88% 12%, rgb(113 41 58 / 6%), transparent 24rem),
+    var(--lux-porcelain);
+}
+
+.bulk-tee-section {
+  background:
+    radial-gradient(circle at 10% 72%, rgb(188 155 132 / 11%), transparent 28rem),
+    var(--lux-ivory);
+}
+
+.process-section {
+  background:
+    linear-gradient(135deg, rgb(255 255 255 / 44%), transparent 52%),
+    var(--lux-champagne);
+}
+
+.direction-section {
+  background:
+    radial-gradient(circle at 82% 18%, rgb(113 41 58 / 7%), transparent 26rem),
+    var(--lux-porcelain);
+}
+
+.secondary-section {
+  background: var(--lux-ivory);
+}
+
+.reviews-section {
+  background:
+    linear-gradient(180deg, rgb(255 255 255 / 28%), transparent),
+    var(--lux-champagne);
+}
+
+.faq-section {
+  background: var(--lux-ivory);
+}
+
+.tee-section .section-heading h2,
+.bulk-tee-section .section-heading h2,
+.process-section .section-heading h2,
+.direction-section .section-heading h2,
+.secondary-section .section-heading h2,
+.reviews-section .section-heading h2,
+.faq-section .section-heading h2 {
+  color: var(--lux-ink);
+}
+
+.tee-section .section-heading > p:last-child,
+.bulk-tee-section .section-heading > p:last-child,
+.process-section .section-heading > p:last-child,
+.direction-section .section-heading > p:last-child,
+.secondary-section .section-heading > p:last-child,
+.reviews-section .section-heading > p:last-child,
+.faq-section .section-heading > p:last-child {
+  color: var(--lux-muted);
+}
+
+.tee-section .eyebrow,
+.bulk-tee-section .eyebrow,
+.process-section .eyebrow,
+.direction-section .eyebrow,
+.secondary-section .eyebrow,
+.reviews-section .eyebrow,
+.faq-section .eyebrow {
+  color: var(--lux-oxblood);
+}
+
+.tee-selector,
+.bulk-tee-card,
+.tab-module,
+.customise-form,
+.review-card,
+.faq-item {
+  border-color: var(--lux-line);
+  background: var(--lux-white);
+  box-shadow: var(--lux-shadow);
+}
+
+.direction-section .tab-module,
+.direction-section .tab-panel {
+  border-color: var(--lux-line);
+  background: transparent;
+}
+
+.direction-section .tab-list {
+  border-color: var(--lux-line);
+  background: rgb(255 253 249 / 82%);
+  box-shadow: 0 10px 28px rgb(70 51 43 / 8%);
+}
+
+.direction-section .tab-list button {
+  color: var(--lux-muted);
+}
+
+.direction-section .tab-list button[aria-selected="true"] {
+  color: #fffaf6;
+  background: var(--lux-oxblood);
+  box-shadow: 0 9px 24px rgb(113 41 58 / 22%);
+}
+
+.direction-section .design-gallery-meta {
+  color: var(--lux-oxblood);
+}
+
+.process-card,
+.secondary-card,
+.review-card,
+.faq-item,
+.bulk-options-panel {
+  border-color: var(--lux-line);
+  color: var(--lux-ink);
+  background: var(--lux-white);
+}
+
+.process-card p,
+.secondary-card p,
+.review-card p,
+.faq-item p,
+.bulk-options-panel p {
+  color: var(--lux-muted);
+}
+
+.faq-item summary {
+  color: var(--lux-ink);
+}
+
+.final-cta {
+  color: #fff9f5;
+  background:
+    radial-gradient(circle at 82% 20%, rgb(255 215 206 / 16%), transparent 24rem),
+    linear-gradient(135deg, #642234, #8a3547);
+}
+
+.final-cta .eyebrow,
+.final-cta p:last-child {
+  color: rgb(255 244 238 / 78%);
+}
+
+.store-journey-enabled #tees::after {
+  background:
+    linear-gradient(115deg, transparent 20%, rgb(255 255 255 / 48%) 42%, transparent 64%),
+    radial-gradient(circle at 18% 54%, rgb(113 41 58 / 5%), transparent 30rem);
+}
+
+.store-journey-enabled #direction::after {
+  background:
+    radial-gradient(circle at var(--journey-glow-x) 34%, rgb(113 41 58 / 6%), transparent 26rem),
+    linear-gradient(180deg, transparent, rgb(188 155 132 / 8%));
+}
+
+@media (max-width: 767px) {
+  .tee-selector,
+  .bulk-tee-card,
+  .tab-module,
+  .customise-form,
+  .review-card,
+  .faq-item {
+    box-shadow: 0 14px 34px rgb(70 51 43 / 8%);
   }
 }
 
@@ -5454,6 +5803,123 @@ html:not(.js-enabled) .story-panel[hidden] {
   .after-dark-image-choices label > span,
   .after-dark-acid-choice > span {
     transition-duration: 0.01ms;
+  }
+}
+
+/* Final porcelain store overrides; these intentionally follow legacy dark themes. */
+.tee-section,
+.bulk-tee-section,
+.process-section,
+.direction-section,
+.secondary-section,
+.reviews-section,
+.faq-section {
+  color: var(--lux-ink);
+}
+
+.tee-section { background: radial-gradient(circle at 88% 12%, rgb(113 41 58 / 7%), transparent 24rem), #f2ece5; }
+.bulk-tee-section { background: radial-gradient(circle at 10% 72%, rgb(188 155 132 / 14%), transparent 28rem), #faf6f0; }
+.process-section { background: linear-gradient(135deg, rgb(255 250 244 / 66%), transparent 52%), #e6dcd2; }
+.direction-section { background: radial-gradient(circle at 82% 18%, rgb(113 41 58 / 9%), transparent 26rem), linear-gradient(155deg, #f5eee8, #eadfd8); }
+.secondary-section,
+.faq-section { background: #faf6f0; }
+.reviews-section { background: linear-gradient(155deg, #e7dbd1, #f1e8e1); }
+
+.tee-section .section-heading h2,
+.bulk-tee-section .section-heading h2,
+.process-section .section-heading h2,
+.direction-section .section-heading h2,
+.secondary-section .section-heading h2,
+.reviews-section .section-heading h2,
+.faq-section .section-heading h2,
+.direction-section .panel-intro h3 {
+  color: var(--lux-ink);
+}
+
+.tee-section .section-heading > p:last-child,
+.bulk-tee-section .section-heading > p:last-child,
+.process-section .section-heading > p:last-child,
+.direction-section .section-heading > p:last-child,
+.secondary-section .section-heading > p:last-child,
+.reviews-section .section-heading > p:last-child,
+.faq-section .section-heading > p:last-child,
+.direction-section .panel-intro p {
+  color: var(--lux-muted);
+}
+
+.tee-section .eyebrow,
+.bulk-tee-section .eyebrow,
+.process-section .eyebrow,
+.direction-section .eyebrow,
+.secondary-section .eyebrow,
+.reviews-section .eyebrow,
+.faq-section .eyebrow,
+.direction-section .design-gallery-meta {
+  color: var(--lux-oxblood);
+}
+
+.tee-selector,
+.bulk-tee-card,
+.customise-form,
+.process-card,
+.secondary-card,
+.review-card,
+.faq-item,
+.bulk-options-panel {
+  border-color: var(--lux-line);
+  color: var(--lux-ink);
+  background: linear-gradient(145deg, #fffaf4, #f4ece5);
+  box-shadow: var(--lux-shadow);
+}
+
+.direction-section .tab-module,
+.direction-section .tab-panel {
+  border-color: var(--lux-line);
+  background: transparent;
+}
+
+.direction-section .tab-list {
+  border-color: var(--lux-line);
+  background: rgb(255 250 244 / 84%);
+  box-shadow: 0 10px 28px rgb(70 51 43 / 9%);
+  backdrop-filter: blur(16px);
+}
+
+.direction-section .tab-list button { color: var(--lux-muted); }
+.direction-section .tab-list button[aria-selected="true"] {
+  color: #fffaf6;
+  background: var(--lux-oxblood);
+  box-shadow: 0 9px 24px rgb(113 41 58 / 24%);
+}
+
+.final-cta {
+  color: #fff9f5;
+  background: radial-gradient(circle at 82% 20%, rgb(255 215 206 / 18%), transparent 24rem), linear-gradient(135deg, #5b1e30, #873447);
+}
+
+.final-cta .eyebrow,
+.final-cta p:last-child { color: rgb(255 244 238 / 80%); }
+
+@media (max-width: 767px) {
+  .hero-content,
+  .hero-copy {
+    width: calc(100vw - (var(--gutter) * 2));
+    max-width: calc(100vw - (var(--gutter) * 2));
+    min-width: 0;
+  }
+
+  .hero h1 {
+    width: 100%;
+    max-width: 100%;
+    font-size: clamp(2.35rem, 10.8vw, 3rem);
+    line-height: .94;
+    text-wrap: wrap;
+  }
+
+  .hero-lead {
+    width: calc(100vw - (var(--gutter) * 2));
+    max-width: 100%;
+    white-space: normal;
   }
 }
 
