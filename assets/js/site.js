@@ -1028,18 +1028,26 @@ function setupAfterDarkGallery() {
   });
 
   document.querySelectorAll(".after-dark-image-choices img").forEach(image => {
-    const label = image.closest("label")?.querySelector("b")?.textContent || "Saturn After Dark option";
+    const optionLabel = image.closest("label");
+    const control = optionLabel?.querySelector("input[type='radio'], input[type='checkbox']");
+    const optionName = optionLabel?.querySelector("b")?.textContent || "Saturn After Dark option";
+    if (!control) return;
+
     image.tabIndex = 0;
     image.setAttribute("role", "button");
-    image.setAttribute("aria-label", `Enlarge ${label}`);
-    const openOption = event => {
+    image.setAttribute("aria-label", `Select and enlarge ${optionName}`);
+
+    const selectAndOpenOption = event => {
       if (event.type === "keydown" && event.key !== "Enter" && event.key !== " ") return;
       event.preventDefault();
       event.stopPropagation();
+      control.checked = control.type === "radio" ? true : !control.checked;
+      control.dispatchEvent(new Event("change", { bubbles: true }));
       openPreview(image, image);
     };
-    image.addEventListener("click", openOption);
-    image.addEventListener("keydown", openOption);
+
+    image.addEventListener("click", selectAndOpenOption);
+    image.addEventListener("keydown", selectAndOpenOption);
   });
 
   modal.querySelector(".after-dark-modal-close")?.addEventListener("click", closePreview);

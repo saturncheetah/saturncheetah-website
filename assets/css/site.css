@@ -3911,6 +3911,11 @@ html:not(.js-enabled) .story-panel[hidden] {
   }
 }
 
+.after-dark-image-choices img,
+.after-dark-acid-choice img {
+  cursor: pointer;
+}
+
 /* Interactive After Dark power-up. */
 .after-dark-section .after-dark-shell {
   position: relative;
