@@ -751,3 +751,38 @@ Changed production files: `index.html` and `assets/css/site.css`. The two UX
 reports were updated. JavaScript, product data, approved assets, review text,
 section order, dependencies and `netlify.toml` are unchanged. No deployment
 occurred.
+
+## Design motion and After Dark streamlining — 2026-08-05
+
+Replaced only the Tote Bags and Bottles imagery in “More Ways to Customise”.
+The supplied JPEG masters remain unchanged in the ignored handoff pack.
+Production uses responsive WebP derivatives at 640 px and original-master
+width, with intrinsic dimensions, centred `object-fit: contain` presentation
+and no crop, zoom or stretched image well. Caps, Coasters and Mugs are
+unchanged, as are card order, product labels and enquiry mappings.
+
+Explore Our Designs is now an unboxed, image-led editorial rail. Approved
+images, order, titles, Bring Your Own and design-specific WhatsApp actions are
+unchanged. The five original cards are followed at runtime by inert,
+aria-hidden clones to form a seamless 30-second loop. Motion pauses on hover,
+focus, pointer/touch, wheel, keyboard use, mobile overlay and preview-modal
+interaction; it pauses outside the viewport and is not created when reduced
+motion is requested. Mobile retains native swipe, one dominant garment plus a
+next-card preview, and a first-tap overlay before the existing action opens.
+
+Saturn After Dark retains its existing five-image hero-first sequence and all
+configurator fields. The inspiration rail now loops in 34 seconds and uses the
+same interaction, viewport and reduced-motion safeguards. Images open in an
+accessible enlarged preview with button, outside-click and Escape dismissal,
+plus focus restoration. The configurator is vertically grouped as Style,
+Details, Optional Acid Spray, Size, Quantity and WhatsApp CTA; style and detail
+image cards use contained media, content-height layouts and a no-layout-shift
+hover/focus enlargement. Mobile controls form a compact two-column grid rather
+than a horizontal option scroller.
+
+Changed production files: `index.html`, `assets/css/site.css`,
+`assets/js/site.js` and four new responsive WebPs under
+`assets/images/boutique/`. The two UX reports were updated. Protected product
+data and WhatsApp builders, all protected sections, existing approved media,
+dependencies and Netlify configuration remain unchanged. No deployment
+occurred.

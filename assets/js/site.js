@@ -794,18 +794,118 @@ function setupAfterDarkConfigurator() {
   updateSummary();
 }
 
+function setupAutoMovingStrip(scroller, originals, duration = 32000) {
+  if (!scroller || originals.length < 2 || reducedMotion.matches) return;
+
+  const pauseReasons = new Set(["viewport"]);
+  let animationFrame = 0;
+  let previousTime = 0;
+  const resumeTimers = new Map();
+  let loopWidth = 0;
+
+  originals.forEach(original => {
+    const clone = original.cloneNode(true);
+    clone.dataset.motionClone = "";
+    clone.removeAttribute("data-gallery-index");
+    clone.setAttribute("aria-hidden", "true");
+    clone.setAttribute("inert", "");
+    clone.querySelectorAll("[id], [data-gallery-open], [data-after-dark-preview], [data-design-title]").forEach(item => {
+      item.removeAttribute("id");
+      item.removeAttribute("data-gallery-open");
+      item.removeAttribute("data-after-dark-preview");
+      item.removeAttribute("data-design-title");
+    });
+    clone.querySelectorAll("a, button, input").forEach(item => item.tabIndex = -1);
+    scroller.append(clone);
+  });
+
+  const measure = () => {
+    const firstClone = scroller.querySelector("[data-motion-clone]");
+    loopWidth = firstClone ? firstClone.offsetLeft - originals[0].offsetLeft : 0;
+  };
+
+  const pause = reason => {
+    window.clearTimeout(resumeTimers.get(reason));
+    pauseReasons.add(reason);
+    scroller.classList.remove("is-auto-moving");
+  };
+
+  const resume = (reason, delay = 700) => {
+    window.clearTimeout(resumeTimers.get(reason));
+    resumeTimers.set(reason, window.setTimeout(() => {
+      pauseReasons.delete(reason);
+      resumeTimers.delete(reason);
+    }, delay));
+  };
+
+  const tick = time => {
+    if (!pauseReasons.size && loopWidth > 0) {
+      const elapsed = previousTime ? Math.min(time - previousTime, 48) : 0;
+      scroller.classList.add("is-auto-moving");
+      scroller.scrollLeft += (loopWidth / duration) * elapsed;
+      if (scroller.scrollLeft >= loopWidth) scroller.scrollLeft -= loopWidth;
+    } else {
+      scroller.classList.remove("is-auto-moving");
+    }
+    previousTime = time;
+    animationFrame = window.requestAnimationFrame(tick);
+  };
+
+  scroller.addEventListener("pointerenter", event => {
+    if (event.pointerType === "mouse") pause("hover");
+  });
+  scroller.addEventListener("pointerleave", event => {
+    if (event.pointerType === "mouse") resume("hover");
+  });
+  scroller.addEventListener("pointerdown", () => pause("pointer"), { passive: true });
+  scroller.addEventListener("pointerup", () => resume("pointer", 1600), { passive: true });
+  scroller.addEventListener("pointercancel", () => resume("pointer", 1600), { passive: true });
+  scroller.addEventListener("wheel", () => {
+    pause("wheel");
+    resume("wheel", 1600);
+  }, { passive: true });
+  scroller.addEventListener("focusin", () => pause("focus"));
+  scroller.addEventListener("focusout", event => {
+    if (!scroller.contains(event.relatedTarget)) resume("focus", 900);
+  });
+  scroller.addEventListener("keydown", () => {
+    pause("keyboard");
+    resume("keyboard", 1600);
+  });
+  scroller.addEventListener("auto-motion-pause", () => pause("modal"));
+  scroller.addEventListener("auto-motion-resume", () => resume("modal", 1200));
+
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(entries => {
+      if (entries.some(entry => entry.isIntersecting)) resume("viewport", 300);
+      else pause("viewport");
+    }, { threshold: 0.08 });
+    observer.observe(scroller);
+  } else {
+    pauseReasons.delete("viewport");
+  }
+
+  window.addEventListener("resize", measure);
+  measure();
+  animationFrame = window.requestAnimationFrame(tick);
+}
+
 function setupAfterDarkGallery() {
   const gallery = document.querySelector(".after-dark-gallery");
   const status = document.querySelector("#after-dark-gallery-status");
   if (!gallery || !status) return;
-  const cards = [...gallery.querySelectorAll(".after-dark-gallery-card")];
+  const cards = [...gallery.querySelectorAll(":scope > .after-dark-gallery-card")];
+  cards.forEach((card, index) => card.dataset.motionSource = String(index));
+  setupAutoMovingStrip(gallery, cards, 34000);
 
   const updateStatus = () => {
     const galleryLeft = gallery.getBoundingClientRect().left;
-    const currentIndex = cards.reduce((closest, card, index) => {
+    const visibleCards = [...gallery.querySelectorAll(":scope > .after-dark-gallery-card")];
+    const currentCard = visibleCards.reduce((closest, card) => {
       const distance = Math.abs(card.getBoundingClientRect().left - galleryLeft);
-      return distance < closest.distance ? { index, distance } : closest;
-    }, { index: 0, distance: Number.POSITIVE_INFINITY }).index;
+      return distance < closest.distance ? { card, distance } : closest;
+    }, { card: cards[0], distance: Number.POSITIVE_INFINITY }).card;
+    const currentIndex = Number(currentCard.dataset.motionSource) || 0;
     status.textContent = `${currentIndex + 1} / ${cards.length}`;
   };
 
@@ -818,6 +918,68 @@ function setupAfterDarkGallery() {
   });
   window.addEventListener("resize", updateStatus);
   updateStatus();
+
+  const modal = document.querySelector("#after-dark-modal");
+  const modalImage = document.querySelector("#after-dark-modal-image");
+  const modalCaption = document.querySelector("#after-dark-modal-caption");
+  let previousFocus;
+
+  if (!modal || !modalImage || !modalCaption) return;
+
+  const openPreview = (image, trigger) => {
+    previousFocus = trigger;
+    modalImage.src = image.currentSrc || image.src;
+    modalImage.srcset = image.srcset || "";
+    modalImage.sizes = "min(88vw, 900px)";
+    modalImage.alt = image.alt || `Preview of ${trigger.closest("label")?.querySelector("b")?.textContent || "Saturn After Dark option"}`;
+    modalImage.width = Number(image.getAttribute("width")) || image.naturalWidth;
+    modalImage.height = Number(image.getAttribute("height")) || image.naturalHeight;
+    modalCaption.textContent = image.alt || trigger.closest("label")?.querySelector("b")?.textContent || "Saturn After Dark inspiration";
+    document.body.classList.add("modal-open", "after-dark-modal-open");
+    gallery.dispatchEvent(new CustomEvent("auto-motion-pause"));
+    if (typeof modal.showModal === "function") modal.showModal();
+    else modal.setAttribute("open", "");
+    modal.querySelector(".after-dark-modal-close")?.focus();
+    refreshFloatingPill();
+  };
+
+  const closePreview = () => {
+    if (typeof modal.close === "function") modal.close();
+    else {
+      modal.removeAttribute("open");
+      modal.dispatchEvent(new Event("close"));
+    }
+  };
+
+  gallery.querySelectorAll("[data-after-dark-preview]").forEach(button => {
+    button.addEventListener("click", () => openPreview(button.querySelector("img"), button));
+  });
+
+  document.querySelectorAll(".after-dark-image-choices img").forEach(image => {
+    const label = image.closest("label")?.querySelector("b")?.textContent || "Saturn After Dark option";
+    image.tabIndex = 0;
+    image.setAttribute("role", "button");
+    image.setAttribute("aria-label", `Enlarge ${label}`);
+    const openOption = event => {
+      if (event.type === "keydown" && event.key !== "Enter" && event.key !== " ") return;
+      event.preventDefault();
+      event.stopPropagation();
+      openPreview(image, image);
+    };
+    image.addEventListener("click", openOption);
+    image.addEventListener("keydown", openOption);
+  });
+
+  modal.querySelector(".after-dark-modal-close")?.addEventListener("click", closePreview);
+  modal.addEventListener("click", event => {
+    if (event.target === modal) closePreview();
+  });
+  modal.addEventListener("close", () => {
+    document.body.classList.remove("modal-open", "after-dark-modal-open");
+    gallery.dispatchEvent(new CustomEvent("auto-motion-resume"));
+    previousFocus?.focus();
+    refreshFloatingPill();
+  });
 }
 
 function updateWidgetEnquiryLinks() {
@@ -1020,11 +1182,13 @@ function setupReviewCarousel() {
 
 function setupDesignGallery() {
   const scroller = document.querySelector(".design-gallery");
-  const cards = [...document.querySelectorAll(".design-card")];
+  const cards = [...scroller?.querySelectorAll(":scope > .design-card") || []];
   const position = document.querySelector("#design-gallery-position");
   let scrollFrame;
 
   if (!scroller || cards.length === 0 || !position) return;
+  cards.forEach((card, index) => card.dataset.motionSource = String(index));
+  setupAutoMovingStrip(scroller, cards, 30000);
 
   const cardOffset = card => {
     const scrollInset = Number.parseFloat(getComputedStyle(scroller).scrollPaddingLeft) || 0;
@@ -1036,11 +1200,12 @@ function setupDesignGallery() {
 
   const activeIndex = () => {
     const current = scroller.scrollLeft;
-    return cards.reduce((nearest, card, index) => (
-      Math.abs(cardOffset(card) - current) < Math.abs(cardOffset(cards[nearest]) - current)
-        ? index
-        : nearest
-    ), 0);
+    const visibleCards = [...scroller.querySelectorAll(":scope > .design-card")];
+    const nearest = visibleCards.reduce((closest, card) => {
+      const distance = Math.abs(cardOffset(card) - current);
+      return distance < closest.distance ? { card, distance } : closest;
+    }, { card: cards[0], distance: Number.POSITIVE_INFINITY }).card;
+    return Number(nearest.dataset.motionSource) || 0;
   };
 
   const updateState = () => {
@@ -1072,6 +1237,26 @@ function setupDesignGallery() {
   }, { passive: true });
 
   window.addEventListener("resize", updateState);
+
+  scroller.addEventListener("click", event => {
+    const preview = event.target.closest("[data-gallery-open]");
+    const card = preview?.closest(".design-card");
+    if (!preview || !card || !window.matchMedia("(hover: none)").matches) return;
+    if (card.classList.contains("is-overlay-open")) return;
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    cards.forEach(item => item.classList.toggle("is-overlay-open", item === card));
+    scroller.dispatchEvent(new CustomEvent("auto-motion-pause"));
+  }, true);
+
+  document.addEventListener("click", event => {
+    if (scroller.contains(event.target)) return;
+    cards.forEach(card => {
+      card.classList.remove("is-overlay-open");
+    });
+    scroller.dispatchEvent(new CustomEvent("auto-motion-resume"));
+  });
+
   updateState();
 }
 
@@ -1099,6 +1284,7 @@ function setupFloatingPill() {
 
 function setupGalleryModal() {
   const modal = document.querySelector("#design-modal");
+  const designGallery = document.querySelector(".design-gallery");
   const modalImage = document.querySelector("#modal-image");
   const modalCaption = document.querySelector("#modal-caption");
   const modalCount = document.querySelector("#modal-count");
@@ -1124,7 +1310,9 @@ function setupGalleryModal() {
   function openModal(index, trigger) {
     previousFocus = trigger;
     renderModal(index);
+    document.querySelectorAll(".design-card.is-overlay-open").forEach(card => card.classList.remove("is-overlay-open"));
     document.body.classList.add("modal-open");
+    designGallery?.dispatchEvent(new CustomEvent("auto-motion-pause"));
 
     if (typeof modal.showModal === "function") {
       modal.showModal();
@@ -1141,9 +1329,7 @@ function setupGalleryModal() {
       modal.close();
     } else {
       modal.removeAttribute("open");
-      document.body.classList.remove("modal-open");
-      previousFocus?.focus();
-      refreshFloatingPill();
+      modal.dispatchEvent(new Event("close"));
     }
   }
 
@@ -1172,6 +1358,7 @@ function setupGalleryModal() {
 
   modal.addEventListener("close", () => {
     document.body.classList.remove("modal-open");
+    designGallery?.dispatchEvent(new CustomEvent("auto-motion-resume"));
     previousFocus?.focus();
     refreshFloatingPill();
   });

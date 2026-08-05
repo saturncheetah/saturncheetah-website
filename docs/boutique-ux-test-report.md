@@ -1006,6 +1006,69 @@ reviews, FAQ, footer, navigation and `netlify.toml` are unchanged.
 No deployment, merge, library installation, DNS change or Netlify
 configuration change was performed.
 
+## Design motion and After Dark validation — 2026-08-05
+
+### Assets and content
+
+- The responsive files are `category-bottles-new-640.webp` (640×640),
+  `category-bottles-new-1254.webp` (1254×1254),
+  `category-tote-bags-new-640.webp` (640×800) and
+  `category-tote-bags-new-1122.webp` (1122×1402).
+- The source masters remain unchanged in the ignored handoff pack. An official
+  one-off `cwebp` binary ran from a temporary directory; no package, library or
+  repository dependency was installed.
+- Static reference checks found 33 images, zero missing local files and zero
+  images without intrinsic dimensions. CSS uses centred `object-fit: contain`
+  for both replacement product images and all affected garment imagery.
+- The other three secondary products, design order and After Dark
+  hero/inspiration order are unchanged.
+
+### Interaction and accessibility
+
+- Explore Our Designs loops leftward in 30 seconds; Saturn After Dark loops in
+  34 seconds. Runtime clones are non-interactive, inert and hidden from the
+  accessibility tree.
+- Both rails pause on pointer/touch, hover, focus, wheel and keyboard use,
+  pause while their overlay or modal is open, stop outside the viewport and
+  omit automatic motion under `prefers-reduced-motion`.
+- Native horizontal touch scrolling remains available. Design overlays reveal
+  on hover/focus and on the first mobile tap, so the title and action do not
+  depend on hover alone.
+- The After Dark preview uses a labelled native dialog, an explicit close
+  button, outside-click and Escape dismissal, and restores focus to its
+  trigger. Option images are keyboard-operable preview controls; selection
+  labels remain separate and visually distinct.
+- Existing focus treatments remain visible and all newly introduced controls
+  retain at least 44 px interactive targets.
+
+### Responsive and regression checks
+
+Static CSS geometry was reviewed at 320, 360, 390, 430, 768, 1024, 1440 and
+1920 px. Mobile design cards use a bounded 82vw width for one dominant image
+and a next-card preview. After Dark style and detail controls use two columns
+on phone widths and auto-fit 180–220 px tracks on larger screens. The
+configurator has no horizontal scroller; page gutters, zero-minimum tracks and
+contained media prevent page-level horizontal overflow.
+
+- JavaScript syntax: passed with `node --check assets/js/site.js`.
+- HTML IDs: 91 checked, zero duplicates.
+- ARIA/label references and anchors: zero missing targets.
+- Local references: zero missing files.
+- CSS braces: 761 opening and 761 closing.
+- `git diff --check`: passed.
+- Hero, Classic, bulk form/content, custom-piece story, reviews and FAQ markup
+  are byte-equivalent to the pre-change commit.
+- `productData`, Classic selectors/image switching, review carousel and all 11
+  WhatsApp message builders are byte-equivalent to the pre-change commit.
+- Approved design order, After Dark field names, section order and WhatsApp
+  number `917780478506` are unchanged.
+- No existing approved asset, dependency or Netlify file changed.
+
+This dependency-free repository has no installed browser-automation harness.
+The listed widths were validated through deterministic CSS geometry and static
+DOM/interaction checks; physical touch-device and browser rendering remain a
+release gate and are not claimed here. No deployment occurred.
+
 ## Phase 1 stable-journey declutter validation — 2026-08-05
 
 Baseline: `b2059c3219d7637d3246671b83ced6410cf51904`
