@@ -786,3 +786,30 @@ Changed production files: `index.html`, `assets/css/site.css`,
 data and WhatsApp builders, all protected sections, existing approved media,
 dependencies and Netlify configuration remain unchanged. No deployment
 occurred.
+
+## Corrective gallery track fix — 2026-08-05
+
+Corrected the desktop duplication and stalled motion introduced by the focused
+editorial update. A legacy `@media (min-width: 1200px)` rule was changing the
+design gallery back to a five-column grid. Runtime loop clones therefore
+wrapped into a visible second row, and the first clone no longer provided a
+valid horizontal loop distance.
+
+Both affected galleries now use one runtime `.motion-track`: the five unique
+source items are moved into one non-wrapping flex row and one inert,
+aria-hidden clone sequence is appended outside the initial viewport solely for
+the loop boundary. Animation uses a translated track and resets at the exact
+unique-sequence width. Explore Our Designs uses card widths that keep roughly
+four to five cards visible on desktop, and its surrounding section is now dark
+and open rather than a pale framed gallery.
+
+Saturn After Dark has exactly one gallery in source markup. Its DOM order is
+introduction, gallery, then configurator, with explicit grid rows preventing
+legacy layout rules from reordering those blocks. The cloned-slide counter was
+removed rather than presenting ambiguous continuous-loop state.
+
+Hover, focus, mouse drag, touch, wheel, modal and off-viewport pauses remain;
+manual horizontal scrolling is folded back into the translated loop before
+motion resumes. Reduced-motion users receive the same one-row track without
+clones or automatic movement. Approved assets, order, titles, options and all
+WhatsApp builders remain unchanged.

@@ -795,11 +795,24 @@ function setupAfterDarkConfigurator() {
 }
 
 function setupAutoMovingStrip(scroller, originals, duration = 32000) {
-  if (!scroller || originals.length < 2 || reducedMotion.matches) return;
+  if (!scroller || originals.length < 2) return;
 
   const pauseReasons = new Set(["viewport"]);
-  let animationFrame = 0;
+  const track = document.createElement("div");
+  track.className = "motion-track";
+  originals.forEach(original => track.append(original));
+  scroller.append(track);
+
+  if (reducedMotion.matches) return;
+
   let previousTime = 0;
+  let travel = 0;
+  let dragging = false;
+  let dragStartX = 0;
+  let dragStartScroll = 0;
+  let committingScroll = false;
+  let scrollTimer = 0;
+  let frameEventTime = 0;
   const resumeTimers = new Map();
   let loopWidth = 0;
 
@@ -816,12 +829,14 @@ function setupAutoMovingStrip(scroller, originals, duration = 32000) {
       item.removeAttribute("data-design-title");
     });
     clone.querySelectorAll("a, button, input").forEach(item => item.tabIndex = -1);
-    scroller.append(clone);
+    track.append(clone);
   });
 
   const measure = () => {
-    const firstClone = scroller.querySelector("[data-motion-clone]");
+    const firstClone = track.querySelector("[data-motion-clone]");
     loopWidth = firstClone ? firstClone.offsetLeft - originals[0].offsetLeft : 0;
+    if (loopWidth > 0) travel %= loopWidth;
+    track.style.transform = `translate3d(${-travel}px, 0, 0)`;
   };
 
   const pause = reason => {
@@ -842,13 +857,28 @@ function setupAutoMovingStrip(scroller, originals, duration = 32000) {
     if (!pauseReasons.size && loopWidth > 0) {
       const elapsed = previousTime ? Math.min(time - previousTime, 48) : 0;
       scroller.classList.add("is-auto-moving");
-      scroller.scrollLeft += (loopWidth / duration) * elapsed;
-      if (scroller.scrollLeft >= loopWidth) scroller.scrollLeft -= loopWidth;
+      travel = (travel + (loopWidth / duration) * elapsed) % loopWidth;
+      track.style.transform = `translate3d(${-travel}px, 0, 0)`;
+      if (time - frameEventTime > 160) {
+        scroller.dispatchEvent(new CustomEvent("auto-motion-frame"));
+        frameEventTime = time;
+      }
     } else {
       scroller.classList.remove("is-auto-moving");
     }
     previousTime = time;
-    animationFrame = window.requestAnimationFrame(tick);
+    window.requestAnimationFrame(tick);
+  };
+
+  const commitManualScroll = () => {
+    if (!scroller.scrollLeft || loopWidth <= 0) return;
+    committingScroll = true;
+    travel = (travel + scroller.scrollLeft) % loopWidth;
+    scroller.scrollLeft = 0;
+    track.style.transform = `translate3d(${-travel}px, 0, 0)`;
+    window.requestAnimationFrame(() => {
+      committingScroll = false;
+    });
   };
 
   scroller.addEventListener("pointerenter", event => {
@@ -857,9 +887,41 @@ function setupAutoMovingStrip(scroller, originals, duration = 32000) {
   scroller.addEventListener("pointerleave", event => {
     if (event.pointerType === "mouse") resume("hover");
   });
-  scroller.addEventListener("pointerdown", () => pause("pointer"), { passive: true });
-  scroller.addEventListener("pointerup", () => resume("pointer", 1600), { passive: true });
-  scroller.addEventListener("pointercancel", () => resume("pointer", 1600), { passive: true });
+  scroller.addEventListener("pointerdown", event => {
+    pause("pointer");
+    if (event.pointerType !== "mouse" || event.target.closest("button, a, input")) return;
+    dragging = true;
+    dragStartX = event.clientX;
+    dragStartScroll = scroller.scrollLeft;
+    scroller.classList.add("is-dragging");
+    scroller.setPointerCapture(event.pointerId);
+  });
+  scroller.addEventListener("pointermove", event => {
+    if (!dragging) return;
+    scroller.scrollLeft = dragStartScroll + dragStartX - event.clientX;
+    event.preventDefault();
+  });
+  const endPointerInteraction = event => {
+    if (dragging) {
+      dragging = false;
+      scroller.classList.remove("is-dragging");
+      if (scroller.hasPointerCapture(event.pointerId)) scroller.releasePointerCapture(event.pointerId);
+    }
+    window.clearTimeout(scrollTimer);
+    scrollTimer = window.setTimeout(commitManualScroll, 180);
+    resume("pointer", 1600);
+  };
+  scroller.addEventListener("pointerup", endPointerInteraction);
+  scroller.addEventListener("pointercancel", endPointerInteraction);
+  scroller.addEventListener("scroll", () => {
+    if (committingScroll) return;
+    pause("manual-scroll");
+    window.clearTimeout(scrollTimer);
+    scrollTimer = window.setTimeout(() => {
+      commitManualScroll();
+      resume("manual-scroll", 1200);
+    }, 180);
+  }, { passive: true });
   scroller.addEventListener("wheel", () => {
     pause("wheel");
     resume("wheel", 1600);
@@ -887,37 +949,21 @@ function setupAutoMovingStrip(scroller, originals, duration = 32000) {
 
   window.addEventListener("resize", measure);
   measure();
-  animationFrame = window.requestAnimationFrame(tick);
+  window.requestAnimationFrame(tick);
 }
 
 function setupAfterDarkGallery() {
   const gallery = document.querySelector(".after-dark-gallery");
-  const status = document.querySelector("#after-dark-gallery-status");
-  if (!gallery || !status) return;
+  if (!gallery) return;
   const cards = [...gallery.querySelectorAll(":scope > .after-dark-gallery-card")];
   cards.forEach((card, index) => card.dataset.motionSource = String(index));
   setupAutoMovingStrip(gallery, cards, 34000);
-
-  const updateStatus = () => {
-    const galleryLeft = gallery.getBoundingClientRect().left;
-    const visibleCards = [...gallery.querySelectorAll(":scope > .after-dark-gallery-card")];
-    const currentCard = visibleCards.reduce((closest, card) => {
-      const distance = Math.abs(card.getBoundingClientRect().left - galleryLeft);
-      return distance < closest.distance ? { card, distance } : closest;
-    }, { card: cards[0], distance: Number.POSITIVE_INFINITY }).card;
-    const currentIndex = Number(currentCard.dataset.motionSource) || 0;
-    status.textContent = `${currentIndex + 1} / ${cards.length}`;
-  };
-
-  gallery.addEventListener("scroll", updateStatus, { passive: true });
   gallery.addEventListener("keydown", event => {
     if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
     event.preventDefault();
     const direction = event.key === "ArrowRight" ? 1 : -1;
     gallery.scrollBy({ left: direction * gallery.clientWidth * 0.78, behavior: "smooth" });
   });
-  window.addEventListener("resize", updateStatus);
-  updateStatus();
 
   const modal = document.querySelector("#after-dark-modal");
   const modalImage = document.querySelector("#after-dark-modal-image");
@@ -1199,10 +1245,10 @@ function setupDesignGallery() {
   };
 
   const activeIndex = () => {
-    const current = scroller.scrollLeft;
-    const visibleCards = [...scroller.querySelectorAll(":scope > .design-card")];
+    const galleryLeft = scroller.getBoundingClientRect().left;
+    const visibleCards = [...scroller.querySelectorAll(".motion-track > .design-card")];
     const nearest = visibleCards.reduce((closest, card) => {
-      const distance = Math.abs(cardOffset(card) - current);
+      const distance = Math.abs(card.getBoundingClientRect().left - galleryLeft);
       return distance < closest.distance ? { card, distance } : closest;
     }, { card: cards[0], distance: Number.POSITIVE_INFINITY }).card;
     return Number(nearest.dataset.motionSource) || 0;
@@ -1235,6 +1281,7 @@ function setupDesignGallery() {
     window.cancelAnimationFrame(scrollFrame);
     scrollFrame = window.requestAnimationFrame(updateState);
   }, { passive: true });
+  scroller.addEventListener("auto-motion-frame", updateState);
 
   window.addEventListener("resize", updateState);
 

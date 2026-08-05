@@ -1069,6 +1069,48 @@ The listed widths were validated through deterministic CSS geometry and static
 DOM/interaction checks; physical touch-device and browser rendering remain a
 release gate and are not claimed here. No deployment occurred.
 
+## Corrective gallery validation — 2026-08-05
+
+Source and runtime-structure checks confirm one Explore gallery with five
+unique design cards and one After Dark gallery with five unique inspiration
+cards. The After Dark introduction precedes its gallery, which precedes the
+configurator. Its continuous-loop counter and ARIA reference were removed.
+
+The final cascade explicitly overrides the legacy 1200 px design-grid rule:
+both viewports and their runtime tracks are non-wrapping flex layouts. At 320,
+360, 390 and 430 px the 82vw/86vw card rules provide one dominant card and a
+partial next card. At 768 and 1024 px the tracks remain single-row swipe rails.
+At 1440 and 1920 px the design width rule yields approximately four to five
+visible cards, while After Dark yields approximately three to four. Each
+unique sequence is wider than its viewport at the desktop bounds, keeping the
+clone sequence beyond the initial view and preventing two complete copies from
+appearing simultaneously.
+
+Animation starts after the short IntersectionObserver activation delay without
+requiring a swipe. Track translation advances continuously for 30 seconds per
+design loop and 34 seconds per After Dark loop. The modulo reset occurs at the
+measured first-clone offset; clones inherit unique sequence indices so their
+vertical rhythm exactly matches the originals at the seam. Manual mouse drag,
+touch scroll and keyboard scrolling remain available. Motion pauses for all
+required interactions and is not initialized under reduced motion.
+
+Regression results:
+
+- JavaScript syntax and `git diff --check`: passed.
+- HTML IDs: 90 checked, zero duplicates.
+- ARIA references, anchors and local media references: zero missing.
+- Images: 33 checked, all with intrinsic dimensions.
+- CSS braces: 774 opening and 774 closing.
+- Hero, Classic, bulk, custom-piece story, reviews and FAQ markup unchanged.
+- Product data, design order, After Dark field names, configurator behavior,
+  review carousel and all WhatsApp builders unchanged.
+- Secondary product assets, all other approved assets, dependencies and
+  Netlify configuration unchanged.
+
+No browser-automation dependency is installed. The eight widths were checked
+using explicit cascade/geometry assertions and DOM regression checks; physical
+browser rendering remains a release gate. No deployment occurred.
+
 ## Phase 1 stable-journey declutter validation — 2026-08-05
 
 Baseline: `b2059c3219d7637d3246671b83ced6410cf51904`
