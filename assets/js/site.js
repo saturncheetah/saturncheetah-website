@@ -999,16 +999,22 @@ function setupAfterDarkGallery() {
   if (!modal || !modalImage || !modalCaption) return;
 
   const openPreview = (image, trigger) => {
+    const optionName = trigger.closest(".after-dark-option")?.querySelector("b")?.textContent
+      || trigger.closest("label")?.querySelector("b")?.textContent
+      || "Saturn After Dark option";
     previousFocus = trigger;
     modalImage.src = image.currentSrc || image.src;
     modalImage.srcset = image.srcset || "";
     modalImage.sizes = "min(88vw, 900px)";
-    modalImage.alt = image.alt || `Preview of ${trigger.closest("label")?.querySelector("b")?.textContent || "Saturn After Dark option"}`;
+    modalImage.alt = image.alt || `Preview of ${optionName}`;
     modalImage.width = Number(image.getAttribute("width")) || image.naturalWidth;
     modalImage.height = Number(image.getAttribute("height")) || image.naturalHeight;
-    modalCaption.textContent = image.alt || trigger.closest("label")?.querySelector("b")?.textContent || "Saturn After Dark inspiration";
+    modalCaption.textContent = image.alt || optionName;
     document.body.classList.add("modal-open", "after-dark-modal-open");
     gallery.dispatchEvent(new CustomEvent("auto-motion-pause"));
+    if (window.history.state?.saturnModal !== "after-dark") {
+      window.history.pushState({ ...window.history.state, saturnModal: "after-dark" }, "");
+    }
     if (typeof modal.showModal === "function") modal.showModal();
     else modal.setAttribute("open", "");
     modal.querySelector(".after-dark-modal-close")?.focus();
@@ -1023,42 +1029,47 @@ function setupAfterDarkGallery() {
     }
   };
 
+  const dismissPreview = () => {
+    if (window.history.state?.saturnModal === "after-dark") {
+      window.history.back();
+      return;
+    }
+    closePreview();
+  };
+
   gallery.querySelectorAll("[data-after-dark-preview]").forEach(button => {
     button.addEventListener("click", () => openPreview(button.querySelector("img"), button));
   });
 
-  document.querySelectorAll(".after-dark-image-choices img").forEach(image => {
-    const optionLabel = image.closest("label");
-    const control = optionLabel?.querySelector("input[type='radio'], input[type='checkbox']");
-    const optionName = optionLabel?.querySelector("b")?.textContent || "Saturn After Dark option";
-    if (!control) return;
-
-    image.tabIndex = 0;
-    image.setAttribute("role", "button");
-    image.setAttribute("aria-label", `Select and enlarge ${optionName}`);
-
-    const selectAndOpenOption = event => {
-      if (event.type === "keydown" && event.key !== "Enter" && event.key !== " ") return;
-      event.preventDefault();
+  document.querySelectorAll(".after-dark-option-preview").forEach(button => {
+    const option = button.closest(".after-dark-option");
+    const image = option?.querySelector("img");
+    const optionName = option?.querySelector("b")?.textContent || "Saturn After Dark option";
+    if (!image) return;
+    button.setAttribute("aria-label", `View ${optionName} detail`);
+    button.addEventListener("click", event => {
       event.stopPropagation();
-      control.checked = control.type === "radio" ? true : !control.checked;
-      control.dispatchEvent(new Event("change", { bubbles: true }));
-      openPreview(image, image);
-    };
-
-    image.addEventListener("click", selectAndOpenOption);
-    image.addEventListener("keydown", selectAndOpenOption);
+      openPreview(image, button);
+    });
   });
 
-  modal.querySelector(".after-dark-modal-close")?.addEventListener("click", closePreview);
+  modal.querySelector(".after-dark-modal-close")?.addEventListener("click", dismissPreview);
   modal.addEventListener("click", event => {
-    if (event.target === modal) closePreview();
+    if (event.target === modal) dismissPreview();
+  });
+  modal.addEventListener("cancel", event => {
+    event.preventDefault();
+    dismissPreview();
   });
   modal.addEventListener("close", () => {
     document.body.classList.remove("modal-open", "after-dark-modal-open");
     gallery.dispatchEvent(new CustomEvent("auto-motion-resume"));
     previousFocus?.focus();
     refreshFloatingPill();
+  });
+
+  window.addEventListener("popstate", () => {
+    if (modal.open || modal.hasAttribute("open")) closePreview();
   });
 }
 

@@ -6352,6 +6352,43 @@ body {
 }
 
 /* Final After Dark layout overrides; kept last to supersede legacy iterations above. */
+.after-dark-option {
+  position: relative;
+  min-width: 0;
+}
+
+.after-dark-option > label {
+  display: block;
+}
+
+.after-dark-option-preview {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 4;
+  min-height: 36px;
+  padding: 7px 11px;
+  border: 1px solid rgb(255 245 238 / 24%);
+  border-radius: 999px;
+  color: var(--night-ivory);
+  background: rgb(9 8 11 / 76%);
+  box-shadow: 0 7px 18px rgb(0 0 0 / 26%);
+  font-size: .64rem;
+  font-weight: 800;
+  letter-spacing: .04em;
+  cursor: zoom-in;
+  backdrop-filter: blur(10px);
+}
+
+.after-dark-option-preview:is(:hover, :focus-visible) {
+  border-color: rgb(233 167 183 / 62%);
+  background: rgb(84 24 45 / 90%);
+}
+
+.after-dark-option-acid {
+  width: 100%;
+}
+
 .after-dark-detail-grid {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
@@ -6464,8 +6501,8 @@ body {
     scrollbar-width: thin;
   }
 
-  .after-dark-style-choices label,
-  .after-dark-details-choices label {
+  .after-dark-style-choices .after-dark-option,
+  .after-dark-details-choices .after-dark-option {
     flex: 0 0 min(43vw, 175px);
     grid-column: auto;
     scroll-snap-align: start;
