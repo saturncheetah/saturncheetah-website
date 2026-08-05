@@ -4134,17 +4134,7 @@ html:not(.js-enabled) .story-panel[hidden] {
 }
 
 .store-journey-enabled #after-dark .after-dark-gallery-block::before {
-  position: absolute;
-  top: 0;
-  left: var(--journey-sweep);
-  z-index: 3;
-  width: 1px;
-  height: 100%;
-  background: linear-gradient(transparent, rgb(255 165 98 / 54%), transparent);
-  box-shadow: 0 0 22px rgb(255 135 56 / 30%);
-  content: "";
-  opacity: var(--journey-opacity);
-  pointer-events: none;
+  display: none;
 }
 
 @media (max-width: 767px) {
