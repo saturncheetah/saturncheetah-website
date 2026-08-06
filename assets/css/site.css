@@ -3758,9 +3758,17 @@ html:not(.js-enabled) .story-panel[hidden] {
 }
 
 @media (max-width: 767px) {
+  .custom-print-rail {
+    width: calc(100% - 20px);
+    max-width: 520px;
+    margin-inline: auto;
+    border-radius: 20px;
+  }
+
   .custom-print-rail img {
-    aspect-ratio: 4 / 5;
-    object-position: center;
+    max-height: 320px;
+    aspect-ratio: 5 / 4;
+    object-position: center 27%;
   }
 }
 
