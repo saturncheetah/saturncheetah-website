@@ -40,7 +40,7 @@
   }
   </script>
 </head>
-<body>
+<body class="home-page">
   <a class="skip-link" href="#main-content">Skip to content</a>
 
   <header class="site-header" id="top">
@@ -71,7 +71,6 @@
         <a href="#tees" data-nav-section="tees">T-shirts</a>
         <a href="#after-dark" data-nav-section="after-dark">After Dark</a>
         <a href="#direction" data-nav-section="direction">Designs</a>
-        <a href="#process" data-nav-section="process">Process</a>
         <a href="#bulk-tees" data-nav-section="bulk-tees">Bulk</a>
         <a class="nav-cta" href="#contact" data-nav-section="contact">WhatsApp</a>
       </nav>
@@ -79,6 +78,7 @@
   </header>
 
   <main id="main-content">
+    <span class="atelier-thread" aria-hidden="true"></span>
     <section class="hero" aria-labelledby="hero-title">
       <div class="container hero-content">
         <div class="hero-copy">
@@ -90,10 +90,8 @@
           </p>
 
           <ul class="hero-proof-chips hero-intro hero-intro-4" aria-label="Product choices and ordering">
-            <li>180 GSM Regular</li>
-            <li>240 GSM Oversized</li>
-            <li>From 1 Piece</li>
-            <li>Bulk Available</li>
+            <li>Regular + Oversized</li>
+            <li>Single pieces + Bulk</li>
           </ul>
 
           <picture class="hero-picture">
@@ -127,7 +125,13 @@
           <p class="eyebrow">Find your silhouette</p>
           <h2 id="tees-title">Wear it your way.</h2>
           <p>Choose the weight, fit and colour that feels like you.</p>
+          <a class="button button-primary section-heading-action" href="customise.html">Customise Your T-shirt <span aria-hidden="true">↗</span></a>
         </div>
+
+        <figure class="custom-print-rail reveal-item">
+          <img src="assets/images/editorial/custom-print-rail.png" alt="Five black and ivory T-shirts on a boutique rail demonstrating spaces for a print, image, logo, custom design and artwork" width="1672" height="941" loading="lazy" decoding="async">
+          <figcaption><span>One blank tee.</span> Any direction you choose.</figcaption>
+        </figure>
 
         <div class="tee-selector">
           <fieldset class="tee-segments" aria-describedby="tee-selector-note">
@@ -234,6 +238,12 @@
 
     <section class="section bulk-tee-section" id="bulk-tees" aria-labelledby="bulk-tees-title">
       <div class="container">
+        <div class="home-journey-link">
+          <p class="eyebrow">For teams, events and brands</p>
+          <h2>Make more, together.</h2>
+          <p>Explore bulk printing and embroidery, then build a focused enquiry on its own page.</p>
+          <a class="button button-primary" href="bulk.html">Request a Bulk Quote <span aria-hidden="true">↗</span></a>
+        </div>
         <div class="bulk-tee-card" data-whatsapp-zone>
           <div class="bulk-tee-overview">
             <div>
@@ -642,6 +652,7 @@
             </figure>
           </div>
           <p class="after-dark-gallery-note">Design inspiration. Final customisation depends on feasibility.</p>
+          <a class="button button-primary after-dark-build-link" href="after-dark.html">Build Your After Dark Piece <span aria-hidden="true">↗</span></a>
         </div>
 
         <form class="after-dark-configurator" id="after-dark-configurator">
@@ -652,7 +663,7 @@
           </div>
 
           <div class="after-dark-detail-grid">
-            <fieldset class="after-dark-detail-card after-dark-style-card">
+            <fieldset class="after-dark-detail-card after-dark-style-card" data-after-dark-step="0">
               <legend><span>01</span> Style</legend>
               <div class="after-dark-image-choices after-dark-style-choices">
                 <div class="after-dark-option"><label><input type="radio" name="afterDarkStyle" value="Regular T-shirt" checked><span><img src="assets/images/after-dark-approved/sad-style-regular-tee.webp" alt="" width="1254" height="1254" loading="lazy" decoding="async"><b>Regular T-shirt</b></span></label><button type="button" class="after-dark-option-preview">View detail</button></div>
@@ -661,7 +672,7 @@
               </div>
             </fieldset>
 
-            <fieldset class="after-dark-detail-card after-dark-details-card">
+            <fieldset class="after-dark-detail-card after-dark-details-card" data-after-dark-step="1">
               <legend><span>02</span> Details <small>Choose any</small></legend>
               <div class="after-dark-image-choices after-dark-details-choices">
                 <div class="after-dark-option"><label><input type="checkbox" name="afterDarkDetails" value="Silver rings"><span><img src="assets/images/after-dark-approved/sad-detail-silver-rings.webp" alt="" width="1254" height="1254" loading="lazy" decoding="async"><b>Silver rings</b></span></label><button type="button" class="after-dark-option-preview">View detail</button></div>
@@ -672,14 +683,14 @@
               </div>
             </fieldset>
 
-            <fieldset class="after-dark-detail-card after-dark-finish-card">
+            <fieldset class="after-dark-detail-card after-dark-finish-card" data-after-dark-step="2">
               <legend><span>03</span> Optional Acid Spray</legend>
               <div class="after-dark-image-choices after-dark-finish-choices">
                 <div class="after-dark-option after-dark-option-acid"><label class="after-dark-acid-choice"><input type="checkbox" name="afterDarkAcidSpray" value="Yes"><span><img src="assets/images/after-dark-approved/sad-finish-acid-spray.webp" alt="" width="1254" height="1254" loading="lazy" decoding="async"><span class="after-dark-acid-copy"><b>Add acid spray</b><small>Orangish bleach-spray texture on black. Leave unselected for clean black.</small></span></span></label><button type="button" class="after-dark-option-preview">View detail</button></div>
               </div>
             </fieldset>
 
-            <fieldset class="after-dark-detail-card after-dark-size-card">
+            <fieldset class="after-dark-detail-card after-dark-size-card" data-after-dark-step="3">
               <legend><span>04</span> Size</legend>
               <div class="after-dark-size-choices">
                 <label><input type="radio" name="afterDarkSize" value="XS"><span>XS</span></label>
@@ -691,7 +702,7 @@
               </div>
             </fieldset>
 
-            <fieldset class="after-dark-detail-card after-dark-quantity-card">
+            <fieldset class="after-dark-detail-card after-dark-quantity-card" data-after-dark-step="4">
               <legend><span>05</span> Quantity</legend>
               <div class="after-dark-quantity-control">
                 <button type="button" data-after-dark-quantity-step="-1" aria-label="Decrease quantity">−</button>
@@ -699,6 +710,14 @@
                 <button type="button" data-after-dark-quantity-step="1" aria-label="Increase quantity">+</button>
               </div>
             </fieldset>
+          </div>
+
+          <div class="after-dark-step-navigation" aria-label="After Dark builder navigation">
+            <p><span id="after-dark-step-current">1</span> of 5 <strong id="after-dark-step-label">Style</strong></p>
+            <div>
+              <button class="button button-secondary" type="button" data-after-dark-step-back hidden>Back</button>
+              <button class="button button-primary" type="button" data-after-dark-step-next>Continue</button>
+            </div>
           </div>
 
           <div class="after-dark-summary" aria-live="polite" aria-atomic="true">

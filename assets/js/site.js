@@ -756,7 +756,29 @@ function setupAfterDarkConfigurator() {
   const quantityInput = document.querySelector("#after-dark-quantity");
   const quantityButtons = [...afterDarkConfigurator.querySelectorAll("[data-after-dark-quantity-step]")];
   const summary = document.querySelector("#after-dark-selection-summary");
+  const steps = [...afterDarkConfigurator.querySelectorAll("[data-after-dark-step]")];
+  const stepBack = afterDarkConfigurator.querySelector("[data-after-dark-step-back]");
+  const stepNext = afterDarkConfigurator.querySelector("[data-after-dark-step-next]");
+  const stepCurrent = document.querySelector("#after-dark-step-current");
+  const stepLabel = document.querySelector("#after-dark-step-label");
+  const stepLabels = ["Style", "Details", "Finish", "Size", "Quantity"];
+  let activeStep = 0;
   let summaryMotionTimer = 0;
+
+  const showStep = nextStep => {
+    if (!steps.length) return;
+    activeStep = Math.max(0, Math.min(steps.length - 1, nextStep));
+    steps.forEach((step, index) => {
+      const isActive = index === activeStep;
+      step.hidden = !isActive;
+      step.setAttribute("aria-hidden", String(!isActive));
+    });
+    if (stepCurrent) stepCurrent.textContent = String(activeStep + 1);
+    if (stepLabel) stepLabel.textContent = stepLabels[activeStep] || "Selection";
+    if (stepBack) stepBack.hidden = activeStep === 0;
+    if (stepNext) stepNext.hidden = activeStep === steps.length - 1;
+    afterDarkConfigurator.classList.toggle("is-final-step", activeStep === steps.length - 1);
+  };
 
   const showSelectionMotion = target => {
     if (reducedMotion.matches) return;
@@ -811,12 +833,16 @@ function setupAfterDarkConfigurator() {
     });
   });
 
+  stepBack?.addEventListener("click", () => showStep(activeStep - 1));
+  stepNext?.addEventListener("click", () => showStep(activeStep + 1));
+
   afterDarkConfigurator.addEventListener("submit", event => {
     event.preventDefault();
     if (!afterDarkConfigurator.reportValidity()) return;
     window.open(whatsappUrl(buildAfterDarkMessage()), "_blank", "noopener");
   });
 
+  showStep(0);
   updateSummary();
 }
 
@@ -1640,6 +1666,23 @@ function setupFooterYear() {
   if (year) year.textContent = String(new Date().getFullYear());
 }
 
+function setupAtelierThread() {
+  const thread = document.querySelector(".atelier-thread");
+  if (!thread || reducedMotion.matches) return;
+  let queued = false;
+  const update = () => {
+    const maximum = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+    document.documentElement.style.setProperty("--atelier-thread-progress", String(Math.min(1, window.scrollY / maximum)));
+    queued = false;
+  };
+  window.addEventListener("scroll", () => {
+    if (queued) return;
+    queued = true;
+    window.requestAnimationFrame(update);
+  }, { passive: true });
+  update();
+}
+
 function respectReducedMotion() {
   if (!reducedMotion.matches) return;
   document.querySelectorAll("video").forEach(video => video.pause());
@@ -1664,5 +1707,6 @@ setupGalleryModal();
 setupSectionReveals();
 setupStoreJourney();
 setupAfterDarkPowerSwitch();
+setupAtelierThread();
 setupFooterYear();
 respectReducedMotion();
