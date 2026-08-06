@@ -4033,6 +4033,25 @@ html:not(.js-enabled) .story-panel[hidden] {
   }
 }
 
+/* Keep decorative glass and motion layers transparent to taps. */
+.home-page a,
+.home-page button,
+.section-heading-action,
+.after-dark-build-link {
+  position: relative;
+  z-index: 6;
+  pointer-events: auto;
+  touch-action: manipulation;
+}
+
+.home-page .button::before,
+.home-page .button::after,
+.custom-print-rail::after,
+.home-page .hero::before,
+.final-cta::before {
+  pointer-events: none;
+}
+
 /* Glass atelier layer inspired by spotlight, moving-border and glare systems. */
 .home-page .site-header {
   background: transparent;
