@@ -524,12 +524,14 @@ function buildCustomMessage() {
   const size = String(formData.get("selectedSize") || "").trim();
   const quantity = String(formData.get("quantity") || "").trim();
   const designStatus = String(formData.get("designStatus") || "").trim();
+  const storeDesign = String(formData.get("storeDesign") || "").trim();
+  const designInstructions = String(formData.get("designInstructions") || "").trim();
   const opening = isPersonalTee
     ? "I’d like to customise a T-shirt."
     : "I’d like to discuss a bulk custom-product order.";
-  const designNextStep = designStatus === "I need design assistance"
-    ? "I’d like help shaping the design direction."
-    : "I will attach my design or reference in WhatsApp.";
+  const designNextStep = designStatus === "Help me create it"
+        ? "I’d like your help creating or finalising my artwork or idea."
+        : "I’d like to continue with the selected Saturn Cheetah design.";
   const productLines = isPersonalTee
     ? [`Fit: ${selectedProduct.shortLabel}`, `Colour: ${colour}`, `Size: ${size}`]
     : [`Product: ${product}`];
@@ -542,6 +544,8 @@ function buildCustomMessage() {
     ...productLines,
     `Quantity: ${quantity}`,
     `Design status: ${designStatus}`,
+    ...(storeDesign ? [`Selected Saturn Cheetah design: ${storeDesign}`] : []),
+    ...(designInstructions ? [`Design instructions: ${designInstructions}`] : []),
     ...getOptionalFormLines(formData),
     "",
     designNextStep,
@@ -631,6 +635,7 @@ function buildWidgetCustomTeeMessage() {
   const colour = getSelectedColour();
   const quantity = document.querySelector("#custom-quantity")?.value || "";
   const designStatus = document.querySelector("#custom-design-status")?.value || "";
+  const storeDesign = document.querySelector("input[name='storeDesign']:checked")?.value || "";
 
   return [
     "Hello Saturn Cheetah Store,",
@@ -642,6 +647,7 @@ function buildWidgetCustomTeeMessage() {
     widgetField("Size", selectedSize),
     widgetField("Quantity", quantity),
     widgetField("Design status", designStatus),
+    ...(storeDesign ? [widgetField("Selected Saturn Cheetah design", storeDesign)] : []),
     "",
     "Please help me with availability, pricing and the next steps."
   ].join("\n");
@@ -1186,7 +1192,27 @@ function updateWhatsAppLinks() {
 
 function setupWhatsAppFlow() {
   const requiredDate = document.querySelector("#custom-date");
+  const designStatus = document.querySelector("#custom-design-status");
+  const designInstructions = document.querySelector("#custom-design-instructions");
+  const ownArtworkFields = [...document.querySelectorAll("[data-own-artwork-field]")];
+  const storeDesignPicker = document.querySelector("[data-store-design-picker]");
+  const storeDesignInputs = [...document.querySelectorAll("input[name='storeDesign']")];
   if (requiredDate) requiredDate.min = getLocalDateString();
+
+  const updateStoreDesignPicker = () => {
+    const shouldChooseStoreDesign = designStatus?.value === "I want a Saturn Cheetah store design";
+    const shouldCreateOwn = !shouldChooseStoreDesign;
+    if (storeDesignPicker) storeDesignPicker.hidden = !shouldChooseStoreDesign;
+    ownArtworkFields.forEach(field => { field.hidden = !shouldCreateOwn; });
+    if (designInstructions) designInstructions.disabled = !shouldCreateOwn;
+    storeDesignInputs.forEach((input, index) => {
+      input.disabled = !shouldChooseStoreDesign;
+      input.required = shouldChooseStoreDesign && index === 0;
+    });
+  };
+
+  designStatus?.addEventListener("change", updateStoreDesignPicker);
+  updateStoreDesignPicker();
 
   customiseForm?.addEventListener("submit", event => {
     event.preventDefault();
@@ -1688,6 +1714,89 @@ function respectReducedMotion() {
   document.querySelectorAll("video").forEach(video => video.pause());
 }
 
+function setupBackgroundVideos() {
+  const videos = document.querySelectorAll("[data-background-video]");
+  if (!videos.length || reducedMotion.matches) return;
+
+  const loadVideo = video => {
+    if (video.dataset.loaded === "true") return;
+    video.querySelectorAll("source[data-src]").forEach(source => {
+      source.src = source.dataset.src;
+      source.removeAttribute("data-src");
+    });
+    video.dataset.loaded = "true";
+    video.load();
+  };
+
+  if (!("IntersectionObserver" in window)) {
+    videos.forEach(video => {
+      loadVideo(video);
+      video.play().catch(() => {});
+    });
+    return;
+  }
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      const video = entry.target;
+      if (entry.isIntersecting) {
+        loadVideo(video);
+        video.play().catch(() => {});
+      } else {
+        video.pause();
+      }
+    });
+  }, { rootMargin: "30% 0px", threshold: 0.01 });
+
+  videos.forEach(video => observer.observe(video));
+}
+
+function setupFloatingGallery() {
+  const gallery = document.querySelector("[data-floating-gallery]");
+  if (!gallery) return;
+
+  const imageIndices = Array.from({ length: 69 }, (_, index) => index + 1).filter(index => index !== 25);
+  const roundImages = new Set([6, 8, 9, 10, 12, 17, 27, 39, 44]);
+  const fragment = document.createDocumentFragment();
+
+  imageIndices.forEach((imageIndex, position) => {
+    const memory = document.createElement("figure");
+    const image = document.createElement("img");
+    const seed = position;
+    const column = seed % 10;
+    const row = Math.floor(seed / 10);
+    const direction = column < 5 ? -1 : 1;
+    const memoryX = 9 + column * 9.1;
+    let memoryY = 10 + row * 12.5 + (column % 2) * 2.5;
+
+    // Preserve a compact window around Saturn without pushing memories to the edges.
+    if (memoryX > 36 && memoryX < 64 && memoryY > 32 && memoryY < 70) {
+      memoryY = row % 2 === 0 ? 25 + (seed % 4) : 76 - (seed % 4);
+    }
+
+    memory.className = `slaying-memory ${roundImages.has(imageIndex) ? "is-round" : "is-square"}`;
+    memory.style.setProperty("--memory-x", `${memoryX}%`);
+    memory.style.setProperty("--memory-y", `${memoryY}%`);
+    memory.style.setProperty("--memory-size", `${72 + (seed * 17) % 48}px`);
+    memory.style.setProperty("--memory-drift-x", `${direction * (18 + (seed * 19) % 34)}px`);
+    memory.style.setProperty("--memory-drift-y", `${-16 - (seed * 13) % 28}px`);
+    memory.style.setProperty("--memory-delay", `${-((seed * 13) % 43)}s`);
+    memory.style.setProperty("--memory-duration", `${38 + (seed * 7) % 11}s`);
+    memory.style.setProperty("--memory-tilt", `${-7 + (seed * 5) % 15}deg`);
+
+    image.src = `assets/images/customer-gallery/experience-${String(imageIndex).padStart(2, "0")}.jpg`;
+    image.alt = `Saturn Cheetah customer experience ${position + 1}`;
+    image.width = 520;
+    image.height = 520;
+    image.loading = "lazy";
+    image.decoding = "async";
+    memory.append(image);
+    fragment.append(memory);
+  });
+
+  gallery.append(fragment);
+}
+
 setupExperienceOrder();
 setupNavigation();
 setupActiveNavigation();
@@ -1709,4 +1818,6 @@ setupStoreJourney();
 setupAfterDarkPowerSwitch();
 setupAtelierThread();
 setupFooterYear();
+setupFloatingGallery();
+setupBackgroundVideos();
 respectReducedMotion();

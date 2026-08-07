@@ -6,13 +6,28 @@ if(form){
   const counter=form.querySelector("[data-counter]");
   const summary=form.querySelector("[data-summary]");
   const colourChoices=form.querySelector("[data-colour-choices]");
+  const artworkStepTitle=form.querySelector("[data-artwork-step-title]");
+  const helpPath=form.querySelector('[data-artwork-path="help"]');
+  const storePath=form.querySelector('[data-artwork-path="store"]');
+  const designInstructions=form.querySelector('textarea[name="Design instructions"]');
+  const storeDesignInputs=[...form.querySelectorAll('input[name="Store design"]')];
   const colourSets={
     "180":[["black","Black"],["blue","Blue"],["gray","Grey"],["green","Green"],["navy-blue","Navy blue"],["off-white","Off-white"],["orange","Orange"],["pink","Pink"],["red","Red"],["white","White"],["yellow","Yellow"]],
     "240":[["black","Black"],["off-white","Off-white"],["white","White"]]
   };
   let active=0;
-  const show=index=>{active=Math.max(0,Math.min(steps.length-1,index));steps.forEach((step,i)=>step.hidden=i!==active);back.hidden=active===0;next.textContent=active===steps.length-1?"Continue on WhatsApp":"Continue";counter.textContent=`Step ${active+1} of ${steps.length}`;summary.hidden=active!==steps.length-1;if(!summary.hidden)updateSummary()};
-  const updateSummary=()=>{const data=new FormData(form);const parts=[];for(const [key,value] of data.entries())parts.push(`${key}: ${value}`);summary.textContent=parts.join(" · ")};
+  const updateNextLabel=()=>{next.textContent=active===steps.length-1?"Continue on WhatsApp":"Continue"};
+  const show=index=>{active=Math.max(0,Math.min(steps.length-1,index));steps.forEach((step,i)=>step.hidden=i!==active);back.hidden=active===0;updateNextLabel();counter.textContent=`Step ${active+1} of ${steps.length}`;summary.hidden=active!==steps.length-1;if(!summary.hidden)updateSummary()};
+  const displayValue=value=>value instanceof File?(value.name||"No file selected"):value;
+  const updateSummary=()=>{const data=new FormData(form);const parts=[];for(const [key,value] of data.entries()){const shown=displayValue(value);if(shown&&shown!=="No file selected")parts.push(`${key}: ${shown}`)}summary.textContent=parts.join(" · ")};
+  const updateDesignPath=()=>{
+    const useStore=form.querySelector('input[name="Design"]:checked')?.value==="Choose a store design";
+    if(helpPath)helpPath.hidden=useStore;
+    if(storePath)storePath.hidden=!useStore;
+    if(artworkStepTitle)artworkStepTitle.textContent=useStore?"Choose your store design":"Share your artwork or idea";
+    if(designInstructions)designInstructions.disabled=useStore;
+    storeDesignInputs.forEach((input,index)=>{input.disabled=!useStore;input.required=useStore&&index===0});
+  };
   const renderColours=productKey=>{
     if(!colourChoices||!colourSets[productKey])return;
     colourChoices.replaceChildren(...colourSets[productKey].map(([slug,label],index)=>{
@@ -24,13 +39,16 @@ if(form){
     updateSummary();
   };
   back.addEventListener("click",()=>show(active-1));
-  next.addEventListener("click",()=>{if(active<steps.length-1){show(active+1);return}if(!form.reportValidity())return;const data=new FormData(form);const lines=[form.dataset.message||"Saturn Cheetah enquiry",...Array.from(data.entries(),([key,value])=>`${key}: ${value}`)];window.open(`https://wa.me/917780478506?text=${encodeURIComponent(lines.join("\n"))}`,"_blank","noopener")});
+  next.addEventListener("click",()=>{if(active<steps.length-1){const invalid=steps[active].querySelector(":invalid");if(invalid){invalid.reportValidity();return}show(active+1);return}if(!form.reportValidity())return;const data=new FormData(form);const lines=[form.dataset.message||"Saturn Cheetah enquiry",...Array.from(data.entries(),([key,value])=>`${key}: ${displayValue(value)}`)];if(data.get("Design")==="Help me create it")lines.push("I will share any reference image directly in this WhatsApp chat.");window.open(`https://wa.me/917780478506?text=${encodeURIComponent(lines.join("\n"))}`,"_blank","noopener")});
   form.addEventListener("change",event=>{
     if(event.target.matches("[data-product-key]"))renderColours(event.target.dataset.productKey);
+    if(event.target.name==="Design")updateDesignPath();
+    updateNextLabel();
     updateSummary();
   });
   const selectedProduct=form.querySelector("[data-product-key]:checked");
   if(selectedProduct)renderColours(selectedProduct.dataset.productKey);
+  updateDesignPath();
   show(0);
 }
 
