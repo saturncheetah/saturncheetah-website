@@ -593,6 +593,21 @@ function buildBulkMessage(product) {
   ].join("\n");
 }
 
+function buildPortraitMessage(size = "", price = "") {
+  return [
+    "Hello Saturn Cheetah Store,",
+    "",
+    "I would like to order one custom portrait.",
+    "",
+    widgetField("Selected size", size || "Please help me choose"),
+    widgetField("Price", price || "Please confirm"),
+    "Finish: HP",
+    "Quantity: 1",
+    "",
+    "I will share the photo and personalisation details here."
+  ].join("\n");
+}
+
 function buildDesignMessage(designTitle) {
   return [
     "Hello Saturn Cheetah Store,",
@@ -1184,10 +1199,26 @@ function updateWhatsAppLinks() {
     link.href = whatsappUrl(buildBulkMessage(link.dataset.bulkProduct));
   });
 
+  document.querySelectorAll("[data-portrait-enquiry]").forEach(link => {
+    link.href = whatsappUrl(buildPortraitMessage());
+  });
+
   document.querySelectorAll("[data-design-title]").forEach(link => {
     link.href = whatsappUrl(buildDesignMessage(link.dataset.designTitle));
   });
 
+}
+
+function setupPortraitOrder() {
+  const form = document.querySelector("#portrait-order-form");
+  if (!form) return;
+
+  form.addEventListener("submit", event => {
+    event.preventDefault();
+    const selection = form.querySelector("input[name='portraitSize']:checked");
+    if (!selection) return;
+    window.open(whatsappUrl(buildPortraitMessage(selection.value, selection.dataset.price)), "_blank", "noopener");
+  });
 }
 
 function setupWhatsAppFlow() {
@@ -1608,7 +1639,7 @@ function setupStoreJourney() {
 
 function setupAfterDarkPowerSwitch() {
   const section = document.querySelector("#after-dark");
-  const powerSwitch = section?.querySelector(".after-dark-power-switch");
+  const powerSwitch = section?.querySelector(".after-dark-chain-control");
   if (!section || !powerSwitch) return;
 
   const playSwitchClick = poweredOn => {
@@ -1673,9 +1704,13 @@ function setupAfterDarkPowerSwitch() {
 
   powerSwitch.addEventListener("click", () => {
     const poweredOn = !section.classList.contains("is-powered");
+    powerSwitch.classList.remove("is-pulling");
+    window.requestAnimationFrame(() => powerSwitch.classList.add("is-pulling"));
+    window.setTimeout(() => powerSwitch.classList.remove("is-pulling"), 460);
     section.classList.toggle("is-powered", poweredOn);
     powerSwitch.setAttribute("aria-pressed", String(poweredOn));
-    powerSwitch.querySelector("strong").textContent = poweredOn ? "After Dark is on" : "Turn on After Dark";
+    powerSwitch.setAttribute("aria-label", poweredOn ? "Leave Saturn After Dark" : "Enter Saturn After Dark");
+    powerSwitch.querySelector("strong").textContent = poweredOn ? "After Dark is open" : "Enter After Dark";
     playSwitchClick(poweredOn);
   });
 
@@ -1805,6 +1840,7 @@ setupTabs();
 setupStorySwipe();
 setupTeeSelector();
 setupWhatsAppFlow();
+setupPortraitOrder();
 setupWhatsAppWidget();
 setupBulkTeeFlow();
 setupAfterDarkConfigurator();

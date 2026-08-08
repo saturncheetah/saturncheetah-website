@@ -20,7 +20,7 @@
   <link rel="icon" href="assets/images/brand/favicon-64.png" type="image/png" sizes="64x64">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;0,6..96,700;1,6..96,400;1,6..96,500&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500;6..96,600;6..96,700&amp;family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/site.min.css">
   <link rel="preload" as="image" href="assets/images/boutique/hero-desktop.webp" fetchpriority="high">
   <script src="assets/js/site.min.js" defer></script>
@@ -649,20 +649,6 @@
     </section>
 
     <section class="section slaying-section" id="slaying" aria-labelledby="slaying-title">
-      <video
-        class="slaying-background-video"
-        muted
-        loop
-        playsinline
-        preload="none"
-        poster="assets/video/customer-gallery/saturn-rings-background-poster.webp"
-        aria-hidden="true"
-        tabindex="-1"
-        data-background-video
-      >
-        <source data-src="assets/video/customer-gallery/saturn-rings-background-balanced.mp4" type="video/mp4">
-      </video>
-      <span class="slaying-background-veil" aria-hidden="true"></span>
       <div class="container">
         <div class="section-heading slaying-heading">
           <div>
@@ -674,6 +660,20 @@
       </div>
 
       <div class="slaying-stage">
+        <video
+          class="slaying-background-video"
+          muted
+          loop
+          playsinline
+          preload="none"
+          poster="assets/video/customer-gallery/saturn-floating-gallery-poster.png"
+          aria-hidden="true"
+          tabindex="-1"
+          data-background-video
+        >
+          <source data-src="assets/video/customer-gallery/saturn-floating-gallery-square.mp4" type="video/mp4">
+        </video>
+        <span class="slaying-background-veil" aria-hidden="true"></span>
         <div class="slaying-orbit" data-floating-gallery aria-label="Customer experiences floating over Saturn"></div>
         <p class="slaying-hint">68 real moments, moving through the Saturn Cheetah universe</p>
       </div>
@@ -699,9 +699,13 @@
           <h2 id="after-dark-title">Saturn After Dark</h2>
           <p class="after-dark-tagline">Built in shadow. Designed by you.</p>
           <p class="after-dark-lead">Custom black tees and sleeveless vests with silver rings, chains, eyelets and stitched black-net detailing.</p>
-          <button class="after-dark-power-switch" type="button" aria-pressed="false">
-            <span class="after-dark-switch-track" aria-hidden="true"><span></span></span>
-            <span class="after-dark-switch-copy"><small>Enter the collection</small><strong>Turn on After Dark</strong></span>
+          <button class="after-dark-chain-control" type="button" aria-pressed="false" aria-label="Enter Saturn After Dark">
+            <span class="after-dark-chain-hardware" aria-hidden="true">
+              <span class="after-dark-eyelet"></span>
+              <span class="after-dark-chain"></span>
+              <span class="after-dark-pull-ring"></span>
+            </span>
+            <span class="after-dark-chain-copy"><small>Pull the ring</small><strong>Enter After Dark</strong></span>
           </button>
         </header>
 
@@ -872,34 +876,20 @@
       </div>
     </section>
 
-    <section class="section portrait-section" id="custom-portraits" aria-labelledby="portrait-title" data-whatsapp-zone>
-      <div class="container portrait-shell">
-        <div class="portrait-copy">
-          <p class="eyebrow">Made from your story</p>
-          <h2 id="portrait-title">Custom Portraits</h2>
-          <p>Box-style portraits with a smooth matte finish, made to order and customised around the person, memory or feeling you want to keep close.</p>
-          <ul class="portrait-details" aria-label="Portrait details">
-            <li>Made to order</li>
-            <li>Matte finish</li>
-            <li>Personalised artwork</li>
-          </ul>
-          <a class="button button-primary" href="https://wa.me/917780478506" target="_blank" rel="noopener noreferrer" data-bulk-product="Custom matte-finish portrait">Create a Portrait <span aria-hidden="true">↗</span></a>
-        </div>
-
-        <div class="portrait-gallery" aria-label="Examples of customised matte-finish portraits">
-          <figure class="portrait-card portrait-card-main">
-            <img src="assets/images/portraits/custom-portrait-02.jpg" alt="Two customised illustrated portraits in black box-style frames" width="797" height="900" loading="lazy" decoding="async">
+    <section class="section portrait-section" id="custom-portraits" aria-labelledby="portrait-title">
+      <div class="container">
+        <a class="portrait-teaser" href="portraits.html" aria-label="Explore Saturn Cheetah custom portraits">
+          <div class="portrait-teaser-copy">
+            <p class="eyebrow">Made from your story</p>
+            <h2 id="portrait-title">Custom Portraits</h2>
+            <p>Personalised box-style artwork in an HP finish, created around a person, memory or feeling.</p>
+            <span class="portrait-teaser-action">Explore portraits <span aria-hidden="true">↗</span></span>
+          </div>
+          <figure class="portrait-teaser-visual">
+            <img src="assets/images/portraits/portrait-gallery-pair.webp" alt="Two personalised portraits displayed together on a dark gallery wall" width="1440" height="960" loading="lazy" decoding="async">
+            <figcaption>Five sizes available · from ₹900</figcaption>
           </figure>
-          <figure class="portrait-card">
-            <img src="assets/images/portraits/custom-portrait-01.jpg" alt="Custom illustrated portrait with floral, sun and cheetah details" width="587" height="900" loading="lazy" decoding="async">
-          </figure>
-          <figure class="portrait-card">
-            <img src="assets/images/portraits/custom-portrait-03.jpg" alt="Custom illustrated portrait with flowers, butterflies and moon details" width="415" height="900" loading="lazy" decoding="async">
-          </figure>
-          <figure class="portrait-card portrait-card-wide">
-            <img src="assets/images/portraits/custom-portrait-04.jpg" alt="Custom portrait collection presented in a dark gallery setting" width="900" height="900" loading="lazy" decoding="async">
-          </figure>
-        </div>
+        </a>
       </div>
     </section>
 
