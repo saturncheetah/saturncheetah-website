@@ -812,6 +812,59 @@ h3 {
   font-weight: 800;
 }
 
+.tee-size-guide {
+  margin-top: 10px;
+  color: var(--ink);
+}
+
+.tee-size-guide summary {
+  width: max-content;
+  color: inherit;
+  font-size: 0.78rem;
+  font-weight: 800;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.tee-size-guide > p,
+.tee-size-guide > small {
+  display: block;
+  margin: 9px 0 0;
+  color: inherit;
+  font-size: 0.72rem;
+  line-height: 1.45;
+  opacity: 0.76;
+}
+
+.tee-size-table-wrap {
+  max-width: 100%;
+  margin-top: 8px;
+  overflow-x: auto;
+}
+
+.tee-size-guide table {
+  width: 100%;
+  min-width: 390px;
+  border-collapse: collapse;
+  font-size: 0.72rem;
+  text-align: center;
+}
+
+.tee-size-guide th,
+.tee-size-guide td {
+  padding: 7px 8px;
+  border: 1px solid currentColor;
+}
+
+.tee-size-guide th {
+  font-weight: 900;
+}
+
+.store-journey-enabled .tee-size-guide {
+  color: var(--night-ivory);
+}
+
 .tee-details dl {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));

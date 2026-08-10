@@ -69,6 +69,31 @@ const productData = {
 
 let selectedProductKey = "180";
 const selectedColourByProduct = { "180": "black", "240": "off-white" };
+const teeSizeGuides = {
+  "180": {
+    note: "Regular fit · Garment measurements in inches",
+    columns: ["Size", "Chest", "Length", "Shoulder", "Sleeve"],
+    rows: [
+      ["S", "38", "26", "16", "7.5"],
+      ["M", "40", "27", "17", "8"],
+      ["L", "42", "28", "18", "8"],
+      ["XL", "44", "29", "19", "8.5"],
+      ["XXL", "46", "30", "20", "9"]
+    ]
+  },
+  "240": {
+    note: "Oversized fit · Garment measurements in inches",
+    columns: ["Size", "Chest", "Length", "Shoulder"],
+    rows: [
+      ["XS", "40", "27", "20"],
+      ["S", "42", "28", "21"],
+      ["M", "44", "28", "22"],
+      ["L", "46", "29", "23"],
+      ["XL", "48", "29", "24"],
+      ["XXL", "50", "30", "25"]
+    ]
+  }
+};
 let selectedSize = "";
 let teeImageRequest = 0;
 const visibleWhatsappZones = new Set();
@@ -416,6 +441,38 @@ function updateTeeSizeAvailability(productKey) {
   if (!allowsXs && selectedSize === "XS") setSelectedSize("");
 }
 
+function updateTeeSizeGuide(productKey) {
+  const guide = teeSizeGuides[productKey];
+  const note = document.querySelector("#tee-size-guide-note");
+  const head = document.querySelector("#tee-size-guide-head");
+  const body = document.querySelector("#tee-size-guide-body");
+  if (!guide || !note || !head || !body) return;
+
+  note.textContent = guide.note;
+  head.replaceChildren();
+  body.replaceChildren();
+
+  const headingRow = document.createElement("tr");
+  guide.columns.forEach(label => {
+    const cell = document.createElement("th");
+    cell.scope = "col";
+    cell.textContent = label;
+    headingRow.append(cell);
+  });
+  head.append(headingRow);
+
+  guide.rows.forEach(values => {
+    const row = document.createElement("tr");
+    values.forEach((value, index) => {
+      const cell = document.createElement(index === 0 ? "th" : "td");
+      if (index === 0) cell.scope = "row";
+      cell.textContent = value;
+      row.append(cell);
+    });
+    body.append(row);
+  });
+}
+
 function requireTeeSize() {
   if (selectedSize) return true;
 
@@ -434,6 +491,7 @@ function updateTeeProduct(productKey, announce = true) {
   if (!product || !colour || !teeImage) return;
   selectedProductKey = productKey;
   updateTeeSizeAvailability(productKey);
+  updateTeeSizeGuide(productKey);
   const image = getProductImage(productKey, colour);
   const requestId = ++teeImageRequest;
 
