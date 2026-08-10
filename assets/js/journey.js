@@ -36,6 +36,36 @@ if(form){
     "180":{custom:"₹799–₹999",store:"₹799"},
     "240":{custom:"₹899–₹1,199",store:"₹999"}
   };
+  const sizeGuides={
+    "180":{
+      note:"Regular fit · Measurements in inches",
+      help:"Body chest is measured around you. Garment chest is the full T-shirt circumference. Length is measured from the highest shoulder point to the hem. Allow a small manufacturing tolerance.",
+      columns:["Size","Body chest","Garment chest","Length","Shoulder","Sleeve"],
+      rows:[["XS","34–36","36","25","15","7"],["S","36–38","38","26","16","7.5"],["M","38–40","40","27","17","8"],["L","40–42","42","28","18","8"],["XL","42–44","44","29","19","8.5"],["XXL","44–46","46","30","20","9"]]
+    },
+    "240":{
+      note:"Oversized fit · Measurements in inches",
+      help:"Chest is the full T-shirt circumference. Length is measured from the highest shoulder point to the hem. Allow a small manufacturing tolerance.",
+      columns:["Size","Chest","Length","Shoulder"],
+      rows:[["XS","40","27","20"],["S","42","28","21"],["M","44","28","22"],["L","46","29","23"],["XL","48","29","24"],["XXL","50","30","25"]]
+    }
+  };
+  const renderSizeGuide=productKey=>{
+    const guide=sizeGuides[productKey];
+    const note=form.querySelector("#builder-size-guide-note");
+    const help=form.querySelector("#builder-size-guide-help");
+    const head=form.querySelector("#builder-size-guide-head");
+    const body=form.querySelector("#builder-size-guide-body");
+    if(!guide||!note||!help||!head||!body)return;
+    note.textContent=guide.note;
+    help.textContent=guide.help;
+    head.replaceChildren();
+    body.replaceChildren();
+    const headingRow=document.createElement("tr");
+    guide.columns.forEach(label=>{const cell=document.createElement("th");cell.scope="col";cell.textContent=label;headingRow.append(cell)});
+    head.append(headingRow);
+    guide.rows.forEach(values=>{const row=document.createElement("tr");values.forEach((value,index)=>{const cell=document.createElement(index===0?"th":"td");if(index===0)cell.scope="row";else cell.dataset.label=guide.columns[index];cell.textContent=value;row.append(cell)});body.append(row)});
+  };
   const syncXsAvailability=()=>{
     const xsInput=form.querySelector('input[name="Size"][value="XS"]');
     const xsLabel=xsInput?.closest("label");
@@ -70,14 +100,14 @@ if(form){
   back.addEventListener("click",()=>show(active-1));
   next.addEventListener("click",()=>{if(active<steps.length-1){const invalid=steps[active].querySelector(":invalid");if(invalid){invalid.reportValidity();return}show(active+1);return}if(!form.reportValidity())return;const data=new FormData(form);const lines=[form.dataset.message||"Saturn Cheetah enquiry",...Array.from(data.entries(),([key,value])=>`${key}: ${displayValue(value)}`)];if(data.get("Design")==="Help me create it")lines.push("I will share a reference image here.");window.open(`https://wa.me/917780478506?text=${encodeURIComponent(lines.join("\n"))}`,"_blank","noopener")});
   form.addEventListener("change",event=>{
-    if(event.target.matches("[data-product-key]"))renderColours(event.target.dataset.productKey);
+    if(event.target.matches("[data-product-key]")){renderColours(event.target.dataset.productKey);renderSizeGuide(event.target.dataset.productKey)}
     if(event.target.name==="Design")updateDesignPath();
     if(event.target.matches("[data-product-key]")||event.target.name==="Style")syncXsAvailability();
     updateNextLabel();
     updateSummary();
   });
   const selectedProduct=form.querySelector("[data-product-key]:checked");
-  if(selectedProduct)renderColours(selectedProduct.dataset.productKey);
+  if(selectedProduct){renderColours(selectedProduct.dataset.productKey);renderSizeGuide(selectedProduct.dataset.productKey)}
   updateDesignPath();
   syncXsAvailability();
   show(0);
