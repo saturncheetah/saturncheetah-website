@@ -3283,6 +3283,11 @@ html:not(.js-enabled) .story-panel[hidden] {
   margin: 0;
 }
 
+/* Processing and shipping policy */
+.policy-hero{padding-top:clamp(9rem,16vw,13rem);padding-bottom:clamp(3.5rem,7vw,6rem);background:radial-gradient(circle at 82% 18%,rgba(132,38,69,.3),transparent 34%),linear-gradient(145deg,#09080a,#1a1018 68%,#09080a)}
+.policy-shell{max-width:72rem}.policy-shell h1{max-width:13ch;margin:.75rem 0 1.25rem;font-family:var(--font-display);font-size:clamp(3.4rem,8vw,7.2rem);font-weight:500;line-height:.88;letter-spacing:-.055em}.policy-intro{max-width:45rem;margin:0;color:var(--text-muted);font-size:clamp(1rem,2vw,1.25rem);line-height:1.65}.policy-highlights{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:3rem}.policy-highlights span{display:grid;gap:.45rem;min-height:8rem;padding:1.35rem;border:1px solid rgba(255,255,255,.14);border-radius:1.25rem;background:rgba(255,255,255,.045);color:var(--text-muted);font-size:.86rem;line-height:1.45}.policy-highlights b{color:var(--text);font-family:var(--font-display);font-size:1.5rem;font-weight:600}.policy-content{background:#0b090a}.policy-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}.policy-grid article{padding:clamp(1.5rem,4vw,2.5rem);border:1px solid rgba(255,255,255,.12);border-radius:1.5rem;background:linear-gradient(145deg,rgba(86,27,48,.32),rgba(255,255,255,.025))}.policy-grid h2{margin:.7rem 0 1.2rem;font-family:var(--font-display);font-size:clamp(1.8rem,3vw,2.7rem);font-weight:500;line-height:1}.policy-grid article>p:not(.eyebrow){margin:.8rem 0 0;color:var(--text-muted);line-height:1.7}.policy-grid strong{color:var(--text)}.policy-note{display:grid;grid-template-columns:1fr 2fr auto;gap:1.5rem;align-items:center;margin-top:1rem;padding:1.5rem 1.75rem;border-radius:1.35rem;background:#4a172c}.policy-note strong{font-family:var(--font-display);font-size:1.5rem}.policy-note p{margin:0;color:#dccbd1;font-size:.9rem;line-height:1.55}.policy-note .button{white-space:nowrap}
+@media(max-width:760px){.policy-highlights,.policy-grid{grid-template-columns:1fr}.policy-highlights{gap:.7rem;margin-top:2rem}.policy-highlights span{min-height:auto}.policy-note{grid-template-columns:1fr;align-items:start}.policy-note .button{width:100%}.policy-shell h1{font-size:clamp(3.15rem,15vw,5.4rem)}}
+
 /* Native WhatsApp enquiry widget */
 
 .whatsapp-widget {
