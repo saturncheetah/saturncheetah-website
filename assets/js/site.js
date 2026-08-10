@@ -24,6 +24,8 @@ const productData = {
     shortLabel: "180 GSM Regular Fit",
     spec: "180 GSM · Unisex · Cotton",
     name: "Regular Fit T-shirt",
+    customPrice: "₹799–₹999",
+    readyDesignPrice: "₹799",
     summary: "A familiar everyday silhouette with an easy, regular fit.",
     fit: "Regular and easy to wear",
     use: "Everyday wear, gifting and event tees",
@@ -49,6 +51,8 @@ const productData = {
     shortLabel: "240 GSM Oversized",
     spec: "240 GSM · Unisex · Heavyweight",
     name: "Oversized T-shirt",
+    customPrice: "₹899–₹1,199",
+    readyDesignPrice: "₹999",
     summary: "A heavier, relaxed silhouette with an oversized streetwear fit.",
     fit: "Relaxed and oversized",
     use: "Bold front, back and streetwear-style prints",
@@ -424,6 +428,8 @@ function updateTeeProduct(productKey, announce = true) {
     teeImage.height = image.height;
     document.querySelector("#tee-spec").textContent = product.spec;
     document.querySelector("#tee-name").textContent = product.name;
+    const teePrice = document.querySelector("#tee-price");
+    if (teePrice) teePrice.innerHTML = `<strong>Custom: ${product.customPrice}</strong><span>Our ready designs: ${product.readyDesignPrice}</span>`;
     document.querySelector("#tee-summary").textContent = product.summary;
     document.querySelector("#tee-fit").textContent = product.fit;
     document.querySelector("#tee-use").textContent = product.use;
@@ -526,6 +532,9 @@ function buildCustomMessage() {
   const designStatus = String(formData.get("designStatus") || "").trim();
   const storeDesign = String(formData.get("storeDesign") || "").trim();
   const designInstructions = String(formData.get("designInstructions") || "").trim();
+  const estimatedPrice = selectedProduct
+    ? (designStatus === "I want a Saturn Cheetah store design" ? selectedProduct.readyDesignPrice : selectedProduct.customPrice)
+    : "Quote required";
   const opening = isPersonalTee
     ? "I’d like to customise a T-shirt."
     : "I’d like to discuss a bulk custom-product order.";
@@ -544,6 +553,7 @@ function buildCustomMessage() {
     ...productLines,
     `Quantity: ${quantity}`,
     `Design status: ${designStatus}`,
+    `Estimated T-shirt price: ${estimatedPrice}`,
     ...(storeDesign ? [`Selected Saturn Cheetah design: ${storeDesign}`] : []),
     ...(designInstructions ? [`Design instructions: ${designInstructions}`] : []),
     ...getOptionalFormLines(formData),
@@ -613,7 +623,9 @@ function buildDesignMessage(designTitle) {
     "Hello Saturn Cheetah Store,",
     "",
     `I’m interested in the ${designTitle} design.`,
-    "Please help me customise it on a T-shirt."
+    "180 GSM Regular: ₹799",
+    "240 GSM Oversized: ₹999",
+    "Please help me choose the fit, colour and size."
   ].join("\n");
 }
 
@@ -1228,6 +1240,7 @@ function setupWhatsAppFlow() {
   const ownArtworkFields = [...document.querySelectorAll("[data-own-artwork-field]")];
   const storeDesignPicker = document.querySelector("[data-store-design-picker]");
   const storeDesignInputs = [...document.querySelectorAll("input[name='storeDesign']")];
+  const priceEstimate = document.querySelector("#custom-price-estimate");
   if (requiredDate) requiredDate.min = getLocalDateString();
 
   const updateStoreDesignPicker = () => {
@@ -1240,9 +1253,16 @@ function setupWhatsAppFlow() {
       input.disabled = !shouldChooseStoreDesign;
       input.required = shouldChooseStoreDesign && index === 0;
     });
+    const selectedProduct = Object.values(productData).find(item => item.value === productSelect?.value);
+    if (priceEstimate) {
+      priceEstimate.textContent = selectedProduct
+        ? (shouldChooseStoreDesign ? selectedProduct.readyDesignPrice : selectedProduct.customPrice)
+        : "Quote required";
+    }
   };
 
   designStatus?.addEventListener("change", updateStoreDesignPicker);
+  productSelect?.addEventListener("change", updateStoreDesignPicker);
   updateStoreDesignPicker();
 
   customiseForm?.addEventListener("submit", event => {

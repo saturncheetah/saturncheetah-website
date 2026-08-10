@@ -15,11 +15,16 @@ if(form){
     "180":[["black","Black"],["blue","Blue"],["gray","Grey"],["green","Green"],["navy-blue","Navy blue"],["off-white","Off-white"],["orange","Orange"],["pink","Pink"],["red","Red"],["white","White"],["yellow","Yellow"]],
     "240":[["black","Black"],["off-white","Off-white"],["white","White"]]
   };
+  const pricing={
+    "180":{custom:"₹799–₹999",store:"₹799"},
+    "240":{custom:"₹899–₹1,199",store:"₹999"}
+  };
   let active=0;
   const updateNextLabel=()=>{next.textContent=active===steps.length-1?"Continue on WhatsApp":"Continue"};
   const show=index=>{active=Math.max(0,Math.min(steps.length-1,index));steps.forEach((step,i)=>step.hidden=i!==active);back.hidden=active===0;updateNextLabel();counter.textContent=`Step ${active+1} of ${steps.length}`;summary.hidden=active!==steps.length-1;if(!summary.hidden)updateSummary()};
   const displayValue=value=>value instanceof File?(value.name||"No file selected"):value;
-  const updateSummary=()=>{const data=new FormData(form);const parts=[];for(const [key,value] of data.entries()){const shown=displayValue(value);if(shown&&shown!=="No file selected")parts.push(`${key}: ${shown}`)}summary.textContent=parts.join(" · ")};
+  const getPrice=()=>{const productKey=form.querySelector("[data-product-key]:checked")?.dataset.productKey||"180";const useStore=form.querySelector('input[name="Design"]:checked')?.value==="Choose a store design";return pricing[productKey]?.[useStore?"store":"custom"]||"Quote required"};
+  const updateSummary=()=>{const data=new FormData(form);const parts=[];for(const [key,value] of data.entries()){const shown=displayValue(value);if(shown&&shown!=="No file selected")parts.push(`${key}: ${shown}`)}parts.push(`Estimated T-shirt price: ${getPrice()}`);summary.textContent=parts.join(" · ")};
   const updateDesignPath=()=>{
     const useStore=form.querySelector('input[name="Design"]:checked')?.value==="Choose a store design";
     if(helpPath)helpPath.hidden=useStore;
@@ -39,7 +44,7 @@ if(form){
     updateSummary();
   };
   back.addEventListener("click",()=>show(active-1));
-  next.addEventListener("click",()=>{if(active<steps.length-1){const invalid=steps[active].querySelector(":invalid");if(invalid){invalid.reportValidity();return}show(active+1);return}if(!form.reportValidity())return;const data=new FormData(form);const lines=[form.dataset.message||"Saturn Cheetah enquiry",...Array.from(data.entries(),([key,value])=>`${key}: ${displayValue(value)}`)];if(data.get("Design")==="Help me create it")lines.push("I will share any reference image directly in this WhatsApp chat.");window.open(`https://wa.me/917780478506?text=${encodeURIComponent(lines.join("\n"))}`,"_blank","noopener")});
+  next.addEventListener("click",()=>{if(active<steps.length-1){const invalid=steps[active].querySelector(":invalid");if(invalid){invalid.reportValidity();return}show(active+1);return}if(!form.reportValidity())return;const data=new FormData(form);const lines=[form.dataset.message||"Saturn Cheetah enquiry",...Array.from(data.entries(),([key,value])=>`${key}: ${displayValue(value)}`),`Estimated T-shirt price: ${getPrice()}`,"Please confirm the exact price before production."];if(data.get("Design")==="Help me create it")lines.push("I will share any reference image directly in this WhatsApp chat.");window.open(`https://wa.me/917780478506?text=${encodeURIComponent(lines.join("\n"))}`,"_blank","noopener")});
   form.addEventListener("change",event=>{
     if(event.target.matches("[data-product-key]"))renderColours(event.target.dataset.productKey);
     if(event.target.name==="Design")updateDesignPath();
