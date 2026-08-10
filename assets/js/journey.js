@@ -5,7 +5,7 @@ if(form){
     const sizeField=[...form.querySelectorAll("fieldset")].find(fieldset=>fieldset.querySelector('input[name="Size"]'));
     const sizeNote=document.createElement("p");
     sizeNote.className="path-note";
-    sizeNote.textContent="Everything is unisex. Choose one size smaller for a closer fit. XS is available.";
+    sizeNote.textContent="All garments are unisex and not gender-specific. Sizes run from XS to XXL; choose one size smaller if you prefer a closer fit.";
     sizeField?.querySelector("legend")?.after(sizeNote);
   }
   const steps=[...form.querySelectorAll("[data-step]")];
