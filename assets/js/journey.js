@@ -1,12 +1,11 @@
 const form=document.querySelector("[data-journey]");
 if(form){
   const isAfterDark=(form.dataset.message||"").includes("After Dark");
-  form.querySelectorAll('input[value="XS"]').forEach(input=>input.closest("label")?.remove());
   if(isAfterDark){
     const sizeField=[...form.querySelectorAll("fieldset")].find(fieldset=>fieldset.querySelector('input[name="Size"]'));
     const sizeNote=document.createElement("p");
     sizeNote.className="path-note";
-    sizeNote.textContent="Standard unisex sizing.";
+    sizeNote.textContent="Everything is unisex. Choose one size smaller for a closer fit. XS is available for the oversized style only.";
     sizeField?.querySelector("legend")?.after(sizeNote);
   }
   const steps=[...form.querySelectorAll("[data-step]")];
@@ -37,6 +36,17 @@ if(form){
     "180":{custom:"₹799–₹999",store:"₹799"},
     "240":{custom:"₹899–₹1,199",store:"₹999"}
   };
+  const syncXsAvailability=()=>{
+    const xsInput=form.querySelector('input[name="Size"][value="XS"]');
+    const xsLabel=xsInput?.closest("label");
+    if(!xsInput||!xsLabel)return;
+    const selectedProduct=form.querySelector("[data-product-key]:checked")?.dataset.productKey;
+    const selectedStyle=form.querySelector('input[name="Style"]:checked')?.value;
+    const allowsXs=selectedProduct==="240"||selectedStyle==="Oversized T-shirt";
+    xsLabel.hidden=!allowsXs;
+    xsInput.disabled=!allowsXs;
+    if(!allowsXs&&xsInput.checked){const medium=form.querySelector('input[name="Size"][value="M"]');if(medium)medium.checked=true}
+  };
   let active=0;
   const updateNextLabel=()=>{next.textContent=active===steps.length-1?"Continue on WhatsApp":"Continue"};
   const show=index=>{active=Math.max(0,Math.min(steps.length-1,index));steps.forEach((step,i)=>step.hidden=i!==active);back.hidden=active===0;updateNextLabel();counter.textContent=`Step ${active+1} of ${steps.length}`;summary.hidden=active!==steps.length-1;if(!summary.hidden)updateSummary()};
@@ -66,12 +76,14 @@ if(form){
   form.addEventListener("change",event=>{
     if(event.target.matches("[data-product-key]"))renderColours(event.target.dataset.productKey);
     if(event.target.name==="Design")updateDesignPath();
+    if(event.target.matches("[data-product-key]")||event.target.name==="Style")syncXsAvailability();
     updateNextLabel();
     updateSummary();
   });
   const selectedProduct=form.querySelector("[data-product-key]:checked");
   if(selectedProduct)renderColours(selectedProduct.dataset.productKey);
   updateDesignPath();
+  syncXsAvailability();
   show(0);
 }
 

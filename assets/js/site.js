@@ -407,6 +407,15 @@ function setSelectedSize(size) {
   updateWhatsAppLinks();
 }
 
+function updateTeeSizeAvailability(productKey) {
+  const xsButton = document.querySelector("[data-tee-size='XS']");
+  if (!xsButton) return;
+  const allowsXs = productKey === "240";
+  xsButton.hidden = !allowsXs;
+  xsButton.disabled = !allowsXs;
+  if (!allowsXs && selectedSize === "XS") setSelectedSize("");
+}
+
 function requireTeeSize() {
   if (selectedSize) return true;
 
@@ -424,6 +433,7 @@ function updateTeeProduct(productKey, announce = true) {
 
   if (!product || !colour || !teeImage) return;
   selectedProductKey = productKey;
+  updateTeeSizeAvailability(productKey);
   const image = getProductImage(productKey, colour);
   const requestId = ++teeImageRequest;
 
@@ -805,6 +815,19 @@ function setupAfterDarkConfigurator() {
   let activeStep = 0;
   let summaryMotionTimer = 0;
 
+  const updateAfterDarkSizeAvailability = () => {
+    const xsInput = afterDarkConfigurator.querySelector("input[name='afterDarkSize'][value='XS']");
+    const xsLabel = xsInput?.closest("label");
+    if (!xsInput || !xsLabel) return;
+    const allowsXs = afterDarkConfigurator.querySelector("input[name='afterDarkStyle']:checked")?.value === "Oversized T-shirt";
+    xsLabel.hidden = !allowsXs;
+    xsInput.disabled = !allowsXs;
+    if (!allowsXs && xsInput.checked) {
+      const medium = afterDarkConfigurator.querySelector("input[name='afterDarkSize'][value='M']");
+      if (medium) medium.checked = true;
+    }
+  };
+
   const showStep = nextStep => {
     if (!steps.length) return;
     activeStep = Math.max(0, Math.min(steps.length - 1, nextStep));
@@ -848,6 +871,7 @@ function setupAfterDarkConfigurator() {
   };
 
   afterDarkConfigurator.addEventListener("change", event => {
+    if (event.target.name === "afterDarkStyle") updateAfterDarkSizeAvailability();
     showSelectionMotion(event.target);
     updateSummary(true);
   });
@@ -883,6 +907,7 @@ function setupAfterDarkConfigurator() {
   });
 
   showStep(0);
+  updateAfterDarkSizeAvailability();
   updateSummary();
 }
 
