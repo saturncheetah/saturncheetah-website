@@ -129,3 +129,157 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Reversible compact-phone experiment for the Build Your Tee journey. */
+@media (max-width: 760px) {
+  .journey-main {
+    padding: 18px 12px 44px;
+  }
+
+  .journey-hero {
+    min-height: 480px;
+    margin-bottom: 24px;
+  }
+
+  .journey-copy {
+    right: 10px;
+    bottom: 10px;
+    left: 10px;
+    padding: 15px;
+  }
+
+  .journey-copy h1 {
+    margin: 5px 0 9px;
+    font-size: clamp(2.45rem, 12vw, 3.45rem);
+    line-height: .9;
+  }
+
+  .journey-copy p {
+    margin-block: 7px 0;
+    font-size: .86rem;
+    line-height: 1.48;
+  }
+
+  .builder {
+    padding: 16px 12px;
+    border-radius: 18px;
+  }
+
+  .builder-head {
+    margin-bottom: 17px;
+  }
+
+  .builder-head h2 {
+    margin: 4px 0;
+    font-size: 2rem;
+  }
+
+  .builder-head p,
+  .path-note {
+    font-size: .82rem;
+    line-height: 1.45;
+  }
+
+  .step legend {
+    margin-bottom: 12px;
+    font-size: 1.55rem;
+  }
+
+  .choices {
+    gap: 8px;
+  }
+
+  .choice,
+  .choice span,
+  .choice b {
+    min-width: 0;
+  }
+
+  .choice b {
+    overflow-wrap: anywhere;
+  }
+
+  .choice span {
+    min-height: 52px;
+    padding: 10px 8px;
+    border-radius: 12px;
+  }
+
+  .choice-visual span {
+    gap: 7px;
+    padding: 6px;
+  }
+
+  .choice-visual img {
+    aspect-ratio: 4 / 3;
+  }
+
+  .choice span small {
+    margin-top: 3px;
+    font-size: .67rem;
+  }
+
+  .path-note {
+    margin-bottom: 12px;
+  }
+
+  .builder-size-guide {
+    margin-top: 15px;
+    padding: 11px;
+  }
+
+  .builder-size-guide > p,
+  .builder-size-guide > small {
+    margin-top: 6px;
+    font-size: .7rem;
+  }
+
+  .builder-size-table-wrap {
+    margin-top: 7px;
+  }
+
+  .builder-size-guide tbody {
+    gap: 6px;
+  }
+
+  .builder-size-guide tr {
+    padding: 7px;
+  }
+
+  .builder-size-guide th,
+  .builder-size-guide td {
+    padding-block: 3px;
+    font-size: .69rem;
+  }
+
+  .builder-nav {
+    gap: 8px;
+    margin-top: 18px;
+    padding-top: 14px;
+  }
+
+  .actions {
+    gap: 7px;
+  }
+
+  .button {
+    min-height: 46px;
+    padding: 10px 14px;
+  }
+
+  .journey-policy-note {
+    margin-top: 14px;
+    font-size: .74rem;
+    overflow-wrap: anywhere;
+  }
+}
+
+@media (max-width: 350px) {
+  .journey-main {
+    padding-inline: 9px;
+  }
+
+  .builder {
+    padding-inline: 10px;
+  }
+}
