@@ -1,6 +1,14 @@
 const form=document.querySelector("[data-journey]");
 if(form){
+  const isAfterDark=(form.dataset.message||"").includes("After Dark");
   form.querySelectorAll('input[value="XS"]').forEach(input=>input.closest("label")?.remove());
+  if(isAfterDark){
+    const sizeField=[...form.querySelectorAll("fieldset")].find(fieldset=>fieldset.querySelector('input[name="Size"]'));
+    const sizeNote=document.createElement("p");
+    sizeNote.className="path-note";
+    sizeNote.textContent="Standard unisex sizing.";
+    sizeField?.querySelector("legend")?.after(sizeNote);
+  }
   const steps=[...form.querySelectorAll("[data-step]")];
   const back=form.querySelector("[data-back]");
   const next=form.querySelector("[data-next]");
@@ -12,7 +20,6 @@ if(form){
   const storePath=form.querySelector('[data-artwork-path="store"]');
   const designInstructions=form.querySelector('textarea[name="Design instructions"]');
   const storeDesignInputs=[...form.querySelectorAll('input[name="Store design"]')];
-  const isAfterDark=(form.dataset.message||"").includes("After Dark");
   if(isAfterDark){
     const priceText="Estimated price: ₹899–₹1,499";
     const heroPrice=document.createElement("p");
