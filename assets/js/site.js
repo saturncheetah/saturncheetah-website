@@ -469,6 +469,7 @@ function updateTeeSizeGuide(productKey) {
     values.forEach((value, index) => {
       const cell = document.createElement(index === 0 ? "th" : "td");
       if (index === 0) cell.scope = "row";
+      else cell.dataset.label = guide.columns[index];
       cell.textContent = value;
       row.append(cell);
     });
