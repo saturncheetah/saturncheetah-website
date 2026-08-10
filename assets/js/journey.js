@@ -5,7 +5,7 @@ if(form){
     const sizeField=[...form.querySelectorAll("fieldset")].find(fieldset=>fieldset.querySelector('input[name="Size"]'));
     const sizeNote=document.createElement("p");
     sizeNote.className="path-note";
-    sizeNote.textContent="Everything is unisex. Choose one size smaller for a closer fit. XS is available for the oversized style only.";
+    sizeNote.textContent="Everything is unisex. Choose one size smaller for a closer fit. XS is available.";
     sizeField?.querySelector("legend")?.after(sizeNote);
   }
   const steps=[...form.querySelectorAll("[data-step]")];
@@ -40,12 +40,8 @@ if(form){
     const xsInput=form.querySelector('input[name="Size"][value="XS"]');
     const xsLabel=xsInput?.closest("label");
     if(!xsInput||!xsLabel)return;
-    const selectedProduct=form.querySelector("[data-product-key]:checked")?.dataset.productKey;
-    const selectedStyle=form.querySelector('input[name="Style"]:checked')?.value;
-    const allowsXs=selectedProduct==="240"||selectedStyle==="Oversized T-shirt";
-    xsLabel.hidden=!allowsXs;
-    xsInput.disabled=!allowsXs;
-    if(!allowsXs&&xsInput.checked){const medium=form.querySelector('input[name="Size"][value="M"]');if(medium)medium.checked=true}
+    xsLabel.hidden=false;
+    xsInput.disabled=false;
   };
   let active=0;
   const updateNextLabel=()=>{next.textContent=active===steps.length-1?"Continue on WhatsApp":"Continue"};

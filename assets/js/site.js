@@ -72,17 +72,20 @@ const selectedColourByProduct = { "180": "black", "240": "off-white" };
 const teeSizeGuides = {
   "180": {
     note: "Regular fit · Garment measurements in inches",
-    columns: ["Size", "Chest", "Length", "Shoulder", "Sleeve"],
+    help: "Body chest is measured around you. Garment chest is the full T-shirt circumference. Length is measured from the highest shoulder point to the hem. Allow a small manufacturing tolerance.",
+    columns: ["Size", "Body chest", "Garment chest", "Length", "Shoulder", "Sleeve"],
     rows: [
-      ["S", "38", "26", "16", "7.5"],
-      ["M", "40", "27", "17", "8"],
-      ["L", "42", "28", "18", "8"],
-      ["XL", "44", "29", "19", "8.5"],
-      ["XXL", "46", "30", "20", "9"]
+      ["XS", "34–36", "36", "25", "15", "7"],
+      ["S", "36–38", "38", "26", "16", "7.5"],
+      ["M", "38–40", "40", "27", "17", "8"],
+      ["L", "40–42", "42", "28", "18", "8"],
+      ["XL", "42–44", "44", "29", "19", "8.5"],
+      ["XXL", "44–46", "46", "30", "20", "9"]
     ]
   },
   "240": {
     note: "Oversized fit · Garment measurements in inches",
+    help: "Chest is the full T-shirt circumference. Length is measured from the highest shoulder point to the hem. Allow a small manufacturing tolerance.",
     columns: ["Size", "Chest", "Length", "Shoulder"],
     rows: [
       ["XS", "40", "27", "20"],
@@ -435,20 +438,20 @@ function setSelectedSize(size) {
 function updateTeeSizeAvailability(productKey) {
   const xsButton = document.querySelector("[data-tee-size='XS']");
   if (!xsButton) return;
-  const allowsXs = productKey === "240";
-  xsButton.hidden = !allowsXs;
-  xsButton.disabled = !allowsXs;
-  if (!allowsXs && selectedSize === "XS") setSelectedSize("");
+  xsButton.hidden = false;
+  xsButton.disabled = false;
 }
 
 function updateTeeSizeGuide(productKey) {
   const guide = teeSizeGuides[productKey];
   const note = document.querySelector("#tee-size-guide-note");
+  const help = document.querySelector("#tee-size-guide-help");
   const head = document.querySelector("#tee-size-guide-head");
   const body = document.querySelector("#tee-size-guide-body");
-  if (!guide || !note || !head || !body) return;
+  if (!guide || !note || !help || !head || !body) return;
 
   note.textContent = guide.note;
+  help.textContent = guide.help;
   head.replaceChildren();
   body.replaceChildren();
 
@@ -877,13 +880,8 @@ function setupAfterDarkConfigurator() {
     const xsInput = afterDarkConfigurator.querySelector("input[name='afterDarkSize'][value='XS']");
     const xsLabel = xsInput?.closest("label");
     if (!xsInput || !xsLabel) return;
-    const allowsXs = afterDarkConfigurator.querySelector("input[name='afterDarkStyle']:checked")?.value === "Oversized T-shirt";
-    xsLabel.hidden = !allowsXs;
-    xsInput.disabled = !allowsXs;
-    if (!allowsXs && xsInput.checked) {
-      const medium = afterDarkConfigurator.querySelector("input[name='afterDarkSize'][value='M']");
-      if (medium) medium.checked = true;
-    }
+    xsLabel.hidden = false;
+    xsInput.disabled = false;
   };
 
   const showStep = nextStep => {
