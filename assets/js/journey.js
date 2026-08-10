@@ -1,5 +1,6 @@
 const form=document.querySelector("[data-journey]");
 if(form){
+  form.querySelectorAll('input[value="XS"]').forEach(input=>input.closest("label")?.remove());
   const steps=[...form.querySelectorAll("[data-step]")];
   const back=form.querySelector("[data-back]");
   const next=form.querySelector("[data-next]");
