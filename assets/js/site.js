@@ -330,6 +330,19 @@ function setupStorySwipe() {
   stage.addEventListener("pointercancel", resetSwipe);
 }
 
+function enforceMutedProcessVideo() {
+  document.querySelectorAll("video[data-always-muted]").forEach(video => {
+    video.defaultMuted = true;
+    video.muted = true;
+    video.addEventListener("volumechange", () => {
+      if (!video.muted || video.volume !== 0) {
+        video.muted = true;
+        video.volume = 0;
+      }
+    });
+  });
+}
+
 function getSelectedColour(productKey = selectedProductKey) {
   const product = productData[productKey];
   const selectedSlug = selectedColourByProduct[productKey] || product.defaultColour;
@@ -532,9 +545,6 @@ function buildCustomMessage() {
   const designStatus = String(formData.get("designStatus") || "").trim();
   const storeDesign = String(formData.get("storeDesign") || "").trim();
   const designInstructions = String(formData.get("designInstructions") || "").trim();
-  const estimatedPrice = selectedProduct
-    ? (designStatus === "I want a Saturn Cheetah store design" ? selectedProduct.readyDesignPrice : selectedProduct.customPrice)
-    : "Quote required";
   const opening = isPersonalTee
     ? "I’d like to customise a T-shirt."
     : "I’d like to discuss a bulk custom-product order.";
@@ -553,7 +563,6 @@ function buildCustomMessage() {
     ...productLines,
     `Quantity: ${quantity}`,
     `Design status: ${designStatus}`,
-    `Estimated T-shirt price: ${estimatedPrice}`,
     ...(storeDesign ? [`Selected Saturn Cheetah design: ${storeDesign}`] : []),
     ...(designInstructions ? [`Design instructions: ${designInstructions}`] : []),
     ...getOptionalFormLines(formData),
@@ -623,8 +632,6 @@ function buildDesignMessage(designTitle) {
     "Hello Saturn Cheetah Store,",
     "",
     `I’m interested in the ${designTitle} design.`,
-    "180 GSM Regular: ₹799",
-    "240 GSM Oversized: ₹999",
     "Please help me choose the fit, colour and size."
   ].join("\n");
 }
@@ -768,7 +775,7 @@ function buildAfterDarkMessage() {
     widgetField("Size", formData.get("afterDarkSize")),
     widgetField("Quantity", formData.get("afterDarkQuantity")),
     "",
-    "Please confirm feasibility, pricing and next steps."
+    "Please help me continue with this piece."
   ].join("\n");
 }
 
@@ -1858,6 +1865,7 @@ setupActiveNavigation();
 setupHeroEntrance();
 setupTabs();
 setupStorySwipe();
+enforceMutedProcessVideo();
 setupTeeSelector();
 setupWhatsAppFlow();
 setupPortraitOrder();
