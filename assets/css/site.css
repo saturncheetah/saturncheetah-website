@@ -9291,7 +9291,7 @@ body {
 
 /* Readability trial: preserve the established palette and strengthen type only. */
 :root {
-  --font-editorial: "Playfair Display", Georgia, serif;
+  --font-editorial: "Cormorant Garamond", Georgia, serif;
   --font-display: var(--font-editorial);
   --night-muted: #d3c7c8;
   --night-silver: #c7c0c3;
