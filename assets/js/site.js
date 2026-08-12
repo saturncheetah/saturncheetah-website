@@ -1790,6 +1790,32 @@ function setupFAQAssistant() {
   });
 }
 
+function setupPlainTeeOffer() {
+  const form = document.querySelector("#plain-tee-offer");
+  if (!form) return;
+
+  form.addEventListener("submit", event => {
+    event.preventDefault();
+    if (!form.reportValidity()) return;
+
+    const data = new FormData(form);
+    const selections = [1, 2, 3].map(number =>
+      `T-shirt ${number}: ${data.get(`plainTeeColour${number}`)}, size ${data.get(`plainTeeSize${number}`)}`
+    );
+    const message = [
+      "Hello Saturn Cheetah Store,",
+      "",
+      "I’m interested in the 3 plain 180 GSM regular-fit T-shirts offer for ₹1,199.",
+      "",
+      ...selections,
+      "",
+      "Please help me confirm availability and the next steps."
+    ].join("\n");
+
+    window.open(whatsappUrl(message), "_blank", "noopener");
+  });
+}
+
 function setupAtelierThread() {
   const thread = document.querySelector(".atelier-thread");
   if (!thread || reducedMotion.matches) return;
@@ -1918,6 +1944,7 @@ setupStoreJourney();
 setupAfterDarkPowerSwitch();
 setupAtelierThread();
 setupFAQAssistant();
+setupPlainTeeOffer();
 setupFooterYear();
 setupFloatingGallery();
 setupBackgroundVideos();
