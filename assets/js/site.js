@@ -1775,6 +1775,21 @@ function setupFooterYear() {
   if (year) year.textContent = String(new Date().getFullYear());
 }
 
+function setupFAQAssistant() {
+  const assistant = document.querySelector("[data-faq-assistant]");
+  if (!assistant) return;
+
+  const questions = [...assistant.querySelectorAll("details")];
+  questions.forEach(question => {
+    question.addEventListener("toggle", () => {
+      if (!question.open) return;
+      questions.forEach(otherQuestion => {
+        if (otherQuestion !== question) otherQuestion.open = false;
+      });
+    });
+  });
+}
+
 function setupAtelierThread() {
   const thread = document.querySelector(".atelier-thread");
   if (!thread || reducedMotion.matches) return;
@@ -1902,6 +1917,7 @@ setupSectionReveals();
 setupStoreJourney();
 setupAfterDarkPowerSwitch();
 setupAtelierThread();
+setupFAQAssistant();
 setupFooterYear();
 setupFloatingGallery();
 setupBackgroundVideos();
