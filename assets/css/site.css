@@ -9335,3 +9335,59 @@ body {
   border-color: rgb(233 167 183 / 64%);
   background: #87304e;
 }
+
+.plain-tee-offer {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: clamp(18px, 3vw, 36px);
+  margin: 24px 0;
+  padding: clamp(20px, 3vw, 30px);
+  border: 1px solid var(--night-line);
+  border-radius: var(--radius-medium);
+  color: var(--night-ivory);
+  background: linear-gradient(135deg, rgb(84 24 45 / 84%), rgb(28 18 27 / 96%));
+  box-shadow: 0 24px 60px rgb(0 0 0 / 24%);
+}
+
+.plain-tee-offer h3 {
+  margin: 0;
+  font-family: var(--font-editorial);
+  font-size: clamp(1.7rem, 3vw, 2.6rem);
+  font-weight: 600;
+  line-height: 1;
+}
+
+.plain-tee-offer > div > p:last-child {
+  margin: 9px 0 0;
+  color: var(--night-muted);
+  font-size: .85rem;
+}
+
+.plain-tee-offer-price {
+  display: grid;
+  gap: 2px;
+  text-align: right;
+}
+
+.plain-tee-offer-price del {
+  color: var(--night-muted);
+  font-size: .9rem;
+}
+
+.plain-tee-offer-price strong {
+  color: var(--orange-light);
+  font-size: clamp(1.65rem, 3vw, 2.2rem);
+  line-height: 1;
+}
+
+@media (max-width: 767px) {
+  .plain-tee-offer {
+    grid-template-columns: 1fr auto;
+  }
+
+  .plain-tee-offer .button {
+    grid-column: 1 / -1;
+    width: 100%;
+  }
+}
