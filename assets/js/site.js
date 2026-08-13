@@ -1791,29 +1791,53 @@ function setupFAQAssistant() {
 }
 
 function setupPlainTeeOffer() {
-  const form = document.querySelector("#plain-tee-offer");
-  if (!form) return;
+  const shop = document.querySelector(".plain-tee-shop");
+  if (!shop) return;
 
-  form.addEventListener("submit", event => {
+  const toggles = [...shop.querySelectorAll("[data-plain-tee-toggle]")];
+  const panels = [...shop.querySelectorAll("[data-plain-tee-panel]")];
+  const colourSlugs = { Black: "black", White: "white", "Off-white": "off-white", Blue: "blue", Green: "green", Gray: "gray", Red: "red", Yellow: "yellow", Pink: "pink", Orange: "orange", "Navy Blue": "navy-blue" };
+
+  const setOpenPanel = key => {
+    const panel = panels.find(item => item.dataset.plainTeePanel === key);
+    const willOpen = panel?.hidden ?? false;
+    panels.forEach(item => { item.hidden = !willOpen || item !== panel; });
+    toggles.forEach(toggle => {
+      const isOpen = willOpen && toggle.dataset.plainTeeToggle === key;
+      toggle.setAttribute("aria-expanded", String(isOpen));
+      toggle.querySelector("span").textContent = isOpen ? "↑" : "↓";
+    });
+    if (willOpen && panel && !reducedMotion.matches) panel.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  };
+
+  toggles.forEach(toggle => toggle.addEventListener("click", () => setOpenPanel(toggle.dataset.plainTeeToggle)));
+
+  shop.querySelectorAll("[data-plain-item]").forEach(item => {
+    const select = item.querySelector("select[name*='Colour']");
+    const preview = item.querySelector("[data-plain-preview]");
+    select?.addEventListener("change", () => {
+      if (!preview || !select.value) return;
+      const product = item.dataset.plainItem;
+      const slug = colourSlugs[select.value];
+      const largeWidth = product === "180" ? (slug === "black" ? 994 : 992) : (slug === "black" ? 1024 : 993);
+      preview.src = `assets/images/products/${product}/tshirt-${product}-${slug}-640.webp`;
+      preview.srcset = `assets/images/products/${product}/tshirt-${product}-${slug}-640.webp 640w, assets/images/products/${product}/tshirt-${product}-${slug}-${largeWidth}.webp ${largeWidth}w`;
+      preview.alt = `${select.value} ${product} GSM ${product === "180" ? "regular-fit" : "oversized"} T-shirt`;
+    });
+  });
+
+  panels.forEach(form => form.addEventListener("submit", event => {
     event.preventDefault();
     if (!form.reportValidity()) return;
 
     const data = new FormData(form);
-    const selections = [1, 2, 3].map(number =>
-      `T-shirt ${number}: ${data.get(`plainTeeColour${number}`)}, size ${data.get(`plainTeeSize${number}`)}`
-    );
-    const message = [
-      "Hello Saturn Cheetah Store,",
-      "",
-      "I’m interested in the 3 plain 180 GSM regular-fit T-shirts offer for ₹1,199.",
-      "",
-      ...selections,
-      "",
-      "Please help me confirm availability and the next steps."
-    ].join("\n");
+    const isRegular = form.dataset.plainTeePanel === "regular";
+    const message = isRegular
+      ? ["Hello Saturn Cheetah Store,", "", "I’m interested in the 3 plain 180 GSM regular-fit T-shirts offer for ₹1,199.", "", ...[1, 2, 3].map(number => `T-shirt ${number}: ${data.get(`plainTeeColour${number}`)}, size ${data.get(`plainTeeSize${number}`)}`), "", "Please help me confirm availability and the next steps."].join("\n")
+      : ["Hello Saturn Cheetah Store,", "", "I’m interested in the plain 240 GSM oversized T-shirt for ₹799 per piece.", "", `Colour: ${data.get("plainOversizedColour")}`, `Size: ${data.get("plainOversizedSize")}`, `Quantity: ${data.get("plainOversizedQuantity")}`, "", "Please help me confirm availability and the next steps."].join("\n");
 
     window.open(whatsappUrl(message), "_blank", "noopener");
-  });
+  }));
 }
 
 function setupAtelierThread() {
