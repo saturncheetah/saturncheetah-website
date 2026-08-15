@@ -5480,9 +5480,12 @@ body.home-page .final-cta::before {
   padding-top: clamp(150px, 14vw, 210px);
 }
 
-.about-home-link {
+.about-actions {
   grid-column: 1 / -1;
-  justify-self: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
 }
 
 @media (max-width: 767px) {
@@ -5528,9 +5531,14 @@ body.home-page .final-cta::before {
     overflow-wrap: anywhere;
   }
 
-  .about-page .about-home-link {
+  .about-page .about-actions {
     width: 100%;
     max-width: 100%;
+    flex-direction: column;
+  }
+
+  .about-page .about-actions .button {
+    width: 100%;
     justify-content: center;
     white-space: normal;
     text-align: center;

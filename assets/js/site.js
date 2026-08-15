@@ -594,7 +594,7 @@ function buildProductMessage(context) {
     ? `I’d like to print my idea on a ${productLabel}.`
     : `I’d like to continue with a ${productLabel} enquiry.`;
   const selectionLines = isPersonalTee
-    ? [`Fit: ${productData[selectedProductKey].shortLabel}`, `Colour: ${colour.label}`, `Size: ${selectedSize}`]
+    ? [`Fit: ${productData[selectedProductKey].shortLabel}`, `Colour: ${colour.label}`, `Size: ${selectedSize || "To be confirmed"}`]
     : [`Product: ${product}`];
 
   return [
@@ -689,7 +689,7 @@ function buildWidgetCustomTeeMessage() {
     "",
     widgetField("GSM / fit", productData[selectedProductKey].shortLabel),
     widgetField("Colour", colour?.label),
-    widgetField("Size", selectedSize),
+    widgetField("Size", selectedSize || "To be confirmed"),
     widgetField("Quantity", quantity),
     widgetField("Design status", designStatus),
     ...(storeDesign ? [widgetField("Selected Saturn Cheetah design", storeDesign)] : []),
@@ -711,7 +711,7 @@ function buildWidgetDesignMessage() {
     widgetField("Design name", designTitle),
     widgetField("GSM / fit", productData[selectedProductKey].shortLabel),
     widgetField("Colour", colour?.label),
-    widgetField("Size", selectedSize),
+    widgetField("Size", selectedSize || "To be confirmed"),
     widgetField("Quantity", quantity),
     "",
     "Please help me continue with this order."
@@ -1235,6 +1235,10 @@ function updateWhatsAppLinks() {
     link.href = whatsappUrl(buildProductMessage("final"));
   });
 
+  document.querySelectorAll("[data-whatsapp-action='general']").forEach(link => {
+    link.href = whatsappUrl(buildWidgetGeneralMessage());
+  });
+
   document.querySelectorAll("[data-bulk-product]").forEach(link => {
     link.href = whatsappUrl(buildBulkMessage(link.dataset.bulkProduct));
   });
@@ -1303,15 +1307,6 @@ function setupWhatsAppFlow() {
       return;
     }
     window.open(whatsappUrl(buildCustomMessage()), "_blank", "noopener");
-  });
-
-  document.addEventListener("click", event => {
-    const trigger = event.target.closest("[data-whatsapp-action='print'], [data-whatsapp-action='final'], [data-whatsapp-action='pill']");
-    const product = getCurrentProductValue();
-    const isPersonalTee = product === productData["180"].value || product === productData["240"].value;
-    if (!trigger || !isPersonalTee || requireTeeSize()) return;
-    event.preventDefault();
-    document.querySelector("#tees")?.scrollIntoView({ behavior: reducedMotion.matches ? "auto" : "smooth" });
   });
 
   updateWhatsAppLinks();
