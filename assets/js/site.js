@@ -1090,6 +1090,7 @@ function setupAfterDarkGallery() {
       || trigger.closest("label")?.querySelector("b")?.textContent
       || "Saturn After Dark option";
     previousFocus = trigger;
+    hydrateDeferredMedia(image);
     modalImage.src = image.currentSrc || image.src;
     modalImage.srcset = image.srcset || "";
     modalImage.sizes = "min(88vw, 900px)";
@@ -1520,7 +1521,8 @@ function setupGalleryModal() {
     const sourceImage = item.querySelector("img");
     const showDetail = activeView === "detail" && item.dataset.detailSrc;
 
-    modalImage.src = showDetail ? item.dataset.detailSrc : sourceImage.src;
+    hydrateDeferredMedia(sourceImage);
+    modalImage.src = showDetail ? item.dataset.detailSrc : (sourceImage.currentSrc || sourceImage.src);
     modalImage.alt = showDetail ? item.dataset.detailAlt : sourceImage.alt;
     modalImage.width = showDetail ? 720 : Number(sourceImage.getAttribute("width"));
     modalImage.height = showDetail ? 720 : Number(sourceImage.getAttribute("height"));
@@ -1857,6 +1859,50 @@ function respectReducedMotion() {
   document.querySelectorAll("video").forEach(video => video.pause());
 }
 
+function hydrateDeferredMedia(media) {
+  if (!media) return;
+
+  media.closest("picture")?.querySelectorAll("source[data-deferred-srcset]").forEach(source => {
+    source.srcset = source.dataset.deferredSrcset;
+    source.removeAttribute("data-deferred-srcset");
+  });
+
+  if (media.dataset.deferredSrcset) {
+    media.srcset = media.dataset.deferredSrcset;
+    media.removeAttribute("data-deferred-srcset");
+  }
+
+  if (media.dataset.deferredSrc) {
+    media.src = media.dataset.deferredSrc;
+    media.removeAttribute("data-deferred-src");
+  }
+
+  if (media.dataset.deferredPoster) {
+    media.poster = media.dataset.deferredPoster;
+    media.removeAttribute("data-deferred-poster");
+  }
+}
+
+function setupDeferredMedia() {
+  const mediaItems = [...document.querySelectorAll("[data-deferred-src], [data-deferred-poster]")];
+  if (!mediaItems.length) return;
+
+  if (!("IntersectionObserver" in window)) {
+    mediaItems.forEach(hydrateDeferredMedia);
+    return;
+  }
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      hydrateDeferredMedia(entry.target);
+      observer.unobserve(entry.target);
+    });
+  }, { rootMargin: "240px 0px", threshold: 0.01 });
+
+  mediaItems.forEach(media => observer.observe(media));
+}
+
 function setupBackgroundVideos() {
   const videos = document.querySelectorAll("[data-background-video]");
   if (!videos.length || reducedMotion.matches) return;
@@ -1898,46 +1944,64 @@ function setupFloatingGallery() {
   const gallery = document.querySelector("[data-floating-gallery]");
   if (!gallery) return;
 
-  const imageIndices = Array.from({ length: 69 }, (_, index) => index + 1).filter(index => index !== 25);
-  const roundImages = new Set([6, 8, 9, 10, 12, 17, 27, 39, 44]);
-  const fragment = document.createDocumentFragment();
+  const buildGallery = () => {
+    if (gallery.dataset.galleryReady === "true") return;
+    gallery.dataset.galleryReady = "true";
 
-  imageIndices.forEach((imageIndex, position) => {
-    const memory = document.createElement("figure");
-    const image = document.createElement("img");
-    const seed = position;
-    const column = seed % 10;
-    const row = Math.floor(seed / 10);
-    const direction = column < 5 ? -1 : 1;
-    const memoryX = 9 + column * 9.1;
-    let memoryY = 10 + row * 12.5 + (column % 2) * 2.5;
+    const imageIndices = Array.from({ length: 69 }, (_, index) => index + 1).filter(index => index !== 25);
+    const roundImages = new Set([6, 8, 9, 10, 12, 17, 27, 39, 44]);
+    const fragment = document.createDocumentFragment();
 
-    // Preserve a compact window around Saturn without pushing memories to the edges.
-    if (memoryX > 36 && memoryX < 64 && memoryY > 32 && memoryY < 70) {
-      memoryY = row % 2 === 0 ? 25 + (seed % 4) : 76 - (seed % 4);
-    }
+    imageIndices.forEach((imageIndex, position) => {
+      const memory = document.createElement("figure");
+      const image = document.createElement("img");
+      const seed = position;
+      const column = seed % 10;
+      const row = Math.floor(seed / 10);
+      const direction = column < 5 ? -1 : 1;
+      const memoryX = 9 + column * 9.1;
+      let memoryY = 10 + row * 12.5 + (column % 2) * 2.5;
 
-    memory.className = `slaying-memory ${roundImages.has(imageIndex) ? "is-round" : "is-square"}`;
-    memory.style.setProperty("--memory-x", `${memoryX}%`);
-    memory.style.setProperty("--memory-y", `${memoryY}%`);
-    memory.style.setProperty("--memory-size", `${72 + (seed * 17) % 48}px`);
-    memory.style.setProperty("--memory-drift-x", `${direction * (18 + (seed * 19) % 34)}px`);
-    memory.style.setProperty("--memory-drift-y", `${-16 - (seed * 13) % 28}px`);
-    memory.style.setProperty("--memory-delay", `${-((seed * 13) % 43)}s`);
-    memory.style.setProperty("--memory-duration", `${38 + (seed * 7) % 11}s`);
-    memory.style.setProperty("--memory-tilt", `${-7 + (seed * 5) % 15}deg`);
+      // Preserve a compact window around Saturn without pushing memories to the edges.
+      if (memoryX > 36 && memoryX < 64 && memoryY > 32 && memoryY < 70) {
+        memoryY = row % 2 === 0 ? 25 + (seed % 4) : 76 - (seed % 4);
+      }
 
-    image.src = `assets/images/customer-gallery/experience-${String(imageIndex).padStart(2, "0")}.jpg`;
-    image.alt = `Saturn Cheetah customer experience ${position + 1}`;
-    image.width = 520;
-    image.height = 520;
-    image.loading = "lazy";
-    image.decoding = "async";
-    memory.append(image);
-    fragment.append(memory);
-  });
+      memory.className = `slaying-memory ${roundImages.has(imageIndex) ? "is-round" : "is-square"}`;
+      memory.style.setProperty("--memory-x", `${memoryX}%`);
+      memory.style.setProperty("--memory-y", `${memoryY}%`);
+      memory.style.setProperty("--memory-size", `${72 + (seed * 17) % 48}px`);
+      memory.style.setProperty("--memory-drift-x", `${direction * (18 + (seed * 19) % 34)}px`);
+      memory.style.setProperty("--memory-drift-y", `${-16 - (seed * 13) % 28}px`);
+      memory.style.setProperty("--memory-delay", `${-((seed * 13) % 43)}s`);
+      memory.style.setProperty("--memory-duration", `${38 + (seed * 7) % 11}s`);
+      memory.style.setProperty("--memory-tilt", `${-7 + (seed * 5) % 15}deg`);
 
-  gallery.append(fragment);
+      image.src = `assets/images/customer-gallery/experience-${String(imageIndex).padStart(2, "0")}.jpg`;
+      image.alt = `Saturn Cheetah customer experience ${position + 1}`;
+      image.width = 520;
+      image.height = 520;
+      image.loading = "lazy";
+      image.decoding = "async";
+      memory.append(image);
+      fragment.append(memory);
+    });
+
+    gallery.append(fragment);
+  };
+
+  if (!("IntersectionObserver" in window)) {
+    buildGallery();
+    return;
+  }
+
+  const observer = new IntersectionObserver(entries => {
+    if (!entries.some(entry => entry.isIntersecting)) return;
+    buildGallery();
+    observer.disconnect();
+  }, { rootMargin: "600px 0px", threshold: 0.01 });
+
+  observer.observe(gallery);
 }
 
 setupExperienceOrder();
@@ -1956,6 +2020,7 @@ setupAfterDarkConfigurator();
 setupAfterDarkGallery();
 setupReviewCarousel();
 setupDesignGallery();
+setupDeferredMedia();
 setupFloatingPill();
 setupGalleryModal();
 setupSectionReveals();

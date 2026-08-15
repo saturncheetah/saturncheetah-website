@@ -22,7 +22,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&amp;family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/site.min.css">
-  <link rel="preload" as="image" href="assets/images/boutique/hero-desktop.webp" fetchpriority="high">
+  <link rel="preload" as="image" href="assets/images/boutique/hero-mobile-800.webp" media="(max-width: 767px)" fetchpriority="high">
+  <link rel="preload" as="image" href="assets/images/boutique/hero-desktop.webp" media="(min-width: 768px)" fetchpriority="high">
   <script src="assets/js/site.min.js" defer></script>
   <script type="application/ld+json">
   {
@@ -108,9 +109,9 @@
           <picture class="hero-picture">
             <source
               media="(max-width: 767px)"
-              srcset="assets/images/boutique/hero-desktop.webp"
-              width="1600"
-              height="900"
+              srcset="assets/images/boutique/hero-mobile-800.webp"
+              width="800"
+              height="1000"
             >
             <img
               src="assets/images/boutique/hero-desktop.webp"
@@ -141,8 +142,8 @@
 
         <figure class="custom-print-rail">
           <picture>
-            <source media="(max-width: 767px)" srcset="assets/images/editorial/wear-it-your-way-mobile.webp" width="1122" height="1402">
-            <img src="assets/images/editorial/custom-print-rail.webp" alt="Regular-fit black and oversized off-white T-shirts presented in the Saturn Cheetah boutique" width="1672" height="941" loading="lazy" decoding="async">
+            <source media="(max-width: 767px)" data-deferred-srcset="assets/images/editorial/wear-it-your-way-mobile.webp" width="1122" height="1402">
+            <img data-deferred-src="assets/images/editorial/custom-print-rail.webp" alt="Regular-fit black and oversized off-white T-shirts presented in the Saturn Cheetah boutique" width="1672" height="941" loading="lazy" decoding="async">
           </picture>
           <figcaption><span>One blank tee.</span> Any direction you choose.</figcaption>
         </figure>
@@ -157,9 +158,9 @@
           <div class="plain-tee-cards">
             <article class="plain-tee-card">
               <div class="plain-tee-card-images" aria-hidden="true">
-                <img src="assets/images/products/180/tshirt-180-black-640.webp" alt="" width="640" height="1019" loading="lazy" decoding="async">
-                <img src="assets/images/products/180/tshirt-180-white-640.webp" alt="" width="640" height="1023" loading="lazy" decoding="async">
-                <img src="assets/images/products/180/tshirt-180-pink-640.webp" alt="" width="640" height="1023" loading="lazy" decoding="async">
+                <img data-deferred-src="assets/images/products/180/tshirt-180-black-640.webp" alt="" width="640" height="1019" loading="lazy" decoding="async">
+                <img data-deferred-src="assets/images/products/180/tshirt-180-white-640.webp" alt="" width="640" height="1023" loading="lazy" decoding="async">
+                <img data-deferred-src="assets/images/products/180/tshirt-180-pink-640.webp" alt="" width="640" height="1023" loading="lazy" decoding="async">
               </div>
               <div class="plain-tee-card-copy">
                 <p class="eyebrow">Plain essentials offer</p>
@@ -172,7 +173,7 @@
 
             <article class="plain-tee-card">
               <div class="plain-tee-card-images plain-tee-card-images-single" aria-hidden="true">
-                <img src="assets/images/products/240/tshirt-240-off-white-640.webp" alt="" width="640" height="1020" loading="lazy" decoding="async">
+                <img data-deferred-src="assets/images/products/240/tshirt-240-off-white-640.webp" alt="" width="640" height="1020" loading="lazy" decoding="async">
               </div>
               <div class="plain-tee-card-copy">
                 <p class="eyebrow">Heavyweight essential</p>
@@ -442,7 +443,7 @@
 
             <article class="story-panel" id="story-print-panel" role="tabpanel" aria-labelledby="story-print-tab" data-tab-panel="story-print" hidden>
               <div class="story-media story-video">
-                <video controls muted playsinline preload="none" poster="assets/images/story/custom-story-printing-poster.webp" aria-label="Muted vertical video showing a real T-shirt printing process" data-always-muted>
+                <video controls muted playsinline preload="none" data-deferred-poster="assets/images/story/custom-story-printing-poster.webp" aria-label="Muted vertical video showing a real T-shirt printing process" data-always-muted>
                   <source src="assets/video/custom-story-live-printing.mp4" type="video/mp4">
                   Your browser does not support video playback.
                 </video>
@@ -547,7 +548,7 @@
             >
               <article class="design-card" data-gallery-index="0" data-tee-tone="black" data-detail-src="assets/images/designs/editorial/echo-silhouette-detail.webp" data-detail-alt="Close view of Echo Silhouette artwork printed on black fabric">
                 <button class="design-preview" type="button" data-gallery-open aria-label="Open Echo Silhouette design preview">
-                  <img src="assets/images/designs/editorial/echo-silhouette-editorial.webp" alt="Model wearing a black T-shirt with Echo Silhouette artwork in the Saturn Cheetah boutique style" width="960" height="1200" loading="lazy" decoding="async">
+                  <img data-deferred-src="assets/images/designs/editorial/echo-silhouette-editorial.webp" alt="Model wearing a black T-shirt with Echo Silhouette artwork in the Saturn Cheetah boutique style" width="960" height="1200" loading="lazy" decoding="async">
                 </button>
                 <div class="design-card-body">
                   <h3>Echo Silhouette</h3>
@@ -557,7 +558,7 @@
               </article>
               <article class="design-card" data-gallery-index="1" data-tee-tone="white" data-detail-src="assets/images/designs/editorial/find-your-balance-detail.webp" data-detail-alt="Close view of Find Your Balance artwork printed on off-white fabric">
                 <button class="design-preview" type="button" data-gallery-open aria-label="Open Find Your Balance design preview">
-                  <img src="assets/images/designs/editorial/find-your-balance-editorial.webp" alt="Off-white T-shirt with Find Your Balance artwork shown in boutique lighting" width="960" height="1200" loading="lazy" decoding="async">
+                  <img data-deferred-src="assets/images/designs/editorial/find-your-balance-editorial.webp" alt="Off-white T-shirt with Find Your Balance artwork shown in boutique lighting" width="960" height="1200" loading="lazy" decoding="async">
                 </button>
                 <div class="design-card-body">
                   <h3>Find Your Balance</h3>
@@ -567,7 +568,7 @@
               </article>
               <article class="design-card" data-gallery-index="2" data-tee-tone="black" data-detail-src="assets/images/designs/editorial/resurrection-detail.webp" data-detail-alt="Close view of Resurrection artwork printed on black fabric">
                 <button class="design-preview" type="button" data-gallery-open aria-label="Open Resurrection design preview">
-                  <img src="assets/images/designs/editorial/resurrection-editorial.webp" alt="Model wearing a black T-shirt with Resurrection artwork in the Saturn Cheetah boutique style" width="960" height="1200" loading="lazy" decoding="async">
+                  <img data-deferred-src="assets/images/designs/editorial/resurrection-editorial.webp" alt="Model wearing a black T-shirt with Resurrection artwork in the Saturn Cheetah boutique style" width="960" height="1200" loading="lazy" decoding="async">
                 </button>
                 <div class="design-card-body">
                   <h3>Resurrection</h3>
@@ -577,7 +578,7 @@
               </article>
               <article class="design-card" data-gallery-index="3" data-tee-tone="white">
                 <button class="design-preview" type="button" data-gallery-open aria-label="Open Knowledge Is Power design preview">
-                  <img src="assets/images/designs/editorial/knowledge-is-power-editorial.webp" alt="Model wearing an off-white T-shirt with Knowledge Is Power artwork in boutique lighting" width="960" height="1200" loading="lazy" decoding="async">
+                  <img data-deferred-src="assets/images/designs/editorial/knowledge-is-power-editorial.webp" alt="Model wearing an off-white T-shirt with Knowledge Is Power artwork in boutique lighting" width="960" height="1200" loading="lazy" decoding="async">
                 </button>
                 <div class="design-card-body">
                   <h3>Knowledge Is Power</h3>
@@ -587,7 +588,7 @@
               </article>
               <article class="design-card" data-gallery-index="4" data-tee-tone="black" data-detail-src="assets/images/designs/editorial/prism-beauty-detail.webp" data-detail-alt="Close view of Prism Beauty artwork printed on black fabric">
                 <button class="design-preview" type="button" data-gallery-open aria-label="Open Prism Beauty design preview">
-                  <img src="assets/images/designs/editorial/prism-beauty-editorial.webp" alt="Model wearing a black T-shirt with Prism Beauty artwork in boutique lighting" width="960" height="1200" loading="lazy" decoding="async">
+                  <img data-deferred-src="assets/images/designs/editorial/prism-beauty-editorial.webp" alt="Model wearing a black T-shirt with Prism Beauty artwork in boutique lighting" width="960" height="1200" loading="lazy" decoding="async">
                 </button>
                 <div class="design-card-body">
                   <h3>Prism Beauty</h3>
@@ -597,7 +598,7 @@
               </article>
               <article class="design-card design-card-custom-story" data-gallery-index="5" data-tee-tone="black" data-detail-src="assets/images/designs/editorial/playlist-made-wearable-detail.webp" data-detail-alt="Close view of a personalised playlist and performance-inspired print on black fabric">
                 <button class="design-preview" type="button" data-gallery-open aria-label="Open A Playlist Made Wearable custom story preview">
-                  <img src="assets/images/designs/editorial/playlist-made-wearable-editorial.webp" alt="Model wearing a personalised playlist and performance-inspired custom T-shirt" width="960" height="1200" loading="lazy" decoding="async">
+                  <img data-deferred-src="assets/images/designs/editorial/playlist-made-wearable-editorial.webp" alt="Model wearing a personalised playlist and performance-inspired custom T-shirt" width="960" height="1200" loading="lazy" decoding="async">
                 </button>
                 <div class="design-card-body">
                   <p class="design-card-kicker">Custom story</p>
@@ -742,7 +743,7 @@
           loop
           playsinline
           preload="none"
-          poster="assets/video/customer-gallery/saturn-floating-gallery-poster.webp"
+          data-deferred-poster="assets/video/customer-gallery/saturn-floating-gallery-poster.webp"
           aria-hidden="true"
           tabindex="-1"
           data-background-video
@@ -790,27 +791,27 @@
           <div class="after-dark-gallery" tabindex="0" aria-label="Saturn After Dark design inspiration gallery">
             <figure class="after-dark-gallery-card after-dark-gallery-hero">
               <button class="after-dark-preview" type="button" data-after-dark-preview aria-label="Enlarge Saturn After Dark flat-lay">
-                <img src="assets/images/after-dark-approved/saturn-after-dark-hero-flatlay-720.webp" srcset="assets/images/after-dark-approved/saturn-after-dark-hero-flatlay-720.webp 720w, assets/images/after-dark-approved/saturn-after-dark-hero-flatlay.webp 1122w" sizes="(max-width: 768px) 88vw, 560px" alt="Black T-shirt and sleeveless vest with silver rings, chains and stitched black-net details in the Saturn After Dark style" width="1122" height="1402" loading="lazy" decoding="async">
+                <img data-deferred-src="assets/images/after-dark-approved/saturn-after-dark-hero-flatlay-720.webp" data-deferred-srcset="assets/images/after-dark-approved/saturn-after-dark-hero-flatlay-720.webp 720w, assets/images/after-dark-approved/saturn-after-dark-hero-flatlay.webp 1122w" sizes="(max-width: 768px) 88vw, 560px" alt="Black T-shirt and sleeveless vest with silver rings, chains and stitched black-net details in the Saturn After Dark style" width="1122" height="1402" loading="lazy" decoding="async">
               </button>
             </figure>
             <figure class="after-dark-gallery-card">
               <button class="after-dark-preview" type="button" data-after-dark-preview aria-label="Enlarge Saturn After Dark collection rack">
-                <img src="assets/images/after-dark-approved/sad-gallery-collection-rack.webp" alt="Saturn After Dark collection rack with black tees and sleeveless vests" width="1122" height="1402" loading="lazy" decoding="async">
+                <img data-deferred-src="assets/images/after-dark-approved/sad-gallery-collection-rack.webp" alt="Saturn After Dark collection rack with black tees and sleeveless vests" width="1122" height="1402" loading="lazy" decoding="async">
               </button>
             </figure>
             <figure class="after-dark-gallery-card">
               <button class="after-dark-preview" type="button" data-after-dark-preview aria-label="Enlarge tee and vest hardware details">
-                <img src="assets/images/after-dark-approved/sad-gallery-tee-vest-detail.webp" alt="Black T-shirt and sleeveless vest with silver hardware details" width="1123" height="1401" loading="lazy" decoding="async">
+                <img data-deferred-src="assets/images/after-dark-approved/sad-gallery-tee-vest-detail.webp" alt="Black T-shirt and sleeveless vest with silver hardware details" width="1123" height="1401" loading="lazy" decoding="async">
               </button>
             </figure>
             <figure class="after-dark-gallery-card">
               <button class="after-dark-preview" type="button" data-after-dark-preview aria-label="Enlarge black-net detailing">
-                <img src="assets/images/after-dark-approved/sad-gallery-black-net.webp" alt="Close view of stitched black-net detailing on a black garment" width="1254" height="1254" loading="lazy" decoding="async">
+                <img data-deferred-src="assets/images/after-dark-approved/sad-gallery-black-net.webp" alt="Close view of stitched black-net detailing on a black garment" width="1254" height="1254" loading="lazy" decoding="async">
               </button>
             </figure>
             <figure class="after-dark-gallery-card">
               <button class="after-dark-preview" type="button" data-after-dark-preview aria-label="Enlarge optional acid-spray finish">
-                <img src="assets/images/after-dark-approved/sad-gallery-acid-spray.webp" alt="Black garment with an optional orangish acid-spray finish" width="1254" height="1254" loading="lazy" decoding="async">
+                <img data-deferred-src="assets/images/after-dark-approved/sad-gallery-acid-spray.webp" alt="Black garment with an optional orangish acid-spray finish" width="1254" height="1254" loading="lazy" decoding="async">
               </button>
             </figure>
           </div>

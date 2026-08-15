@@ -3994,7 +3994,7 @@ html:not(.js-enabled) .story-panel[hidden] {
     position: relative;
     display: block;
     width: min(100%, 420px);
-    aspect-ratio: 16 / 9;
+    aspect-ratio: 4 / 5;
     height: auto;
     margin-top: 20px;
     margin-inline: auto;
