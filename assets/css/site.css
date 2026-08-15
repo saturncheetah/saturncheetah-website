@@ -4354,7 +4354,9 @@ html:not(.js-enabled) .story-panel[hidden] {
 
 .custom-print-rail {
   position: relative;
-  margin: 0;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
   overflow: hidden;
   border-radius: clamp(18px, 3vw, 34px);
   background: #090807;
@@ -4409,7 +4411,8 @@ html:not(.js-enabled) .story-panel[hidden] {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 0;
-  margin: 10px 0 0;
+  max-width: 900px;
+  margin: 10px auto 0;
   padding: 0;
   overflow: hidden;
   border: 1px solid rgb(255 255 255 / 14%);
