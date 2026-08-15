@@ -9612,6 +9612,38 @@ body {
   margin: 18px 0 0 auto;
 }
 
+@media (min-width: 901px) {
+  .plain-tee-cards {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr);
+  }
+
+  .plain-tee-card:first-child {
+    grid-template-columns: minmax(230px, .9fr) minmax(0, 1fr);
+  }
+
+  .plain-tee-card:first-child .plain-tee-card-images {
+    gap: 0;
+    padding-inline: 4px;
+  }
+
+  .plain-tee-card:first-child .plain-tee-card-images img {
+    width: 200%;
+    min-width: 0;
+    margin-left: 0;
+    clip-path: inset(0 50% 0 0);
+    object-position: left bottom;
+    transform-origin: left bottom;
+  }
+
+  .plain-tee-card:first-child .plain-tee-card-images img:nth-child(2) {
+    transform: translateY(-8px) scale(1.08);
+  }
+
+  .plain-tee-card:first-child .plain-tee-toggle {
+    white-space: nowrap;
+  }
+}
+
 @media (max-width: 900px) {
   .plain-tee-cards {
     grid-template-columns: 1fr;
