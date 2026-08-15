@@ -5241,8 +5241,8 @@ html:not(.js-enabled) .story-panel[hidden] {
 }
 
 .after-dark-section.is-powered .after-dark-pull-ring {
-  border-color: #c8bfc0;
-  box-shadow: inset 2px 2px 2px rgb(255 255 255 / 52%), inset -3px -3px 4px rgb(24 22 25 / 48%), 0 8px 18px rgb(0 0 0 / 55%), 0 0 20px rgb(205 52 78 / 52%);
+  border-color: #cbb99f;
+  box-shadow: inset 2px 2px 2px rgb(255 255 255 / 52%), inset -3px -3px 4px rgb(24 22 25 / 48%), 0 8px 18px rgb(0 0 0 / 55%), 0 0 20px rgb(218 165 92 / 48%);
 }
 
 @keyframes after-dark-chain-pull {
@@ -5998,8 +5998,8 @@ body.home-page .final-cta::before {
   inset: 0;
   z-index: 0;
   background:
-    radial-gradient(circle at 20% 18%, rgb(207 72 86 / 58%), transparent 31rem),
-    linear-gradient(112deg, transparent 36%, rgb(255 221 202 / 12%) 49%, transparent 62%);
+    radial-gradient(circle at 20% 18%, rgb(205 151 84 / 36%), transparent 31rem),
+    linear-gradient(112deg, transparent 36%, rgb(255 231 196 / 10%) 49%, transparent 62%);
   content: "";
   opacity: 0;
   pointer-events: none;
@@ -6012,7 +6012,7 @@ body.home-page .final-cta::before {
 
 .after-dark-section.is-powered .after-dark-intro h2 {
   color: #fffaf2;
-  text-shadow: 0 0 18px rgb(255 207 190 / 28%), 0 0 52px rgb(184 46 68 / 48%);
+  text-shadow: 0 0 18px rgb(255 226 190 / 26%), 0 0 52px rgb(181 117 60 / 36%);
 }
 
 .after-dark-section.is-powered .after-dark-power-switch {
@@ -6022,9 +6022,9 @@ body.home-page .final-cta::before {
 }
 
 .after-dark-section.is-powered .after-dark-gallery-card {
-  border-color: rgb(225 169 157 / 62%);
-  background: linear-gradient(145deg, #3a2025, #171113);
-  box-shadow: 0 20px 54px rgb(0 0 0 / 44%), 0 0 26px rgb(153 43 61 / 22%);
+  border-color: rgb(207 176 146 / 52%);
+  background: linear-gradient(145deg, #30251f, #151211);
+  box-shadow: 0 20px 54px rgb(0 0 0 / 44%), 0 0 26px rgb(169 115 61 / 20%);
 }
 
 .after-dark-section.is-powered .after-dark-gallery-card img {
@@ -6682,7 +6682,7 @@ body.home-page .final-cta::before {
 }
 
 .after-dark-section.is-powered .after-dark-shell::before {
-  background: radial-gradient(circle, rgb(133 22 42 / 48%) 0%, rgb(84 29 34 / 24%) 36%, transparent 70%);
+  background: radial-gradient(circle, rgb(181 118 55 / 34%) 0%, rgb(104 69 39 / 20%) 36%, transparent 70%);
   opacity: 1;
   transform: scale(1);
   animation: after-dark-light-on 760ms ease-out both;
@@ -9725,13 +9725,13 @@ body {
 @media (min-width: 1100px) {
   .home-page .tee-section > .container {
     display: grid;
-    grid-template-columns: minmax(280px, .62fr) minmax(0, 1.38fr);
+    grid-template-columns: minmax(290px, .7fr) minmax(0, 1.3fr);
     grid-template-areas:
       "intro visual"
       "intro ideas"
       "shop shop";
     align-items: start;
-    column-gap: clamp(40px, 5vw, 72px);
+    column-gap: clamp(30px, 4vw, 56px);
     row-gap: 10px;
   }
 
@@ -9744,12 +9744,31 @@ body {
 
   .home-page .tee-section .custom-print-rail {
     grid-area: visual;
-    max-width: none;
+    width: 100%;
+    max-width: 780px;
+    justify-self: end;
+  }
+
+  .home-page .tee-section .custom-print-rail picture {
+    height: auto;
+    aspect-ratio: auto;
+  }
+
+  .home-page .tee-section .custom-print-rail img {
+    width: 100%;
+    height: auto;
+    max-height: none;
+    aspect-ratio: auto;
+    object-fit: contain;
+    object-position: center;
+    transform: none;
   }
 
   .home-page .tee-section .custom-print-ideas {
     grid-area: ideas;
-    max-width: none;
+    width: 100%;
+    max-width: 780px;
+    justify-self: end;
     margin-top: 0;
   }
 
