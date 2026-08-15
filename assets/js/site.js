@@ -1653,6 +1653,14 @@ function setupStoreJourney() {
       const bounds = chapter.element.getBoundingClientRect();
       const progress = Math.max(0, Math.min(1, (viewportHeight - bounds.top) / (viewportHeight + bounds.height)));
       chapter.element.style.setProperty("--journey-progress", progress.toFixed(4));
+
+      if (chapter.element.matches(".hero")) {
+        const heroExitProgress = Math.max(0, Math.min(1, -bounds.top / Math.max(bounds.height, 1)));
+        chapter.element.style.setProperty("--hero-exit-progress", heroExitProgress.toFixed(4));
+        chapter.element.style.setProperty("--hero-image-lift", `${(heroExitProgress * -34).toFixed(2)}px`);
+        chapter.element.style.setProperty("--hero-image-scale", (1 + heroExitProgress * 0.035).toFixed(4));
+      }
+
       chapter.element.style.setProperty("--journey-shift", `${((progress - 0.5) * 18).toFixed(2)}px`);
       chapter.element.style.setProperty("--journey-lift", `${((0.5 - progress) * 18).toFixed(2)}px`);
       chapter.element.style.setProperty("--journey-parallax", `${(progress * 18).toFixed(2)}px`);

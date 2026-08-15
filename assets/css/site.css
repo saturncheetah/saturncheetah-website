@@ -9813,3 +9813,161 @@ body {
     flex-basis: clamp(220px, 42%, 290px);
   }
 }
+
+/* Mauli-informed editorial rhythm: complete one thought per desktop frame. */
+@media (min-width: 1100px) {
+  .store-journey-enabled .hero {
+    --hero-exit-progress: 0;
+    --hero-image-lift: 0px;
+    --hero-image-scale: 1;
+  }
+
+  .store-journey-enabled .hero-picture img {
+    transform: translate3d(0, var(--hero-image-lift), 0) scale(var(--hero-image-scale));
+  }
+
+  .store-journey-enabled .hero.is-ready .hero-copy > :is(.hero-brand-line, h1, .hero-lead, .hero-proof-chips, .hero-actions) {
+    opacity: calc(1 - (var(--hero-exit-progress) * .22));
+    transform: translate3d(0, calc(var(--hero-exit-progress) * 20px), 0);
+    transition: opacity 80ms linear, transform 80ms linear;
+    will-change: opacity, transform;
+  }
+
+  .home-page .bulk-tee-section .home-journey-link {
+    max-width: 760px;
+    justify-items: center;
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  .home-page .bulk-tee-section .home-journey-link > p:not(.eyebrow) {
+    margin-inline: auto;
+  }
+
+  .home-page .bulk-tee-section .home-journey-link .button {
+    width: fit-content;
+    justify-self: center;
+  }
+
+  .home-page .process-section .section-heading {
+    max-width: 720px;
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  .home-page .process-section .section-heading > p:last-child {
+    margin-inline: auto;
+  }
+
+  .home-page .process-section .story-module {
+    max-width: 1060px;
+    margin-inline: auto;
+  }
+
+  .home-page .secondary-section > .container {
+    display: grid;
+    grid-template-columns: minmax(0, 1.38fr) minmax(280px, .62fr);
+    align-items: center;
+    column-gap: clamp(40px, 5vw, 72px);
+  }
+
+  .home-page .secondary-section .section-heading {
+    grid-column: 2;
+    grid-row: 1;
+    max-width: 320px;
+    margin: 0;
+  }
+
+  .home-page .secondary-section .secondary-scroller {
+    display: flex;
+    grid-column: 1;
+    grid-row: 1;
+    min-width: 0;
+    gap: 14px;
+    padding: 4px 2px 12px;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+  }
+
+  .home-page .secondary-section .secondary-card {
+    flex: 0 0 clamp(205px, 42%, 245px);
+    scroll-snap-align: start;
+  }
+
+  .home-page .portrait-section .portrait-teaser {
+    grid-template-columns: minmax(300px, .82fr) minmax(0, 1.18fr);
+    min-height: 360px;
+  }
+
+  .home-page .portrait-section .portrait-teaser-visual {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: auto;
+    margin: 0;
+    border: 0;
+    border-left: 1px solid rgb(216 181 165 / 18%);
+    border-radius: 0;
+  }
+
+  .home-page .portrait-section .portrait-teaser-visual img {
+    object-fit: cover;
+  }
+
+  .home-page .reviews-section > .container {
+    display: grid;
+    grid-template-columns: minmax(320px, .65fr) minmax(0, 1.35fr);
+    align-items: center;
+    column-gap: clamp(40px, 5vw, 72px);
+  }
+
+  .home-page .reviews-section .section-heading {
+    max-width: 340px;
+    margin: 0;
+  }
+
+  .home-page .reviews-section .section-heading h2 {
+    font-size: clamp(2.4rem, 3.6vw, 3.6rem);
+  }
+
+  .home-page .reviews-section .review-card {
+    flex-basis: calc((100% - 16px) / 2);
+  }
+
+  .home-page .slaying-section {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(280px, .65fr);
+    align-items: center;
+    gap: clamp(42px, 5vw, 72px);
+    padding-inline: max(var(--gutter), calc((100% - var(--content-width)) / 2));
+  }
+
+  .home-page .slaying-section > .container {
+    grid-column: 2;
+    grid-row: 1;
+    width: 100%;
+    margin: 0;
+  }
+
+  .home-page .slaying-section .slaying-heading {
+    max-width: 320px;
+    margin: 0;
+  }
+
+  .home-page .slaying-section .slaying-stage {
+    grid-column: 1;
+    grid-row: 1;
+    width: min(100%, 680px);
+    min-height: 0;
+    margin: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .store-journey-enabled .hero.is-ready .hero-copy > :is(.hero-brand-line, h1, .hero-lead, .hero-proof-chips, .hero-actions) {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
