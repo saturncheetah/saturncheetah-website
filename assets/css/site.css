@@ -4405,6 +4405,39 @@ html:not(.js-enabled) .story-panel[hidden] {
   font-size: 1.25em;
 }
 
+.custom-print-ideas {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0;
+  margin: 10px 0 0;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid rgb(255 255 255 / 14%);
+  border-radius: 14px;
+  color: var(--night-ivory);
+  background: rgb(17 13 17 / 82%);
+  box-shadow: 0 18px 44px rgb(0 0 0 / 18%);
+  list-style: none;
+}
+
+.custom-print-ideas li {
+  display: flex;
+  min-height: 48px;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 8px;
+  color: #ead9d2;
+  font-size: clamp(.68rem, 1vw, .82rem);
+  font-weight: 800;
+  letter-spacing: .015em;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.custom-print-ideas li + li {
+  border-left: 1px solid rgb(216 181 165 / 14%);
+}
+
 @keyframes atelier-light-pass {
   to { transform: translateX(120%); }
 }
@@ -4588,6 +4621,10 @@ html:not(.js-enabled) .story-panel[hidden] {
     max-height: 320px;
     aspect-ratio: 5 / 4;
     object-position: center 27%;
+  }
+
+  .custom-print-ideas {
+    display: none;
   }
 }
 
