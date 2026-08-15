@@ -109,21 +109,26 @@ if(afterDarkForm){
   modal.innerHTML='<button type="button" aria-label="Close image preview">×</button><img alt="">';
   document.body.append(modal);
   const modalImage=modal.querySelector("img");
+  let previewTrigger=null;
   const close=()=>modal.close();
   modal.querySelector("button").addEventListener("click",close);
   modal.addEventListener("click",event=>{if(event.target===modal)close()});
+  modal.addEventListener("close",()=>previewTrigger?.focus());
   afterDarkForm.querySelectorAll(".choice-visual img").forEach(image=>{
-    image.tabIndex=0;
-    image.setAttribute("role","button");
-    image.setAttribute("aria-label",`Enlarge ${image.alt}`);
+    const preview=document.createElement("button");
+    preview.type="button";
+    preview.className="choice-image-preview";
+    preview.textContent="Preview";
+    preview.setAttribute("aria-label",`Preview ${image.alt}`);
+    image.insertAdjacentElement("afterend",preview);
     const open=event=>{
       event.preventDefault();
       event.stopPropagation();
+      previewTrigger=preview;
       modalImage.src=image.src;
       modalImage.alt=image.alt;
       modal.showModal();
     };
-    image.addEventListener("click",open);
-    image.addEventListener("keydown",event=>{if(event.key==="Enter"||event.key===" ")open(event)});
+    preview.addEventListener("click",open);
   });
 }
