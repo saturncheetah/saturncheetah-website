@@ -10100,29 +10100,36 @@ body {
   }
 
   .home-page .slaying-section .slaying-proof {
-    display: flex;
+    display: inline-flex;
+    width: fit-content;
+    min-height: 34px;
     align-items: center;
-    gap: 13px;
+    gap: 9px;
     margin: 28px 0 0;
-    color: rgba(255, 248, 238, .68);
+    padding: 7px 12px;
+    border: 1px solid rgb(206 255 55 / 28%);
+    border-radius: 999px;
+    color: rgba(255, 248, 238, .76);
+    background: rgb(206 255 55 / 5%);
     font-size: .72rem;
     font-weight: 800;
-    letter-spacing: .13em;
+    letter-spacing: .09em;
     line-height: 1.35;
     text-transform: uppercase;
   }
 
-  .home-page .slaying-section .slaying-proof strong {
-    color: #ceff37;
-    font-family: var(--font-editorial);
-    font-size: 2.8rem;
-    font-weight: 600;
-    letter-spacing: -.04em;
-    line-height: .8;
+  .home-page .slaying-section .slaying-proof::before {
+    width: 7px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: #ceff37;
+    box-shadow: 0 0 12px rgb(206 255 55 / 52%);
+    content: "";
+    flex: 0 0 auto;
   }
 
   .home-page .slaying-section .slaying-proof span {
-    max-width: 14ch;
+    max-width: none;
   }
 
   .home-page .slaying-section .slaying-social-link {
@@ -10164,7 +10171,9 @@ body {
     aspect-ratio: 5 / 4;
     isolation: isolate;
     overflow: hidden;
-    background: #08070a;
+    background:
+      radial-gradient(circle at 50% 48%, rgb(150 92 52 / 12%), transparent 43%),
+      #08070a;
     box-shadow: 0 34px 90px rgb(0 0 0 / 32%);
   }
 
@@ -10172,33 +10181,48 @@ body {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 46%;
+    width: 50%;
     aspect-ratio: 2.7 / 1;
     z-index: 0;
-    border: 1px solid rgb(255 225 184 / 22%);
+    border: 1px solid rgb(255 225 184 / 38%);
     border-radius: 50%;
-    box-shadow: 0 0 36px rgb(217 143 85 / 10%);
+    box-shadow: 0 0 42px rgb(217 143 85 / 18%);
     content: "";
     pointer-events: none;
     transform: translate(-50%, -50%) rotate(-11deg);
   }
 
   .home-page .slaying-section .slaying-background-video {
-    opacity: .46;
-    filter: saturate(.62) contrast(1.08) brightness(.58);
+    opacity: .66;
+    filter: saturate(.74) contrast(1.08) brightness(.76);
     transform: scale(1.045);
   }
 
   .home-page .slaying-section .slaying-background-veil {
     background:
-      linear-gradient(180deg, rgb(6 5 8 / 54%), rgb(6 5 8 / 18%) 42%, rgb(6 5 8 / 66%)),
-      radial-gradient(circle at 50% 49%, transparent 15%, rgb(6 5 8 / 25%) 52%, rgb(6 5 8 / 72%) 100%);
+      linear-gradient(180deg, rgb(6 5 8 / 38%), rgb(6 5 8 / 8%) 42%, rgb(6 5 8 / 52%)),
+      radial-gradient(circle at 50% 49%, transparent 12%, rgb(6 5 8 / 16%) 54%, rgb(6 5 8 / 58%) 100%);
   }
 
   .home-page .slaying-section .slaying-orbit {
     z-index: 2;
     overflow: hidden;
     perspective: none;
+  }
+
+  .home-page .slaying-section .slaying-orbit::before {
+    position: absolute;
+    top: 48%;
+    left: 50%;
+    width: 62%;
+    aspect-ratio: 2.8 / 1;
+    z-index: 0;
+    border: 1px solid rgb(216 181 165 / 18%);
+    border-radius: 50%;
+    box-shadow: inset 0 0 30px rgb(216 181 165 / 5%);
+    content: "";
+    pointer-events: none;
+    transform: translate(-50%, -50%) rotate(11deg);
   }
 
   .home-page .slaying-section .slaying-memory.is-collage {
@@ -10236,14 +10260,28 @@ body {
   }
 
   .home-page .slaying-section .slaying-memory.is-collage img {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
     padding: 0;
     border-radius: inherit;
     object-fit: cover;
+    opacity: 1;
     filter: saturate(.98) contrast(1.03);
     transform: scale(1.01);
-    transition: filter 300ms ease, transform 650ms cubic-bezier(.22, 1, .36, 1);
+    transition: opacity 420ms ease, filter 420ms ease, transform 650ms cubic-bezier(.22, 1, .36, 1);
+  }
+
+  .home-page .slaying-section .slaying-memory.is-collage .slaying-memory-next {
+    z-index: 2;
+    opacity: 0;
+    transform: scale(1.045);
+  }
+
+  .home-page .slaying-section .slaying-memory.is-collage .slaying-memory-next.is-active {
+    opacity: 1;
+    transform: scale(1.01);
   }
 
   .home-page .slaying-section .slaying-memory[data-collage-slot="1"] { top: 7%; left: 4%; --collage-rotate: -2deg; z-index: 4; }
@@ -10307,5 +10345,11 @@ body {
   .home-page .slaying-section .slaying-memory.is-collage img,
   .home-page .slaying-section .slaying-social-link {
     transition: none;
+  }
+
+  .home-page .slaying-section .slaying-memory.is-collage.is-changing img {
+    opacity: 1;
+    filter: saturate(.98) contrast(1.03);
+    transform: scale(1.01);
   }
 }
