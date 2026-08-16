@@ -6011,8 +6011,8 @@ body.home-page .final-cta::before {
 }
 
 .after-dark-section.is-powered .after-dark-intro h2 {
-  color: #efd0aa;
-  text-shadow: 0 0 18px rgb(218 165 92 / 20%);
+  color: #ebe6e8;
+  text-shadow: 0 0 18px rgb(174 160 169 / 18%);
 }
 
 .after-dark-section.is-powered .after-dark-power-switch {
@@ -6950,20 +6950,20 @@ body.home-page .final-cta::before {
 
 .after-dark-intro h2 {
   margin: 8px 0 10px;
-  color: #dc7a50;
+  color: #c8c1c4;
   background: none;
-  text-shadow: 0 0 24px rgb(177 55 58 / 25%), 0 2px 0 #5a1d29;
+  text-shadow: 0 0 24px rgb(118 81 97 / 20%), 0 2px 0 #4b303a;
   font-size: clamp(2.65rem, 6vw, 5.8rem);
   line-height: 0.9;
   letter-spacing: -0.045em;
 }
 
 .after-dark-section.is-powered .after-dark-intro h2 {
-  color: #f08a58;
+  color: #ebe6e8;
   background: none;
   border-color: transparent;
   box-shadow: none;
-  text-shadow: 0 0 18px rgb(240 112 73 / 38%), 0 0 52px rgb(184 46 68 / 40%);
+  text-shadow: 0 0 18px rgb(174 160 169 / 18%);
 }
 
 .after-dark-kicker,

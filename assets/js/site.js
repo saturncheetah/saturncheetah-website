@@ -1692,7 +1692,7 @@ function setupStoreJourney() {
 
 function setupAfterDarkPowerSwitch() {
   const section = document.querySelector("#after-dark");
-  const powerSwitch = section?.querySelector(".after-dark-chain-control");
+  const powerSwitch = section?.querySelector(".after-dark-power-switch");
   if (!section || !powerSwitch) return;
 
   const playSwitchClick = poweredOn => {
@@ -1757,9 +1757,6 @@ function setupAfterDarkPowerSwitch() {
 
   powerSwitch.addEventListener("click", () => {
     const poweredOn = !section.classList.contains("is-powered");
-    powerSwitch.classList.remove("is-pulling");
-    window.requestAnimationFrame(() => powerSwitch.classList.add("is-pulling"));
-    window.setTimeout(() => powerSwitch.classList.remove("is-pulling"), 460);
     section.classList.toggle("is-powered", poweredOn);
     powerSwitch.setAttribute("aria-pressed", String(poweredOn));
     powerSwitch.setAttribute("aria-label", poweredOn ? "Leave Saturn After Dark" : "Enter Saturn After Dark");
