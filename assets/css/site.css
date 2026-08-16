@@ -8233,21 +8233,6 @@ body.home-page .final-cta::before {
   isolation: isolate;
 }
 
-.atelier-thread {
-  position: absolute;
-  top: 100vh;
-  bottom: 220px;
-  left: max(18px, calc(50% - 610px));
-  z-index: 3;
-  width: 1px;
-  background: linear-gradient(#9b5360, #c9aaa4 52%, #451520);
-  box-shadow: 0 0 12px rgb(113 41 58 / 28%);
-  opacity: .5;
-  pointer-events: none;
-  transform: scaleY(var(--atelier-thread-progress, 0));
-  transform-origin: top;
-}
-
 .final-cta {
   position: relative;
   overflow: hidden;
@@ -8402,11 +8387,6 @@ body.home-page .final-cta::before {
     width: 100%;
   }
 
-  .atelier-thread { left: 8px; opacity: .32; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .atelier-thread { transform: scaleY(1); }
 }
 
 /* Final porcelain store overrides; these intentionally follow legacy dark themes. */

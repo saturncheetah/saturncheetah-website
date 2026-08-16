@@ -1842,23 +1842,6 @@ function setupPlainTeeOffer() {
   }));
 }
 
-function setupAtelierThread() {
-  const thread = document.querySelector(".atelier-thread");
-  if (!thread || reducedMotion.matches) return;
-  let queued = false;
-  const update = () => {
-    const maximum = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
-    document.documentElement.style.setProperty("--atelier-thread-progress", String(Math.min(1, window.scrollY / maximum)));
-    queued = false;
-  };
-  window.addEventListener("scroll", () => {
-    if (queued) return;
-    queued = true;
-    window.requestAnimationFrame(update);
-  }, { passive: true });
-  update();
-}
-
 function respectReducedMotion() {
   if (!reducedMotion.matches) return;
   document.querySelectorAll("video").forEach(video => video.pause());
@@ -2031,7 +2014,6 @@ setupGalleryModal();
 setupSectionReveals();
 setupStoreJourney();
 setupAfterDarkPowerSwitch();
-setupAtelierThread();
 setupFAQAssistant();
 setupPlainTeeOffer();
 setupFooterYear();
