@@ -1967,102 +1967,170 @@ function setupFloatingGallery() {
       { index: 58, alt: "Young customer wearing a colourful Saturn Cheetah T-shirt", focus: "50% 36%" }
     ]
   };
-  const visibleCollageImages = [
+  const collageSlots = [
+    { role: "lead" },
+    { role: "mid" },
+    { role: "accent" },
+    { role: "north-west" },
+    { role: "south-east" },
+    { role: "west" },
+    { role: "north" },
+    { role: "south" }
+  ];
+  const collageImageSequence = [
+    collagePools.lead[1],
+    collagePools.mid[0],
+    collagePools.accent[0],
+    collagePools.lead[2],
+    collagePools.mid[1],
+    collagePools.accent[1],
+    collagePools.lead[3],
+    collagePools.accent[2],
+    collagePools.mid[2],
+    collagePools.accent[3],
+    collagePools.lead[4],
+    collagePools.mid[3],
+    collagePools.accent[4],
+    collagePools.lead[5],
+    collagePools.mid[4],
+    collagePools.accent[5],
+    collagePools.lead[6],
+    collagePools.mid[5],
+    collagePools.accent[6],
+    collagePools.lead[7],
+    collagePools.mid[6],
+    collagePools.accent[7],
+    collagePools.mid[7],
+    collagePools.lead[0]
+  ];
+  const sequenceCollageImages = collageSlots.map((slot, index) => ({
+    ...collageImageSequence[index],
+    role: slot.role
+  }));
+  const staticCollageImages = [
     { ...collagePools.lead[1], role: "lead" },
     { ...collagePools.mid[0], role: "mid" },
-    { ...collagePools.accent[0], role: "accent" }
-  ];
-  const staticCollageImages = [
-    ...visibleCollageImages,
+    { ...collagePools.accent[0], role: "accent" },
     { ...collagePools.lead[2], role: "static" },
     { ...collagePools.accent[2], role: "static" }
   ];
-  const collageRotationRoles = ["accent", "mid", "lead"];
-  const collagePoolCursors = { lead: 2, mid: 1, accent: 1 };
   const slayingSection = gallery.closest(".slaying-section");
-  let collageRotationTimer = 0;
-  let collageRotationGroup = 0;
+  let collageSequenceTimer = 0;
+  let collageIntroPosition = 0;
+  let collageSequencePhase = 0;
+  let collageImageCursor = collageSlots.length;
+  let visibleCollageSlots = [];
+  let hiddenCollageSlots = [];
   let collageInView = false;
 
   const collageSource = index => `assets/images/customer-gallery/experience-${String(index).padStart(2, "0")}.jpg`;
 
-  const collageDimensions = role => role === "mid" ? { width: 620, height: 620 } : { width: 520, height: 650 };
+  const squareCollageRoles = new Set(["mid", "west"]);
+  const collageDimensions = role => squareCollageRoles.has(role) ? { width: 620, height: 620 } : { width: 520, height: 650 };
 
-  const nextCollageImage = (role, visibleIndices) => {
-    const pool = collagePools[role];
-    for (let attempt = 0; attempt < pool.length; attempt += 1) {
-      const cursor = collagePoolCursors[role] % pool.length;
-      collagePoolCursors[role] += 1;
-      const item = pool[cursor];
-      if (visibleIndices.has(item.index)) continue;
-      visibleIndices.add(item.index);
-      return item;
+  const collageShouldPlay = () => desktopGallery.matches
+    && collageInView
+    && !reducedMotion.matches
+    && !document.hidden
+    && gallery.dataset.galleryMode === "collage";
+
+  const nextSequenceImage = () => {
+    const visibleIndices = new Set(visibleCollageSlots.map(slot => {
+      const memory = gallery.querySelector(`[data-sequence-slot="${slot}"]`);
+      return Number(memory?.dataset.imageIndex);
+    }));
+
+    for (let attempt = 0; attempt < collageImageSequence.length; attempt += 1) {
+      const item = collageImageSequence[collageImageCursor % collageImageSequence.length];
+      collageImageCursor += 1;
+      if (!visibleIndices.has(item.index)) return item;
     }
-    return null;
+    return collageImageSequence[collageImageCursor % collageImageSequence.length];
   };
 
-  const rotateCollage = () => {
-    if (gallery.dataset.galleryMode !== "collage" || reducedMotion.matches || document.hidden) return;
-    const memories = [...gallery.querySelectorAll('.slaying-memory.is-collage[data-collage-rotates="true"]')];
-    const visibleIndices = new Set(memories.map(memory => Number(memory.dataset.imageIndex)));
-    const role = collageRotationRoles[collageRotationGroup % collageRotationRoles.length];
-    collageRotationGroup += 1;
-    const memory = gallery.querySelector(`[data-collage-role="${role}"]`);
+  const scheduleCollageStep = delay => {
+    window.clearTimeout(collageSequenceTimer);
+    collageSequenceTimer = window.setTimeout(runCollageSequenceStep, delay);
+  };
+
+  const revealCollageSlot = (slot, replaceImage, afterReveal) => {
+    const memory = gallery.querySelector(`[data-sequence-slot="${slot}"]`);
     const image = memory?.querySelector("img");
     if (!memory || !image) return;
-    const item = nextCollageImage(role, visibleIndices);
-    if (!item) return;
-    const previousImageIndex = memory.dataset.imageIndex;
-    memory.dataset.imageIndex = String(item.index);
 
-    const source = collageSource(item.index);
-    const dimensions = collageDimensions(role);
-    const nextImage = new Image();
-    nextImage.className = "slaying-memory-next";
-    nextImage.src = source;
-    nextImage.alt = item.alt;
-    nextImage.width = dimensions.width;
-    nextImage.height = dimensions.height;
-    nextImage.loading = "eager";
-    nextImage.decoding = "async";
-    nextImage.style.objectPosition = item.focus;
-    const ready = typeof nextImage.decode === "function" ? nextImage.decode() : Promise.resolve();
+    if (replaceImage) {
+      const item = nextSequenceImage();
+      const dimensions = collageDimensions(memory.dataset.collageRole);
+      memory.dataset.imageIndex = String(item.index);
+      image.src = collageSource(item.index);
+      image.alt = item.alt;
+      image.width = dimensions.width;
+      image.height = dimensions.height;
+      image.style.objectPosition = item.focus;
+    }
 
-    ready.then(() => {
-      if (!memory.isConnected || gallery.dataset.galleryMode !== "collage") return;
-      memory.append(nextImage);
-      window.requestAnimationFrame(() => window.requestAnimationFrame(() => {
-        memory.classList.add("is-changing");
-        nextImage.classList.add("is-active");
-        window.setTimeout(() => {
-          if (!memory.isConnected || gallery.dataset.galleryMode !== "collage") return;
-          image.remove();
-          nextImage.classList.remove("slaying-memory-next", "is-active");
-          memory.classList.remove("is-changing");
-        }, 900);
-      }));
-    }).catch(() => {
-      memory.dataset.imageIndex = previousImageIndex;
+    const ready = replaceImage && typeof image.decode === "function" ? image.decode() : Promise.resolve();
+    ready.catch(() => {}).then(() => {
+      if (!memory.isConnected || !collageShouldPlay()) return;
+      memory.classList.add("is-sequence-visible");
+      memory.dataset.hasShown = "true";
+      visibleCollageSlots.push(slot);
+      hiddenCollageSlots = hiddenCollageSlots.filter(hiddenSlot => hiddenSlot !== slot);
+      afterReveal();
     });
   };
 
-  const stopCollageRotation = () => {
-    window.clearInterval(collageRotationTimer);
-    collageRotationTimer = 0;
-  };
+  function runCollageSequenceStep() {
+    collageSequenceTimer = 0;
+    if (!collageShouldPlay()) return;
 
-  const updateCollageRotation = () => {
-    const shouldRotate = desktopGallery.matches && collageInView && !reducedMotion.matches && !document.hidden && gallery.dataset.galleryMode === "collage";
-    if (!shouldRotate) {
-      stopCollageRotation();
+    if (collageIntroPosition < 6) {
+      const slot = collageIntroPosition;
+      revealCollageSlot(slot, false, () => {
+        collageIntroPosition += 1;
+        scheduleCollageStep(collageIntroPosition === 6 ? 760 : 520);
+      });
       return;
     }
-    if (!collageRotationTimer) collageRotationTimer = window.setInterval(rotateCollage, 3000);
+
+    const isAdding = collageSequencePhase < 2;
+    if (isAdding) {
+      const slot = hiddenCollageSlots[0];
+      if (slot === undefined) return;
+      const memory = gallery.querySelector(`[data-sequence-slot="${slot}"]`);
+      const replaceImage = memory?.dataset.hasShown === "true";
+      revealCollageSlot(slot, replaceImage, () => {
+        collageSequencePhase += 1;
+        scheduleCollageStep(collageSequencePhase === 2 ? 1400 : 860);
+      });
+      return;
+    }
+
+    const slot = visibleCollageSlots.shift();
+    const memory = gallery.querySelector(`[data-sequence-slot="${slot}"]`);
+    memory?.classList.remove("is-sequence-visible");
+    hiddenCollageSlots.push(slot);
+    collageSequencePhase += 1;
+    if (collageSequencePhase === 4) collageSequencePhase = 0;
+    scheduleCollageStep(900);
+  }
+
+  const stopCollageSequence = () => {
+    window.clearTimeout(collageSequenceTimer);
+    collageSequenceTimer = 0;
+  };
+
+  const updateCollageSequence = () => {
+    if (!collageShouldPlay()) {
+      stopCollageSequence();
+      return;
+    }
+    if (!collageSequenceTimer) scheduleCollageStep(collageIntroPosition ? 180 : 80);
   };
 
   const buildCollage = staticMode => {
     const fragment = document.createDocumentFragment();
-    const collageItems = staticMode ? staticCollageImages : visibleCollageImages;
+    const collageItems = staticMode ? staticCollageImages : sequenceCollageImages;
 
     collageItems.forEach((item, position) => {
       const memory = document.createElement("figure");
@@ -2072,10 +2140,15 @@ function setupFloatingGallery() {
       memory.className = `slaying-memory is-collage is-${item.role}`;
       memory.dataset.collageSlot = String(position + 1);
       memory.dataset.collageRole = item.role;
-      memory.dataset.collageRotates = String(position < 3);
       memory.dataset.imageIndex = String(item.index);
       memory.style.setProperty("--collage-delay", `${80 + position * 55}ms`);
       memory.style.setProperty("--ring-drift-delay", `${-position * 9}s`);
+
+      if (!staticMode) {
+        memory.dataset.sequenceSlot = String(position);
+        memory.dataset.hasShown = "false";
+        hiddenCollageSlots.push(position);
+      }
 
       image.src = collageSource(item.index);
       image.alt = item.alt;
@@ -2136,14 +2209,18 @@ function setupFloatingGallery() {
     const mode = desktopGallery.matches ? (reducedMotion.matches ? "collage-static" : "collage") : "floating";
     if (gallery.dataset.galleryMode === mode) return;
 
-    stopCollageRotation();
+    stopCollageSequence();
     gallery.replaceChildren();
     gallery.dataset.galleryReady = "true";
     gallery.dataset.galleryMode = mode;
-    collageRotationGroup = 0;
+    collageIntroPosition = 0;
+    collageSequencePhase = 0;
+    collageImageCursor = collageSlots.length;
+    visibleCollageSlots = [];
+    hiddenCollageSlots = [];
     if (desktopGallery.matches) buildCollage(mode === "collage-static");
     else buildFloatingField();
-    updateCollageRotation();
+    updateCollageSequence();
   };
 
   desktopGallery.addEventListener("change", () => {
@@ -2151,14 +2228,14 @@ function setupFloatingGallery() {
   });
   reducedMotion.addEventListener("change", () => {
     if (gallery.dataset.galleryReady === "true") buildGallery();
-    else updateCollageRotation();
+    else updateCollageSequence();
   });
-  document.addEventListener("visibilitychange", updateCollageRotation);
+  document.addEventListener("visibilitychange", updateCollageSequence);
 
   if ("IntersectionObserver" in window && slayingSection) {
     const rotationObserver = new IntersectionObserver(entries => {
       collageInView = entries.some(entry => entry.isIntersecting);
-      updateCollageRotation();
+      updateCollageSequence();
     }, { threshold: 0.12 });
     rotationObserver.observe(slayingSection);
   } else {
