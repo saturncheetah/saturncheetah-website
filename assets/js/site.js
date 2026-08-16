@@ -1932,15 +1932,53 @@ function setupFloatingGallery() {
   const gallery = document.querySelector("[data-floating-gallery]");
   if (!gallery) return;
 
-  const buildGallery = () => {
-    if (gallery.dataset.galleryReady === "true") return;
-    gallery.dataset.galleryReady = "true";
+  const desktopGallery = window.matchMedia("(min-width: 1100px)");
+  const allImageIndices = Array.from({ length: 69 }, (_, index) => index + 1).filter(index => index !== 25);
+  const roundImages = new Set([6, 8, 9, 10, 12, 17, 27, 39, 44]);
+  const collageImages = [
+    { index: 68, size: "hero", alt: "Customer wearing a vivid Saturn Cheetah graphic T-shirt outdoors at night", focus: "50% 35%" },
+    { index: 3, size: "hero", alt: "Family wearing personalised Saturn Cheetah T-shirts", focus: "50% 45%" },
+    { index: 2, size: "feature", alt: "Two customers showing colourful Saturn Cheetah back prints", focus: "50% 42%" },
+    { index: 13, size: "wide", alt: "Group of customers celebrating in custom white T-shirts", focus: "50% 48%" },
+    { index: 29, size: "feature", alt: "Two customers showing custom graphic T-shirt prints", focus: "50% 45%" },
+    { index: 47, size: "feature", alt: "Customer wearing a bright portrait-print T-shirt at night", focus: "50% 36%" },
+    { index: 6, size: "small", alt: "Customer wearing a Saturn Cheetah T-shirt in purple event lighting", focus: "50% 48%" },
+    { index: 18, size: "small", alt: "Customer wearing a personalised portrait T-shirt outdoors", focus: "50% 40%" },
+    { index: 24, size: "small", alt: "Customer wearing a colourful Saturn Cheetah graphic T-shirt", focus: "50% 38%" },
+    { index: 40, size: "small", alt: "Customer wearing a Saturn Cheetah skull-print T-shirt", focus: "50% 34%" },
+    { index: 63, size: "wide", alt: "Group wearing matching Saturn Cheetah T-shirts", focus: "50% 50%" },
+    { index: 58, size: "small", alt: "Young customer wearing a colourful Saturn Cheetah T-shirt", focus: "50% 36%" }
+  ];
 
-    const imageIndices = Array.from({ length: 69 }, (_, index) => index + 1).filter(index => index !== 25);
-    const roundImages = new Set([6, 8, 9, 10, 12, 17, 27, 39, 44]);
+  const buildCollage = () => {
     const fragment = document.createDocumentFragment();
 
-    imageIndices.forEach((imageIndex, position) => {
+    collageImages.forEach((item, position) => {
+      const memory = document.createElement("figure");
+      const image = document.createElement("img");
+
+      memory.className = `slaying-memory is-collage is-${item.size}`;
+      memory.dataset.collageSlot = String(position + 1);
+      memory.style.setProperty("--collage-delay", `${80 + position * 55}ms`);
+
+      image.src = `assets/images/customer-gallery/experience-${String(item.index).padStart(2, "0")}.jpg`;
+      image.alt = item.alt;
+      image.width = item.size === "wide" ? 650 : 520;
+      image.height = item.size === "wide" ? 520 : 650;
+      image.loading = "eager";
+      image.decoding = "async";
+      image.style.objectPosition = item.focus;
+      memory.append(image);
+      fragment.append(memory);
+    });
+
+    gallery.append(fragment);
+  };
+
+  const buildFloatingField = () => {
+    const fragment = document.createDocumentFragment();
+
+    allImageIndices.forEach((imageIndex, position) => {
       const memory = document.createElement("figure");
       const image = document.createElement("img");
       const seed = position;
@@ -1977,6 +2015,21 @@ function setupFloatingGallery() {
 
     gallery.append(fragment);
   };
+
+  const buildGallery = () => {
+    const mode = desktopGallery.matches ? "collage" : "floating";
+    if (gallery.dataset.galleryMode === mode) return;
+
+    gallery.replaceChildren();
+    gallery.dataset.galleryReady = "true";
+    gallery.dataset.galleryMode = mode;
+    if (desktopGallery.matches) buildCollage();
+    else buildFloatingField();
+  };
+
+  desktopGallery.addEventListener("change", () => {
+    if (gallery.dataset.galleryReady === "true") buildGallery();
+  });
 
   if (!("IntersectionObserver" in window)) {
     buildGallery();
