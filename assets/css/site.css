@@ -10390,3 +10390,82 @@ body {
     transform: scale(1.01);
   }
 }
+
+/* Compact the visible homepage product cards without shrinking mobile controls. */
+@media (min-width: 768px) {
+  .home-page .plain-tee-shop {
+    width: 100%;
+    max-width: 1100px;
+    margin-inline: auto;
+  }
+
+  .home-page .plain-tee-shop-heading {
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  .home-page .plain-tee-cards {
+    max-width: 1080px;
+    gap: 14px;
+    margin-inline: auto;
+  }
+
+  .home-page .plain-tee-card {
+    min-height: 292px;
+    border-radius: 16px;
+  }
+
+  .home-page .plain-tee-card-images {
+    padding-top: 14px;
+  }
+
+  .home-page .plain-tee-card-copy {
+    padding: clamp(17px, 2vw, 22px);
+  }
+
+  .home-page .plain-tee-card h4 {
+    font-size: clamp(1.45rem, 2vw, 2rem);
+  }
+
+  .home-page .plain-tee-card-copy > p:nth-of-type(2) {
+    margin-top: 7px;
+    font-size: .78rem;
+    line-height: 1.45;
+  }
+
+  .home-page .plain-tee-card-price {
+    min-height: 42px;
+    margin: 12px 0;
+  }
+
+  .home-page .plain-tee-card-price strong {
+    font-size: clamp(1.45rem, 2.3vw, 1.9rem);
+  }
+
+  .home-page .plain-tee-toggle {
+    min-height: 44px;
+    padding: 10px 15px;
+    font-size: .76rem;
+  }
+
+  .home-page .plain-tee-panel {
+    max-width: 1080px;
+    margin-inline: auto;
+    padding: 22px;
+  }
+
+  .home-page .plain-tee-choices {
+    gap: 10px;
+    margin-top: 18px;
+  }
+
+  .home-page .plain-tee-choices fieldset {
+    gap: 8px;
+    padding: 10px;
+    border-radius: 12px;
+  }
+
+  .home-page .plain-tee-choices fieldset img {
+    height: 180px;
+  }
+}
