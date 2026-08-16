@@ -1970,7 +1970,8 @@ function setupFloatingGallery() {
       ...extraCollageImages.filter(item => item.frames.includes(size))
     ]
   ]));
-  const collageRotationGroups = [[3, 7, 11], [4, 8, 12], [2, 5, 9], [1, 6, 10]];
+  const visibleCollageImages = [collageImages[0], collageImages[1], collageImages[2], collageImages[3], collageImages[4], collageImages[6]];
+  const collageRotationGroups = [[2, 5], [3, 6], [1, 4]];
   const collagePoolCursors = { hero: 0, feature: 0, wide: 0, small: 0 };
   const slayingSection = gallery.closest(".slaying-section");
   let collageRotationTimer = 0;
@@ -2005,6 +2006,7 @@ function setupFloatingGallery() {
       if (!memory || !image) return;
       const item = nextCollageImage(memory.dataset.collageSize, visibleIndices);
       if (!item) return;
+      memory.dataset.imageIndex = String(item.index);
 
       const source = collageSource(item.index);
       const nextImage = new Image();
@@ -2029,7 +2031,6 @@ function setupFloatingGallery() {
             image.remove();
             nextImage.classList.remove("slaying-memory-next", "is-active");
             memory.classList.remove("is-changing");
-            memory.dataset.imageIndex = String(item.index);
           }, 680);
         }));
       });
@@ -2053,7 +2054,7 @@ function setupFloatingGallery() {
   const buildCollage = () => {
     const fragment = document.createDocumentFragment();
 
-    collageImages.forEach((item, position) => {
+    visibleCollageImages.forEach((item, position) => {
       const memory = document.createElement("figure");
       const image = document.createElement("img");
 
