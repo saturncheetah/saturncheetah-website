@@ -10082,6 +10082,8 @@ body {
   .home-page .slaying-section .slaying-heading {
     display: grid;
     max-width: 430px;
+    align-self: center;
+    align-content: center;
     gap: 0;
   }
 
@@ -10193,41 +10195,56 @@ body {
     z-index: 2;
     overflow: hidden;
     perspective: none;
-    visibility: hidden;
+    visibility: visible;
   }
 
   .home-page .slaying-section .slaying-memory.is-collage {
     --collage-rotate: 0deg;
     position: absolute;
     inset: auto;
-    width: clamp(68px, 10.5%, 88px);
+    width: 13%;
     aspect-ratio: 4 / 5;
     overflow: hidden;
     margin: 0;
-    border: 1px solid rgb(255 248 238 / 58%);
-    border-radius: 14px;
+    border: 1px solid rgb(255 248 238 / 48%);
+    border-radius: 16px;
     background: #171319;
     box-shadow: 0 18px 42px rgb(0 0 0 / 55%), 0 0 0 5px rgb(8 7 10 / 24%);
     opacity: 0;
+    translate: -50% -50%;
+    scale: 1;
     transform: rotate(var(--collage-rotate));
-    animation: slaying-collage-reveal 640ms cubic-bezier(.22, 1, .36, 1) var(--collage-delay) forwards;
+    animation:
+      slaying-collage-reveal 640ms cubic-bezier(.22, 1, .36, 1) var(--collage-delay) forwards,
+      slaying-ring-drift 26s ease-in-out var(--ring-drift-delay) infinite alternate;
     transition: border-color 300ms ease, box-shadow 300ms ease, filter 300ms ease, transform 360ms cubic-bezier(.22, 1, .36, 1);
     will-change: auto;
   }
 
-  .home-page .slaying-section .slaying-memory.is-collage.is-feature {
-    width: clamp(86px, 13.5%, 112px);
+  .home-page .slaying-section .slaying-memory.is-collage.is-lead {
+    width: 27%;
+    border: 1.5px solid rgb(255 248 238 / 70%);
+    border-radius: 18px;
+    box-shadow: 0 30px 68px rgb(0 0 0 / 68%), 0 0 0 6px rgb(8 7 10 / 28%);
   }
 
-  .home-page .slaying-section .slaying-memory.is-collage.is-hero {
-    width: clamp(104px, 16.5%, 138px);
-    border-color: rgb(255 248 238 / 76%);
-    box-shadow: 0 26px 58px rgb(0 0 0 / 65%), 0 0 0 6px rgb(8 7 10 / 30%);
+  .home-page .slaying-section .slaying-memory.is-collage.is-mid {
+    width: 18%;
+    aspect-ratio: 1;
+    border-color: rgb(255 248 238 / 42%);
+    border-radius: 16px;
+    box-shadow: 0 24px 54px rgb(0 0 0 / 62%), 0 0 0 4px rgb(8 7 10 / 20%);
   }
 
-  .home-page .slaying-section .slaying-memory.is-collage.is-wide {
-    width: clamp(118px, 19%, 158px);
-    aspect-ratio: 5 / 4;
+  .home-page .slaying-section .slaying-memory.is-collage.is-accent {
+    width: 11%;
+    border: 0;
+    border-radius: 12px;
+    box-shadow: 0 16px 36px rgb(0 0 0 / 62%);
+  }
+
+  .home-page .slaying-section .slaying-memory.is-collage.is-static {
+    display: none;
   }
 
   .home-page .slaying-section .slaying-memory.is-collage img {
@@ -10241,26 +10258,23 @@ body {
     opacity: 1;
     filter: saturate(.98) contrast(1.03);
     transform: scale(1.01);
-    transition: opacity 420ms ease, filter 420ms ease, transform 650ms cubic-bezier(.22, 1, .36, 1);
+    transition: opacity 900ms ease, filter 900ms ease, transform 900ms cubic-bezier(.22, 1, .36, 1);
   }
 
   .home-page .slaying-section .slaying-memory.is-collage .slaying-memory-next {
     z-index: 2;
     opacity: 0;
-    transform: scale(1.045);
+    transform: translate(-5px, 3px) scale(1.045);
   }
 
   .home-page .slaying-section .slaying-memory.is-collage .slaying-memory-next.is-active {
     opacity: 1;
-    transform: scale(1.01);
+    transform: translate(0, 0) scale(1.01);
   }
 
-  .home-page .slaying-section .slaying-memory[data-collage-slot="1"] { top: 7%; left: 4%; --collage-rotate: -2deg; z-index: 4; }
-  .home-page .slaying-section .slaying-memory[data-collage-slot="2"] { right: 4%; bottom: 6%; --collage-rotate: 2deg; z-index: 5; }
-  .home-page .slaying-section .slaying-memory[data-collage-slot="3"] { top: 5%; left: 30%; --collage-rotate: 1.5deg; z-index: 3; }
-  .home-page .slaying-section .slaying-memory[data-collage-slot="4"] { top: 6%; right: 5%; --collage-rotate: -1deg; z-index: 2; }
-  .home-page .slaying-section .slaying-memory[data-collage-slot="5"] { bottom: 5%; left: 7%; --collage-rotate: 1.7deg; z-index: 3; }
-  .home-page .slaying-section .slaying-memory[data-collage-slot="6"] { right: 30%; bottom: 4%; --collage-rotate: -1.6deg; z-index: 4; }
+  .home-page .slaying-section .slaying-memory[data-collage-role="lead"] { top: 76%; left: 16%; --collage-rotate: -3deg; z-index: 4; }
+  .home-page .slaying-section .slaying-memory[data-collage-role="mid"] { top: 54%; left: 82%; --collage-rotate: 2deg; z-index: 3; }
+  .home-page .slaying-section .slaying-memory[data-collage-role="accent"] { top: 20%; left: 86%; --collage-rotate: -1.5deg; z-index: 2; }
 
   .home-page .slaying-section .slaying-hint {
     display: none;
@@ -10274,7 +10288,7 @@ body {
     border-color: #ceff37;
     box-shadow: 0 30px 70px rgb(0 0 0 / 72%), 0 0 0 5px rgb(206 255 55 / 12%);
     filter: brightness(1.04);
-    transform: translateY(-7px) rotate(0deg) scale(1.025);
+    transform: rotate(0deg) scale(1.025);
   }
 
   .home-page .slaying-section .slaying-memory.is-collage:hover img {
@@ -10286,15 +10300,27 @@ body {
 @keyframes slaying-collage-reveal {
   from {
     opacity: 0;
-    transform: translateY(18px) rotate(var(--collage-rotate)) scale(.94);
+    scale: .94;
   }
   to {
     opacity: 1;
-    transform: translateY(0) rotate(var(--collage-rotate)) scale(1);
+    scale: 1;
   }
 }
 
+@keyframes slaying-ring-drift {
+  from { translate: calc(-50% - 4px) calc(-50% + 2px); }
+  to { translate: calc(-50% + 4px) calc(-50% - 2px); }
+}
+
 @media (min-width: 1100px) and (prefers-reduced-motion: reduce) {
+  .home-page .slaying-section .slaying-stage {
+    background:
+      linear-gradient(180deg, rgb(6 5 8 / 16%), rgb(6 5 8 / 5%) 45%, rgb(6 5 8 / 28%)),
+      url("../video/customer-gallery/saturn-floating-gallery-poster.webp") center / cover no-repeat,
+      #08070a;
+  }
+
   .home-page .slaying-section .slaying-orbit {
     display: block;
     padding: 0;
@@ -10304,8 +10330,22 @@ body {
     opacity: 1;
     animation: none;
     transition: none;
+    translate: -50% -50%;
+    scale: 1;
     transform: rotate(var(--collage-rotate));
   }
+
+  .home-page .slaying-section .slaying-memory.is-collage.is-static {
+    display: block;
+    width: 12%;
+    aspect-ratio: 4 / 5;
+    border: 1px solid rgb(255 248 238 / 34%);
+    border-radius: 13px;
+    box-shadow: 0 16px 34px rgb(0 0 0 / 54%);
+  }
+
+  .home-page .slaying-section .slaying-memory[data-collage-slot="4"] { top: 82%; left: 43%; --collage-rotate: 1.5deg; z-index: 3; }
+  .home-page .slaying-section .slaying-memory[data-collage-slot="5"] { top: 70%; left: 72%; --collage-rotate: -1.5deg; z-index: 3; }
 
   .home-page .slaying-section .slaying-memory.is-collage img,
   .home-page .slaying-section .slaying-social-link {

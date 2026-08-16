@@ -1935,44 +1935,50 @@ function setupFloatingGallery() {
   const desktopGallery = window.matchMedia("(min-width: 1100px)");
   const allImageIndices = Array.from({ length: 69 }, (_, index) => index + 1).filter(index => index !== 25);
   const roundImages = new Set([6, 8, 9, 10, 12, 17, 27, 39, 44]);
-  const collageImages = [
-    { index: 68, size: "hero", alt: "Customer wearing a vivid Saturn Cheetah graphic T-shirt outdoors at night", focus: "50% 35%" },
-    { index: 3, size: "hero", alt: "Family wearing personalised Saturn Cheetah T-shirts", focus: "50% 45%" },
-    { index: 2, size: "feature", alt: "Two customers showing colourful Saturn Cheetah back prints", focus: "50% 42%" },
-    { index: 13, size: "wide", alt: "Group of customers celebrating in custom white T-shirts", focus: "50% 48%" },
-    { index: 29, size: "feature", alt: "Two customers showing custom graphic T-shirt prints", focus: "50% 45%" },
-    { index: 47, size: "feature", alt: "Customer wearing a bright portrait-print T-shirt at night", focus: "50% 36%" },
-    { index: 6, size: "small", alt: "Customer wearing a Saturn Cheetah T-shirt in purple event lighting", focus: "50% 48%" },
-    { index: 18, size: "small", alt: "Customer wearing a personalised portrait T-shirt outdoors", focus: "50% 40%" },
-    { index: 24, size: "small", alt: "Customer wearing a colourful Saturn Cheetah graphic T-shirt", focus: "50% 38%" },
-    { index: 40, size: "small", alt: "Customer wearing a Saturn Cheetah skull-print T-shirt", focus: "50% 34%" },
-    { index: 63, size: "wide", alt: "Group wearing matching Saturn Cheetah T-shirts", focus: "50% 50%" },
-    { index: 58, size: "small", alt: "Young customer wearing a colourful Saturn Cheetah T-shirt", focus: "50% 36%" }
-  ];
-  const extraCollageImages = [
-    { index: 1, frames: ["wide"], alt: "Friends showing coordinated Saturn Cheetah back prints", focus: "50% 46%" },
-    { index: 5, frames: ["wide"], alt: "Three customers showing personalised back prints", focus: "50% 44%" },
-    { index: 15, frames: ["hero", "feature", "small"], alt: "Customer wearing a black Saturn Cheetah graphic T-shirt", focus: "50% 38%" },
-    { index: 20, frames: ["wide"], alt: "Family group wearing custom T-shirts outdoors", focus: "50% 48%" },
-    { index: 21, frames: ["feature", "small"], alt: "Customers wearing personalised Saturn Cheetah designs", focus: "50% 42%" },
-    { index: 26, frames: ["wide"], alt: "Two customers wearing coordinated Saturn Cheetah T-shirts", focus: "50% 45%" },
-    { index: 34, frames: ["hero", "feature", "small"], alt: "Young customer wearing a Saturn Cheetah graphic T-shirt by the sea", focus: "50% 36%" },
-    { index: 41, frames: ["wide"], alt: "Family wearing matching Saturn Cheetah T-shirts", focus: "50% 46%" },
-    { index: 46, frames: ["wide"], alt: "Team wearing matching custom T-shirts", focus: "50% 50%" },
-    { index: 50, frames: ["hero", "feature", "small"], alt: "Customer wearing a Saturn Cheetah T-shirt outdoors", focus: "50% 38%" },
-    { index: 53, frames: ["feature", "small"], alt: "Two young customers wearing colourful graphic T-shirts", focus: "50% 38%" },
-    { index: 61, frames: ["hero", "small"], alt: "Young customer wearing a Saturn Cheetah graphic T-shirt", focus: "50% 34%" }
-  ];
-  const collagePools = Object.fromEntries(["hero", "feature", "wide", "small"].map(size => [
-    size,
-    [
-      ...collageImages.filter(item => item.size === size),
-      ...extraCollageImages.filter(item => item.frames.includes(size))
+  const collagePools = {
+    lead: [
+      { index: 68, alt: "Customer wearing a vivid Saturn Cheetah graphic T-shirt outdoors at night", focus: "50% 35%" },
+      { index: 3, alt: "Family wearing personalised Saturn Cheetah T-shirts", focus: "50% 45%" },
+      { index: 15, alt: "Customer wearing a black Saturn Cheetah graphic T-shirt", focus: "50% 38%" },
+      { index: 34, alt: "Young customer wearing a Saturn Cheetah graphic T-shirt by the sea", focus: "50% 36%" },
+      { index: 50, alt: "Customer wearing a Saturn Cheetah T-shirt outdoors", focus: "50% 38%" },
+      { index: 61, alt: "Young customer wearing a Saturn Cheetah graphic T-shirt", focus: "50% 34%" },
+      { index: 47, alt: "Customer wearing a bright portrait-print T-shirt at night", focus: "50% 36%" },
+      { index: 40, alt: "Customer wearing a Saturn Cheetah skull-print T-shirt", focus: "50% 34%" }
+    ],
+    mid: [
+      { index: 13, alt: "Group of customers celebrating in custom white T-shirts", focus: "50% 48%" },
+      { index: 63, alt: "Group wearing matching Saturn Cheetah T-shirts", focus: "50% 50%" },
+      { index: 1, alt: "Friends showing coordinated Saturn Cheetah back prints", focus: "50% 46%" },
+      { index: 5, alt: "Three customers showing personalised back prints", focus: "50% 44%" },
+      { index: 20, alt: "Family group wearing custom T-shirts outdoors", focus: "50% 48%" },
+      { index: 26, alt: "Two customers wearing coordinated Saturn Cheetah T-shirts", focus: "50% 45%" },
+      { index: 41, alt: "Family wearing matching Saturn Cheetah T-shirts", focus: "50% 46%" },
+      { index: 46, alt: "Team wearing matching custom T-shirts", focus: "50% 50%" }
+    ],
+    accent: [
+      { index: 2, alt: "Two customers showing colourful Saturn Cheetah back prints", focus: "50% 42%" },
+      { index: 29, alt: "Two customers showing custom graphic T-shirt prints", focus: "50% 45%" },
+      { index: 6, alt: "Customer wearing a Saturn Cheetah T-shirt in purple event lighting", focus: "50% 48%" },
+      { index: 18, alt: "Customer wearing a personalised portrait T-shirt outdoors", focus: "50% 40%" },
+      { index: 21, alt: "Customers wearing personalised Saturn Cheetah designs", focus: "50% 42%" },
+      { index: 24, alt: "Customer wearing a colourful Saturn Cheetah graphic T-shirt", focus: "50% 38%" },
+      { index: 53, alt: "Two young customers wearing colourful graphic T-shirts", focus: "50% 38%" },
+      { index: 58, alt: "Young customer wearing a colourful Saturn Cheetah T-shirt", focus: "50% 36%" }
     ]
-  ]));
-  const visibleCollageImages = [collageImages[0], collageImages[1], collageImages[2], collageImages[3], collageImages[4], collageImages[6]];
-  const collageRotationGroups = [[2, 5], [3, 6], [1, 4]];
-  const collagePoolCursors = { hero: 0, feature: 0, wide: 0, small: 0 };
+  };
+  const visibleCollageImages = [
+    { ...collagePools.lead[1], role: "lead" },
+    { ...collagePools.mid[0], role: "mid" },
+    { ...collagePools.accent[0], role: "accent" }
+  ];
+  const staticCollageImages = [
+    ...visibleCollageImages,
+    { ...collagePools.lead[2], role: "static" },
+    { ...collagePools.accent[2], role: "static" }
+  ];
+  const collageRotationRoles = ["accent", "mid", "lead"];
+  const collagePoolCursors = { lead: 2, mid: 1, accent: 1 };
   const slayingSection = gallery.closest(".slaying-section");
   let collageRotationTimer = 0;
   let collageRotationGroup = 0;
@@ -1980,11 +1986,13 @@ function setupFloatingGallery() {
 
   const collageSource = index => `assets/images/customer-gallery/experience-${String(index).padStart(2, "0")}.jpg`;
 
-  const nextCollageImage = (size, visibleIndices) => {
-    const pool = collagePools[size];
+  const collageDimensions = role => role === "mid" ? { width: 620, height: 620 } : { width: 520, height: 650 };
+
+  const nextCollageImage = (role, visibleIndices) => {
+    const pool = collagePools[role];
     for (let attempt = 0; attempt < pool.length; attempt += 1) {
-      const cursor = collagePoolCursors[size] % pool.length;
-      collagePoolCursors[size] += 1;
+      const cursor = collagePoolCursors[role] % pool.length;
+      collagePoolCursors[role] += 1;
       const item = pool[cursor];
       if (visibleIndices.has(item.index)) continue;
       visibleIndices.add(item.index);
@@ -1995,45 +2003,46 @@ function setupFloatingGallery() {
 
   const rotateCollage = () => {
     if (gallery.dataset.galleryMode !== "collage" || reducedMotion.matches || document.hidden) return;
-    const memories = [...gallery.querySelectorAll(".slaying-memory.is-collage")];
+    const memories = [...gallery.querySelectorAll('.slaying-memory.is-collage[data-collage-rotates="true"]')];
     const visibleIndices = new Set(memories.map(memory => Number(memory.dataset.imageIndex)));
-    const slots = collageRotationGroups[collageRotationGroup % collageRotationGroups.length];
+    const role = collageRotationRoles[collageRotationGroup % collageRotationRoles.length];
     collageRotationGroup += 1;
+    const memory = gallery.querySelector(`[data-collage-role="${role}"]`);
+    const image = memory?.querySelector("img");
+    if (!memory || !image) return;
+    const item = nextCollageImage(role, visibleIndices);
+    if (!item) return;
+    const previousImageIndex = memory.dataset.imageIndex;
+    memory.dataset.imageIndex = String(item.index);
 
-    slots.forEach(slot => {
-      const memory = gallery.querySelector(`[data-collage-slot="${slot}"]`);
-      const image = memory?.querySelector("img");
-      if (!memory || !image) return;
-      const item = nextCollageImage(memory.dataset.collageSize, visibleIndices);
-      if (!item) return;
-      memory.dataset.imageIndex = String(item.index);
+    const source = collageSource(item.index);
+    const dimensions = collageDimensions(role);
+    const nextImage = new Image();
+    nextImage.className = "slaying-memory-next";
+    nextImage.src = source;
+    nextImage.alt = item.alt;
+    nextImage.width = dimensions.width;
+    nextImage.height = dimensions.height;
+    nextImage.loading = "eager";
+    nextImage.decoding = "async";
+    nextImage.style.objectPosition = item.focus;
+    const ready = typeof nextImage.decode === "function" ? nextImage.decode() : Promise.resolve();
 
-      const source = collageSource(item.index);
-      const nextImage = new Image();
-      nextImage.className = "slaying-memory-next";
-      nextImage.src = source;
-      nextImage.alt = item.alt;
-      nextImage.width = memory.dataset.collageSize === "wide" ? 650 : 520;
-      nextImage.height = memory.dataset.collageSize === "wide" ? 520 : 650;
-      nextImage.loading = "eager";
-      nextImage.decoding = "async";
-      nextImage.style.objectPosition = item.focus;
-      const ready = typeof nextImage.decode === "function" ? nextImage.decode().catch(() => {}) : Promise.resolve();
-
-      ready.then(() => {
-        if (!memory.isConnected || gallery.dataset.galleryMode !== "collage") return;
-        memory.append(nextImage);
-        window.requestAnimationFrame(() => window.requestAnimationFrame(() => {
-          memory.classList.add("is-changing");
-          nextImage.classList.add("is-active");
-          window.setTimeout(() => {
-            if (!memory.isConnected || gallery.dataset.galleryMode !== "collage") return;
-            image.remove();
-            nextImage.classList.remove("slaying-memory-next", "is-active");
-            memory.classList.remove("is-changing");
-          }, 680);
-        }));
-      });
+    ready.then(() => {
+      if (!memory.isConnected || gallery.dataset.galleryMode !== "collage") return;
+      memory.append(nextImage);
+      window.requestAnimationFrame(() => window.requestAnimationFrame(() => {
+        memory.classList.add("is-changing");
+        nextImage.classList.add("is-active");
+        window.setTimeout(() => {
+          if (!memory.isConnected || gallery.dataset.galleryMode !== "collage") return;
+          image.remove();
+          nextImage.classList.remove("slaying-memory-next", "is-active");
+          memory.classList.remove("is-changing");
+        }, 900);
+      }));
+    }).catch(() => {
+      memory.dataset.imageIndex = previousImageIndex;
     });
   };
 
@@ -2048,26 +2057,30 @@ function setupFloatingGallery() {
       stopCollageRotation();
       return;
     }
-    if (!collageRotationTimer) collageRotationTimer = window.setInterval(rotateCollage, 6800);
+    if (!collageRotationTimer) collageRotationTimer = window.setInterval(rotateCollage, 8000);
   };
 
-  const buildCollage = () => {
+  const buildCollage = staticMode => {
     const fragment = document.createDocumentFragment();
+    const collageItems = staticMode ? staticCollageImages : visibleCollageImages;
 
-    visibleCollageImages.forEach((item, position) => {
+    collageItems.forEach((item, position) => {
       const memory = document.createElement("figure");
       const image = document.createElement("img");
+      const dimensions = collageDimensions(item.role);
 
-      memory.className = `slaying-memory is-collage is-${item.size}`;
+      memory.className = `slaying-memory is-collage is-${item.role}`;
       memory.dataset.collageSlot = String(position + 1);
-      memory.dataset.collageSize = item.size;
+      memory.dataset.collageRole = item.role;
+      memory.dataset.collageRotates = String(position < 3);
       memory.dataset.imageIndex = String(item.index);
       memory.style.setProperty("--collage-delay", `${80 + position * 55}ms`);
+      memory.style.setProperty("--ring-drift-delay", `${-position * 9}s`);
 
       image.src = collageSource(item.index);
       image.alt = item.alt;
-      image.width = item.size === "wide" ? 650 : 520;
-      image.height = item.size === "wide" ? 520 : 650;
+      image.width = dimensions.width;
+      image.height = dimensions.height;
       image.loading = "eager";
       image.decoding = "async";
       image.style.objectPosition = item.focus;
@@ -2120,13 +2133,15 @@ function setupFloatingGallery() {
   };
 
   const buildGallery = () => {
-    const mode = desktopGallery.matches ? "collage" : "floating";
+    const mode = desktopGallery.matches ? (reducedMotion.matches ? "collage-static" : "collage") : "floating";
     if (gallery.dataset.galleryMode === mode) return;
 
+    stopCollageRotation();
     gallery.replaceChildren();
     gallery.dataset.galleryReady = "true";
     gallery.dataset.galleryMode = mode;
-    if (desktopGallery.matches) buildCollage();
+    collageRotationGroup = 0;
+    if (desktopGallery.matches) buildCollage(mode === "collage-static");
     else buildFloatingField();
     updateCollageRotation();
   };
@@ -2134,7 +2149,10 @@ function setupFloatingGallery() {
   desktopGallery.addEventListener("change", () => {
     if (gallery.dataset.galleryReady === "true") buildGallery();
   });
-  reducedMotion.addEventListener("change", updateCollageRotation);
+  reducedMotion.addEventListener("change", () => {
+    if (gallery.dataset.galleryReady === "true") buildGallery();
+    else updateCollageRotation();
+  });
   document.addEventListener("visibilitychange", updateCollageRotation);
 
   if ("IntersectionObserver" in window && slayingSection) {
