@@ -2057,7 +2057,7 @@ function setupFloatingGallery() {
       stopCollageRotation();
       return;
     }
-    if (!collageRotationTimer) collageRotationTimer = window.setInterval(rotateCollage, 8000);
+    if (!collageRotationTimer) collageRotationTimer = window.setInterval(rotateCollage, 3000);
   };
 
   const buildCollage = staticMode => {
