@@ -206,12 +206,16 @@
   }
 
   .choice-visual span {
-    gap: 7px;
-    padding: 6px;
+    gap: 9px;
+    min-height: 238px;
+    padding: 8px;
+    border-radius: 18px;
   }
 
   .choice-visual img {
-    aspect-ratio: 4 / 3;
+    height: clamp(150px, 42vw, 178px);
+    aspect-ratio: auto;
+    border-radius: 11px;
   }
 
   .choice span small {
@@ -281,5 +285,13 @@
 
   .builder {
     padding-inline: 10px;
+  }
+
+  .choices-visual {
+    grid-template-columns: 1fr;
+  }
+
+  .choice-visual img {
+    height: 220px;
   }
 }

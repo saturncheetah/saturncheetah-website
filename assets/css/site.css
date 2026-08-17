@@ -10351,11 +10351,11 @@ body {
   }
 }
 
-/* Compact the visible homepage product cards without shrinking mobile controls. */
+/* Keep product selection image-led and consistent with the dedicated builders. */
 @media (min-width: 768px) {
   .home-page .tee-section .plain-tee-shop {
     width: 100%;
-    max-width: 1100px;
+    max-width: 1160px;
     justify-self: center;
     margin-inline: auto;
   }
@@ -10366,67 +10366,132 @@ body {
   }
 
   .home-page .plain-tee-cards {
-    max-width: 1080px;
-    gap: 14px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-width: 1160px;
+    gap: 22px;
     margin-inline: auto;
   }
 
   .home-page .plain-tee-card {
-    min-height: 292px;
-    border-radius: 16px;
+    grid-template-columns: minmax(240px, .92fr) minmax(0, 1fr);
+    min-height: 390px;
+    border-color: rgb(255 255 255 / 18%);
+    border-radius: 18px;
+    background: linear-gradient(145deg, rgb(84 24 45 / 88%), rgb(28 18 27 / 98%));
+    box-shadow: 0 30px 72px rgb(0 0 0 / 30%), inset 0 1px rgb(255 255 255 / 10%);
+    transition: border-color 220ms ease, box-shadow 220ms ease, transform 220ms ease;
+  }
+
+  .home-page .plain-tee-card:has(.plain-tee-toggle[aria-expanded="true"]) {
+    border-color: #eda89f;
+    box-shadow: 0 0 0 2px rgb(237 168 159 / 22%), 0 30px 72px rgb(94 21 43 / 42%);
   }
 
   .home-page .plain-tee-card-images {
-    padding-top: 14px;
+    min-height: 390px;
+    padding: 24px 10px 0;
+    background: radial-gradient(circle at 50% 42%, rgb(238 157 182 / 20%), transparent 62%), #110e12;
+  }
+
+  .home-page .plain-tee-card:first-child .plain-tee-card-images {
+    padding-inline: 0;
+  }
+
+  .home-page .plain-tee-card:first-child .plain-tee-card-images img {
+    width: 175%;
+    min-width: 0;
+    margin-left: -38%;
+    clip-path: none;
+    object-position: center bottom;
   }
 
   .home-page .plain-tee-card-copy {
-    padding: clamp(17px, 2vw, 22px);
+    padding: clamp(24px, 2.6vw, 34px);
   }
 
   .home-page .plain-tee-card h4 {
-    font-size: clamp(1.45rem, 2vw, 2rem);
+    font-size: clamp(1.7rem, 2.4vw, 2.35rem);
   }
 
   .home-page .plain-tee-card-copy > p:nth-of-type(2) {
-    margin-top: 7px;
-    font-size: .78rem;
-    line-height: 1.45;
+    margin-top: 10px;
+    font-size: .84rem;
+    line-height: 1.5;
   }
 
   .home-page .plain-tee-card-price {
-    min-height: 42px;
-    margin: 12px 0;
+    min-height: 52px;
+    margin: 18px 0;
   }
 
   .home-page .plain-tee-card-price strong {
-    font-size: clamp(1.45rem, 2.3vw, 1.9rem);
+    font-size: clamp(1.7rem, 2.7vw, 2.15rem);
   }
 
   .home-page .plain-tee-toggle {
-    min-height: 44px;
-    padding: 10px 15px;
-    font-size: .76rem;
+    min-height: 48px;
+    padding: 12px 18px;
+    font-size: .8rem;
   }
 
   .home-page .plain-tee-panel {
-    max-width: 1080px;
+    max-width: 1160px;
     margin-inline: auto;
-    padding: 22px;
+    padding: 28px;
   }
 
   .home-page .plain-tee-choices {
-    gap: 10px;
-    margin-top: 18px;
+    gap: 16px;
+    margin-top: 22px;
   }
 
   .home-page .plain-tee-choices fieldset {
-    gap: 8px;
-    padding: 10px;
-    border-radius: 12px;
+    gap: 10px;
+    padding: 14px;
+    border-color: rgb(255 255 255 / 18%);
+    border-radius: 18px;
+    background: linear-gradient(145deg, rgb(255 255 255 / 8%), rgb(255 255 255 / 3%));
   }
 
   .home-page .plain-tee-choices fieldset img {
-    height: 180px;
+    height: 240px;
+  }
+}
+
+@media (hover: hover) and (min-width: 768px) {
+  .home-page .plain-tee-card:hover {
+    border-color: rgb(255 183 158 / 50%);
+    box-shadow: 0 34px 82px rgb(0 0 0 / 36%), 0 0 28px rgb(129 32 58 / 18%);
+    transform: translateY(-3px);
+  }
+}
+
+@media (max-width: 767px) {
+  .home-page .plain-tee-card {
+    border-color: rgb(255 255 255 / 18%);
+    border-radius: 18px;
+    background: linear-gradient(145deg, rgb(84 24 45 / 88%), rgb(28 18 27 / 98%));
+    box-shadow: 0 24px 60px rgb(0 0 0 / 30%), inset 0 1px rgb(255 255 255 / 10%);
+  }
+
+  .home-page .plain-tee-card:has(.plain-tee-toggle[aria-expanded="true"]) {
+    border-color: #eda89f;
+    box-shadow: 0 0 0 2px rgb(237 168 159 / 22%), 0 24px 60px rgb(94 21 43 / 40%);
+  }
+
+  .home-page .plain-tee-card-images {
+    height: clamp(300px, 86vw, 390px);
+    padding-top: 22px;
+    background: radial-gradient(circle at 50% 42%, rgb(238 157 182 / 20%), transparent 62%), #110e12;
+  }
+
+  .home-page .plain-tee-choices fieldset {
+    border-color: rgb(255 255 255 / 18%);
+    border-radius: 18px;
+    background: linear-gradient(145deg, rgb(255 255 255 / 8%), rgb(255 255 255 / 3%));
+  }
+
+  .home-page .plain-tee-choices fieldset img {
+    height: 260px;
   }
 }
