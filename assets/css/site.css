@@ -10516,4 +10516,34 @@ body {
   .home-page .plain-tee-card:first-child {
     grid-template-columns: minmax(320px, 1.04fr) minmax(0, .96fr);
   }
+
+  .home-page .plain-tee-card:first-child .plain-tee-card-images {
+    display: block;
+    padding: 0;
+  }
+
+  .home-page .plain-tee-card:first-child .plain-tee-card-images img {
+    position: absolute;
+    bottom: 0;
+    width: 29%;
+    height: 100%;
+    margin: 0;
+    object-fit: cover;
+    object-position: left bottom;
+    transform: none;
+  }
+
+  .home-page .plain-tee-card:first-child .plain-tee-card-images img:first-child {
+    left: 0;
+  }
+
+  .home-page .plain-tee-card:first-child .plain-tee-card-images img:nth-child(2) {
+    left: 29%;
+    z-index: 1;
+    width: 42%;
+  }
+
+  .home-page .plain-tee-card:first-child .plain-tee-card-images img:nth-child(3) {
+    right: 0;
+  }
 }
