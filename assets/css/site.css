@@ -10495,3 +10495,25 @@ body {
     height: 260px;
   }
 }
+
+/* Desktop product offers need the same visual authority as the boutique imagery. */
+@media (min-width: 1100px) {
+  .home-page .tee-section .plain-tee-shop,
+  .home-page .plain-tee-cards,
+  .home-page .plain-tee-panel {
+    max-width: 1320px;
+  }
+
+  .home-page .plain-tee-card,
+  .home-page .plain-tee-card-images {
+    min-height: 460px;
+  }
+
+  .home-page .plain-tee-card {
+    grid-template-columns: minmax(300px, 1fr) minmax(0, 1fr);
+  }
+
+  .home-page .plain-tee-card:first-child {
+    grid-template-columns: minmax(320px, 1.04fr) minmax(0, .96fr);
+  }
+}
