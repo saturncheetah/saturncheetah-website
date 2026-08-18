@@ -287,7 +287,7 @@ function setupTabs() {
 
     if (trigger.dataset.scrollTarget) {
       document.querySelector(`#${trigger.dataset.scrollTarget}`)?.scrollIntoView({
-        behavior: reducedMotion.matches ? "auto" : "smooth",
+        behavior: "auto",
         block: "start"
       });
     }
@@ -1075,7 +1075,7 @@ function setupAfterDarkGallery() {
     if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
     event.preventDefault();
     const direction = event.key === "ArrowRight" ? 1 : -1;
-    gallery.scrollBy({ left: direction * gallery.clientWidth * 0.78, behavior: "smooth" });
+    gallery.scrollBy({ left: direction * gallery.clientWidth * 0.78, behavior: "auto" });
   });
 
   const modal = document.querySelector("#after-dark-modal");
@@ -1304,7 +1304,7 @@ function setupWhatsAppFlow() {
     const product = productSelect?.value;
     const isPersonalTee = product === productData["180"].value || product === productData["240"].value;
     if (isPersonalTee && !requireTeeSize()) {
-      document.querySelector("#tees")?.scrollIntoView({ behavior: reducedMotion.matches ? "auto" : "smooth" });
+      document.querySelector("#tees")?.scrollIntoView({ behavior: "auto" });
       return;
     }
     window.open(whatsappUrl(buildCustomMessage()), "_blank", "noopener");
@@ -1376,7 +1376,7 @@ function setupReviewCarousel() {
     const target = cards[Math.max(0, Math.min(index, cards.length - 1))];
     scroller.scrollTo({
       left: cardOffset(target),
-      behavior: reducedMotion.matches ? "auto" : "smooth"
+      behavior: "auto"
     });
   };
 
@@ -1439,7 +1439,7 @@ function setupDesignGallery() {
     const target = cards[Math.max(0, Math.min(index, cards.length - 1))];
     scroller.scrollTo({
       left: cardOffset(target),
-      behavior: reducedMotion.matches ? "auto" : "smooth"
+      behavior: "auto"
     });
   };
 
@@ -1606,88 +1606,25 @@ function setupSectionReveals() {
   const revealItems = document.querySelectorAll(
     ".section-heading, .tee-selector, .tab-module, .after-dark-intro, .after-dark-media, .after-dark-configurator, .secondary-scroller, .faq-list, .final-cta-inner"
   );
-
-  revealItems.forEach(item => item.classList.add("reveal-item"));
-
-  if (reducedMotion.matches || !("IntersectionObserver" in window)) {
-    revealItems.forEach(item => item.classList.add("is-visible"));
-    return;
-  }
-
-  document.body.classList.add("motion-enabled");
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      entry.target.classList.add("is-visible");
-      observer.unobserve(entry.target);
-    });
-  }, {
-    threshold: 0.08,
-    rootMargin: "0px 0px -8% 0px"
-  });
-
-  revealItems.forEach(item => observer.observe(item));
+  document.body.classList.remove("motion-enabled");
+  revealItems.forEach(item => item.classList.remove("reveal-item", "is-visible"));
 }
 
 function setupStoreJourney() {
   const chapters = [
-    { element: document.querySelector(".hero"), mood: "boutique" },
-    { element: document.querySelector("#tees"), mood: "studio" },
-    { element: document.querySelector("#direction"), mood: "lookbook" },
-    { element: document.querySelector("#after-dark"), mood: "after-dark" }
-  ].filter(chapter => chapter.element);
-
-  if (!chapters.length || reducedMotion.matches) return;
-
-  document.documentElement.classList.add("store-journey-enabled");
-  let frame = 0;
-
-  const updateJourney = () => {
-    frame = 0;
-    const viewportHeight = window.innerHeight;
-    const focusLine = viewportHeight * 0.48;
-    let activeChapter = chapters[0];
-    let closestDistance = Number.POSITIVE_INFINITY;
-
-    chapters.forEach(chapter => {
-      const bounds = chapter.element.getBoundingClientRect();
-      const progress = Math.max(0, Math.min(1, (viewportHeight - bounds.top) / (viewportHeight + bounds.height)));
-      chapter.element.style.setProperty("--journey-progress", progress.toFixed(4));
-
-      if (chapter.element.matches(".hero")) {
-        const heroExitProgress = Math.max(0, Math.min(1, -bounds.top / Math.max(bounds.height, 1)));
-        chapter.element.style.setProperty("--hero-exit-progress", heroExitProgress.toFixed(4));
-        chapter.element.style.setProperty("--hero-image-lift", `${(heroExitProgress * -34).toFixed(2)}px`);
-        chapter.element.style.setProperty("--hero-image-scale", (1 + heroExitProgress * 0.035).toFixed(4));
-      }
-
-      chapter.element.style.setProperty("--journey-shift", `${((progress - 0.5) * 18).toFixed(2)}px`);
-      chapter.element.style.setProperty("--journey-lift", `${((0.5 - progress) * 18).toFixed(2)}px`);
-      chapter.element.style.setProperty("--journey-parallax", `${(progress * 18).toFixed(2)}px`);
-      chapter.element.style.setProperty("--journey-scale", (1 + progress * 0.018).toFixed(4));
-      chapter.element.style.setProperty("--journey-opacity", (0.3 + progress * 0.7).toFixed(3));
-      chapter.element.style.setProperty("--journey-sweep", `${(progress * 82).toFixed(2)}%`);
-      chapter.element.style.setProperty("--journey-glow-x", `${(18 + progress * 48).toFixed(2)}%`);
-      chapter.element.style.setProperty("--journey-dark-glow-x", `${(88 - progress * 38).toFixed(2)}%`);
-      const chapterCenter = bounds.top + bounds.height / 2;
-      const distance = Math.abs(chapterCenter - focusLine);
-      if (distance < closestDistance) {
-        closestDistance = distance;
-        activeChapter = chapter;
-      }
-    });
-
-    document.documentElement.dataset.storeMood = activeChapter.mood;
-  };
-
-  const requestJourneyUpdate = () => {
-    if (frame) return;
-    frame = window.requestAnimationFrame(updateJourney);
-  };
-
-  window.addEventListener("scroll", requestJourneyUpdate, { passive: true });
-  window.addEventListener("resize", requestJourneyUpdate);
-  updateJourney();
+    document.querySelector(".hero"),
+    document.querySelector("#tees"),
+    document.querySelector("#direction"),
+    document.querySelector("#after-dark")
+  ].filter(Boolean);
+  const properties = [
+    "--journey-progress", "--journey-shift", "--journey-lift", "--journey-parallax",
+    "--journey-scale", "--journey-opacity", "--journey-sweep", "--journey-glow-x",
+    "--journey-dark-glow-x", "--hero-exit-progress", "--hero-image-lift", "--hero-image-scale"
+  ];
+  document.documentElement.classList.remove("store-journey-enabled", "gsap-ready", "lenis-active");
+  delete document.documentElement.dataset.storeMood;
+  chapters.forEach(chapter => properties.forEach(property => chapter.style.removeProperty(property)));
 }
 
 function setupAfterDarkPowerSwitch() {
@@ -1809,7 +1746,7 @@ function setupPlainTeeOffer() {
       toggle.setAttribute("aria-expanded", String(isOpen));
       toggle.querySelector("span").textContent = isOpen ? "↑" : "↓";
     });
-    if (willOpen && panel && !reducedMotion.matches) panel.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    if (willOpen && panel) panel.scrollIntoView({ behavior: "auto", block: "nearest" });
   };
 
   toggles.forEach(toggle => toggle.addEventListener("click", () => setOpenPanel(toggle.dataset.plainTeeToggle)));
@@ -1933,6 +1870,7 @@ function setupFloatingGallery() {
   if (!gallery) return;
 
   const desktopGallery = window.matchMedia("(min-width: 1100px)");
+  const phoneGallery = window.matchMedia("(max-width: 767px)");
   const allImageIndices = Array.from({ length: 69 }, (_, index) => index + 1).filter(index => index !== 25);
   const roundImages = new Set([6, 8, 9, 10, 12, 17, 27, 39, 44]);
   const collageImages = [
@@ -1972,11 +1910,17 @@ function setupFloatingGallery() {
   ]));
   const collagePoolCursors = { hero: 0, feature: 0, wide: 0, small: 0 };
   const collageRotationOrder = [2, 6, 10, 3, 7, 11, 1, 4, 8, 0, 5, 9];
+  const phoneRotationOrder = [0, 2, 4, 1, 3];
   const staticCollageImages = collageImages.slice(0, 5);
   const slayingSection = gallery.closest(".slaying-section");
+  const slayingStage = gallery.closest(".slaying-stage");
   let collageSequenceTimer = 0;
   let collageIntroPosition = 0;
   let collageRotationPosition = 0;
+  let phoneSequenceTimer = 0;
+  let phoneIntroPosition = 0;
+  let phoneRotationPosition = 0;
+  let phoneFocusStarted = false;
   let collageInView = false;
 
   const collageSource = index => `assets/images/customer-gallery/experience-${String(index).padStart(2, "0")}.jpg`;
@@ -2083,12 +2027,131 @@ function setupFloatingGallery() {
     collageSequenceTimer = 0;
   };
 
+  const phoneShouldPlay = () => phoneGallery.matches
+    && collageInView
+    && !reducedMotion.matches
+    && !document.hidden
+    && gallery.dataset.galleryMode === "phone";
+
+  const schedulePhoneStep = delay => {
+    window.clearTimeout(phoneSequenceTimer);
+    phoneSequenceTimer = window.setTimeout(runPhoneSequenceStep, delay);
+  };
+
+  const stopPhoneSequence = () => {
+    window.clearTimeout(phoneSequenceTimer);
+    phoneSequenceTimer = 0;
+  };
+
+  const nextPhoneImage = size => {
+    const pool = collagePools[size];
+    const visibleIndices = new Set([...gallery.querySelectorAll(".slaying-memory.is-phone-memory")]
+      .map(memory => Number(memory.dataset.imageIndex)));
+
+    for (let attempt = 0; attempt < pool.length; attempt += 1) {
+      const cursor = collagePoolCursors[size] % pool.length;
+      collagePoolCursors[size] += 1;
+      const item = pool[cursor];
+      if (!visibleIndices.has(item.index)) return item;
+    }
+    return null;
+  };
+
+  const revealPhoneSlot = (slot, afterReveal) => {
+    const memory = gallery.querySelector(`[data-phone-slot="${slot + 1}"]`);
+    if (!memory || !memory.isConnected || !phoneShouldPlay()) return;
+
+    memory.classList.add("is-sequence-visible");
+    afterReveal();
+  };
+
+  const rotatePhoneSlot = (slot, afterRotation) => {
+    const memory = gallery.querySelector(`[data-phone-slot="${slot + 1}"]`);
+    const image = memory?.querySelector("img");
+    const size = memory?.dataset.phoneSize;
+    if (!memory || !image || !size) return;
+
+    const item = nextPhoneImage(size);
+    if (!item) {
+      afterRotation();
+      return;
+    }
+
+    const dimensions = collageDimensions(size);
+    const nextImage = new Image();
+    nextImage.className = "slaying-memory-next";
+    nextImage.src = collageSource(item.index);
+    nextImage.alt = item.alt;
+    nextImage.width = dimensions.width;
+    nextImage.height = dimensions.height;
+    nextImage.loading = "eager";
+    nextImage.decoding = "async";
+    nextImage.style.objectPosition = item.focus;
+    const ready = typeof nextImage.decode === "function" ? nextImage.decode() : Promise.resolve();
+
+    ready.catch(() => {}).then(() => {
+      if (!memory.isConnected || gallery.dataset.galleryMode !== "phone") return;
+      memory.append(nextImage);
+      window.requestAnimationFrame(() => window.requestAnimationFrame(() => {
+        memory.classList.add("is-changing");
+        nextImage.classList.add("is-active");
+        window.setTimeout(() => {
+          if (!memory.isConnected || gallery.dataset.galleryMode !== "phone") return;
+          image.remove();
+          nextImage.classList.remove("slaying-memory-next", "is-active");
+          memory.classList.remove("is-changing");
+          memory.dataset.imageIndex = String(item.index);
+          afterRotation();
+        }, 900);
+      }));
+    });
+  };
+
+  function runPhoneSequenceStep() {
+    phoneSequenceTimer = 0;
+    if (!phoneShouldPlay()) return;
+
+    if (!phoneFocusStarted) {
+      phoneFocusStarted = true;
+      slayingStage?.classList.add("is-phone-saturn-focused");
+      schedulePhoneStep(950);
+      return;
+    }
+
+    if (phoneIntroPosition < 5) {
+      const slot = phoneIntroPosition;
+      revealPhoneSlot(slot, () => {
+        phoneIntroPosition += 1;
+        if (phoneIntroPosition === 5) slayingStage?.classList.add("is-phone-gallery-active");
+        schedulePhoneStep(phoneIntroPosition === 5 ? 1900 : 220);
+      });
+      return;
+    }
+
+    const slot = phoneRotationOrder[phoneRotationPosition % phoneRotationOrder.length];
+    phoneRotationPosition += 1;
+    rotatePhoneSlot(slot, () => schedulePhoneStep(1600));
+  }
+
   const updateCollageSequence = () => {
     if (!collageShouldPlay()) {
       stopCollageSequence();
       return;
     }
     if (!collageSequenceTimer) scheduleCollageStep(collageIntroPosition ? 180 : 80);
+  };
+
+  const updatePhoneSequence = () => {
+    if (!phoneShouldPlay()) {
+      stopPhoneSequence();
+      return;
+    }
+    if (!phoneSequenceTimer) schedulePhoneStep(phoneFocusStarted ? 180 : 80);
+  };
+
+  const updateGallerySequences = () => {
+    updateCollageSequence();
+    updatePhoneSequence();
   };
 
   const buildCollage = staticMode => {
@@ -2164,37 +2227,84 @@ function setupFloatingGallery() {
     gallery.append(fragment);
   };
 
+  const buildPhoneGallery = () => {
+    const fragment = document.createDocumentFragment();
+    const phoneItems = [
+      collageImages[0],
+      collageImages[2],
+      collageImages[3],
+      collageImages[4],
+      collageImages[5]
+    ];
+
+    phoneItems.forEach((item, position) => {
+      const memory = document.createElement("figure");
+      const image = document.createElement("img");
+      const dimensions = collageDimensions(item.size);
+
+      memory.className = `slaying-memory is-phone-memory is-${item.size}`;
+      memory.dataset.phoneSlot = String(position + 1);
+      memory.dataset.phoneSize = item.size;
+      memory.dataset.imageIndex = String(item.index);
+      image.src = collageSource(item.index);
+      image.alt = item.alt;
+      image.width = dimensions.width;
+      image.height = dimensions.height;
+      image.loading = position < 2 ? "eager" : "lazy";
+      image.decoding = "async";
+      image.style.objectPosition = item.focus;
+      memory.append(image);
+      fragment.append(memory);
+    });
+
+    gallery.append(fragment);
+  };
+
   const buildGallery = () => {
-    const mode = desktopGallery.matches ? (reducedMotion.matches ? "collage-static" : "collage") : "floating";
-    if (gallery.dataset.galleryMode === mode) return;
+    const mode = desktopGallery.matches
+      ? (reducedMotion.matches ? "collage-static" : "collage")
+      : (phoneGallery.matches ? "phone" : "floating");
+    if (gallery.dataset.galleryMode === mode) {
+      updateGallerySequences();
+      return;
+    }
 
     stopCollageSequence();
+    stopPhoneSequence();
+    slayingStage?.classList.remove("is-phone-saturn-focused", "is-phone-gallery-active");
     gallery.replaceChildren();
     gallery.dataset.galleryReady = "true";
     gallery.dataset.galleryMode = mode;
     collageIntroPosition = 0;
     collageRotationPosition = 0;
+    phoneIntroPosition = 0;
+    phoneRotationPosition = 0;
+    phoneFocusStarted = false;
     Object.keys(collagePoolCursors).forEach(size => {
       collagePoolCursors[size] = 0;
     });
     if (desktopGallery.matches) buildCollage(mode === "collage-static");
+    else if (phoneGallery.matches) buildPhoneGallery();
     else buildFloatingField();
-    updateCollageSequence();
+    updateGallerySequences();
   };
 
   desktopGallery.addEventListener("change", () => {
     if (gallery.dataset.galleryReady === "true") buildGallery();
   });
+  phoneGallery.addEventListener("change", () => {
+    if (gallery.dataset.galleryReady === "true") buildGallery();
+  });
   reducedMotion.addEventListener("change", () => {
     if (gallery.dataset.galleryReady === "true") buildGallery();
-    else updateCollageSequence();
+    else updateGallerySequences();
   });
-  document.addEventListener("visibilitychange", updateCollageSequence);
+  document.addEventListener("visibilitychange", updateGallerySequences);
 
   if ("IntersectionObserver" in window && slayingSection) {
     const rotationObserver = new IntersectionObserver(entries => {
       collageInView = entries.some(entry => entry.isIntersecting);
-      updateCollageSequence();
+      updateGallerySequences();
     }, { threshold: 0.12 });
     rotationObserver.observe(slayingSection);
   } else {
